@@ -1,0 +1,3 @@
+class CountryEntity:
+    name=""
+    code=""
