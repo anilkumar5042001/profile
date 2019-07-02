@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^IdealWeight/', views.IdealWeight),
     url(r'^GetCountryById/', views.GetCountryById),
     url(r'^GetCountries/', views.GetCountries),
+    url(r'^InsertCountry/', views.InsertCountry),
 ]

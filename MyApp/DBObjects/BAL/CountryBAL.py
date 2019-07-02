@@ -8,5 +8,9 @@ class CountryBAL:
     def GetCountries(self):
         objCountryDAL=CountryDAL()
         return objCountryDAL.GetCountries() 
+
+    def InsertCountry(self,countryCode,countryName):
+        objCountryDAL=CountryDAL()
+        return objCountryDAL.InsertCountry(countryCode,countryName) 
     
     

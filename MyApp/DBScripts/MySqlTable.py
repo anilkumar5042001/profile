@@ -15,6 +15,20 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+    def CreateCountry(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"country")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table country(
+            country_id INT NOT NULL AUTO_INCREMENT,
+            country_code VARCHAR(100) NOT NULL,
+            country_name VARCHAR(100) NOT NULL,
+            PRIMARY KEY (country_id)
+            );"""
+            cursor.execute(query)
+            print('method executed table CreateCountry')
+
     def CreateUserProfile(self):
         objMySqlTable=MySqlTable
         tblExists=objMySqlTable.CheckTableExists(self,"UserProfile")

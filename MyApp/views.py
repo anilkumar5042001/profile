@@ -10,6 +10,13 @@ from .DBObjects.Entity import CountryEntity
 from django.core import serializers
 from .DBScripts.MySqlTable import MySqlTable
 from .DBScripts.ExecOrder import ExecOrder
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+#from snippets.models import Snippet
+#from snippets.serializers import SnippetSerializer
+
 
 
 #from django.db import connection
@@ -58,4 +65,17 @@ def GetCountries(id):
         result = json.dumps([ob.__dict__ for ob in objCountries])
         return JsonResponse(result,safe=False)        
 
-
+#{"CountryCode": "uk", "ContryName": "unitr"}
+@csrf_exempt
+@api_view(["POST"])
+def InsertCountry(json_data):
+        
+        #json_data = '{"CountryCode": "Ind", "ContryName": "India"}'
+        
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strCountryCode=loaded_json["CountryCode"]
+        strContryName=loaded_json["ContryName"]
+        objCountryBAL=CountryBAL.CountryBAL()
+        result=objCountryBAL.InsertCountry(strCountryCode,strContryName)
+        return JsonResponse("1",safe=False)        

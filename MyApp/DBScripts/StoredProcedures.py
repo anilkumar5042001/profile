@@ -28,11 +28,11 @@ class StoredProcedures:
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Country_Insert"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Country_Insert(IN countryId INT)
+        query = """CREATE PROCEDURE Country_Insert(IN p_country_code VARCHAR(250),IN p_country_name VARCHAR(250))
         BEGIN
-        SELECT country_id,country_name,country_code  FROM country 
-        WHERE country_id = countryId;
+        INSERT INTO country (country_name,country_code) 
+        VALUES (p_country_name,p_country_code);
         END"""
         cursor.execute(query)
-        print('method executed')
+        print('Exec SP CountryInsert')
     

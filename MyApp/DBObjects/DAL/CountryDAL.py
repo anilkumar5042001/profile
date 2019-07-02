@@ -14,18 +14,20 @@ class CountryDAL:
             objCountryEntityOne.CountryName=r[2]
             countries.append(objCountryEntityOne)
         return countries
-    # def GetCountryById(self,countryId):
-    #     objCountryEntityOne=CountryEntity()
-    #     objCountryEntityOne.Countrycode="Ind"
-    #     objCountryEntityOne.CountryName="India"
-    #     return objCountryEntityOne
+    
     def GetCountryById(self,countryId):
         cursor = connection.cursor()
-        args = [1]
+        args = [countryId]
         cursor.callproc('Country_GetById',args)
         res =  cursor.fetchall()
         objCountryEntityOne=CountryEntity()
         objCountryEntityOne.Countrycode=res[0][0]
         objCountryEntityOne.CountryName=res[0][1]
         return objCountryEntityOne
+
+    def InsertCountry(self,countryCode,countryName):
+        cursor = connection.cursor()
+        args = [countryCode,countryName]
+        cursor.callproc('Country_Insert',args)
+        return 1
         

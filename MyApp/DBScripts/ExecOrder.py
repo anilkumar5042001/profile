@@ -6,11 +6,13 @@ class ExecOrder:
         objMySqlTable=MySqlTable
         objMySqlTable.CreateTest('self')
         objMySqlTable.CreateUserProfile('self')
+        objMySqlTable.CreateCountry('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
         objStoredProcedures.CountryGetAll('self')        
         objStoredProcedures.CountryGetById('self')        
+        objStoredProcedures.CountryInsert('self')     
 
 
 
