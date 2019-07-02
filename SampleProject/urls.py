@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^GetCountries/', views.GetCountries),
     url(r'^InsertCountry/', views.InsertCountry),
     url(r'^GetUserProfileById/', views.GetUserProfileById),
+    url(r'^ExecuteDBScripts/', views.ExecuteDBScripts),
+    
 ]

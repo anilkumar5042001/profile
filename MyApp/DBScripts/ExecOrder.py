@@ -18,5 +18,5 @@ class ExecOrder:
 
 
 
-objExecOrder=ExecOrder
-objExecOrder.scriptsOrder('self')
+#objExecOrder=ExecOrder
+#objExecOrder.scriptsOrder('self')

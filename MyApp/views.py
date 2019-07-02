@@ -3,7 +3,6 @@ from django.http import Http404
 from django.http import JsonResponse
 from django.conf import settings
 import json
-from .demo import GetCountry
 from django.views.decorators.csrf import csrf_exempt
 from .DBObjects.BAL import CountryBAL
 from .DBObjects.Entity import CountryEntity
@@ -15,6 +14,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .DBObjects.BAL import UserProfileBAL
 from .DBObjects.Entity import UserProfileEntity
+
 
 #from snippets.models import Snippet
 #from snippets.serializers import SnippetSerializer
@@ -83,9 +83,16 @@ def InsertCountry(json_data):
 @api_view(["POST"])
 def GetUserProfileById(json_data):
         loaded_json = json.loads(json_data.body)
-        print(id)
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
         profileId=loaded_json["ProfileId"]
         objUserProfileEntity=objUserProfileBAL.GetUserProfileById(profileId)
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False) 
+
+@csrf_exempt
+@api_view(["POST"])
+def ExecuteDBScripts(json_data):
+        loaded_json = json.loads(json_data.body)
+        objExecOrder=ExecOrder
+        objExecOrder.scriptsOrder('self')
+        return JsonResponse("success",safe=False) 
