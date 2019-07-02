@@ -1,0 +1,49 @@
+
+from django.db import connection
+
+class MySqlTable:
+    def CreateTest(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"test")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table test(
+            test_id INT NOT NULL AUTO_INCREMENT,
+            test_title VARCHAR(100) NOT NULL,
+            PRIMARY KEY ( test_id )
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CreateUserProfile(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"UserProfile")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table UserProfile(
+            ProfileId INT NOT NULL AUTO_INCREMENT,
+            FirstName VARCHAR(250) NULL,
+            LastName VARCHAR(250) NULL,
+            EmailId NVARCHAR(500) NULL,
+            PhoneNumber NVARCHAR(250) NULL,
+            PRIMARY KEY ( ProfileId )
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CheckTableExists(self,tableName):
+        cursor = connection.cursor()
+        query = "SELECT * FROM information_schema.tables WHERE table_schema = 'submitprofile' AND table_name = '"+tableName+"' LIMIT 1;"
+        cursor.execute(query)
+        res =  cursor.fetchall()
+        count=cursor.rowcount
+        if count>0:
+            return True
+        else:
+            return False
+        
+
+  
+
+
+

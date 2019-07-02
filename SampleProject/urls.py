@@ -22,4 +22,6 @@ from MyApp import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^IdealWeight/', views.IdealWeight),
+    url(r'^GetCountryById/', views.GetCountryById),
+    url(r'^GetCountries/', views.GetCountries),
 ]
