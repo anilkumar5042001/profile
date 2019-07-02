@@ -12,7 +12,8 @@ class ExecOrder:
         objStoredProcedures=StoredProcedures
         objStoredProcedures.CountryGetAll('self')        
         objStoredProcedures.CountryGetById('self')        
-        objStoredProcedures.CountryInsert('self')     
+        objStoredProcedures.CountryInsert('self')  
+        objStoredProcedures.UserProfileGetById('self')    
 
 
 

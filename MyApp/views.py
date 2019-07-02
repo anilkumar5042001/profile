@@ -13,6 +13,8 @@ from .DBScripts.ExecOrder import ExecOrder
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .DBObjects.BAL import UserProfileBAL
+from .DBObjects.Entity import UserProfileEntity
 
 #from snippets.models import Snippet
 #from snippets.serializers import SnippetSerializer
@@ -69,13 +71,21 @@ def GetCountries(id):
 @csrf_exempt
 @api_view(["POST"])
 def InsertCountry(json_data):
-        
-        #json_data = '{"CountryCode": "Ind", "ContryName": "India"}'
-        
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
         strCountryCode=loaded_json["CountryCode"]
         strContryName=loaded_json["ContryName"]
         objCountryBAL=CountryBAL.CountryBAL()
         result=objCountryBAL.InsertCountry(strCountryCode,strContryName)
-        return JsonResponse("1",safe=False)        
+        return JsonResponse("1",safe=False)    
+
+@csrf_exempt
+@api_view(["POST"])
+def GetUserProfileById(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(id)
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        profileId=loaded_json["ProfileId"]
+        objUserProfileEntity=objUserProfileBAL.GetUserProfileById(profileId)
+        result= json.dumps(objUserProfileEntity.__dict__)
+        return JsonResponse(result,safe=False) 

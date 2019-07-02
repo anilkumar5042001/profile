@@ -20,17 +20,16 @@ class UserProfileDAL:
 
     #     return UserProfile
 
-    def GetUserProfileById(self,ProfileId):
-
+    def GetUserProfileById(self,profileId):
         cursor = connection.cursor()
-        query = """select * from UserProfile;"""
-        cursor.execute(query)
-
+        args = [profileId]
+        cursor.callproc('UserProfile_GetById',args)
+        res =  cursor.fetchall()
         objUserProfileEntity=UserProfileEntity()
-        objUserProfileEntity.FirstName="test"
-        objUserProfileEntity.LastName="one"
-        objUserProfileEntity.EmailId="testone@gmail.com"
-        objUserProfileEntity.PhoneNumber="12345"
-
+        objUserProfileEntity.ProfileId=res[0][0]
+        objUserProfileEntity.FirstName=res[0][1]
+        objUserProfileEntity.LastName=res[0][2]
+        objUserProfileEntity.EmailId=res[0][3]
+        objUserProfileEntity.PhoneNumber=res[0][4]
         return objUserProfileEntity  
 

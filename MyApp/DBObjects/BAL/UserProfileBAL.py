@@ -2,9 +2,9 @@
 from ..DAL.UserProfileDAL import UserProfileDAL
 
 class UserProfileBAL:
-    def GetUserProfileById(self,ProfileId):
+    def GetUserProfileById(self,profileId):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.GetUserProfileById(ProfileId)
+        return objUserProfileDAL.GetUserProfileById(profileId)
 
     def GetUserProfile(self):
         objUserProfileDAL=UserProfileDAL()

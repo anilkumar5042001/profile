@@ -36,3 +36,15 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP CountryInsert')
     
+    def UserProfileGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_GetById(IN p_ProfileId INT)
+        BEGIN
+        SELECT ProfileId,FirstName,LastName,EmailId,PhoneNumber  FROM UserProfile 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP UserProfileGetById executed')
+    
