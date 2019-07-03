@@ -79,6 +79,7 @@ def InsertCountry(json_data):
         result=objCountryBAL.InsertCountry(strCountryCode,strContryName)
         return JsonResponse("1",safe=False)    
 
+#{"ProfileId": 1}
 @csrf_exempt
 @api_view(["POST"])
 def GetUserProfileById(json_data):
@@ -89,6 +90,7 @@ def GetUserProfileById(json_data):
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False) 
 
+{"ProfileId": 1}
 @csrf_exempt
 @api_view(["POST"])
 def ExecuteDBScripts(json_data):
@@ -96,6 +98,7 @@ def ExecuteDBScripts(json_data):
         objExecOrder=ExecOrder
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
+        
 #{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}
 @csrf_exempt
 @api_view(["POST"])

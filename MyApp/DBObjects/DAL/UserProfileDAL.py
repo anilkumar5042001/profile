@@ -21,6 +21,8 @@ class UserProfileDAL:
     #     return UserProfile
 
     def GetUserProfileById(self,profileId):
+        db_name = connection.settings_dict['NAME']
+        print(db_name)
         cursor = connection.cursor()
         args = [profileId]
         cursor.callproc('UserProfile_GetById',args)

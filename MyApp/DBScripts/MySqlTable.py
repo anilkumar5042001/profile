@@ -46,8 +46,9 @@ class MySqlTable:
             print('method executed')
 
     def CheckTableExists(self,tableName):
+        db_name = connection.settings_dict['NAME']
         cursor = connection.cursor()
-        query = "SELECT * FROM information_schema.tables WHERE table_schema = 'submitprofile' AND table_name = '"+tableName+"' LIMIT 1;"
+        query = "SELECT * FROM information_schema.tables WHERE table_schema = '"+db_name+"' AND table_name = '"+tableName+"' LIMIT 1;"
         cursor.execute(query)
         res =  cursor.fetchall()
         count=cursor.rowcount
