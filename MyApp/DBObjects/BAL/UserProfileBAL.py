@@ -8,4 +8,9 @@ class UserProfileBAL:
 
     def GetUserProfile(self):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.GetUserProfile() 
+        return objUserProfileDAL.GetUserProfile()
+
+    
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber):
+        objUserProfileDAL=UserProfileDAL()
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber)  

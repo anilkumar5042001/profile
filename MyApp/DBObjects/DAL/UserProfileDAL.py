@@ -33,3 +33,9 @@ class UserProfileDAL:
         objUserProfileEntity.PhoneNumber=res[0][4]
         return objUserProfileEntity  
 
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber):
+        cursor = connection.cursor()
+        args = [firstName,lastName,emailId,phoneNumber]
+        cursor.callproc('UserProfile_Insert',args)
+        return 1
+
