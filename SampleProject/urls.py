@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^GetUserProfileById/', views.GetUserProfileById),
     url(r'^ExecuteDBScripts/', views.ExecuteDBScripts),
     url(r'^UserProfileInsert/', views.UserProfileInsert),
+    url(r'^UserProfileUpdate/', views.UserProfileUpdate),
+    url(r'^UploadFile/', views.UploadFile),
     
 ]

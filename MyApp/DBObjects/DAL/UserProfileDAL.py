@@ -33,11 +33,18 @@ class UserProfileDAL:
         objUserProfileEntity.LastName=res[0][2]
         objUserProfileEntity.EmailId=res[0][3]
         objUserProfileEntity.PhoneNumber=res[0][4]
+        objUserProfileEntity.Education=res[0][5]
+        objUserProfileEntity.Designation=res[0][6]
         return objUserProfileEntity  
 
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation):
         cursor = connection.cursor()
-        args = [firstName,lastName,emailId,phoneNumber]
+        args = [firstName,lastName,emailId,phoneNumber,education,designation]
         cursor.callproc('UserProfile_Insert',args)
         return 1
 
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation):
+        cursor = connection.cursor()
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation]
+        cursor.callproc('UserProfile_Update',args)
+        return 1

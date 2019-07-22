@@ -40,7 +40,29 @@ class MySqlTable:
             LastName VARCHAR(250) NULL,
             EmailId NVARCHAR(500) NULL,
             PhoneNumber NVARCHAR(250) NULL,
+            Education NVARCHAR(250) NULL,
+            Designation NVARCHAR(250) NULL,
             PRIMARY KEY ( ProfileId )
+            );"""
+            cursor.execute(query)
+            print('method executed')
+    
+    def CreateProjects(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Projects")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Projects(
+            ProfileId INT NOT NULL,
+            ProjectId INT NOT NULL AUTO_INCREMENT,
+            ProjectName NVARCHAR(250) NULL,
+            ProjectDescription NVARCHAR(500) NULL,
+            Role NVARCHAR(250) NULL,
+            StartYear DATETIME() NULL,
+            EndYear DATETIME() NULL,
+            Responsibilities NVARCHAR(250) NULL,
+            Awards NVARCHAR(250) NULL,
+            PRIMARY KEY ( ProjectId )
             );"""
             cursor.execute(query)
             print('method executed')

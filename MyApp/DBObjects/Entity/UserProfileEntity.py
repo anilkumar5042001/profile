@@ -4,3 +4,5 @@ class UserProfileEntity(object):
     LastName=""
     EmailId=""
     PhoneNumber=""
+    Education=""
+    Designation=""

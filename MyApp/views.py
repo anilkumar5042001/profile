@@ -14,6 +14,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .DBObjects.BAL import UserProfileBAL
 from .DBObjects.Entity import UserProfileEntity
+from .DBObjects.BAL import ProjectsBAL
+from .DBObjects.Entity import ProjectEntity
 
 
 #from snippets.models import Snippet
@@ -90,7 +92,7 @@ def GetUserProfileById(json_data):
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False) 
 
-{"ProfileId": 1}
+#{"ProfileId": 1}
 @csrf_exempt
 @api_view(["POST"])
 def ExecuteDBScripts(json_data):
@@ -99,13 +101,52 @@ def ExecuteDBScripts(json_data):
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
         
-#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
         strFirstName=loaded_json["FirstName"]
+        strLastName=loaded_json["LastName"]
+        strEmailId=loaded_json["EmailId"]
+        strPhoneNumber=loaded_json["PhoneNumber"]
+        strEducation=loaded_json["Education"]
+        strDesignation=loaded_json["Designation"]
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation)
+        return JsonResponse("1",safe=False)
+
+@csrf_exempt
+@api_view(["POST"])
+def UploadFile(binaryData):
+        print(binaryData)
+        return JsonResponse("1",safe=False)
+
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileUpdate(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strProfileId=loaded_json["ProfileId"]
+        strFirstName=loaded_json["FirstName"]
+        strLastName=loaded_json["LastName"]
+        strEmailId=loaded_json["EmailId"]
+        strPhoneNumber=loaded_json["PhoneNumber"]
+        strEducation=loaded_json["Education"]
+        strDesignation=loaded_json["Designation"]
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation)
+        return JsonResponse("1",safe=False)
+
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}
+@csrf_exempt
+@api_view(["POST"])
+def ProjectInsert(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strProjectName=loaded_json["ProjectName"]
         strLastName=loaded_json["LastName"]
         strEmailId=loaded_json["EmailId"]
         strPhoneNumber=loaded_json["PhoneNumber"]
