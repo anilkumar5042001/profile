@@ -6,3 +6,4 @@ class UserProfileEntity(object):
     PhoneNumber=""
     Education=""
     Designation=""
+    AboutMe=""

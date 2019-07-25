@@ -45,7 +45,8 @@ class StoredProcedures:
         SELECT ProfileId,FirstName,LastName,EmailId,
         PhoneNumber,
         Education,
-        Designation
+        Designation,
+        AboutMe
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
         END"""

@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib import admin
 from MyApp import views
+from MyApp import userProfileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^ExecuteDBScripts/', views.ExecuteDBScripts),
     url(r'^UserProfileInsert/', views.UserProfileInsert),
     url(r'^UserProfileUpdate/', views.UserProfileUpdate),
+    url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
     url(r'^UploadFile/', views.UploadFile),
     
 ]

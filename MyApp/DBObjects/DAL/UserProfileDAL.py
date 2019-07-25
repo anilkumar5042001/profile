@@ -35,6 +35,7 @@ class UserProfileDAL:
         objUserProfileEntity.PhoneNumber=res[0][4]
         objUserProfileEntity.Education=res[0][5]
         objUserProfileEntity.Designation=res[0][6]
+        objUserProfileEntity.AboutMe=res[0][7]
         return objUserProfileEntity  
 
     def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation):
