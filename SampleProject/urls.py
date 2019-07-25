@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib import admin
 from MyApp import views
-from MyApp import userProfileView
+from . import UserProfileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
