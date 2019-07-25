@@ -101,7 +101,7 @@ def ExecuteDBScripts(json_data):
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
         
-#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","AboutMe":"I am mad"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileInsert(json_data):
@@ -113,8 +113,9 @@ def UserProfileInsert(json_data):
         strPhoneNumber=loaded_json["PhoneNumber"]
         strEducation=loaded_json["Education"]
         strDesignation=loaded_json["Designation"]
+        strAboutMe=loaded_json["AboutMe"]
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation)
+        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strAboutMe)
         return JsonResponse("1",safe=False)
 
 @csrf_exempt

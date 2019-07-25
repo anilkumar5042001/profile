@@ -64,7 +64,8 @@ class StoredProcedures:
         IN p_EmailId NVARCHAR(500),
         IN p_PhoneNumber NVARCHAR(250),
         IN p_Education NVARCHAR(250),
-        IN p_Designation NVARCHAR(250)
+        IN p_Designation NVARCHAR(250),
+        IN p_AboutMe NVARCHAR(500)
         )
         BEGIN
         INSERT INTO UserProfile (
@@ -73,14 +74,16 @@ class StoredProcedures:
         EmailId,
         PhoneNumber,
         Education,
-        Designation) 
+        Designation,
+        AboutMe) 
         VALUES (
         p_FirstName,
         p_LastName,
         p_EmailId,
         p_PhoneNumber,
         p_Education,
-        p_Designation);
+        p_Designation,
+        p_AboutMe);
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')

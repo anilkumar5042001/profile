@@ -11,9 +11,9 @@ class UserProfileBAL:
         return objUserProfileDAL.GetUserProfile()
 
     
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation)  
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,aboutMe)  
 
     def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation):
         objUserProfileDAL=UserProfileDAL()

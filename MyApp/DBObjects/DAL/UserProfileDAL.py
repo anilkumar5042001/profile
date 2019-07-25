@@ -38,9 +38,9 @@ class UserProfileDAL:
         objUserProfileEntity.AboutMe=res[0][7]
         return objUserProfileEntity  
 
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe):
         cursor = connection.cursor()
-        args = [firstName,lastName,emailId,phoneNumber,education,designation]
+        args = [firstName,lastName,emailId,phoneNumber,education,designation,aboutMe]
         cursor.callproc('UserProfile_Insert',args)
         return 1
 
