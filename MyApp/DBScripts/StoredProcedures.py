@@ -113,6 +113,22 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileUpdate')
+
+    def UserProfileUpdateAboutMe(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_UpdateAboutMe"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_UpdateAboutMe
+        (IN p_ProfileId INT,
+        IN p_AboutMe VARCHAR(500)
+        )
+        BEGIN
+        UPDATE UserProfile SET 
+        AboutMe=p_AboutMe
+        WHERE ProfileId=p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP UserProfileUpdateAboutMe')
     
     def ProjectInsert(self):
         cursor = connection.cursor()

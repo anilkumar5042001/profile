@@ -16,6 +16,7 @@ class ExecOrder:
         objStoredProcedures.UserProfileGetById('self')
         objStoredProcedures.UserProfileInsert('self') 
         objStoredProcedures.UserProfileUpdate('self')    
+        objStoredProcedures.UserProfileUpdateAboutMe('self')
 
 
 

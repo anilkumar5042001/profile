@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^UserProfileInsert/', views.UserProfileInsert),
     url(r'^UserProfileUpdate/', views.UserProfileUpdate),
     url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
+    url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),
     url(r'^UploadFile/', views.UploadFile),
     
 ]

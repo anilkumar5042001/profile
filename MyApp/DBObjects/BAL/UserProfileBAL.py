@@ -18,3 +18,7 @@ class UserProfileBAL:
     def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation):
         objUserProfileDAL=UserProfileDAL()
         return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation) 
+    
+    def UserProfileUpdateAboutMe(self,profileId,aboutMe):
+        objUserProfileDAL=UserProfileDAL()
+        return objUserProfileDAL.UserProfileUpdateAboutMe(profileId,aboutMe) 

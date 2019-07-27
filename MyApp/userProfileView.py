@@ -27,3 +27,14 @@ def GetUserProfileAboutMeById(json_data):
         objUserProfileEntity=objUserProfileBAL.GetUserProfileById(profileId)
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False) 
+
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileUpdateAboutMe(json_data):
+        loaded_json = json.loads(json_data.body)
+        strProfileId=loaded_json["ProfileId"]
+        strAboutMe=loaded_json["AboutMe"]
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        result=objUserProfileBAL.UserProfileUpdateAboutMe(strProfileId,strAboutMe)
+        return JsonResponse("1",safe=False)
