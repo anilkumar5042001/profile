@@ -16,6 +16,8 @@ from .DBObjects.BAL import UserProfileBAL
 from .DBObjects.Entity import UserProfileEntity
 from .DBObjects.BAL import ProjectsBAL
 from .DBObjects.Entity import ProjectEntity
+from .DBObjects.BAL import WorkHistoryBAL
+from .DBObjects.Entity import WorkHistoryEntity
 
 
 #from snippets.models import Snippet

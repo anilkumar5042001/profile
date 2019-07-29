@@ -47,6 +47,21 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('method executed')
+
+    def CreateCertificationTable(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Certification")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Certification(
+            CertificationId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            CertificationName VARCHAR(250) NULL,
+            Description VARCHAR(500) NULL,
+            PRIMARY KEY (CertificationId)
+            );"""
+            cursor.execute(query)
+            print('Certification table created')
     
     def CreateProjects(self):
         objMySqlTable=MySqlTable
@@ -59,14 +74,36 @@ class MySqlTable:
             ProjectName NVARCHAR(250) NULL,
             ProjectDescription NVARCHAR(500) NULL,
             Role NVARCHAR(250) NULL,
-            StartYear DATETIME() NULL,
-            EndYear DATETIME() NULL,
+            StartYear DATETIME NULL,
+            EndYear DATETIME NULL,
             Responsibilities NVARCHAR(250) NULL,
             Awards NVARCHAR(250) NULL,
             PRIMARY KEY ( ProjectId )
             );"""
             cursor.execute(query)
             print('method executed')
+
+    def CreateWorkHistory(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"WorkHistory")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table WorkHistory
+            (
+            WorkHistoryId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            CompanyName NVARCHAR(250) NULL,
+            Role NVARCHAR(250) NULL,
+            Description NVARCHAR(500),
+            City VARCHAR(250),
+            Country VARCHAR(250),
+            StartDate DATETIME NULL,
+            EndDate DATETIME NULL,
+            PRIMARY KEY (WorkHistoryId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
 
     def CheckTableExists(self,tableName):
         db_name = connection.settings_dict['NAME']

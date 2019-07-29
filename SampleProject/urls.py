@@ -19,6 +19,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from MyApp import views
 from MyApp import userProfileView
+from MyApp import WorkHistoryView
+from MyApp.AllViews import CertificationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,5 +35,7 @@ urlpatterns = [
     url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
     url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),
     url(r'^UploadFile/', views.UploadFile),
-    
+    url(r'^WorkHistoryInsert/', WorkHistoryView.WorkHistoryInsert),
+    url(r'^WorkHistoryGetById/', WorkHistoryView.GetWorkHistoryById),
+    url(r'^CertificationInsert/', CertificationView.CertificationInsert),
 ]

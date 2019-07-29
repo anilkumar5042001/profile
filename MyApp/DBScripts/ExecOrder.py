@@ -7,6 +7,9 @@ class ExecOrder:
         objMySqlTable.CreateTest('self')
         objMySqlTable.CreateUserProfile('self')
         objMySqlTable.CreateCountry('self')
+        objMySqlTable.CreateCertificationTable('self')
+        objMySqlTable.CreateWorkHistory('self')
+    
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -17,6 +20,13 @@ class ExecOrder:
         objStoredProcedures.UserProfileInsert('self') 
         objStoredProcedures.UserProfileUpdate('self')    
         objStoredProcedures.UserProfileUpdateAboutMe('self')
+        objStoredProcedures.CertificationInsert('self')
+        objStoredProcedures.CertificationUpdate('self')
+        objStoredProcedures.CertificationGetByProfileId('self')
+        objStoredProcedures.WorkHistoryInsert('self')
+        objStoredProcedures.WorkHistoryGetById('self')
+        
+        
 
 
 

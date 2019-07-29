@@ -12,6 +12,7 @@ class StoredProcedures:
         cursor.execute(query)
         print('method executed')
 
+
     def CountryGetById(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Country_GetById"""
@@ -52,6 +53,23 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP UserProfileGetById executed')
+
+    def CertificationGetByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Certification_GetByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Certification_GetByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT 
+        CertificationId,
+        ProfileId,
+        CertificationName,
+        Description
+        FROM Certification 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP CertificationGetByProfileId executed')
     
     def UserProfileInsert(self):
         cursor = connection.cursor()
@@ -87,7 +105,51 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')
-    
+
+    def CertificationInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Certification_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Certification_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_CertificationName VARCHAR(250),
+        IN p_Description VARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO Certification (
+        ProfileId,    
+        CertificationName,
+        Description
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_CertificationName,
+        p_Description
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP CertificationInsert')
+
+    def CertificationUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Certification_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Certification_Update
+        (
+        IN p_CertificationId VARCHAR(250),
+        IN p_CertificationName VARCHAR(250),
+        IN p_Description VARCHAR(500)
+        )
+        BEGIN
+        Update Certification 
+        SET CertificationName=p_CertificationName,
+        Description=p_Description
+        WHERE CertificationId=p_CertificationId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP CertificationUpdate')
+  
     def UserProfileUpdate(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS UserProfile_Update"""
@@ -144,4 +206,63 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP ProjectInsert')
+
+    def WorkHistoryInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_CompanyName NVARCHAR(250),
+        IN p_Role NVARCHAR(250),
+        IN p_Description NVARCHAR(500),
+        IN p_City VARCHAR(250),
+        IN p_Country VARCHAR(250),
+        IN p_StartDate DATETIME,
+        IN p_EndDate DATETIME
+        )
+        BEGIN
+        INSERT INTO WorkHistory (
+        ProfileId,
+        CompanyName,
+        Role,
+        Description,
+        City,
+        Country,
+        StartDate,
+        EndDate) 
+        VALUES (
+        p_ProfileId,
+        p_CompanyName,
+        p_Role,
+        p_Description,
+        p_City,
+        p_Country,
+        p_StartDate,
+        p_EndDate);
+        END"""
+        cursor.execute(query)
+        print('Exec SP WorkHistoryInsert')
+
+    def WorkHistoryGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_GetById(IN p_WorkHistoryId INT)
+        BEGIN
+        SELECT ProfileId,
+        CompanyName,
+        Role,
+        Description,
+        City,
+        Country,
+        StartDate,
+        EndDate
+        FROM WorkHistory 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP WorkHistoryGetById executed')
+
     
