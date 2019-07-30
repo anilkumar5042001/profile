@@ -9,8 +9,20 @@ class CertificationDAL:
         cursor.callproc('Certification_Insert',args)
         return 1
 
-    def CertificationGetByProfileId(self,ProfileId):
+    def CertificationGetByProfileId(self,profileId):
+        db_name = connection.settings_dict['NAME']
         cursor = connection.cursor()
-        args = [ProfileId]
+        args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
-        return 1
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for certItem in res:
+            objCertificationEntity=CertificationEntity()
+            objCertificationEntity.CertificationId=certItem[0]
+            objCertificationEntity.ProfileId=certItem[1]
+            objCertificationEntity.CertificationName=certItem[2]
+            objCertificationEntity.Description=certItem[3]
+            arrayItems.append(objCertificationEntity)
+        return arrayItems  
+
+    
