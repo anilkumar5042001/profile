@@ -17,7 +17,7 @@ from .DBObjects.Entity import UserProfileEntity
 from .DBObjects.BAL import WorkHistoryBAL
 from .DBObjects.Entity import WorkHistoryEntity
 
-#{"ProfileId": "1",CompanyName":"WebSynergies","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartDate":"11.11.2009","EndDate":"11.07.2011"}
+#{"ProfileId": "1","CompanyName":"WebSynergies","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartDate":"11.11.2009","EndDate":"11.07.2011"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryInsert(json_data):

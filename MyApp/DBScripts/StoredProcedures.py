@@ -245,13 +245,14 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP WorkHistoryInsert')
 
-    def WorkHistoryGetById(self):
+    def GetAllWorkHistory(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS WorkHistory_GetById"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE WorkHistory_GetById(IN p_WorkHistoryId INT)
+        query = """CREATE PROCEDURE WorkHistory_GetById(IN p_ProfileId INT)
         BEGIN
         SELECT ProfileId,
+        WorkHistoryId,
         CompanyName,
         Role,
         Description,
@@ -260,7 +261,7 @@ class StoredProcedures:
         StartDate,
         EndDate
         FROM WorkHistory 
-        WHERE WorkHistoryId = p_WorkHistoryId;
+        WHERE ProfileId = p_ProfileId;
         END"""
         cursor.execute(query)
         print('SP WorkHistoryGetById executed')
