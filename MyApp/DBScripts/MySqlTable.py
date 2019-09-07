@@ -99,6 +99,11 @@ class MySqlTable:
             Country VARCHAR(250),
             StartDate DATETIME NULL,
             EndDate DATETIME NULL,
+            StartMonth INT,
+            StartYear INT,
+            EndMonth INT,
+            EndYear INT,
+            CurrentlyWorking BOOLEAN,
             PRIMARY KEY (WorkHistoryId)
             );"""
             cursor.execute(query)

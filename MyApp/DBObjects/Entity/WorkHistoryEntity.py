@@ -8,3 +8,8 @@ class WorkHistoryEntity(object):
     Country=""
     StartDate=""
     EndDate=""
+    StartMonth=""
+    StartYear=""
+    EndMonth=""
+    EndYear=""
+    CurrenltyWorking=""

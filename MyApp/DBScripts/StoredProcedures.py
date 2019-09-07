@@ -220,7 +220,12 @@ class StoredProcedures:
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
         IN p_StartDate DATETIME,
-        IN p_EndDate DATETIME
+        IN p_EndDate DATETIME,
+        IN p_StartMonth INT,
+        IN p_StartYear INT,
+        IN p_EndMonth INT,
+        IN p_EndYear INT,
+        IN p_CurrentlyWorking BOOLEAN
         )
         BEGIN
         INSERT INTO WorkHistory (
@@ -231,7 +236,12 @@ class StoredProcedures:
         City,
         Country,
         StartDate,
-        EndDate) 
+        EndDate,
+        StartMonth,
+        StartYear,
+        EndMonth,
+        EndYear,
+        CurrentlyWorking) 
         VALUES (
         p_ProfileId,
         p_CompanyName,
@@ -240,12 +250,17 @@ class StoredProcedures:
         p_City,
         p_Country,
         p_StartDate,
-        p_EndDate);
+        p_EndDate,
+        p_StartMonth,
+        p_StartYear,
+        p_EndMonth,
+        p_EndYear,
+        p_CurrentlyWorking);
         END"""
         cursor.execute(query)
         print('Exec SP WorkHistoryInsert')
 
-    def GetAllWorkHistory(self):
+    def WorkHistoryGetById(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS WorkHistory_GetById"""
         cursor.execute(query)
