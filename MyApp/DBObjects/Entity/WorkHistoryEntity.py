@@ -6,8 +6,6 @@ class WorkHistoryEntity(object):
     Description=""
     City=""
     Country=""
-    StartDate=""
-    EndDate=""
     StartMonth=""
     StartYear=""
     EndMonth=""

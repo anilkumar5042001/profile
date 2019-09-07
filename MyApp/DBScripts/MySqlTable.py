@@ -97,8 +97,6 @@ class MySqlTable:
             Description NVARCHAR(500),
             City VARCHAR(250),
             Country VARCHAR(250),
-            StartDate DATETIME NULL,
-            EndDate DATETIME NULL,
             StartMonth INT,
             StartYear INT,
             EndMonth INT,

@@ -219,8 +219,6 @@ class StoredProcedures:
         IN p_Description NVARCHAR(500),
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
-        IN p_StartDate DATETIME,
-        IN p_EndDate DATETIME,
         IN p_StartMonth INT,
         IN p_StartYear INT,
         IN p_EndMonth INT,
@@ -235,8 +233,6 @@ class StoredProcedures:
         Description,
         City,
         Country,
-        StartDate,
-        EndDate,
         StartMonth,
         StartYear,
         EndMonth,
@@ -249,8 +245,6 @@ class StoredProcedures:
         p_Description,
         p_City,
         p_Country,
-        p_StartDate,
-        p_EndDate,
         p_StartMonth,
         p_StartYear,
         p_EndMonth,
@@ -280,5 +274,43 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP WorkHistoryGetById executed')
+    
+    def WorkHistoryUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_Update
+        (
+        IN p_ProfileId INT,
+        IN p_WorkHistoryId INT,
+        IN p_CompanyName NVARCHAR(250),
+        IN p_Role NVARCHAR(250),
+        IN p_Description NVARCHAR(500),
+        IN p_City VARCHAR(250),
+        IN p_Country VARCHAR(250),
+        IN p_StartMonth INT,
+        IN p_StartYear INT,
+        IN p_EndMonth INT,
+        IN p_EndYear INT,
+        IN p_CurrentlyWorking BOOLEAN
+        )
+        BEGIN
+        Update WorkHistory 
+        SET ProfileId=p_ProfileId,
+        CompanyName=p_CompanyName,
+        Role=p_Role,
+        Description=p_Description,
+        City=p_City,
+        Country=p_Country,
+        StartMonth=p_StartMonth,
+        StartYear=p_StartYear,
+        EndMonth=p_EndMonth,
+        EndYear=p_EndYear,
+        CurrentlyWorking=p_CurrentlyWorking
+        WHERE WorkHistoryId=p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP WorkHistoryUpdate')
+  
 
     

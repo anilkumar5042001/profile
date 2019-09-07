@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class WorkHistoryDAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,Role,Description,City,Country,StartDate,EndDate,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+    def WorkHistoryInsert(self,ProfileId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
         cursor = connection.cursor()
-        args = [ProfileId,CompanyName,Role,Description,City,Country,StartDate,EndDate,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
+        args = [ProfileId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
         cursor.callproc('WorkHistory_Insert',args)
         return 1
     
@@ -14,6 +14,12 @@ class WorkHistoryDAL:
         cursor = connection.cursor()
         args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
+
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+        cursor = connection.cursor()
+        args = [ProfileId,WorkHistoryId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
+        cursor.callproc('WorkHistory_Update',args)
+        return 1
         
     
     def WorkHistoryGetById(self,WorkHistoryId):
@@ -35,6 +41,8 @@ class WorkHistoryDAL:
             #objWorkHistoryEntity.EndDate=WorkHistoryItem[7]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
+
+    
         
 
 
