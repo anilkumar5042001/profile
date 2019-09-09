@@ -5,6 +5,14 @@ class CertificationBAL:
         objCertificationDAL=CertificationDAL()
         return objCertificationDAL.CertificationInsert(ProfileId,CertificationName,Description)
 
+    def CertificationUpdate(self,CertificationId,CertificationName,Description):
+        objCertificationDAL=CertificationDAL()
+        return objCertificationDAL.CertificationUpdate(CertificationId,CertificationName,Description)
+
+    def CertificationDelete(self,CertificationId):
+        objCertificationDAL=CertificationDAL()
+        return objCertificationDAL.CertificationDelete(CertificationId)
+
     def CertificationGetByProfileId(self,ProfileId):
         objCertificationDAL=CertificationDAL()
         return objCertificationDAL.CertificationGetByProfileId(ProfileId) 

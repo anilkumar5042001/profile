@@ -25,6 +25,28 @@ def CertificationInsert(json_data):
         result=objCertificationBAL.CertificationInsert(strProfileId,strCertificationName,strDescription)
         return JsonResponse("1",safe=False)
 
+#{"CertificationId": "1","CertificationName":"Haddop","Description":"I worked as a Test Engineer"}
+@csrf_exempt
+@api_view(["POST"])
+def CertificationUpdate(json_data):
+        loaded_json = json.loads(json_data.body)
+        strCertificationId=loaded_json["CertificationId"]
+        strCertificationName=loaded_json["CertificationName"]
+        strDescription=loaded_json["Description"]
+        objCertificationBAL=CertificationBAL.CertificationBAL()
+        result=objCertificationBAL.CertificationUpdate(strCertificationId,strCertificationName,strDescription)
+        return JsonResponse("1",safe=False)
+
+#{"CertificationId": "3"}
+@csrf_exempt
+@api_view(["POST"])
+def CertificationDelete(json_data):
+        loaded_json = json.loads(json_data.body)
+        strCertificationId=loaded_json["CertificationId"]
+        objCertificationBAL=CertificationBAL.CertificationBAL()
+        result=objCertificationBAL.CertificationDelete(strCertificationId)
+        return JsonResponse("1",safe=False)
+
 @csrf_exempt
 @api_view(["POST"])
 def CertificationGetByProfileId(json_data):

@@ -24,6 +24,7 @@ class ExecOrder:
         objStoredProcedures.UserProfileUpdateAboutMe('self')
         objStoredProcedures.CertificationInsert('self')
         objStoredProcedures.CertificationUpdate('self')
+        objStoredProcedures.CertificationDelete('self')
         objStoredProcedures.CertificationGetByProfileId('self')
         objStoredProcedures.CertificationGetByCertificationId('self')
         objStoredProcedures.WorkHistoryInsert('self')

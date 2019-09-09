@@ -166,6 +166,21 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP CertificationUpdate')
+
+    def CertificationDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Certification_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Certification_Delete
+        (
+        IN p_CertificationId INT
+        )
+        BEGIN
+        DELETE FROM Certification 
+        WHERE CertificationId=p_CertificationId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP CertificationDelete')
   
     def UserProfileUpdate(self):
         cursor = connection.cursor()
