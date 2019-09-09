@@ -137,6 +137,24 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+    def CreateEducation(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Education")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Education
+            (
+            EducationId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            NameOfInstitution NVARCHAR(500) NULL,
+            CourseName NVARCHAR(250) NULL,
+            StartYear Int,
+            EndYear Int,
+            PRIMARY KEY (EducationId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
 
     def CheckTableExists(self,tableName):
         db_name = connection.settings_dict['NAME']

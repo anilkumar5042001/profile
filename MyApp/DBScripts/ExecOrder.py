@@ -11,6 +11,7 @@ class ExecOrder:
         objMySqlTable.CreateWorkHistory('self')
         objMySqlTable.CreateProjectHighlights('self')
         objMySqlTable.CreateResponsibilities('self')
+        objMySqlTable.CreateEducation('self')
     
 
         #Stored Procedures
@@ -36,6 +37,7 @@ class ExecOrder:
         objStoredProcedures.ResponsibilitiesInsert('self')
         objStoredProcedures.ResponsibilitiesGetById('self')
         objStoredProcedures.ResponsibilitiesUpdate('self')
+        objStoredProcedures.EducationInsert('self')
         
         
 

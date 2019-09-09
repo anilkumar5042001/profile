@@ -462,5 +462,39 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP ResponsibilitiesUpdate')
 
+    def EducationInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Education_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Education_Insert
+        (
+        IN p_EducationId INT,
+        IN p_ProfileId INT,
+        IN p_NameOfInstitution NVARCHAR(500),
+        IN p_CourseName NVARCHAR(250),
+        IN p_StartYear INT,
+        IN p_EndYear INT
+        )
+        BEGIN
+        INSERT INTO Education (
+        EducationId,
+        ProfileId,
+        NameOfInstitution,
+        CourseName,
+        StartYear,
+        EndYear
+        ) 
+        VALUES (
+        p_EducationId,
+        p_ProfileId,
+        p_NameOfInstitution,
+        p_CourseName,
+        p_StartYear,
+        p_EndYear
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP EducationInsert')
+
 
     
