@@ -70,6 +70,23 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP CertificationGetByProfileId executed')
+
+    def CertificationGetByCertificationId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Certification_GetByCertificationId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Certification_GetByCertificationId(IN p_CertificationId INT)
+        BEGIN
+        SELECT 
+        CertificationId,
+        ProfileId,
+        CertificationName,
+        Description
+        FROM Certification 
+        WHERE CertificationId = p_CertificationId;
+        END"""
+        cursor.execute(query)
+        print('SP CertificationGetByCertificationId executed')    
     
     def UserProfileInsert(self):
         cursor = connection.cursor()
@@ -311,6 +328,124 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP WorkHistoryUpdate')
-  
+
+    def ProjectHighlightsInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ProjectHighlights_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ProjectHighlights_Insert
+        (
+        IN p_ProjectHighlightsId INT,
+        IN p_WorkHistoryId INT,
+        IN p_ProjectHighlightsDescription NVARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO ProjectHighlights (
+        ProjectHighlightsId,
+        WorkHistoryId,
+        ProjectHighlightsDescription
+        ) 
+        VALUES (
+        p_ProjectHighlightsId,
+        p_WorkHistoryId,
+        p_ProjectHighlightsDescription
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP ProjectHighlightsInsert')
+
+    def ProjectHighlightsGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ProjectHighlights_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ProjectHighlights_GetById(IN p_WorkHistoryId INT)
+        BEGIN
+        SELECT ProjectHighlightsId,
+        WorkHistoryId,
+        ProjectHighlightsDescription
+        FROM ProjectHighlights 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP ProjectHighlightsGetById executed')
+
+    def ProjectHighlightsUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ProjectHighlights_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ProjectHighlights_Update
+        (
+        IN p_ProjectHighlightsId INT,
+        IN p_WorkHistoryId INT,
+        IN p_ProjectHighlightsDescription NVARCHAR(500)
+        )
+        BEGIN
+        Update ProjectHighlights 
+        SET WorkHistoryId=p_WorkHistoryId,
+        ProjectHighlightsDescription=p_ProjectHighlightsDescription
+        WHERE ProjectHighlightsId=p_ProjectHighlightsId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP ProjectHighlightsUpdate')
+
+    def ResponsibilitiesInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Responsibilities_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Responsibilities_Insert
+        (
+        IN p_ResponsibilitiesId INT,
+        IN p_WorkHistoryId INT,
+        IN p_ResponsibilitiesDescription NVARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO Responsibilities (
+        ResponsibilitiesId,
+        WorkHistoryId,
+        ResponsibilitiesDescription
+        ) 
+        VALUES (
+        p_ResponsibilitiesId,
+        p_WorkHistoryId,
+        p_ResponsibilitiesDescription
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP ResponsibilitiesInsert')
+
+    def ResponsibilitiesGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Responsibilities_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Responsibilities_GetById(IN p_WorkHistoryId INT)
+        BEGIN
+        SELECT ResponsibilitiesId,
+        WorkHistoryId,
+        ResponsibilitiesDescription
+        FROM Responsibilities 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP ResponsibilitiesGetById executed')
+
+    def ResponsibilitiesUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Responsibilities_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Responsibilities_Update
+        (
+        IN p_ResponsibilitiesId INT,
+        IN p_WorkHistoryId INT,
+        IN p_ResponsibilitiesDescription NVARCHAR(500)
+        )
+        BEGIN
+        Update Responsibilities 
+        SET WorkHistoryId=p_WorkHistoryId,
+        ResponsibilitiesDescription=p_ResponsibilitiesDescription
+        WHERE ResponsibilitiesId=p_ResponsibilitiesId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP ResponsibilitiesUpdate')
+
 
     

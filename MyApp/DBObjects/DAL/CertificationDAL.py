@@ -24,5 +24,20 @@ class CertificationDAL:
             objCertificationEntity.Description=certItem[3]
             arrayItems.append(objCertificationEntity)
         return arrayItems  
+    
+    def CertificationGetByCertificationId(self,certificationId):
+        db_name = connection.settings_dict['NAME']
+        cursor = connection.cursor()
+        args = [certificationId]
+        cursor.callproc('Certification_GetByCertificationId',args)
+        certItem =  cursor.fetchall()
+        
+        objCertificationEntity=CertificationEntity()
+        objCertificationEntity.CertificationId=certItem[0][0]
+        objCertificationEntity.ProfileId=certItem[0][1]
+        objCertificationEntity.CertificationName=certItem[0][2]
+        objCertificationEntity.Description=certItem[0][3]
+        
+        return objCertificationEntity  
 
     

@@ -42,6 +42,60 @@ class WorkHistoryDAL:
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
+    def ProjectHighlightsInsert(self,ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription):
+        cursor = connection.cursor()
+        args = [ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription]
+        cursor.callproc('ProjectHighlights_Insert',args)
+        return 1
+
+    def ProjectHighlightsGetById(self,WorkHistoryId):
+        cursor = connection.cursor()
+        args = [WorkHistoryId]
+        cursor.callproc('ProjectHighlights_GetById',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for ProjectHighlightsItem in res:
+            objProjectHighlightsEntity=ProjectHighlightsEntity()
+            objProjectHighlightsEntity.ProjectHighlightsId=ProjectHighlightsItem[0]
+            objProjectHighlightsEntity.WorkHistoryId=ProjectHighlightsItem[1]
+            objProjectHighlightsEntity.ProjectHighlightsDescription=ProjectHighlightsItem[2]
+            arrayItems.append(objProjectHighlightsEntity)
+        return arrayItems 
+
+    def ProjectHighlightsUpdate(self,ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription):
+        cursor = connection.cursor()
+        args = [ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription]
+        cursor.callproc('ProjectHighlights_Update',args)
+        return 1
+
+    def ResponsibilitiesInsert(self,ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription):
+        cursor = connection.cursor()
+        args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
+        cursor.callproc('Responsibilities_Insert',args)
+        return 1
+
+    def ResponsibilitiesGetById(self,WorkHistoryId):
+        cursor = connection.cursor()
+        args = [WorkHistoryId]
+        cursor.callproc('Responsibilities_GetById',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for ResponsibilitiesItem in res:
+            objResponsibilitiesEntity=ResponsibilitiesEntity()
+            objResponsibilitiesEntity.ResponsibilitiesId=ResponsibilitiesItem[0]
+            objResponsibilitiesEntity.WorkHistoryId=ResponsibilitiesItem[1]
+            objResponsibilitiesEntity.ResponsibilitiesDescription=ResponsibilitiesItem[2]
+            arrayItems.append(objResponsibilitiesEntity)
+        return arrayItems 
+
+    def ResponsibilitiesUpdate(self,ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription):
+        cursor = connection.cursor()
+        args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
+        cursor.callproc('Responsibilities_Update',args)
+        return 1
+
+        
+
     
         
 

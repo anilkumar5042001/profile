@@ -28,12 +28,19 @@ def CertificationInsert(json_data):
 @csrf_exempt
 @api_view(["POST"])
 def CertificationGetByProfileId(json_data):
-        print('1')
         loaded_json = json.loads(json_data.body)
-        print('2')
         strProfileId=loaded_json["ProfileId"]
-        print('profileid is '+strProfileId )
         objCertificationBAL=CertificationBAL.CertificationBAL()
         objCertifications=objCertificationBAL.CertificationGetByProfileId(strProfileId)
         result = json.dumps([ob.__dict__ for ob in objCertifications])
         return JsonResponse(result,safe=False)    
+
+@csrf_exempt
+@api_view(["POST"])
+def CertificationGetByCertificationId(json_data):
+        loaded_json = json.loads(json_data.body)
+        strCertificationId=loaded_json["CertificationId"]
+        objCertificationBAL=CertificationBAL.CertificationBAL()
+        objCertificationEntity=objCertificationBAL.CertificationGetByCertificationId(strCertificationId)
+        result= json.dumps(objCertificationEntity.__dict__)
+        return JsonResponse(result,safe=False) 

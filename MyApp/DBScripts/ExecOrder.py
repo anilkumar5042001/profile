@@ -9,6 +9,8 @@ class ExecOrder:
         objMySqlTable.CreateCountry('self')
         objMySqlTable.CreateCertificationTable('self')
         objMySqlTable.CreateWorkHistory('self')
+        objMySqlTable.CreateProjectHighlights('self')
+        objMySqlTable.CreateResponsibilities('self')
     
 
         #Stored Procedures
@@ -23,9 +25,16 @@ class ExecOrder:
         objStoredProcedures.CertificationInsert('self')
         objStoredProcedures.CertificationUpdate('self')
         objStoredProcedures.CertificationGetByProfileId('self')
+        objStoredProcedures.CertificationGetByCertificationId('self')
         objStoredProcedures.WorkHistoryInsert('self')
         objStoredProcedures.WorkHistoryGetById('self')
         objStoredProcedures.WorkHistoryUpdate('self')
+        objStoredProcedures.ProjectHighlightsInsert('self')
+        objStoredProcedures.ProjectHighlightsGetById('self')
+        objStoredProcedures.ProjectHighlightsUpdate('self')
+        objStoredProcedures.ResponsibilitiesInsert('self')
+        objStoredProcedures.ResponsibilitiesGetById('self')
+        objStoredProcedures.ResponsibilitiesUpdate('self')
         
         
 

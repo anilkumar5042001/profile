@@ -47,6 +47,7 @@ def GetWorkHistoryById(json_data):
         strWorkHistoryId=loaded_json["WorkHistoryId"]
         objWorkHistoryEntity=objWorkHistoryBAL.WorkHistoryGetById(strWorkHistoryId)
         result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
@@ -71,4 +72,84 @@ def WorkHistoryUpdate(json_data):
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
+        return JsonResponse("1",safe=False)
+
+#{"ProjectHighlightsId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Worked hard in deadline"}
+@csrf_exempt
+@api_view(["POST"])
+def ProjectHighlightsInsert(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strProjectHighlightsId=loaded_json["ProjectHighlightsId"]
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        result=objWorkHistoryBAL.ProjectHighlightsInsert(strProjectHighlightsId,strWorkHistoryId,strProjectHighlightsDescription)
+        return JsonResponse("1",safe=False)
+
+#{"WorkHistoryId": 1}
+@csrf_exempt
+@api_view(["POST"])
+def GetProjectHighlightsById(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        objProjectHighlightsEntity=objWorkHistoryBAL.ProjectHighlightsGetById(strWorkHistoryId)
+        result = json.dumps([ob.__dict__ for ob in objProjectHighlightsEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"ProjectHighlightsId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Successfully finished the project on time"}
+@csrf_exempt
+@api_view(["POST"])
+def ProjectHighlightsUpdate(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strProjectHighlightsId=loaded_json["ProjectHighlightsId"]
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        result=objWorkHistoryBAL.ProjectHighlightsUpdate(strProjectHighlightsId,strWorkHistoryId,strProjectHighlightsDescription)
+        return JsonResponse("1",safe=False)
+
+#{"ResponsibilitiesId": "1","WorkHistoryId":"1","ResponsibilitiesDescription":"Worked as Team Lead"}
+@csrf_exempt
+@api_view(["POST"])
+def ResponsibilitiesInsert(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        strResponsibilitiesDescription=loaded_json["ResponsibilitiesDescription"]
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        result=objWorkHistoryBAL.ResponsibilitiesInsert(strResponsibilitiesId,strWorkHistoryId,strResponsibilitiesDescription)
+        return JsonResponse("1",safe=False)
+
+#{"WorkHistoryId": 1}
+@csrf_exempt
+@api_view(["POST"])
+def GetResponsibilitiesById(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        objResponsibilitiesEntity=objWorkHistoryBAL.ResponsibilitiesGetById(strWorkHistoryId)
+        result = json.dumps([ob.__dict__ for ob in objResponsibilitiesEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"ResponsibilitiesId": "1","WorkHistoryId":"1","ResponsibilitiesDescription":"Started working as PM"}
+@csrf_exempt
+@api_view(["POST"])
+def ResponsibilitiesUpdate(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        strResponsibilitiesDescription=loaded_json["ResponsibilitiesDescription"]
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        result=objWorkHistoryBAL.ResponsibilitiesUpdate(strResponsibilitiesId,strWorkHistoryId,strResponsibilitiesDescription)
         return JsonResponse("1",safe=False)

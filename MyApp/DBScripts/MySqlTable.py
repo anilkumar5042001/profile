@@ -106,6 +106,36 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('method executed')
+    
+    def CreateProjectHighlights(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"ProjectHighlights")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table ProjectHighlights
+            (
+            ProjectHighlightsId INT NOT NULL AUTO_INCREMENT,
+            WorkHistoryId INT NOT NULL,
+            ProjectHighlightsDescription NVARCHAR(500) NULL,
+            PRIMARY KEY (ProjectHighlightsId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CreateResponsibilities(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Responsibilities")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Responsibilities
+            (
+            ResponsibilitiesId INT NOT NULL AUTO_INCREMENT,
+            WorkHistoryId INT NOT NULL,
+            ResponsibilitiesDescription NVARCHAR(500) NULL,
+            PRIMARY KEY (ResponsibilitiesId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
 
 
     def CheckTableExists(self,tableName):

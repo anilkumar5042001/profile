@@ -6,6 +6,9 @@ class CertificationBAL:
         return objCertificationDAL.CertificationInsert(ProfileId,CertificationName,Description)
 
     def CertificationGetByProfileId(self,ProfileId):
-        print('danger')
         objCertificationDAL=CertificationDAL()
         return objCertificationDAL.CertificationGetByProfileId(ProfileId) 
+
+    def CertificationGetByCertificationId(self,certificationId):
+        objCertificationDAL=CertificationDAL()
+        return objCertificationDAL.CertificationGetByCertificationId(certificationId) 
