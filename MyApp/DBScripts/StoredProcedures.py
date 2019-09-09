@@ -496,5 +496,62 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP EducationInsert')
 
+    def EducationGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Education_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Education_GetById(IN p_ProfileId INT)
+        BEGIN
+        SELECT EducationId,
+        ProfileId,
+        NameOfInstitution,
+        CourseName,
+        StartYear,
+        EndYear
+        FROM Education 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP EducationGetById executed')
+
+    def EducationUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Education_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Education_Update
+        (
+        IN p_EducationId INT,
+        IN p_ProfileId INT,
+        IN p_NameOfInstitution NVARCHAR(500),
+        IN p_CourseName NVARCHAR(250),
+        IN p_StartYear INT,
+        IN p_EndYear INT
+        )
+        BEGIN
+        Update Education 
+        SET ProfileId=p_ProfileId,
+        NameOfInstitution=p_NameOfInstitution,
+        CourseName=p_CourseName,
+        StartYear=p_StartYear,
+        EndYear=p_EndYear
+        WHERE EducationId=p_EducationId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP EducationUpdate')
+
+    def EducationDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Education_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Education_Delete(IN p_EducationId INT)
+        BEGIN
+        Delete
+        FROM Education 
+        WHERE EducationId = p_EducationId;
+        END"""
+        cursor.execute(query)
+        print('SP EducationDelete executed')
+
+
 
     

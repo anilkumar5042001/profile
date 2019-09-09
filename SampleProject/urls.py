@@ -20,6 +20,7 @@ from django.contrib import admin
 from MyApp import views
 from MyApp import userProfileView
 from MyApp import WorkHistoryView
+from MyApp import EducationView
 from MyApp.AllViews import CertificationView
 
 urlpatterns = [
@@ -49,6 +50,11 @@ urlpatterns = [
     url(r'^ResponsibilitiesInsert/', WorkHistoryView.ResponsibilitiesInsert),
     url(r'^GetResponsibilitiesById/', WorkHistoryView.GetResponsibilitiesById),
     url(r'^ResponsibilitiesUpdate/', WorkHistoryView.ResponsibilitiesUpdate),
+    url(r'^EducationInsert/', EducationView.EducationInsert),
+    url(r'^GetEducationById/', EducationView.GetEducationById),
+    url(r'^EducationUpdate/', EducationView.EducationUpdate),
+    url(r'^EducationDelete/', EducationView.EducationDelete),
+
 
     
     

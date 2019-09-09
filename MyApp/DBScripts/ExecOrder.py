@@ -38,6 +38,9 @@ class ExecOrder:
         objStoredProcedures.ResponsibilitiesGetById('self')
         objStoredProcedures.ResponsibilitiesUpdate('self')
         objStoredProcedures.EducationInsert('self')
+        objStoredProcedures.EducationGetById('self')
+        objStoredProcedures.EducationUpdate('self')
+        objStoredProcedures.EducationDelete('self')
         
         
 
