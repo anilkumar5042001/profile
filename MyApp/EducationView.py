@@ -15,20 +15,20 @@ from rest_framework.response import Response
 from .DBObjects.BAL import EducationBAL
 from .DBObjects.Entity import EducationEntity
 
-#{"EducationId":"1","ProfileId": "1","NameOfInstitution":"St.Xaviers High School","CourseName":"10th Standard","StartYear":"1995","EndYear":"1996"}
+#{"ProfileId": "1","NameOfInstitution":"St.Xaviers High School","Degree":"10th Standard","StartYear":"1995","EndYear":"1996","EducationDescription":"I Passed my first entrance"}
 @csrf_exempt
 @api_view(["POST"])
 def EducationInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strEducationId=loaded_json["EducationId"]
         strProfileId=loaded_json["ProfileId"]
         strNameOfInstitution=loaded_json["NameOfInstitution"]
-        strCourseName=loaded_json["CourseName"]
+        strDegree=loaded_json["Degree"]
         strStartYear=loaded_json["StartYear"]
         strEndYear=loaded_json["EndYear"]
+        strEducationDescription=loaded_json["EducationDescription"]
         objEducationBAL=EducationBAL.EducationBAL()
-        result=objEducationBAL.EducationInsert(strEducationId,strProfileId,strNameOfInstitution,strCourseName,strStartYear,strEndYear)
+        result=objEducationBAL.EducationInsert(strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId": "1"}
@@ -45,7 +45,7 @@ def GetEducationById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"EducationId":"2","ProfileId": "1","NameOfInstitution":"Nalanda","CourseName":"10th Standard","StartYear":"1998","EndYear":"2000"}
+#{"EducationId":"2","ProfileId": "1","NameOfInstitution":"Nalanda","Degree":"10th Standard","StartYear":"1998","EndYear":"2000","EducationDescription":"Completed"}
 @csrf_exempt
 @api_view(["POST"])
 def EducationUpdate(json_data):
@@ -54,11 +54,12 @@ def EducationUpdate(json_data):
         strEducationId=loaded_json["EducationId"]
         strProfileId=loaded_json["ProfileId"]
         strNameOfInstitution=loaded_json["NameOfInstitution"]
-        strCourseName=loaded_json["CourseName"]
+        strDegree=loaded_json["Degree"]
         strStartYear=loaded_json["StartYear"]
         strEndYear=loaded_json["EndYear"]
+        strEducationDescription=loaded_json["EducationDescription"]
         objEducationBAL=EducationBAL.EducationBAL()
-        result=objEducationBAL.EducationUpdate(strEducationId,strProfileId,strNameOfInstitution,strCourseName,strStartYear,strEndYear)
+        result=objEducationBAL.EducationUpdate(strEducationId,strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription)
         return JsonResponse("1",safe=False)
 
 #{"EducationId": "1"}

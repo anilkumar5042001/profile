@@ -12,7 +12,8 @@ class ExecOrder:
         objMySqlTable.CreateProjectHighlights('self')
         objMySqlTable.CreateResponsibilities('self')
         objMySqlTable.CreateEducation('self')
-    
+        objMySqlTable.CreateLanguage('self') 
+        objMySqlTable.CreateRegistration('self')   
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -41,6 +42,13 @@ class ExecOrder:
         objStoredProcedures.EducationGetById('self')
         objStoredProcedures.EducationUpdate('self')
         objStoredProcedures.EducationDelete('self')
+        objStoredProcedures.LanguageInsert('self')
+        objStoredProcedures.LanguageGetById('self')
+        objStoredProcedures.LanguageUpdate('self')
+        objStoredProcedures.LanguageDelete('self')
+        objStoredProcedures.RegistrationInsert('self')
+        objStoredProcedures.RegistrationGetById('self')
+        objStoredProcedures.RegistrationUpdate('self')
         
         
 

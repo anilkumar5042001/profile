@@ -22,6 +22,8 @@ from MyApp import userProfileView
 from MyApp import WorkHistoryView
 from MyApp import EducationView
 from MyApp.AllViews import CertificationView
+from MyApp import LanguageView
+from MyApp.AllViews import RegistrationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -54,6 +56,15 @@ urlpatterns = [
     url(r'^GetEducationById/', EducationView.GetEducationById),
     url(r'^EducationUpdate/', EducationView.EducationUpdate),
     url(r'^EducationDelete/', EducationView.EducationDelete),
+    url(r'^LanguageInsert/', LanguageView.LanguageInsert),
+    url(r'^GetLanguageById/', LanguageView.GetLanguageById),
+    url(r'^LanguageUpdate/', LanguageView.LanguageUpdate),
+    url(r'^LanguageDelete/', LanguageView.LanguageDelete),
+     url(r'^RegistrationInsert/', RegistrationView.RegistrationInsert),
+    url(r'^GetRegistrationById/', RegistrationView.GetRegistrationById),
+    url(r'^RegistrationUpdate/', RegistrationView.RegistrationUpdate),
+    
+    
 
 
     

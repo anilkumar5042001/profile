@@ -468,29 +468,29 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Education_Insert
         (
-        IN p_EducationId INT,
         IN p_ProfileId INT,
         IN p_NameOfInstitution NVARCHAR(500),
-        IN p_CourseName NVARCHAR(250),
+        IN p_Degree NVARCHAR(250),
         IN p_StartYear INT,
-        IN p_EndYear INT
+        IN p_EndYear INT,
+        IN p_EducationDescription NVARCHAR(500)
         )
         BEGIN
         INSERT INTO Education (
-        EducationId,
         ProfileId,
         NameOfInstitution,
-        CourseName,
+        Degree,
         StartYear,
-        EndYear
+        EndYear,
+        EducationDescription
         ) 
         VALUES (
-        p_EducationId,
         p_ProfileId,
         p_NameOfInstitution,
-        p_CourseName,
+        p_Degree,
         p_StartYear,
-        p_EndYear
+        p_EndYear,
+        p_EducationDescription
         );
         END"""
         cursor.execute(query)
@@ -505,9 +505,10 @@ class StoredProcedures:
         SELECT EducationId,
         ProfileId,
         NameOfInstitution,
-        CourseName,
+        Degree,
         StartYear,
-        EndYear
+        EndYear,
+        EducationDescription
         FROM Education 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -523,17 +524,19 @@ class StoredProcedures:
         IN p_EducationId INT,
         IN p_ProfileId INT,
         IN p_NameOfInstitution NVARCHAR(500),
-        IN p_CourseName NVARCHAR(250),
+        IN p_Degree NVARCHAR(250),
         IN p_StartYear INT,
-        IN p_EndYear INT
+        IN p_EndYear INT,
+        IN p_EducationDescription NVARCHAR(500)
         )
         BEGIN
         Update Education 
         SET ProfileId=p_ProfileId,
         NameOfInstitution=p_NameOfInstitution,
-        CourseName=p_CourseName,
+        Degree=p_Degree,
         StartYear=p_StartYear,
-        EndYear=p_EndYear
+        EndYear=p_EndYear,
+        EducationDescription=p_EducationDescription
         WHERE EducationId=p_EducationId;
         END"""
         cursor.execute(query)
@@ -551,6 +554,143 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP EducationDelete executed')
+
+    def LanguageInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Language_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Language_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_LanguageName NVARCHAR(250),
+        IN p_LanguageLevel NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Language (
+        ProfileId,
+        LanguageName,
+        LanguageLevel
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_LanguageName,
+        p_LanguageLevel
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP LanguageInsert')
+
+    def LanguageGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Language_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Language_GetById(IN p_ProfileId INT)
+        BEGIN
+        SELECT LanguageId,
+        ProfileId,
+        LanguageName,
+        LanguageLevel
+        FROM Language 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP LanguageGetById executed')
+
+    def LanguageUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Language_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Language_Update
+        (
+        IN p_LanguageId INT,
+        IN p_ProfileId INT,
+        IN p_LanguageName NVARCHAR(250),
+        IN p_LanguageLevel NVARCHAR(250)
+        )
+        BEGIN
+        Update Language 
+        SET ProfileId=p_ProfileId,
+        LanguageName=p_LanguageName,
+        LanguageLevel=p_LanguageLevel
+        WHERE LanguageId=p_LanguageId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP LanguageUpdate')
+
+    def LanguageDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Language_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Language_Delete(IN p_LanguageId INT)
+        BEGIN
+        Delete
+        FROM Language 
+        WHERE LanguageId = p_LanguageId;
+        END"""
+        cursor.execute(query)
+        print('SP LanguageDelete executed')
+
+    def RegistrationInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Registration_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Registration_Insert
+        (
+        IN p_RegistrationId INT,
+        IN p_EmailId NVARCHAR(500),
+        IN p_Password NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Registration (
+        RegistrationId,
+        EmailId,
+        Password
+        ) 
+        VALUES (
+        p_RegistrationId,
+        p_EmailId,
+        p_Password
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP RegistrationInsert')
+
+    def RegistrationGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Registration_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Registration_GetById(IN p_RegistrationId INT)
+        BEGIN
+        SELECT RegistrationId,
+        EmailId,
+        Password
+        FROM Registration 
+        WHERE RegistrationId = p_RegistrationId;
+        END"""
+        cursor.execute(query)
+        print('SP RegistrationGetById executed')
+
+    def RegistrationUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Registration_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Registration_Update
+        (
+        IN p_RegistrationId INT,
+        IN p_EmailId NVARCHAR(500),
+        IN p_Password NVARCHAR(250)
+        )
+        BEGIN
+        Update Registration 
+        SET 
+        EmailId=p_EmailId,
+        Password=p_Password
+        WHERE RegistrationId=p_RegistrationId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP RegistrationUpdate')
+
+
 
 
 

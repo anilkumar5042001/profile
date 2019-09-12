@@ -2,6 +2,7 @@ class EducationEntity(object):
     EducationId=0
     ProfileId=""
     NameOfInstitution=""
-    CourseName=""
+    Degree=""
     StartYear=""
     EndYear=""
+    EducationDescription=""

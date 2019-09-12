@@ -147,13 +147,47 @@ class MySqlTable:
             EducationId INT NOT NULL AUTO_INCREMENT,
             ProfileId INT NOT NULL,
             NameOfInstitution NVARCHAR(500) NULL,
-            CourseName NVARCHAR(250) NULL,
+            Degree NVARCHAR(250) NULL,
             StartYear Int,
             EndYear Int,
+            EducationDescription NVARCHAR(500) NULL,
             PRIMARY KEY (EducationId)
             );"""
             cursor.execute(query)
             print('method executed')
+
+    def CreateLanguage(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Language")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Language
+            (
+            LanguageId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            LanguageName NVARCHAR(250) NULL,
+            LanguageLevel NVARCHAR(250) NULL,
+            PRIMARY KEY (LanguageId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CreateRegistration(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Registration")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Registration
+            (
+            RegistrationId INT NOT NULL AUTO_INCREMENT,           
+            EmailId NVARCHAR(500) NULL,
+            Password NVARCHAR(250) NULL,
+            PRIMARY KEY (RegistrationId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    
 
 
     def CheckTableExists(self,tableName):

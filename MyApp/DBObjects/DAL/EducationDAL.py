@@ -2,9 +2,9 @@ from ..Entity.EducationEntity import *
 from django.db import connection
 
 class EducationDAL:
-    def EducationInsert(self,EducationId,ProfileId,NameOfInstitution,CourseName,StartYear,EndYear):
+    def EducationInsert(self,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription):
         cursor = connection.cursor()
-        args = [EducationId,ProfileId,NameOfInstitution,CourseName,StartYear,EndYear]
+        args = [ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription]
         cursor.callproc('Education_Insert',args)
         return 1
 
@@ -19,15 +19,16 @@ class EducationDAL:
             objEducationEntity.EducationId=EducationItem[0]
             objEducationEntity.ProfileId=EducationItem[1]
             objEducationEntity.NameOfInstitution=EducationItem[2]
-            objEducationEntity.CourseName=EducationItem[3]
+            objEducationEntity.Degree=EducationItem[3]
             objEducationEntity.StartYear=EducationItem[4]
             objEducationEntity.EndYear=EducationItem[5]
+            objEducationEntity.EducationDescription=EducationItem[6]
             arrayItems.append(objEducationEntity)
         return arrayItems 
 
-    def EducationUpdate(self,EducationId,ProfileId,NameOfInstitution,CourseName,StartYear,EndYear):
+    def EducationUpdate(self,EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription):
         cursor = connection.cursor()
-        args = [EducationId,ProfileId,NameOfInstitution,CourseName,StartYear,EndYear]
+        args = [EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription]
         cursor.callproc('Education_Update',args)
         return 1
 
