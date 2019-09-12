@@ -24,6 +24,7 @@ from MyApp import EducationView
 from MyApp.AllViews import CertificationView
 from MyApp import LanguageView
 from MyApp.AllViews import RegistrationView
+from MyApp.AllViews import AwardsView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -63,6 +64,10 @@ urlpatterns = [
      url(r'^RegistrationInsert/', RegistrationView.RegistrationInsert),
     url(r'^GetRegistrationById/', RegistrationView.GetRegistrationById),
     url(r'^RegistrationUpdate/', RegistrationView.RegistrationUpdate),
+     url(r'^AwardsInsert/',AwardsView.AwardsInsert),
+    url(r'^GetAwardsById/', AwardsView.GetAwardsById),
+    url(r'^AwardsUpdate/', AwardsView.AwardsUpdate),
+    url(r'^AwardsDelete/', AwardsView.AwardsDelete),
     
     
 

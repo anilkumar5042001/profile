@@ -7,7 +7,7 @@ class RegistrationBAL:
 
     def GetRegistrationById(self,RegistrationId):
         objRegistrationDAL=RegistrationDAL()
-        return objRegistrationDAL.GetRegistrationById(RegistrationId)
+        return objRegistrationDAL.GetRegistrationeById(RegistrationId)
 
     def RegistrationUpdate(self,RegistrationId,EmailId,Password):
         objRegistrationDAL=RegistrationDAL()

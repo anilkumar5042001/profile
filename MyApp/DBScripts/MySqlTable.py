@@ -187,6 +187,22 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+    def CreateAwards(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Awards")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Awards
+            (
+            AwardId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            AwardTitle NVARCHAR(250) NULL,
+            AwardDescription NVARCHAR(500) NULL,
+            PRIMARY KEY (AwardId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
     
 
 

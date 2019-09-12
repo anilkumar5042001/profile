@@ -690,6 +690,82 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP RegistrationUpdate')
 
+    def AwardsInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_AwardTitle NVARCHAR(250),
+        IN p_AwardDescription NVARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO Awards (
+        ProfileId,
+        AwardTitle,
+        AwardDescription
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_AwardTitle,
+        p_AwardDescription
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP AwardsInsert')
+
+    def AwardsGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_GetById(IN p_ProfileId INT)
+        BEGIN
+        SELECT AwardId,
+        ProfileId,
+        AwardTitle,
+        AwardDescription
+        FROM Awards
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP AwardsGetById executed')
+
+    def AwardsUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_Update
+        (
+        IN p_AwardId INT,
+        IN p_ProfileId INT,
+        IN p_AwardTitle NVARCHAR(250),
+        IN p_AwardDescription NVARCHAR(500)
+        )
+        BEGIN
+        Update Awards 
+        SET ProfileId=p_ProfileId,
+        AwardTitle=p_AwardTitle,
+        AwardDescription=p_AwardDescription
+        WHERE AwardId=p_AwardId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP AwardsUpdate')
+
+    def AwardsDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_Delete(IN p_AwardId INT)
+        BEGIN
+        Delete
+        FROM Awards 
+        WHERE AwardId = p_AwardId;
+        END"""
+        cursor.execute(query)
+        print('SP AwardsDelete executed')
+
+
 
 
 

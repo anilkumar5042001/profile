@@ -8,7 +8,7 @@ class RegistrationDAL:
         cursor.callproc('Registration_Insert',args)
         return 1
 
-    def GetLanguageById(self,RegistrationId):
+    def GetRegistrationeById(self,RegistrationId):
         cursor = connection.cursor()
         args = [RegistrationId]
         cursor.callproc('Registration_GetById',args)

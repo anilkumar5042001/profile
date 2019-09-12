@@ -13,7 +13,8 @@ class ExecOrder:
         objMySqlTable.CreateResponsibilities('self')
         objMySqlTable.CreateEducation('self')
         objMySqlTable.CreateLanguage('self') 
-        objMySqlTable.CreateRegistration('self')   
+        objMySqlTable.CreateRegistration('self') 
+        objMySqlTable.CreateAwards('self')  
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -49,6 +50,10 @@ class ExecOrder:
         objStoredProcedures.RegistrationInsert('self')
         objStoredProcedures.RegistrationGetById('self')
         objStoredProcedures.RegistrationUpdate('self')
+        objStoredProcedures.AwardsInsert('self')
+        objStoredProcedures.AwardsGetById('self')
+        objStoredProcedures.AwardsUpdate('self')
+        objStoredProcedures.AwardsDelete('self')
         
         
 

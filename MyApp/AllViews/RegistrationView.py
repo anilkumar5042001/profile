@@ -50,7 +50,7 @@ def RegistrationUpdate(json_data):
         strEmailId=loaded_json["EmailId"]
         strPassword=loaded_json["Password"]
         objRegistrationBAL=RegistrationBAL.RegistrationBAL()
-        result=objRegistrationBAL.RegistrationUpdate(RegistrationId,strEmailId,strPassword)
+        result=objRegistrationBAL.RegistrationUpdate(strRegistrationId,strEmailId,strPassword)
         return JsonResponse("1",safe=False)
 
       
