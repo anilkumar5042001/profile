@@ -65,6 +65,7 @@ urlpatterns = [
     url(r'^GetRegistrationById/', RegistrationView.GetRegistrationById),
     url(r'^RegistrationUpdate/', RegistrationView.RegistrationUpdate),
      url(r'^AwardsInsert/',AwardsView.AwardsInsert),
+    url(r'^GetAwardsByProfileId/', AwardsView.GetAwardsByProfileId),
     url(r'^GetAwardsById/', AwardsView.GetAwardsById),
     url(r'^AwardsUpdate/', AwardsView.AwardsUpdate),
     url(r'^AwardsDelete/', AwardsView.AwardsDelete),

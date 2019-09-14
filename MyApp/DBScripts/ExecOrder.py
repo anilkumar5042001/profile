@@ -51,7 +51,8 @@ class ExecOrder:
         objStoredProcedures.RegistrationGetById('self')
         objStoredProcedures.RegistrationUpdate('self')
         objStoredProcedures.AwardsInsert('self')
-        objStoredProcedures.AwardsGetById('self')
+        objStoredProcedures.GetAwardsById('self')
+        objStoredProcedures.GetAwardsByProfileId('self')
         objStoredProcedures.AwardsUpdate('self')
         objStoredProcedures.AwardsDelete('self')
         

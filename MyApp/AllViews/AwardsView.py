@@ -28,11 +28,25 @@ def AwardsInsert(json_data):
 #{"ProfileId": "1"}
 @csrf_exempt
 @api_view(["POST"])
-def GetAwardsById(json_data):
+def GetAwardsByProfileId(json_data):
         loaded_json = json.loads(json_data.body)
         objAwardsBAL=AwardsBAL.AwardsBAL()
         strProfileId=loaded_json["ProfileId"]
-        objAwardsEntity=objAwardsBAL.GetAwardsById(strProfileId)
+        objAwardsEntity=objAwardsBAL.GetAwardsByProfileId(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objAwardsEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"AwardId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetAwardsById(json_data):
+        loaded_json = json.loads(json_data.body)
+        objAwardsBAL=AwardsBAL.AwardsBAL()
+        strAwardId=loaded_json["AwardId"]
+        objAwardsEntity=objAwardsBAL.GetAwardsById(strAwardId)
         result = json.dumps([ob.__dict__ for ob in objAwardsEntity])
         # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 

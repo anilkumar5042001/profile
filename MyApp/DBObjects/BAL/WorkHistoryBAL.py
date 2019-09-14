@@ -13,9 +13,9 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking)
 
-    def ProjectHighlightsInsert(self,ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription):
+    def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.ProjectHighlightsInsert(ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription)
+        return objWorkHistoryDAL.ProjectHighlightsInsert(WorkHistoryId,ProjectHighlightsDescription)
     
     def ProjectHighlightsGetById(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()

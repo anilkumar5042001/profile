@@ -42,9 +42,9 @@ class WorkHistoryDAL:
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
-    def ProjectHighlightsInsert(self,ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription):
+    def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         cursor = connection.cursor()
-        args = [ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription]
+        args = [WorkHistoryId,ProjectHighlightsDescription]
         cursor.callproc('ProjectHighlights_Insert',args)
         return 1
 

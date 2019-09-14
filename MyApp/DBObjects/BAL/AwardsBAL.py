@@ -5,9 +5,13 @@ class AwardsBAL:
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.AwardsInsert(ProfileId,AwardTitle,AwardDescription)
 
-    def GetAwardsById(self,ProfileId):
+    def GetAwardsByProfileId(self,ProfileId):
         objAwardsDAL=AwardsDAL()
-        return objAwardsDAL.GetAwardsById(ProfileId)
+        return objAwardsDAL.GetAwardsByProfileId(ProfileId)
+    
+    def GetAwardsById(self,AwardId):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.GetAwardsById(AwardId)
 
     def AwardsUpdate(self,AwardId,ProfileId,AwardTitle,AwardDescription):
         objAwardsDAL=AwardsDAL()

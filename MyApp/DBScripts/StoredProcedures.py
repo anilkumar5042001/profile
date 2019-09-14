@@ -350,18 +350,15 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE ProjectHighlights_Insert
         (
-        IN p_ProjectHighlightsId INT,
         IN p_WorkHistoryId INT,
         IN p_ProjectHighlightsDescription NVARCHAR(500)
         )
         BEGIN
         INSERT INTO ProjectHighlights (
-        ProjectHighlightsId,
         WorkHistoryId,
-        ProjectHighlightsDescription
+        Description
         ) 
         VALUES (
-        p_ProjectHighlightsId,
         p_WorkHistoryId,
         p_ProjectHighlightsDescription
         );
@@ -375,9 +372,9 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE ProjectHighlights_GetById(IN p_WorkHistoryId INT)
         BEGIN
-        SELECT ProjectHighlightsId,
+        SELECT HighlightId,
         WorkHistoryId,
-        ProjectHighlightsDescription
+        Description
         FROM ProjectHighlights 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -390,15 +387,15 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE ProjectHighlights_Update
         (
-        IN p_ProjectHighlightsId INT,
+        IN p_HighlightId INT,
         IN p_WorkHistoryId INT,
         IN p_ProjectHighlightsDescription NVARCHAR(500)
         )
         BEGIN
         Update ProjectHighlights 
         SET WorkHistoryId=p_WorkHistoryId,
-        ProjectHighlightsDescription=p_ProjectHighlightsDescription
-        WHERE ProjectHighlightsId=p_ProjectHighlightsId;
+        Description=p_Description
+        WHERE HighlightId=p_HighlightId;
         END"""
         cursor.execute(query)
         print('Exec SP ProjectHighlightsUpdate')
@@ -715,11 +712,11 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP AwardsInsert')
 
-    def AwardsGetById(self):
+    def GetAwardsByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS Awards_GetById"""
+        query = """DROP PROCEDURE IF EXISTS GetAwards_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Awards_GetById(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE GetAwards_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT AwardId,
         ProfileId,
@@ -729,7 +726,23 @@ class StoredProcedures:
         WHERE ProfileId = p_ProfileId;
         END"""
         cursor.execute(query)
-        print('SP AwardsGetById executed')
+        print('SP GetAwardsByProfileId executed')
+
+    def GetAwardsById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_GetById(IN p_AwardId INT)
+        BEGIN
+        SELECT AwardId,
+        ProfileId,
+        AwardTitle,
+        AwardDescription
+        FROM Awards
+        WHERE AwardId = p_AwardId;
+        END"""
+        cursor.execute(query)
+        print('SP GetAwardsById executed')
 
     def AwardsUpdate(self):
         cursor = connection.cursor()

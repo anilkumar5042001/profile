@@ -8,9 +8,24 @@ class AwardsDAL:
         cursor.callproc('Awards_Insert',args)
         return 1
 
-    def GetAwardsById(self,ProfileId):
+    def GetAwardsByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
+        cursor.callproc('GetAwards_ByProfileId',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for AwardItem in res:
+            objAwardEntity=AwardsEntity()
+            objAwardEntity.AwardId=AwardItem[0]
+            objAwardEntity.ProfileId=AwardItem[1]
+            objAwardEntity.AwardTitle=AwardItem[2]
+            objAwardEntity.AwardDescription=AwardItem[3]
+            arrayItems.append(objAwardEntity)
+        return arrayItems
+
+    def GetAwardsById(self,AwardId):
+        cursor = connection.cursor()
+        args = [AwardId]
         cursor.callproc('Awards_GetById',args)
         res =  cursor.fetchall()
         arrayItems=[]
@@ -21,7 +36,7 @@ class AwardsDAL:
             objAwardEntity.AwardTitle=AwardItem[2]
             objAwardEntity.AwardDescription=AwardItem[3]
             arrayItems.append(objAwardEntity)
-        return arrayItems 
+        return arrayItems  
 
     def AwardsUpdate(self,AwardId,ProfileId,AwardTitle,AwardDescription):
         cursor = connection.cursor()

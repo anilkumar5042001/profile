@@ -74,17 +74,16 @@ def WorkHistoryUpdate(json_data):
         result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
         return JsonResponse("1",safe=False)
 
-#{"ProjectHighlightsId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Worked hard in deadline"}
+#{"WorkHistoryId":"1","Description":"Worked hard in deadline"}
 @csrf_exempt
 @api_view(["POST"])
 def ProjectHighlightsInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strProjectHighlightsId=loaded_json["ProjectHighlightsId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
-        strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
+        strProjectHighlightsDescription=loaded_json["Description"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.ProjectHighlightsInsert(strProjectHighlightsId,strWorkHistoryId,strProjectHighlightsDescription)
+        result=objWorkHistoryBAL.ProjectHighlightsInsert(strWorkHistoryId,strProjectHighlightsDescription)
         return JsonResponse("1",safe=False)
 
 #{"WorkHistoryId": 1}
@@ -107,7 +106,7 @@ def GetProjectHighlightsById(json_data):
 def ProjectHighlightsUpdate(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strProjectHighlightsId=loaded_json["ProjectHighlightsId"]
+        strProjectHighlightsId=loaded_json["HighlightId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
         strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
