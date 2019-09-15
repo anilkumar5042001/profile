@@ -15,12 +15,14 @@ from rest_framework.response import Response
 from .DBObjects.BAL import EducationBAL
 from .DBObjects.Entity import EducationEntity
 
+
 #{"ProfileId": "1","NameOfInstitution":"St.Xaviers High School","Degree":"10th Standard","StartYear":"1995","EndYear":"1996","EducationDescription":"I Passed my first entrance"}
 @csrf_exempt
 @api_view(["POST"])
 def EducationInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
+        
         strProfileId=loaded_json["ProfileId"]
         strNameOfInstitution=loaded_json["NameOfInstitution"]
         strDegree=loaded_json["Degree"]
