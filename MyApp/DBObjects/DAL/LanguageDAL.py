@@ -8,10 +8,10 @@ class LanguageDAL:
         cursor.callproc('Language_Insert',args)
         return 1
 
-    def GetLanguageById(self,ProfileId):
+    def GetLanguageByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
-        cursor.callproc('Language_GetById',args)
+        cursor.callproc('GetLanguage_ByProfileId',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for LanguageItem in res:
@@ -22,6 +22,21 @@ class LanguageDAL:
             objLanguageEntity.LanguageLevel=LanguageItem[3]
             arrayItems.append(objLanguageEntity)
         return arrayItems 
+
+    def GetLanguageById(self,EducationId):
+        cursor = connection.cursor()
+        args = [EducationId]
+        cursor.callproc('Language_GetById',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for LanguageItem in res:
+            objLanguageEntity=LanguageEntity()
+            objLanguageEntity.LanguageId=LanguageItem[0]
+            objLanguageEntity.ProfileId=LanguageItem[1]
+            objLanguageEntity.LanguageName=LanguageItem[2]
+            objLanguageEntity.LanguageLevel=LanguageItem[3]
+            arrayItems.append(objLanguageEntity)
+        return arrayItems
 
     def LanguageUpdate(self,LanguageId,ProfileId,LanguageName,LanguageLevel):
         cursor = connection.cursor()

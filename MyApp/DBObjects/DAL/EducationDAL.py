@@ -8,10 +8,28 @@ class EducationDAL:
         cursor.callproc('Education_Insert',args)
         return 1
 
-    def GetEducationById(self,ProfileId):
+    def GetEducationById(self,EducationId):
+        cursor = connection.cursor()
+        args = [EducationId]
+        cursor.callproc('Education_GetById',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for EducationItem in res:
+            objEducationEntity=EducationEntity()
+            objEducationEntity.EducationId=EducationItem[0]
+            objEducationEntity.ProfileId=EducationItem[1]
+            objEducationEntity.NameOfInstitution=EducationItem[2]
+            objEducationEntity.Degree=EducationItem[3]
+            objEducationEntity.StartYear=EducationItem[4]
+            objEducationEntity.EndYear=EducationItem[5]
+            objEducationEntity.EducationDescription=EducationItem[6]
+            arrayItems.append(objEducationEntity)
+        return arrayItems
+
+    def GetEducationByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
-        cursor.callproc('Education_GetById',args)
+        cursor.callproc('GetEducation_ByProfileId',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for EducationItem in res:

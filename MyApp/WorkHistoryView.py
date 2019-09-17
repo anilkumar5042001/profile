@@ -52,6 +52,19 @@ def GetWorkHistoryById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"ProfileId": 1}
+@csrf_exempt
+@api_view(["POST"])
+def GetWorkHistoryByProfileId(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strProfileId=loaded_json["ProfileId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.GetWorkHistoryByProfileId(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
 #{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys", "Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1"}
 @csrf_exempt
 @api_view(["POST"])
@@ -72,6 +85,16 @@ def WorkHistoryUpdate(json_data):
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
+        return JsonResponse("1",safe=False)
+
+#{"WorkHistoryId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def WorkHistoryDelete(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.WorkHistoryDelete(strWorkHistoryId)
         return JsonResponse("1",safe=False)
 
 #{"WorkHistoryId":"1","Description":"Worked hard in deadline"}
@@ -100,17 +123,27 @@ def GetProjectHighlightsById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"ProjectHighlightsId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Successfully finished the project on time"}
+#{"HighlightId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Successfully finished the project on time"}
 @csrf_exempt
 @api_view(["POST"])
 def ProjectHighlightsUpdate(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strProjectHighlightsId=loaded_json["HighlightId"]
+        strHighlightId=loaded_json["HighlightId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
         strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.ProjectHighlightsUpdate(strProjectHighlightsId,strWorkHistoryId,strProjectHighlightsDescription)
+        result=objWorkHistoryBAL.ProjectHighlightsUpdate(strHighlightId,strWorkHistoryId,strProjectHighlightsDescription)
+        return JsonResponse("1",safe=False)
+
+#{"HighlightId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def ProjectHighlightsDelete(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strHighlightId=loaded_json["HighlightId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.ProjectHighlightsDelete(strHighlightId)
         return JsonResponse("1",safe=False)
 
 #{"ResponsibilitiesId": "1","WorkHistoryId":"1","ResponsibilitiesDescription":"Worked as Team Lead"}
@@ -151,4 +184,14 @@ def ResponsibilitiesUpdate(json_data):
         strResponsibilitiesDescription=loaded_json["ResponsibilitiesDescription"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.ResponsibilitiesUpdate(strResponsibilitiesId,strWorkHistoryId,strResponsibilitiesDescription)
+        return JsonResponse("1",safe=False)
+
+#{"ResponsibilitiesId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def ResponsibilitiesDelete(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.ResponsibilitiesDelete(strResponsibilitiesId)
         return JsonResponse("1",safe=False)

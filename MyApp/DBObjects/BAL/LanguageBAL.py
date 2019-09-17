@@ -5,9 +5,13 @@ class LanguageBAL:
         objLanguageDAL=LanguageDAL()
         return objLanguageDAL.LanguageInsert(ProfileId,LanguageName,LanguageLevel)
 
-    def GetLanguageById(self,ProfileId):
+    def GetLanguageByProfileId(self,ProfileId):
         objLanguageDAL=LanguageDAL()
-        return objLanguageDAL.GetLanguageById(ProfileId)
+        return objLanguageDAL.GetLanguageByProfileId(ProfileId)
+
+    def GetLanguageById(self,LanguageId):
+        objLanguageDAL=LanguageDAL()
+        return objLanguageDAL.GetLanguageById(LanguageId)
 
     def LanguageUpdate(self,LanguageId,ProfileId,LanguageName,LanguageLevel):
         objLanguageDAL=LanguageDAL()

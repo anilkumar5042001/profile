@@ -36,11 +36,25 @@ def EducationInsert(json_data):
 #{"ProfileId": "1"}
 @csrf_exempt
 @api_view(["POST"])
-def GetEducationById(json_data):
+def GetEducationByProfileId(json_data):
         loaded_json = json.loads(json_data.body)
         objEducationBAL=EducationBAL.EducationBAL()
         strProfileId=loaded_json["ProfileId"]
-        objEducationEntity=objEducationBAL.GetEducationById(strProfileId)
+        objEducationEntity=objEducationBAL.GetEducationByProfileId(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objEducationEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"EducationId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetEducationById(json_data):
+        loaded_json = json.loads(json_data.body)
+        objEducationBAL=EducationBAL.EducationBAL()
+        strEducationd=loaded_json["EducationId"]
+        objEducationEntity=objEducationBAL.GetEducationById(strEducationd)
         result = json.dumps([ob.__dict__ for ob in objEducationEntity])
         # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 

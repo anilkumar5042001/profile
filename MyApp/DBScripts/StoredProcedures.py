@@ -286,11 +286,11 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP WorkHistoryInsert')
 
-    def WorkHistoryGetById(self):
+    def GetWorkHistoryByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS WorkHistory_GetById"""
+        query = """DROP PROCEDURE IF EXISTS GetWorkHistory_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE WorkHistory_GetById(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE GetWorkHistory_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT ProfileId,
         WorkHistoryId,
@@ -299,10 +299,37 @@ class StoredProcedures:
         Description,
         City,
         Country,
-        StartDate,
-        EndDate
+        StartMonth,
+        StartYear,
+        EndMonth,
+        EndYear,
+        CurrentlyWorking
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetWorkHistoryByProfileId executed')
+
+    def WorkHistoryGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_GetById(IN p_WorkHistoryId INT)
+        BEGIN
+        SELECT ProfileId,
+        WorkHistoryId,
+        CompanyName,
+        Role,
+        Description,
+        City,
+        Country,
+        StartMonth,
+        StartYear,
+        EndMonth,
+        EndYear,
+        CurrentlyWorking
+        FROM WorkHistory 
+        WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
         cursor.execute(query)
         print('SP WorkHistoryGetById executed')
@@ -343,6 +370,19 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP WorkHistoryUpdate')
+
+    def WorkHistoryDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_Delete(IN p_WorkHistoryId INT)
+        BEGIN
+        Delete
+        FROM WorkHistory 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP WorkHistoryDelete executed')
 
     def ProjectHighlightsInsert(self):
         cursor = connection.cursor()
@@ -399,6 +439,19 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP ProjectHighlightsUpdate')
+
+    def ProjectHighlightsDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ProjectHighlights_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ProjectHighlights_Delete(IN p_HighlightId INT)
+        BEGIN
+        Delete
+        FROM ProjectHighlights 
+        WHERE HighlightId = p_HighlightId;
+        END"""
+        cursor.execute(query)
+        print('SP ProjectHighlightsDelete executed')
 
     def ResponsibilitiesInsert(self):
         cursor = connection.cursor()
@@ -459,6 +512,19 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP ResponsibilitiesUpdate')
 
+    def ResponsibilitiesDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Responsibilities_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Responsibilities_Delete(IN p_ResponsibilitiesId INT)
+        BEGIN
+        Delete
+        FROM Responsibilities 
+        WHERE ResponsibilitiesId = p_ResponsibilitiesId;
+        END"""
+        cursor.execute(query)
+        print('SP ResponsibilitiesDelete executed')
+
     def EducationInsert(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Education_Insert"""
@@ -493,11 +559,11 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP EducationInsert')
 
-    def EducationGetById(self):
+    def GetEducationByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS Education_GetById"""
+        query = """DROP PROCEDURE IF EXISTS GetEducation_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Education_GetById(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE GetEducation_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT EducationId,
         ProfileId,
@@ -508,6 +574,25 @@ class StoredProcedures:
         EducationDescription
         FROM Education 
         WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEducationByProfileId executed')
+
+    def EducationGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Education_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Education_GetById(IN p_EducationId INT)
+        BEGIN
+        SELECT EducationId,
+        ProfileId,
+        NameOfInstitution,
+        Degree,
+        StartYear,
+        EndYear,
+        EducationDescription
+        FROM Education 
+        WHERE EducationId = p_EducationId;
         END"""
         cursor.execute(query)
         print('SP EducationGetById executed')
@@ -577,11 +662,11 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP LanguageInsert')
 
-    def LanguageGetById(self):
+    def GetLanguageByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS Language_GetById"""
+        query = """DROP PROCEDURE IF EXISTS GetLanguage_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Language_GetById(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE GetLanguage_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT LanguageId,
         ProfileId,
@@ -589,6 +674,22 @@ class StoredProcedures:
         LanguageLevel
         FROM Language 
         WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetLanguageByProfileId executed')
+
+    def LanguageGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Language_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Language_GetById(IN p_LanguageId INT)
+        BEGIN
+        SELECT LanguageId,
+        ProfileId,
+        LanguageName,
+        LanguageLevel
+        FROM Language 
+        WHERE LanguageId = p_LanguageId;
         END"""
         cursor.execute(query)
         print('SP LanguageGetById executed')

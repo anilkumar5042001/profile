@@ -22,6 +22,29 @@ class WorkHistoryDAL:
         return 1
         
     
+    def GetWorkHistoryByProfileId(self,ProfileId):
+        cursor = connection.cursor()
+        args = [ProfileId]
+        cursor.callproc('GetWorkHistory_ByProfileId',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for WorkHistoryItem in res:
+            objWorkHistoryEntity=WorkHistoryEntity()
+            objWorkHistoryEntity.ProfileId=WorkHistoryItem[0]
+            objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
+            objWorkHistoryEntity.CompanyName=WorkHistoryItem[2]
+            objWorkHistoryEntity.Role=WorkHistoryItem[3]
+            objWorkHistoryEntity.Description=WorkHistoryItem[4]
+            objWorkHistoryEntity.City=WorkHistoryItem[5]
+            objWorkHistoryEntity.Country=WorkHistoryItem[6]
+            objWorkHistoryEntity.StartMonth=WorkHistoryItem[7]
+            objWorkHistoryEntity.StartYear=WorkHistoryItem[8]
+            objWorkHistoryEntity.EndMonth=WorkHistoryItem[9]
+            objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
+            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[11]
+            arrayItems.append(objWorkHistoryEntity)
+        return arrayItems 
+
     def WorkHistoryGetById(self,WorkHistoryId):
         cursor = connection.cursor()
         args = [WorkHistoryId]
@@ -31,16 +54,25 @@ class WorkHistoryDAL:
         for WorkHistoryItem in res:
             objWorkHistoryEntity=WorkHistoryEntity()
             objWorkHistoryEntity.ProfileId=WorkHistoryItem[0]
-            #objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
-            objWorkHistoryEntity.CompanyName=WorkHistoryItem[1]
-            objWorkHistoryEntity.Role=WorkHistoryItem[2]
-            objWorkHistoryEntity.Description=WorkHistoryItem[3]
-            objWorkHistoryEntity.City=WorkHistoryItem[4]
-            objWorkHistoryEntity.Country=WorkHistoryItem[5]
-            #objWorkHistoryEntity.StartDate=WorkHistoryItem[6]
-            #objWorkHistoryEntity.EndDate=WorkHistoryItem[7]
+            objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
+            objWorkHistoryEntity.CompanyName=WorkHistoryItem[2]
+            objWorkHistoryEntity.Role=WorkHistoryItem[3]
+            objWorkHistoryEntity.Description=WorkHistoryItem[4]
+            objWorkHistoryEntity.City=WorkHistoryItem[5]
+            objWorkHistoryEntity.Country=WorkHistoryItem[6]
+            objWorkHistoryEntity.StartMonth=WorkHistoryItem[7]
+            objWorkHistoryEntity.StartYear=WorkHistoryItem[8]
+            objWorkHistoryEntity.EndMonth=WorkHistoryItem[9]
+            objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
+            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[11]
             arrayItems.append(objWorkHistoryEntity)
-        return arrayItems 
+        return arrayItems
+
+    def WorkHistoryDelete(self,WorkHistoryId):
+        cursor = connection.cursor()
+        args = [WorkHistoryId]
+        cursor.callproc('WorkHistory_Delete',args)
+        return 1
 
     def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         cursor = connection.cursor()
@@ -68,6 +100,12 @@ class WorkHistoryDAL:
         cursor.callproc('ProjectHighlights_Update',args)
         return 1
 
+    def ProjectHighlightsDelete(self,HighlightId):
+        cursor = connection.cursor()
+        args = [HighlightId]
+        cursor.callproc('ProjectHighlights_Delete',args)
+        return 1
+
     def ResponsibilitiesInsert(self,ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription):
         cursor = connection.cursor()
         args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
@@ -92,6 +130,12 @@ class WorkHistoryDAL:
         cursor = connection.cursor()
         args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
         cursor.callproc('Responsibilities_Update',args)
+        return 1
+
+    def ResponsibilitiesDelete(self,ResponsibilitiesId):
+        cursor = connection.cursor()
+        args = [ResponsibilitiesId]
+        cursor.callproc('Responsibilities_Delete',args)
         return 1
 
         

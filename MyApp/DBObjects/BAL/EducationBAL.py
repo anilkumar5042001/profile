@@ -5,9 +5,13 @@ class EducationBAL:
         objEducationDAL=EducationDAL()
         return objEducationDAL.EducationInsert(ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription)
 
-    def GetEducationById(self,ProfileId):
+    def GetEducationByProfileId(self,ProfileId):
         objEducationDAL=EducationDAL()
-        return objEducationDAL.GetEducationById(ProfileId)
+        return objEducationDAL.GetEducationByProfileId(ProfileId)
+
+    def GetEducationById(self,EducationId):
+        objEducationDAL=EducationDAL()
+        return objEducationDAL.GetEducationById(EducationId)
 
     def EducationUpdate(self,EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription):
         objEducationDAL=EducationDAL()

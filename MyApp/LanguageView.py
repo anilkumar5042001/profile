@@ -31,11 +31,25 @@ def LanguageInsert(json_data):
 #{"ProfileId": "1"}
 @csrf_exempt
 @api_view(["POST"])
-def GetLanguageById(json_data):
+def GetLanguageByProfileId(json_data):
         loaded_json = json.loads(json_data.body)
         objLanguageBAL=LanguageBAL.LanguageBAL()
         strProfileId=loaded_json["ProfileId"]
-        objLanguageEntity=objLanguageBAL.GetLanguageById(strProfileId)
+        objLanguageEntity=objLanguageBAL.GetLanguageByProfileId(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objLanguageEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"LanguageId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetLanguageById(json_data):
+        loaded_json = json.loads(json_data.body)
+        objLanguageBAL=LanguageBAL.LanguageBAL()
+        strLanguageId=loaded_json["LanguageId"]
+        objLanguageEntity=objLanguageBAL.GetLanguageById(strLanguageId)
         result = json.dumps([ob.__dict__ for ob in objLanguageEntity])
         # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 
