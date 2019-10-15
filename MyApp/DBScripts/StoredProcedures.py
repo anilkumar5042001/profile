@@ -429,7 +429,7 @@ class StoredProcedures:
         (
         IN p_HighlightId INT,
         IN p_WorkHistoryId INT,
-        IN p_ProjectHighlightsDescription NVARCHAR(500)
+        IN p_Description NVARCHAR(500)
         )
         BEGIN
         Update ProjectHighlights 
@@ -459,20 +459,17 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Responsibilities_Insert
         (
-        IN p_ResponsibilitiesId INT,
         IN p_WorkHistoryId INT,
-        IN p_ResponsibilitiesDescription NVARCHAR(500)
+        IN p_Description NVARCHAR(500)
         )
         BEGIN
         INSERT INTO Responsibilities (
-        ResponsibilitiesId,
         WorkHistoryId,
-        ResponsibilitiesDescription
+        Description
         ) 
         VALUES (
-        p_ResponsibilitiesId,
         p_WorkHistoryId,
-        p_ResponsibilitiesDescription
+        p_Description
         );
         END"""
         cursor.execute(query)
@@ -486,7 +483,7 @@ class StoredProcedures:
         BEGIN
         SELECT ResponsibilitiesId,
         WorkHistoryId,
-        ResponsibilitiesDescription
+        Description
         FROM Responsibilities 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -501,12 +498,12 @@ class StoredProcedures:
         (
         IN p_ResponsibilitiesId INT,
         IN p_WorkHistoryId INT,
-        IN p_ResponsibilitiesDescription NVARCHAR(500)
+        IN p_Description NVARCHAR(500)
         )
         BEGIN
         Update Responsibilities 
         SET WorkHistoryId=p_WorkHistoryId,
-        ResponsibilitiesDescription=p_ResponsibilitiesDescription
+        Description=p_Description
         WHERE ResponsibilitiesId=p_ResponsibilitiesId;
         END"""
         cursor.execute(query)

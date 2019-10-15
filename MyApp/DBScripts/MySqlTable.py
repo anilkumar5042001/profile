@@ -131,7 +131,7 @@ class MySqlTable:
             (
             ResponsibilitiesId INT NOT NULL AUTO_INCREMENT,
             WorkHistoryId INT NOT NULL,
-            ResponsibilitiesDescription NVARCHAR(500) NULL,
+            Description NVARCHAR(500) NULL,
             PRIMARY KEY (ResponsibilitiesId)
             );"""
             cursor.execute(query)

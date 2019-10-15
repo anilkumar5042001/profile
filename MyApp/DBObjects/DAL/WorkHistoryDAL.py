@@ -88,15 +88,15 @@ class WorkHistoryDAL:
         arrayItems=[]
         for ProjectHighlightsItem in res:
             objProjectHighlightsEntity=ProjectHighlightsEntity()
-            objProjectHighlightsEntity.ProjectHighlightsId=ProjectHighlightsItem[0]
+            objProjectHighlightsEntity.HighlightId=ProjectHighlightsItem[0]
             objProjectHighlightsEntity.WorkHistoryId=ProjectHighlightsItem[1]
             objProjectHighlightsEntity.ProjectHighlightsDescription=ProjectHighlightsItem[2]
             arrayItems.append(objProjectHighlightsEntity)
         return arrayItems 
 
-    def ProjectHighlightsUpdate(self,ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription):
+    def ProjectHighlightsUpdate(self,HighlightId,WorkHistoryId,Description):
         cursor = connection.cursor()
-        args = [ProjectHighlightsId,WorkHistoryId,ProjectHighlightsDescription]
+        args = [HighlightId,WorkHistoryId,Description]
         cursor.callproc('ProjectHighlights_Update',args)
         return 1
 
@@ -106,9 +106,9 @@ class WorkHistoryDAL:
         cursor.callproc('ProjectHighlights_Delete',args)
         return 1
 
-    def ResponsibilitiesInsert(self,ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription):
+    def ResponsibilitiesInsert(self,WorkHistoryId,Description):
         cursor = connection.cursor()
-        args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
+        args = [WorkHistoryId,Description]
         cursor.callproc('Responsibilities_Insert',args)
         return 1
 
@@ -122,13 +122,13 @@ class WorkHistoryDAL:
             objResponsibilitiesEntity=ResponsibilitiesEntity()
             objResponsibilitiesEntity.ResponsibilitiesId=ResponsibilitiesItem[0]
             objResponsibilitiesEntity.WorkHistoryId=ResponsibilitiesItem[1]
-            objResponsibilitiesEntity.ResponsibilitiesDescription=ResponsibilitiesItem[2]
+            objResponsibilitiesEntity.Description=ResponsibilitiesItem[2]
             arrayItems.append(objResponsibilitiesEntity)
         return arrayItems 
 
-    def ResponsibilitiesUpdate(self,ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription):
+    def ResponsibilitiesUpdate(self,ResponsibilitiesId,WorkHistoryId,Description):
         cursor = connection.cursor()
-        args = [ResponsibilitiesId,WorkHistoryId,ResponsibilitiesDescription]
+        args = [ResponsibilitiesId,WorkHistoryId,Description]
         cursor.callproc('Responsibilities_Update',args)
         return 1
 

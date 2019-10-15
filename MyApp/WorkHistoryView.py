@@ -123,7 +123,7 @@ def GetProjectHighlightsById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"HighlightId": "1","WorkHistoryId":"1","ProjectHighlightsDescription":"Successfully finished the project on time"}
+#{"HighlightId": "1","WorkHistoryId":"1","Description":"Successfully finished the project on time"}
 @csrf_exempt
 @api_view(["POST"])
 def ProjectHighlightsUpdate(json_data):
@@ -131,7 +131,7 @@ def ProjectHighlightsUpdate(json_data):
         print(loaded_json)
         strHighlightId=loaded_json["HighlightId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
-        strProjectHighlightsDescription=loaded_json["ProjectHighlightsDescription"]
+        strProjectHighlightsDescription=loaded_json["Description"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.ProjectHighlightsUpdate(strHighlightId,strWorkHistoryId,strProjectHighlightsDescription)
         return JsonResponse("1",safe=False)
@@ -146,17 +146,16 @@ def ProjectHighlightsDelete(json_data):
         objWorkHistoryEntity=objWorkHistoryBAL.ProjectHighlightsDelete(strHighlightId)
         return JsonResponse("1",safe=False)
 
-#{"ResponsibilitiesId": "1","WorkHistoryId":"1","ResponsibilitiesDescription":"Worked as Team Lead"}
+#{"WorkHistoryId":"1","Description":"Worked as Team Lead"}
 @csrf_exempt
 @api_view(["POST"])
 def ResponsibilitiesInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
-        strResponsibilitiesDescription=loaded_json["ResponsibilitiesDescription"]
+        strDescription=loaded_json["Description"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.ResponsibilitiesInsert(strResponsibilitiesId,strWorkHistoryId,strResponsibilitiesDescription)
+        result=objWorkHistoryBAL.ResponsibilitiesInsert(strWorkHistoryId,strDescription)
         return JsonResponse("1",safe=False)
 
 #{"WorkHistoryId": 1}
@@ -173,7 +172,7 @@ def GetResponsibilitiesById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"ResponsibilitiesId": "1","WorkHistoryId":"1","ResponsibilitiesDescription":"Started working as PM"}
+#{"ResponsibilitiesId": "1","WorkHistoryId":"1","Description":"Started working as PM"}
 @csrf_exempt
 @api_view(["POST"])
 def ResponsibilitiesUpdate(json_data):
@@ -181,7 +180,7 @@ def ResponsibilitiesUpdate(json_data):
         print(loaded_json)
         strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
-        strResponsibilitiesDescription=loaded_json["ResponsibilitiesDescription"]
+        strResponsibilitiesDescription=loaded_json["Description"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.ResponsibilitiesUpdate(strResponsibilitiesId,strWorkHistoryId,strResponsibilitiesDescription)
         return JsonResponse("1",safe=False)

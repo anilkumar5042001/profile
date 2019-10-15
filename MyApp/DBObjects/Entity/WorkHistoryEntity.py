@@ -12,12 +12,12 @@ class WorkHistoryEntity(object):
     EndYear=""
     CurrenltyWorking=""
 
-class ProjectHighlightsEntity(object):
-    ProjectHighlightsId=0
+class ProjectHighlightsEntity(object): 
+    HighlightId=0
     WorkHistoryId=""
-    ProjectHighlightsDescription=""
+    Description=""
 
 class ResponsibilitiesEntity(object):
     ResponsibilitiesId=0
     WorkHistoryId=""
-    ResponsibilitiesDescription=""
+    Description=""
