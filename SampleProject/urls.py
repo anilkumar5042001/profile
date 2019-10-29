@@ -25,6 +25,7 @@ from MyApp.AllViews import CertificationView
 from MyApp import LanguageView
 from MyApp.AllViews import RegistrationView
 from MyApp.AllViews import AwardsView
+from MyApp.AllViews import InterestView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -75,6 +76,11 @@ urlpatterns = [
     url(r'^GetAwardsById/', AwardsView.GetAwardsById),
     url(r'^AwardsUpdate/', AwardsView.AwardsUpdate),
     url(r'^AwardsDelete/', AwardsView.AwardsDelete),
+    url(r'^InterestInsert/', InterestView.InterestInsert),
+    url(r'^GetInterestById/', InterestView.GetInterestById),
+    url(r'^GetInterestByProfileId/', InterestView.GetInterestByProfileId),
+    url(r'^InterestUpdate/', InterestView.InterestUpdate),
+    url(r'^InterestDelete/', InterestView.InterestDelete),
     
     
 

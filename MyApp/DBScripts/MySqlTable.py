@@ -203,6 +203,20 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+    def CreateInterest(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Interest")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Interest
+            (
+            InterestId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            InterestName NVARCHAR(250) NULL,
+            PRIMARY KEY (InterestId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
     
 
 

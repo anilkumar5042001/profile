@@ -14,7 +14,8 @@ class ExecOrder:
         objMySqlTable.CreateEducation('self')
         objMySqlTable.CreateLanguage('self') 
         objMySqlTable.CreateRegistration('self') 
-        objMySqlTable.CreateAwards('self')  
+        objMySqlTable.CreateAwards('self')
+        objMySqlTable.CreateInterest('self')  
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -61,6 +62,11 @@ class ExecOrder:
         objStoredProcedures.GetAwardsByProfileId('self')
         objStoredProcedures.AwardsUpdate('self')
         objStoredProcedures.AwardsDelete('self')
+        objStoredProcedures.InterestInsert('self')
+        objStoredProcedures.InterestGetById('self')
+        objStoredProcedures.GetInterestByProfileId('self')
+        objStoredProcedures.InterestUpdate('self')
+        objStoredProcedures.InterestDelete('self')
         
         
 

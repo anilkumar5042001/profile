@@ -876,6 +876,91 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP AwardsDelete executed')
 
+    def InterestInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Interest_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Interest_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_InterestName NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Interest (
+        ProfileId,
+        InterestName
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_InterestName
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP InterestInsert')
+
+    def InterestGetById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Interest_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Interest_GetById(IN p_InterestId INT)
+        BEGIN
+        SELECT InterestId,
+        ProfileId,
+        InterestName
+        FROM Interest 
+        WHERE InterestId = p_InterestId;
+        END"""
+        cursor.execute(query)
+        print('SP InterestGetById executed')
+
+    def GetInterestByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetInterest_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetInterest_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT InterestId,
+        ProfileId,
+        InterestName
+        FROM Interest 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetInterestByProfileId executed')
+
+    def InterestUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Interest_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Interest_Update
+        (
+        IN p_InterestId INT,
+        IN p_ProfileId INT,
+        IN p_InterestName NVARCHAR(250)
+        )
+        BEGIN
+        Update Interest 
+        SET ProfileId=p_ProfileId,
+        InterestName=p_InterestName
+        WHERE InterestId=p_InterestId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP InterestUpdate')
+
+    def InterestDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Interest_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Interest_Delete(IN p_InterestId INT)
+        BEGIN
+        Delete
+        FROM Interest 
+        WHERE InterestId = p_InterestId;
+        END"""
+        cursor.execute(query)
+        print('SP InterestDelete executed')
+
+
 
 
 
