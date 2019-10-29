@@ -126,7 +126,7 @@ def UploadFile(binaryData):
         print(binaryData)
         return JsonResponse("1",safe=False)
 
-#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileUpdate(json_data):
@@ -139,8 +139,9 @@ def UserProfileUpdate(json_data):
         strPhoneNumber=loaded_json["PhoneNumber"]
         strEducation=loaded_json["Education"]
         strDesignation=loaded_json["Designation"]
+        strAboutMe=loaded_json["AboutMe"]      
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strAboutMe)
         return JsonResponse("1",safe=False)
 
 #{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}

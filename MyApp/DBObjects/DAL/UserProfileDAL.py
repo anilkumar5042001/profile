@@ -44,9 +44,9 @@ class UserProfileDAL:
         cursor.callproc('UserProfile_Insert',args)
         return 1
 
-    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation):
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,AboutMe):
         cursor = connection.cursor()
-        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation]
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,AboutMe]
         cursor.callproc('UserProfile_Update',args)
         return 1
     def UserProfileUpdateAboutMe(self,ProfileId,aboutMe):

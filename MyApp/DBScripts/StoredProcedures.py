@@ -193,7 +193,8 @@ class StoredProcedures:
         IN p_EmailId NVARCHAR(500),
         IN p_PhoneNumber NVARCHAR(250),
         IN p_Education NVARCHAR(250),
-        IN p_Designation NVARCHAR(250)
+        IN p_Designation NVARCHAR(250),
+        IN p_AboutMe NVARCHAR(500)
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -202,7 +203,8 @@ class StoredProcedures:
         EmailId=p_EmailId,
         PhoneNumber=p_PhoneNumber,
         Education=p_Education,
-        Designation=p_Designation
+        Designation=p_Designation,
+        AboutMe = p_AboutMe
         WHERE ProfileId=p_ProfileId;
         END"""
         cursor.execute(query)
