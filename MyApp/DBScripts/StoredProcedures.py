@@ -100,7 +100,8 @@ class StoredProcedures:
         IN p_PhoneNumber NVARCHAR(250),
         IN p_Education NVARCHAR(250),
         IN p_Designation NVARCHAR(250),
-        IN p_AboutMe NVARCHAR(500)
+        IN p_AboutMe NVARCHAR(500),
+        IN p_Password NVARCHAR(250)
         )
         BEGIN
         INSERT INTO UserProfile (
@@ -110,7 +111,8 @@ class StoredProcedures:
         PhoneNumber,
         Education,
         Designation,
-        AboutMe) 
+        AboutMe,
+        Password) 
         VALUES (
         p_FirstName,
         p_LastName,
@@ -118,7 +120,8 @@ class StoredProcedures:
         p_PhoneNumber,
         p_Education,
         p_Designation,
-        p_AboutMe);
+        p_AboutMe,
+        p_Password);
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')
@@ -961,6 +964,30 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP InterestDelete executed')
+
+    def CheckLoginCredentials(self): 
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS CheckLoginCredentials"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE CheckLoginCredentials
+        (
+        IN p_EmailId NVARCHAR(500),
+        IN p_Password NVARCHAR(250)
+        )
+        BEGIN
+        Declare p_ProfileIdValue INT;
+        Declare p_Result INT;
+        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId and Password=p_Password);
+        IF p_ProfileIdValue>0 THEN
+        set  p_Result=p_ProfileIdValue;
+        else
+        set p_Result=0;
+        END IF;
+        select p_Result as output;
+        END"""
+        cursor.execute(query)
+        print('SP CheckLoginCredentials executed')
+
 
 
 

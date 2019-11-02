@@ -11,9 +11,9 @@ class UserProfileBAL:
         return objUserProfileDAL.GetUserProfile()
 
     
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,aboutMe)  
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password)  
 
     def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,AboutMe):
         objUserProfileDAL=UserProfileDAL()
@@ -22,3 +22,8 @@ class UserProfileBAL:
     def UserProfileUpdateAboutMe(self,profileId,aboutMe):
         objUserProfileDAL=UserProfileDAL()
         return objUserProfileDAL.UserProfileUpdateAboutMe(profileId,aboutMe) 
+
+    def UserLoginCheckCredentials(self,EmailId,Password):
+        objUserProfileDAL=UserProfileDAL()
+        res = objUserProfileDAL.UserLoginCheckCredentials(EmailId,Password)
+        return res

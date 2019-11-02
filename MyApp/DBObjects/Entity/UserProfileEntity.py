@@ -7,3 +7,4 @@ class UserProfileEntity(object):
     Education=""
     Designation=""
     AboutMe=""
+    Password=""

@@ -67,6 +67,7 @@ class ExecOrder:
         objStoredProcedures.GetInterestByProfileId('self')
         objStoredProcedures.InterestUpdate('self')
         objStoredProcedures.InterestDelete('self')
+        objStoredProcedures.CheckLoginCredentials('self')
         
         
 

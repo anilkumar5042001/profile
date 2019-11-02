@@ -103,7 +103,7 @@ def ExecuteDBScripts(json_data):
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
         
-#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","AboutMe":"I am mad"}
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","AboutMe":"I am mad","Password":"Test123"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileInsert(json_data):
@@ -116,8 +116,9 @@ def UserProfileInsert(json_data):
         strEducation=loaded_json["Education"]
         strDesignation=loaded_json["Designation"]
         strAboutMe=loaded_json["AboutMe"]
+        strPassword=loaded_json["Password"]
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strAboutMe)
+        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strAboutMe,strPassword)
         return JsonResponse("1",safe=False)
 
 @csrf_exempt
@@ -157,3 +158,15 @@ def ProjectInsert(json_data):
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
         result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber)
         return JsonResponse("1",safe=False)
+
+#{ "EmailId":"testthree@gmail.com","Password":"Test123"}
+@csrf_exempt
+@api_view(["POST"])
+def UserLoginCheckCredentials(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strEmailId=loaded_json["EmailId"]
+        strPassword=loaded_json["Password"]      
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        result=objUserProfileBAL.UserLoginCheckCredentials(strEmailId,strPassword)
+        return JsonResponse(result,safe=False)

@@ -43,6 +43,7 @@ class MySqlTable:
             Education NVARCHAR(250) NULL,
             Designation NVARCHAR(250) NULL,
             AboutMe NVARCHAR(500) NULL,
+            Password NVARCHAR(250) NULL,
             PRIMARY KEY ( ProfileId )
             );"""
             cursor.execute(query)

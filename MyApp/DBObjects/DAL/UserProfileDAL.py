@@ -38,9 +38,9 @@ class UserProfileDAL:
         objUserProfileEntity.AboutMe=res[0][7]
         return objUserProfileEntity  
 
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password):
         cursor = connection.cursor()
-        args = [firstName,lastName,emailId,phoneNumber,education,designation,aboutMe]
+        args = [firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password]
         cursor.callproc('UserProfile_Insert',args)
         return 1
 
@@ -54,3 +54,11 @@ class UserProfileDAL:
         args = [ProfileId,aboutMe]
         cursor.callproc('UserProfile_UpdateAboutMe',args)
         return 1
+
+    def UserLoginCheckCredentials(self,EmailId,Password):
+        cursor = connection.cursor()
+        args = [EmailId,Password]
+        cursor.callproc('CheckLoginCredentials',args)
+        res=cursor.fetchall()
+        return res
+        
