@@ -159,7 +159,7 @@ def ProjectInsert(json_data):
         result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber)
         return JsonResponse("1",safe=False)
 
-#{ "EmailId":"testthree@gmail.com","Password":"Test123"}
+#{"EmailId":"testthree@gmail.com","Password":"Test123"}
 @csrf_exempt
 @api_view(["POST"])
 def UserLoginCheckCredentials(json_data):
@@ -168,5 +168,8 @@ def UserLoginCheckCredentials(json_data):
         strEmailId=loaded_json["EmailId"]
         strPassword=loaded_json["Password"]      
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserLoginCheckCredentials(strEmailId,strPassword)
+        objUserProfileEntity=objUserProfileBAL.UserLoginCheckCredentials(strEmailId,strPassword)
+        result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False)
+
+

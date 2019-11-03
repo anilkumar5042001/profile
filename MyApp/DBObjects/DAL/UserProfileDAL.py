@@ -60,5 +60,7 @@ class UserProfileDAL:
         args = [EmailId,Password]
         cursor.callproc('CheckLoginCredentials',args)
         res=cursor.fetchall()
-        return res
+        objUserProfileEntity=UserProfileEntity()        
+        objUserProfileEntity.ProfileId=res[0][0]
+        return objUserProfileEntity
         
