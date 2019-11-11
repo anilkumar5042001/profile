@@ -36,7 +36,7 @@ def WorkHistoryInsert(json_data):
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.WorkHistoryInsert(strProfileId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
-        return JsonResponse("1",safe=False)
+        return JsonResponse(result,safe=False)
 
 #{"WorkHistoryId": 1}
 @csrf_exempt
@@ -146,6 +146,16 @@ def ProjectHighlightsDelete(json_data):
         objWorkHistoryEntity=objWorkHistoryBAL.ProjectHighlightsDelete(strHighlightId)
         return JsonResponse("1",safe=False)
 
+#{"WorkHistoryId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def ProjectHighlightsDeleteByWorkHistoryId(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.ProjectHighlightsDeleteByWorkHistoryId(strWorkHistoryId)
+        return JsonResponse("1",safe=False)
+
 #{"WorkHistoryId":"1","Description":"Worked as Team Lead"}
 @csrf_exempt
 @api_view(["POST"])
@@ -193,4 +203,14 @@ def ResponsibilitiesDelete(json_data):
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         strResponsibilitiesId=loaded_json["ResponsibilitiesId"]
         objWorkHistoryEntity=objWorkHistoryBAL.ResponsibilitiesDelete(strResponsibilitiesId)
+        return JsonResponse("1",safe=False)
+
+#{"WorkHistoryId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def ResponsibilitiesDeleteByWorkHistoryId(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strWorkHistoryId=loaded_json["WorkHistoryId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.ResponsibilitiesDeleteByWorkHistoryId(strWorkHistoryId)
         return JsonResponse("1",safe=False)

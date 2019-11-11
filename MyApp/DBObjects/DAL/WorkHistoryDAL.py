@@ -7,7 +7,10 @@ class WorkHistoryDAL:
         cursor = connection.cursor()
         args = [ProfileId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
         cursor.callproc('WorkHistory_Insert',args)
-        return 1
+        workHistoryItem =  cursor.fetchall()
+        workHistoryId=workHistoryItem[0][0]
+        return workHistoryId
+        
     
     def CertificationGetByProfileId(self,profileId):
         db_name = connection.settings_dict['NAME']
@@ -106,6 +109,12 @@ class WorkHistoryDAL:
         cursor.callproc('ProjectHighlights_Delete',args)
         return 1
 
+    def ProjectHighlightsDeleteByWorkHistoryId(self,WorkHistoryId):
+        cursor = connection.cursor()
+        args = [WorkHistoryId]
+        cursor.callproc('ProjectHighlightsDelete_ByWorkHistoryId',args)
+        return 1
+
     def ResponsibilitiesInsert(self,WorkHistoryId,Description):
         cursor = connection.cursor()
         args = [WorkHistoryId,Description]
@@ -136,6 +145,12 @@ class WorkHistoryDAL:
         cursor = connection.cursor()
         args = [ResponsibilitiesId]
         cursor.callproc('Responsibilities_Delete',args)
+        return 1
+
+    def ResponsibilitiesDeleteByWorkHistoryId(self,WorkHistoryId):
+        cursor = connection.cursor()
+        args = [WorkHistoryId]
+        cursor.callproc('ResponsibilitiesDelete_ByWorkHistoryId',args)
         return 1
 
         

@@ -36,6 +36,10 @@ class WorkHistoryBAL:
     def ProjectHighlightsDelete(self,HighlightId):
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.ProjectHighlightsDelete(HighlightId)  
+    
+    def ProjectHighlightsDeleteByWorkHistoryId(self,WorkHistoryId):
+        objWorkHistoryDAL=WorkHistoryDAL()
+        return objWorkHistoryDAL.ProjectHighlightsDeleteByWorkHistoryId(WorkHistoryId)
 
     def ResponsibilitiesInsert(self,WorkHistoryId,Description):
         objWorkHistoryDAL=WorkHistoryDAL()
@@ -51,4 +55,8 @@ class WorkHistoryBAL:
 
     def ResponsibilitiesDelete(self,ResponsibilitiesId):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.ResponsibilitiesDelete(ResponsibilitiesId)  
+        return objWorkHistoryDAL.ResponsibilitiesDelete(ResponsibilitiesId)
+    
+    def ResponsibilitiesDeleteByWorkHistoryId(self,WorkHistoryId):
+        objWorkHistoryDAL=WorkHistoryDAL()
+        return objWorkHistoryDAL.ResponsibilitiesDeleteByWorkHistoryId(WorkHistoryId) 

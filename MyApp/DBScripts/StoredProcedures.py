@@ -287,6 +287,7 @@ class StoredProcedures:
         p_EndMonth,
         p_EndYear,
         p_CurrentlyWorking);
+        select LAST_INSERT_ID();
         END"""
         cursor.execute(query)
         print('Exec SP WorkHistoryInsert')
@@ -458,6 +459,19 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP ProjectHighlightsDelete executed')
 
+    def ProjectHighlightsDeleteByWorkHistoryId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ProjectHighlightsDelete_ByWorkHistoryId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ProjectHighlightsDelete_ByWorkHistoryId(IN p_WorkHistoryId INT)
+        BEGIN
+        Delete
+        FROM ProjectHighlights 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP ProjectHighlightsDeleteByWorkHistoryId executed')
+
     def ResponsibilitiesInsert(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Responsibilities_Insert"""
@@ -526,6 +540,19 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP ResponsibilitiesDelete executed')
+
+    def ResponsibilitiesDeleteByWorkHistoryId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ResponsibilitiesDelete_ByWorkHistoryId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ResponsibilitiesDelete_ByWorkHistoryId(IN p_WorkHistoryId INT)
+        BEGIN
+        Delete
+        FROM Responsibilities 
+        WHERE WorkHistoryId = p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('SP ResponsibilitiesDeleteByWorkHistoryId executed')
 
     def EducationInsert(self):
         cursor = connection.cursor()
