@@ -763,21 +763,19 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Registration_Insert
         (
-        IN p_RegistrationId INT,
         IN p_EmailId NVARCHAR(500),
         IN p_Password NVARCHAR(250)
         )
         BEGIN
         INSERT INTO Registration (
-        RegistrationId,
         EmailId,
         Password
         ) 
         VALUES (
-        p_RegistrationId,
         p_EmailId,
         p_Password
         );
+        select LAST_INSERT_ID();
         END"""
         cursor.execute(query)
         print('Exec SP RegistrationInsert')
@@ -1014,6 +1012,115 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP CheckLoginCredentials executed')
+
+    def TaskInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Task_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Task_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_TaskTitle NVARCHAR(250),
+        IN p_Description NVARCHAR(500),
+        IN p_DueDate DATETIME,
+        IN p_AssignTo INT,
+        IN p_CreatedBy INT,
+        IN p_TaskStatus VARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Task (
+        ProfileId,
+        TaskTitle,
+        Description,
+        DueDate,
+        AssignTo,
+        CreatedBy,
+        TaskStatus
+        ) 
+        VALUES (
+        p_ProfileId,    
+        p_TaskTitle,
+        p_Description,
+        p_DueDate,
+        p_AssignTo,
+        p_CreatedBy,
+        p_TaskStatus
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP TaskInsert')
+
+    def GetTaskByTaskId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetTask_ByTaskId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetTask_ByTaskId(IN p_TaskId INT)
+        BEGIN
+        SELECT TaskId,
+        ProfileId,
+        TaskTitle,
+        Description,
+        DueDate,
+        AssignTo,
+        CreatedBy,
+        TaskStatus
+        FROM Task 
+        WHERE TaskId = p_TaskId;
+        END"""
+        cursor.execute(query)
+        print('SP GetTaskByTaskId executed')
+
+    def GetTaskByAssignTo(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetTask_ByAssignTo"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetTask_ByAssignTo(IN p_AssignTo INT)
+        BEGIN
+        SELECT TaskId,
+        ProfileId,
+        TaskTitle,
+        Description,
+        DueDate,
+        AssignTo,
+        CreatedBy,
+        TaskStatus
+        FROM Task 
+        WHERE AssignTo = p_AssignTo;
+        END"""
+        cursor.execute(query)
+        print('SP GetTaskByAssignTo executed')
+
+    def TaskUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Task_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Task_Update
+        (
+        IN p_TaskId INT,
+        IN p_ProfileId INT,
+        IN p_TaskTitle NVARCHAR(250),
+        IN p_Description NVARCHAR(500),
+        IN p_DueDate DATETIME,
+        IN p_AssignTo INT,
+        IN p_CreatedBy INT,
+        IN p_TaskStatus VARCHAR(250)
+        )
+        BEGIN
+        Update Task 
+        SET 
+        ProfileId=p_ProfileId,
+        TaskTitle=p_TaskTitle,
+        Description=p_Description,
+        DueDate=p_DueDate,
+        AssignTo=p_AssignTo,
+        CreatedBy=p_CreatedBy,
+        TaskStatus=p_TaskStatus
+        WHERE TaskId=p_TaskId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP TaskUpdate')
+
 
 
 

@@ -13,18 +13,17 @@ from rest_framework.response import Response
 from ..DBObjects.BAL import RegistrationBAL
 from ..DBObjects.Entity import RegistrationEntity
 
-#{"RegistrationId": "1","EmailId":"test@gmail.com","Password":"Test123"}
+#{"EmailId":"test@gmail.com","Password":"Test123"}
 @csrf_exempt
 @api_view(["POST"])
 def RegistrationInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
-        strRegistrationId=loaded_json["RegistrationId"]
         strEmailId=loaded_json["EmailId"]
         strPassword=loaded_json["Password"]
         objRegistrationBAL=RegistrationBAL.RegistrationBAL()
-        result=objRegistrationBAL.RegistrationInsert(strRegistrationId,strEmailId,strPassword)
-        return JsonResponse("1",safe=False)
+        result=objRegistrationBAL.RegistrationInsert(strEmailId,strPassword)
+        return JsonResponse(result,safe=False)
 
 #{"RegistrationId": "1"}
 @csrf_exempt

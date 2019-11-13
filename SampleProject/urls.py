@@ -26,6 +26,7 @@ from MyApp import LanguageView
 from MyApp.AllViews import RegistrationView
 from MyApp.AllViews import AwardsView
 from MyApp.AllViews import InterestView
+from MyApp.AllViews import TaskView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -84,6 +85,11 @@ urlpatterns = [
     url(r'^GetInterestByProfileId/', InterestView.GetInterestByProfileId),
     url(r'^InterestUpdate/', InterestView.InterestUpdate),
     url(r'^InterestDelete/', InterestView.InterestDelete),
+    url(r'^TaskInsert/', TaskView.TaskInsert),
+    url(r'^GetTaskByTaskId/', TaskView.GetTaskByTaskId),
+    url(r'^GetTaskByAssignTo/', TaskView.GetTaskByAssignTo),
+    url(r'^TaskUpdate/', TaskView.TaskUpdate),
+    
     
     
 

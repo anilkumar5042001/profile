@@ -15,7 +15,8 @@ class ExecOrder:
         objMySqlTable.CreateLanguage('self') 
         objMySqlTable.CreateRegistration('self') 
         objMySqlTable.CreateAwards('self')
-        objMySqlTable.CreateInterest('self')  
+        objMySqlTable.CreateInterest('self') 
+        objMySqlTable.CreateTask('self') 
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -70,7 +71,10 @@ class ExecOrder:
         objStoredProcedures.InterestUpdate('self')
         objStoredProcedures.InterestDelete('self')
         objStoredProcedures.CheckLoginCredentials('self')
-        
+        objStoredProcedures.TaskInsert('self')
+        objStoredProcedures.GetTaskByTaskId('self')
+        objStoredProcedures.GetTaskByAssignTo('self')
+        objStoredProcedures.TaskUpdate('self')
         
 
 

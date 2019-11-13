@@ -1,9 +1,9 @@
 from ..DAL.RegistrationDAL import RegistrationDAL
 
 class RegistrationBAL:
-    def RegistrationInsert(self,RegistrationId,EmailId,Password):
+    def RegistrationInsert(self,EmailId,Password):
         objRegistrationDAL=RegistrationDAL()
-        return objRegistrationDAL.RegistrationInsert(RegistrationId,EmailId,Password)
+        return objRegistrationDAL.RegistrationInsert(EmailId,Password)
 
     def GetRegistrationById(self,RegistrationId):
         objRegistrationDAL=RegistrationDAL()

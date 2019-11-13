@@ -2,11 +2,13 @@ from ..Entity.RegistrationEntity import *
 from django.db import connection
 
 class RegistrationDAL:
-    def RegistrationInsert(self,RegistrationId,EmailId,Password):
+    def RegistrationInsert(self,EmailId,Password):
         cursor=connection.cursor()
-        args=[RegistrationId,EmailId,Password]
+        args=[EmailId,Password]
         cursor.callproc('Registration_Insert',args)
-        return 1
+        RegistrationItem=cursor.fetchall()
+        objRegistrationId=RegistrationItem[0][0]
+        return objRegistrationId
 
     def GetRegistrationeById(self,RegistrationId):
         cursor = connection.cursor()

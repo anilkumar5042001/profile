@@ -219,6 +219,26 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
     
+    def CreateTask(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Task")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Task
+            (
+            TaskId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            TaskTitle NVARCHAR(250) NULL,
+            Description NVARCHAR(500) NULL,
+            DueDate DATETIME,
+            AssignTo INT,
+            CreatedBy INT,
+            TaskStatus VARCHAR(250) NULL,
+            PRIMARY KEY (TaskId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+    
 
 
     def CheckTableExists(self,tableName):
