@@ -93,7 +93,7 @@ class WorkHistoryDAL:
             objProjectHighlightsEntity=ProjectHighlightsEntity()
             objProjectHighlightsEntity.HighlightId=ProjectHighlightsItem[0]
             objProjectHighlightsEntity.WorkHistoryId=ProjectHighlightsItem[1]
-            objProjectHighlightsEntity.ProjectHighlightsDescription=ProjectHighlightsItem[2]
+            objProjectHighlightsEntity.Description=ProjectHighlightsItem[2]
             arrayItems.append(objProjectHighlightsEntity)
         return arrayItems 
 
