@@ -47,6 +47,8 @@ class StoredProcedures:
         PhoneNumber,
         Education,
         Designation,
+        City,
+        Country,
         AboutMe
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
@@ -100,6 +102,8 @@ class StoredProcedures:
         IN p_PhoneNumber NVARCHAR(250),
         IN p_Education NVARCHAR(250),
         IN p_Designation NVARCHAR(250),
+        IN p_City VARCHAR(250),
+        IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
         IN p_Password NVARCHAR(250)
         )
@@ -111,6 +115,8 @@ class StoredProcedures:
         PhoneNumber,
         Education,
         Designation,
+        City,
+        Country,
         AboutMe,
         Password) 
         VALUES (
@@ -120,6 +126,8 @@ class StoredProcedures:
         p_PhoneNumber,
         p_Education,
         p_Designation,
+        p_City,
+        p_Country,
         p_AboutMe,
         p_Password);
         END"""
@@ -197,6 +205,8 @@ class StoredProcedures:
         IN p_PhoneNumber NVARCHAR(250),
         IN p_Education NVARCHAR(250),
         IN p_Designation NVARCHAR(250),
+        IN p_City VARCHAR(250),
+        IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500)
         )
         BEGIN
@@ -207,6 +217,8 @@ class StoredProcedures:
         PhoneNumber=p_PhoneNumber,
         Education=p_Education,
         Designation=p_Designation,
+        City=p_City,
+        Country=p_Country,
         AboutMe = p_AboutMe
         WHERE ProfileId=p_ProfileId;
         END"""

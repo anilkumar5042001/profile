@@ -35,18 +35,20 @@ class UserProfileDAL:
         objUserProfileEntity.PhoneNumber=res[0][4]
         objUserProfileEntity.Education=res[0][5]
         objUserProfileEntity.Designation=res[0][6]
-        objUserProfileEntity.AboutMe=res[0][7]
+        objUserProfileEntity.City=res[0][7]
+        objUserProfileEntity.Country=res[0][8]
+        objUserProfileEntity.AboutMe=res[0][9]
         return objUserProfileEntity  
 
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password):
         cursor = connection.cursor()
-        args = [firstName,lastName,emailId,phoneNumber,education,designation,aboutMe,Password]
+        args = [firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password]
         cursor.callproc('UserProfile_Insert',args)
         return 1
 
-    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,AboutMe):
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe):
         cursor = connection.cursor()
-        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,AboutMe]
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe]
         cursor.callproc('UserProfile_Update',args)
         return 1
     def UserProfileUpdateAboutMe(self,ProfileId,aboutMe):

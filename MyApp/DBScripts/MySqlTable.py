@@ -42,6 +42,8 @@ class MySqlTable:
             PhoneNumber NVARCHAR(250) NULL,
             Education NVARCHAR(250) NULL,
             Designation NVARCHAR(250) NULL,
+            City VARCHAR(250) NULL,
+            Country VARCHAR(250) NULL,
             AboutMe NVARCHAR(500) NULL,
             Password NVARCHAR(250) NULL,
             PRIMARY KEY ( ProfileId )
