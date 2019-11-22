@@ -71,6 +71,29 @@ class WorkHistoryDAL:
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems
 
+    def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
+        cursor = connection.cursor()
+        args = [ProfileId,CompanyName]
+        cursor.callproc('GetWorkHistory_ByProfileIdAndCompanyName',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for WorkHistoryItem in res:
+            objWorkHistoryEntity=WorkHistoryEntity()
+            objWorkHistoryEntity.ProfileId=WorkHistoryItem[0]
+            objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
+            objWorkHistoryEntity.CompanyName=WorkHistoryItem[2]
+            objWorkHistoryEntity.Role=WorkHistoryItem[3]
+            objWorkHistoryEntity.Description=WorkHistoryItem[4]
+            objWorkHistoryEntity.City=WorkHistoryItem[5]
+            objWorkHistoryEntity.Country=WorkHistoryItem[6]
+            objWorkHistoryEntity.StartMonth=WorkHistoryItem[7]
+            objWorkHistoryEntity.StartYear=WorkHistoryItem[8]
+            objWorkHistoryEntity.EndMonth=WorkHistoryItem[9]
+            objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
+            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[11]
+            arrayItems.append(objWorkHistoryEntity)
+        return arrayItems  
+
     def WorkHistoryDelete(self,WorkHistoryId):
         cursor = connection.cursor()
         args = [WorkHistoryId]

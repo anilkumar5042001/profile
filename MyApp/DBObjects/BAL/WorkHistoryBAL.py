@@ -13,6 +13,10 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileId(ProfileId)
 
+    def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
+        objWorkHistoryDAL=WorkHistoryDAL()
+        return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyName(ProfileId,CompanyName)
+
     def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking)

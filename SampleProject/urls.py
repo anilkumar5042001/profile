@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^WorkHistoryInsert/', WorkHistoryView.WorkHistoryInsert),
     url(r'^WorkHistoryGetById/', WorkHistoryView.GetWorkHistoryById),
     url(r'^GetWorkHistoryByProfileId/', WorkHistoryView.GetWorkHistoryByProfileId),
+    url(r'^GetWorkHistoryByProfileIdAndCompanyName/', WorkHistoryView.GetWorkHistoryByProfileIdAndCompanyName),
     url(r'^WorkHistoryUpdate/', WorkHistoryView.WorkHistoryUpdate),
     url(r'^WorkHistoryDelete/', WorkHistoryView.WorkHistoryDelete),
     url(r'^CertificationInsert/', CertificationView.CertificationInsert),

@@ -35,6 +35,7 @@ class ExecOrder:
         objStoredProcedures.WorkHistoryInsert('self')
         objStoredProcedures.GetWorkHistoryByProfileId('self')
         objStoredProcedures.WorkHistoryGetById('self')
+        objStoredProcedures.GetWorkHistoryByProfileIdAndCompanyName('self')
         objStoredProcedures.WorkHistoryUpdate('self')
         objStoredProcedures.WorkHistoryDelete('self')
         objStoredProcedures.ProjectHighlightsInsert('self')

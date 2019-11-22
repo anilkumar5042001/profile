@@ -327,6 +327,32 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileId executed')
+    
+    def GetWorkHistoryByProfileIdAndCompanyName(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetWorkHistory_ByProfileIdAndCompanyName"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetWorkHistory_ByProfileIdAndCompanyName(IN p_ProfileId INT,IN p_CompanyName VARCHAR(250))
+        BEGIN
+        SELECT ProfileId,
+        WorkHistoryId,
+        CompanyName,
+        Role,
+        Description,
+        City,
+        Country,
+        StartMonth,
+        StartYear,
+        EndMonth,
+        EndYear,
+        CurrentlyWorking
+        FROM WorkHistory 
+        WHERE ProfileId = p_ProfileId
+        AND
+        CompanyName=p_CompanyName;
+        END"""
+        cursor.execute(query)
+        print('SP GetWorkHistoryByProfileIdAndCompanyName executed')
 
     def WorkHistoryGetById(self):
         cursor = connection.cursor()

@@ -52,7 +52,7 @@ def GetWorkHistoryById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"ProfileId": 1}
+#{"ProfileId": "1"}
 @csrf_exempt
 @api_view(["POST"])
 def GetWorkHistoryByProfileId(json_data):
@@ -65,6 +65,23 @@ def GetWorkHistoryByProfileId(json_data):
 
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
+
+#{"ProfileId": "1","CompanyName":"WebSynergies"}
+@csrf_exempt
+@api_view(["POST"])
+def GetWorkHistoryByProfileIdAndCompanyName(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strProfileId=loaded_json["ProfileId"]
+        strCompanyName=loaded_json["CompanyName"]
+        objWorkHistoryEntity=objWorkHistoryBAL.GetWorkHistoryByProfileIdAndCompanyName(strProfileId,strCompanyName)
+        result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+
 #{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys", "Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1"}
 @csrf_exempt
 @api_view(["POST"])
