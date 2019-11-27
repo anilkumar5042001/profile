@@ -264,6 +264,7 @@ class StoredProcedures:
         (
         IN p_ProfileId INT,
         IN p_CompanyName NVARCHAR(250),
+        IN p_ProjectName NVARCHAR(250),
         IN p_Role NVARCHAR(250),
         IN p_Description NVARCHAR(500),
         IN p_City VARCHAR(250),
@@ -278,6 +279,7 @@ class StoredProcedures:
         INSERT INTO WorkHistory (
         ProfileId,
         CompanyName,
+        ProjectName,
         Role,
         Description,
         City,
@@ -290,6 +292,7 @@ class StoredProcedures:
         VALUES (
         p_ProfileId,
         p_CompanyName,
+        p_ProjectName,
         p_Role,
         p_Description,
         p_City,
@@ -313,6 +316,7 @@ class StoredProcedures:
         SELECT ProfileId,
         WorkHistoryId,
         CompanyName,
+        ProjectName,
         Role,
         Description,
         City,
@@ -337,6 +341,7 @@ class StoredProcedures:
         SELECT ProfileId,
         WorkHistoryId,
         CompanyName,
+        ProjectName,
         Role,
         Description,
         City,
@@ -363,6 +368,7 @@ class StoredProcedures:
         SELECT ProfileId,
         WorkHistoryId,
         CompanyName,
+        ProjectName,
         Role,
         Description,
         City,
@@ -387,6 +393,7 @@ class StoredProcedures:
         IN p_ProfileId INT,
         IN p_WorkHistoryId INT,
         IN p_CompanyName NVARCHAR(250),
+        IN p_ProjectName NVARCHAR(250),
         IN p_Role NVARCHAR(250),
         IN p_Description NVARCHAR(500),
         IN p_City VARCHAR(250),
@@ -401,6 +408,7 @@ class StoredProcedures:
         Update WorkHistory 
         SET ProfileId=p_ProfileId,
         CompanyName=p_CompanyName,
+        ProjectName=p_ProjectName,
         Role=p_Role,
         Description=p_Description,
         City=p_City,
@@ -1076,7 +1084,7 @@ class StoredProcedures:
         TaskStatus
         ) 
         VALUES (
-        p_ProfileId,    
+        p_ProfileId,
         p_TaskTitle,
         p_Description,
         p_DueDate,
@@ -1158,6 +1166,17 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP TaskUpdate')
+
+    def GetUsers(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Get_Users"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Get_Users()
+        BEGIN
+        SELECT ProfileId,FirstName,LastName  FROM UserProfile;
+        END """
+        cursor.execute(query)
+        print('Exec SP GetUsers')
 
 
 

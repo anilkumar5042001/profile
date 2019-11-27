@@ -17,7 +17,7 @@ from .DBObjects.Entity import UserProfileEntity
 from .DBObjects.BAL import WorkHistoryBAL
 from .DBObjects.Entity import WorkHistoryEntity
 
-#{"ProfileId": "1","CompanyName":"WebSynergies","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0"}
+#{"ProfileId": "1","CompanyName":"WebSynergies","ProjectName":"FujiFilm","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryInsert(json_data):
@@ -25,6 +25,7 @@ def WorkHistoryInsert(json_data):
         print(loaded_json)
         strProfileId=loaded_json["ProfileId"]
         strCompanyName=loaded_json["CompanyName"]
+        strProjectName=loaded_json["ProjectName"]
         strRole=loaded_json["Role"]
         strDescription=loaded_json["Description"]
         strCity=loaded_json["City"]
@@ -35,10 +36,10 @@ def WorkHistoryInsert(json_data):
         strEndYear=loaded_json["EndYear"]
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.WorkHistoryInsert(strProfileId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
+        result=objWorkHistoryBAL.WorkHistoryInsert(strProfileId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
         return JsonResponse(result,safe=False)
 
-#{"WorkHistoryId": 1}
+#{"WorkHistoryId": "1"}
 @csrf_exempt
 @api_view(["POST"])
 def GetWorkHistoryById(json_data):
@@ -82,7 +83,7 @@ def GetWorkHistoryByProfileIdAndCompanyName(json_data):
         return JsonResponse(result,safe=False)
 
 
-#{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys", "Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1"}
+#{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys","ProjectName":"RSM","Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryUpdate(json_data):
@@ -91,6 +92,7 @@ def WorkHistoryUpdate(json_data):
         strProfileId=loaded_json["ProfileId"]
         strWorkHistoryId=loaded_json["WorkHistoryId"]
         strCompanyName=loaded_json["CompanyName"]
+        strProjectName=loaded_json["ProjectName"]
         strRole=loaded_json["Role"]
         strDescription=loaded_json["Description"]
         strCity=loaded_json["City"]
@@ -101,7 +103,7 @@ def WorkHistoryUpdate(json_data):
         strEndYear=loaded_json["EndYear"]
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
+        result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking)
         return JsonResponse("1",safe=False)
 
 #{"WorkHistoryId": "1"}

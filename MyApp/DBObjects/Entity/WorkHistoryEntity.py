@@ -2,6 +2,7 @@ class WorkHistoryEntity(object):
     ProfileId=0
     WorkHistoryId=""
     CompanyName=""
+    ProjectName=""
     Role=""
     Description=""
     City=""

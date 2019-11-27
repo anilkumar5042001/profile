@@ -90,6 +90,8 @@ urlpatterns = [
     url(r'^GetTaskByTaskId/', TaskView.GetTaskByTaskId),
     url(r'^GetTaskByAssignTo/', TaskView.GetTaskByAssignTo),
     url(r'^TaskUpdate/', TaskView.TaskUpdate),
+    url(r'^GetUserNameForAssignTo/', TaskView.GetUserNameForAssignTo),
+    
     
     
     

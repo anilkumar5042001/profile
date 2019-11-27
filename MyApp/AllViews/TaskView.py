@@ -81,4 +81,17 @@ def TaskUpdate(json_data):
         result=objTaskBAL.TaskUpdate(strTaskId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus)
         return JsonResponse("1",safe=False)
 
+#{"TaskId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetUserNameForAssignTo(id):
+        objTaskBAL=TaskBAL.TaskBAL()        
+        objTaskEntity=objTaskBAL.GetUserNameForAssignTo()
+        result = json.dumps([ob.__dict__ for ob in objTaskEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+
       

@@ -16,3 +16,7 @@ class TaskBAL:
     def TaskUpdate(self,TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus):
         objTaskDAL=TaskDAL()
         return objTaskDAL.TaskUpdate(TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus)
+    
+    def GetUserNameForAssignTo(self):
+        objTaskDAL=TaskDAL()
+        return objTaskDAL.GetUserNameForAssignTo()

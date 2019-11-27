@@ -1,6 +1,7 @@
 from ..Entity.TaskEntity import *
 from django.db import connection
 from datetime import datetime
+from ..Entity.UserProfileEntity import *
 
 class TaskDAL:
     def TaskInsert(self,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus):
@@ -54,3 +55,16 @@ class TaskDAL:
         args=[TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus]
         cursor.callproc('Task_Update',args)
         return 1
+    
+    def GetUserNameForAssignTo(self):
+        cursor=connection.cursor()
+        cursor.callproc('Get_Users')
+        res=cursor.fetchall()
+        arrayItems=[]
+        for UserItem in res:
+            objUserProfileEntity=UserProfileEntity()
+            objUserProfileEntity.ProfileId=UserItem[0]
+            objUserProfileEntity.FirstName=UserItem[1]
+            objUserProfileEntity.LastName=UserItem[2]
+            arrayItems.append(objUserProfileEntity)
+        return arrayItems 

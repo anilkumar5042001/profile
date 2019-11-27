@@ -76,6 +76,7 @@ class ExecOrder:
         objStoredProcedures.GetTaskByTaskId('self')
         objStoredProcedures.GetTaskByAssignTo('self')
         objStoredProcedures.TaskUpdate('self')
+        objStoredProcedures.GetUsers('self')
         
 
 

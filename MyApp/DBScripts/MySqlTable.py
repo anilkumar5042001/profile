@@ -96,6 +96,7 @@ class MySqlTable:
             WorkHistoryId INT NOT NULL AUTO_INCREMENT,
             ProfileId INT NOT NULL,
             CompanyName NVARCHAR(250) NULL,
+            ProjectName NVARCHAR(250) NULL,
             Role NVARCHAR(250) NULL,
             Description NVARCHAR(500),
             City VARCHAR(250),
