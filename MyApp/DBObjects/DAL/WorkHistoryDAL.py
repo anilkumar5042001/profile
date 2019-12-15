@@ -45,7 +45,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.StartYear=WorkHistoryItem[9]
             objWorkHistoryEntity.EndMonth=WorkHistoryItem[10]
             objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
-            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[12]
+            objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
@@ -60,16 +60,16 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.ProfileId=WorkHistoryItem[0]
             objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
             objWorkHistoryEntity.CompanyName=WorkHistoryItem[2]
-            objWorkHistoryEntity.Role=WorkHistoryItem[3]
-            objWorkHistoryEntity.Description=WorkHistoryItem[4]
-            objWorkHistoryEntity.City=WorkHistoryItem[5]
-            objWorkHistoryEntity.Country=WorkHistoryItem[6]
-            objWorkHistoryEntity.StartMonth=WorkHistoryItem[7]
-            objWorkHistoryEntity.StartYear=WorkHistoryItem[8]
-            objWorkHistoryEntity.EndMonth=WorkHistoryItem[9]
-            objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
-            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[11]
-            objWorkHistoryEntity.ProfileId=WorkHistoryItem[12]
+            objWorkHistoryEntity.ProjectName=WorkHistoryItem[3]
+            objWorkHistoryEntity.Role=WorkHistoryItem[4]
+            objWorkHistoryEntity.Description=WorkHistoryItem[5]
+            objWorkHistoryEntity.City=WorkHistoryItem[6]
+            objWorkHistoryEntity.Country=WorkHistoryItem[7]
+            objWorkHistoryEntity.StartMonth=WorkHistoryItem[8]
+            objWorkHistoryEntity.StartYear=WorkHistoryItem[9]
+            objWorkHistoryEntity.EndMonth=WorkHistoryItem[10]
+            objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
+            objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems
 
@@ -92,7 +92,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.StartYear=WorkHistoryItem[8]
             objWorkHistoryEntity.EndMonth=WorkHistoryItem[9]
             objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
-            objWorkHistoryEntity.CurrenltyWorking=WorkHistoryItem[11]
+            objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[11]
             objWorkHistoryEntity.ProjectName=WorkHistoryItem[12]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems  

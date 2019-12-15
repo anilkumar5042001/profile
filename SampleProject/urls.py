@@ -27,6 +27,8 @@ from MyApp.AllViews import RegistrationView
 from MyApp.AllViews import AwardsView
 from MyApp.AllViews import InterestView
 from MyApp.AllViews import TaskView
+from MyApp.AllViews import SkillsCategoryView
+from MyApp.AllViews import SkillsView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -91,8 +93,16 @@ urlpatterns = [
     url(r'^GetTaskByAssignTo/', TaskView.GetTaskByAssignTo),
     url(r'^TaskUpdate/', TaskView.TaskUpdate),
     url(r'^GetUserNameForAssignTo/', TaskView.GetUserNameForAssignTo),
-    
-    
+    url(r'^SkillsCategoryInsert/', SkillsCategoryView.SkillsCategoryInsert),
+    url(r'^GetSkillCategoryNameByProfileId/', SkillsCategoryView.GetSkillCategoryNameByProfileId),
+    url(r'^GetSkillsCategoryById/', SkillsCategoryView.GetSkillsCategoryById),
+    url(r'^SkillsCategoryUpdate/', SkillsCategoryView.SkillsCategoryUpdate),
+    url(r'^SkillsCategoryDelete/', SkillsCategoryView.SkillsCategoryDelete),
+    url(r'^SkillsInsert/', SkillsView.SkillsInsert),
+    url(r'^GetSkillsByProfileId/', SkillsView.GetSkillsByProfileId),
+    url(r'^GetSkillsById/', SkillsView.GetSkillsById),
+    url(r'^SkillsUpdate/', SkillsView.SkillsUpdate),
+    url(r'^SkillsDelete/', SkillsView.SkillsDelete),
     
     
 

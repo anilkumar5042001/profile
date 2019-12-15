@@ -38,8 +38,7 @@ def TaskInsert(json_data):
 @api_view(["POST"])
 def GetTaskByTaskId(json_data):
         loaded_json = json.loads(json_data.body)
-        objTaskBAL=TaskBAL.TaskBAL()
-        objCommonMethods=CommonMethods()       
+        objTaskBAL=TaskBAL.TaskBAL()    
         strTaskId=loaded_json["TaskId"]    
         objTaskEntity=objTaskBAL.GetTaskByTaskId(strTaskId)
         result = json.dumps([ob.__dict__ for ob in objTaskEntity])

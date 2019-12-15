@@ -241,6 +241,37 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('method executed')
+
+    def CreateSkillsCategory(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"SkillsCategory")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table SkillsCategory
+            (
+            SkillCategoryId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            SkillCategoryName NVARCHAR(250) NULL,
+            PRIMARY KEY (SkillCategoryId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CreateSkills(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Skills")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Skills
+            (
+            SkillId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            SkillCategoryId INT NOT NULL,
+            SkillName NVARCHAR(250) NULL,
+            PRIMARY KEY (SkillId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
     
 
 

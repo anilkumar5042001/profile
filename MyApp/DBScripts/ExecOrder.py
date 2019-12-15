@@ -17,6 +17,8 @@ class ExecOrder:
         objMySqlTable.CreateAwards('self')
         objMySqlTable.CreateInterest('self') 
         objMySqlTable.CreateTask('self') 
+        objMySqlTable.CreateSkillsCategory('self')
+        objMySqlTable.CreateSkills('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -77,6 +79,16 @@ class ExecOrder:
         objStoredProcedures.GetTaskByAssignTo('self')
         objStoredProcedures.TaskUpdate('self')
         objStoredProcedures.GetUsers('self')
+        objStoredProcedures.SkillsCategoryInsert('self')
+        objStoredProcedures.GetSkillCategoryById('self')
+        objStoredProcedures.GetSkillCategoryByProfileId('self')
+        objStoredProcedures.SkillCategoryUpdate('self')
+        objStoredProcedures.SkillCategoryDelete('self')
+        objStoredProcedures.SkillsInsert('self')
+        objStoredProcedures.GetSkillsByProfileId('self')
+        objStoredProcedures.GetSkillsById('self')
+        objStoredProcedures.SkillsUpdate('self')
+        objStoredProcedures.SkillsDelete('self')
         
 
 

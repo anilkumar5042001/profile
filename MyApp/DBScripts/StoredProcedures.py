@@ -1178,6 +1178,185 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP GetUsers')
 
+    def SkillsCategoryInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS SkillsCategory_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE SkillsCategory_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_SkillCategoryName NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO SkillsCategory (
+        ProfileId,
+        SkillCategoryName
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_SkillCategoryName
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP SkillsCategoryInsert')
+
+    def GetSkillCategoryByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetSkillsCategory_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetSkillsCategory_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT SkillCategoryId,
+        ProfileId,
+        SkillCategoryName
+        FROM SkillsCategory
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetSkillsCategoryByProfileId executed')
+
+    def GetSkillCategoryById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS SkillsCategory_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE SkillsCategory_GetById(IN p_SkillCategoryId INT)
+        BEGIN
+        SELECT SkillCategoryId,
+        ProfileId,
+        SkillCategoryName
+        FROM SkillsCategory
+        WHERE SkillCategoryId = p_SkillCategoryId;
+        END"""
+        cursor.execute(query)
+        print('SP GetSkillCategoryById executed')
+
+    def SkillCategoryUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS SkillsCategory_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE SkillsCategory_Update
+        (
+        IN p_SkillCategoryId INT,
+        IN p_ProfileId INT,
+        IN p_SkillCategoryName NVARCHAR(250)
+        )
+        BEGIN
+        Update SkillsCategory 
+        SET
+        ProfileId=p_ProfileId,
+        SkillCategoryName=p_SkillCategoryName
+        WHERE SkillCategoryId=p_SkillCategoryId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP SkillsCategoryUpdate')
+
+    def SkillCategoryDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS SkillsCategory_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE SkillsCategory_Delete(IN p_SkillCategoryId INT)
+        BEGIN
+        Delete
+        FROM SkillsCategory 
+        WHERE SkillCategoryId = p_SkillCategoryId;
+        END"""
+        cursor.execute(query)
+        print('SP SkillsCategoryDelete executed')
+
+    def SkillsInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Skills_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Skills_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_SkillCategoryId INT,
+        IN p_SkillName NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Skills (
+        ProfileId,
+        SkillCategoryId,
+        SkillName
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_SkillCategoryId,
+        p_SkillName
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP SkillsInsert')
+
+    def GetSkillsByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetSkills_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetSkills_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT SkillId,
+        ProfileId,
+        SkillCategoryId,
+        SkillName
+        FROM Skills
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetSkillsByProfileId executed')
+
+    def GetSkillsById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Skills_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Skills_GetById(IN p_SkillId INT)
+        BEGIN
+        SELECT SkillId,
+        ProfileId,
+        SkillCategoryId,
+        SkillName
+        FROM Skills
+        WHERE SkillId = p_SkillId;
+        END"""
+        cursor.execute(query)
+        print('SP GetSkillsById executed')
+
+    def SkillsUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Skills_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Skills_Update
+        (
+        IN p_SkillId INT,
+        IN p_ProfileId INT,
+        IN p_SkillCategoryId INT,
+        IN p_SkillCategoryName NVARCHAR(250)
+        )
+        BEGIN
+        Update Skills 
+        SET
+        ProfileId=p_ProfileId,
+        SkillCategoryId=p_SkillCategoryId,
+        SkillName=p_SkillName
+        WHERE SkillId=p_SkillId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP SkillsUpdate')
+
+    def SkillsDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Skills_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Skills_Delete(IN p_SkillId INT)
+        BEGIN
+        Delete
+        FROM Skills 
+        WHERE SkillsId = p_SkillsId;
+        END"""
+        cursor.execute(query)
+        print('SP SkillsDelete executed')
+
 
 
 

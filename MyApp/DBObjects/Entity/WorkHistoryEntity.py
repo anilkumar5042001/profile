@@ -11,7 +11,7 @@ class WorkHistoryEntity(object):
     StartYear=""
     EndMonth=""
     EndYear=""
-    CurrenltyWorking=""
+    CurrentlyWorking=""
 
 class ProjectHighlightsEntity(object): 
     HighlightId=0
