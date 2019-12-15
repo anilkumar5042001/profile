@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class WorkHistoryDAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
         cursor = connection.cursor()
-        args = [ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
+        args = [ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId]
         cursor.callproc('WorkHistory_Insert',args)
         workHistoryItem =  cursor.fetchall()
         workHistoryId=workHistoryItem[0][0]
@@ -18,9 +18,9 @@ class WorkHistoryDAL:
         args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
         cursor = connection.cursor()
-        args = [ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking]
+        args = [ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId]
         cursor.callproc('WorkHistory_Update',args)
         return 1
         
@@ -46,6 +46,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.EndMonth=WorkHistoryItem[10]
             objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
             objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
+            objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
@@ -70,6 +71,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.EndMonth=WorkHistoryItem[10]
             objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
             objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
+            objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems
 
@@ -94,6 +96,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.EndYear=WorkHistoryItem[10]            
             objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[11]
             objWorkHistoryEntity.ProjectName=WorkHistoryItem[12]
+            objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems  
 

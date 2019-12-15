@@ -1,9 +1,9 @@
 from ..DAL.WorkHistoryDAL import WorkHistoryDAL
 
 class WorkHistoryBAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking)
+        return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId)
     
     def WorkHistoryGetById(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()
@@ -17,9 +17,9 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyName(ProfileId,CompanyName)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking)
+        return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId)
 
     def WorkHistoryDelete(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()

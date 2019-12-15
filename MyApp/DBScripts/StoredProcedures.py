@@ -49,7 +49,8 @@ class StoredProcedures:
         Designation,
         City,
         Country,
-        AboutMe
+        AboutMe,
+        CompanyDomain
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -105,7 +106,8 @@ class StoredProcedures:
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
-        IN p_Password NVARCHAR(250)
+        IN p_Password NVARCHAR(250),
+        IN p_CompanyDomain NVARCHAR(250)
         )
         BEGIN
         INSERT INTO UserProfile (
@@ -118,7 +120,8 @@ class StoredProcedures:
         City,
         Country,
         AboutMe,
-        Password) 
+        Password,
+        CompanyDomain) 
         VALUES (
         p_FirstName,
         p_LastName,
@@ -129,7 +132,8 @@ class StoredProcedures:
         p_City,
         p_Country,
         p_AboutMe,
-        p_Password);
+        p_Password,
+        p_CompanyDomain);
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')
@@ -207,7 +211,8 @@ class StoredProcedures:
         IN p_Designation NVARCHAR(250),
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
-        IN p_AboutMe NVARCHAR(500)
+        IN p_AboutMe NVARCHAR(500),
+        IN p_CompanyDomain NVARCHAR(250)
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -219,7 +224,8 @@ class StoredProcedures:
         Designation=p_Designation,
         City=p_City,
         Country=p_Country,
-        AboutMe = p_AboutMe
+        AboutMe = p_AboutMe,
+        CompanyDomain=p_CompanyDomain
         WHERE ProfileId=p_ProfileId;
         END"""
         cursor.execute(query)
@@ -273,7 +279,8 @@ class StoredProcedures:
         IN p_StartYear INT,
         IN p_EndMonth INT,
         IN p_EndYear INT,
-        IN p_CurrentlyWorking BOOLEAN
+        IN p_CurrentlyWorking BOOLEAN,
+        IN p_CompanyEmailId NVARCHAR(250)
         )
         BEGIN
         INSERT INTO WorkHistory (
@@ -288,7 +295,8 @@ class StoredProcedures:
         StartYear,
         EndMonth,
         EndYear,
-        CurrentlyWorking) 
+        CurrentlyWorking,
+        CompanyEmailId) 
         VALUES (
         p_ProfileId,
         p_CompanyName,
@@ -301,7 +309,8 @@ class StoredProcedures:
         p_StartYear,
         p_EndMonth,
         p_EndYear,
-        p_CurrentlyWorking);
+        p_CurrentlyWorking,
+        p_CompanyEmailId);
         select LAST_INSERT_ID();
         END"""
         cursor.execute(query)
@@ -325,7 +334,8 @@ class StoredProcedures:
         StartYear,
         EndMonth,
         EndYear,
-        CurrentlyWorking
+        CurrentlyWorking,
+        CompanyEmailId
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -350,7 +360,8 @@ class StoredProcedures:
         StartYear,
         EndMonth,
         EndYear,
-        CurrentlyWorking
+        CurrentlyWorking,
+        CompanyEmailId
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId
         AND
@@ -377,7 +388,8 @@ class StoredProcedures:
         StartYear,
         EndMonth,
         EndYear,
-        CurrentlyWorking
+        CurrentlyWorking,
+        CompanyEmailId
         FROM WorkHistory 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -402,7 +414,8 @@ class StoredProcedures:
         IN p_StartYear INT,
         IN p_EndMonth INT,
         IN p_EndYear INT,
-        IN p_CurrentlyWorking BOOLEAN
+        IN p_CurrentlyWorking BOOLEAN,
+        IN p_CompanyEmailId NVARCHAR(250)
         )
         BEGIN
         Update WorkHistory 
@@ -417,7 +430,8 @@ class StoredProcedures:
         StartYear=p_StartYear,
         EndMonth=p_EndMonth,
         EndYear=p_EndYear,
-        CurrentlyWorking=p_CurrentlyWorking
+        CurrentlyWorking=p_CurrentlyWorking,
+        CompanyEmailId=p_CompanyEmailId
         WHERE WorkHistoryId=p_WorkHistoryId;
         END"""
         cursor.execute(query)

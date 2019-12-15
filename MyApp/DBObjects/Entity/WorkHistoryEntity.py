@@ -12,6 +12,7 @@ class WorkHistoryEntity(object):
     EndMonth=""
     EndYear=""
     CurrentlyWorking=""
+    CompanyEmailId=""
 
 class ProjectHighlightsEntity(object): 
     HighlightId=0

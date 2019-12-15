@@ -11,13 +11,13 @@ class UserProfileBAL:
         return objUserProfileDAL.GetUserProfile()
 
     
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password)  
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain)  
 
-    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe):
+    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,CompanyDomain):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City, Country,AboutMe) 
+        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,CompanyDomain) 
     
     def UserProfileUpdateAboutMe(self,profileId,aboutMe):
         objUserProfileDAL=UserProfileDAL()

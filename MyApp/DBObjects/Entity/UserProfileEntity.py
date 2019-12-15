@@ -10,3 +10,4 @@ class UserProfileEntity(object):
     Country=""
     AboutMe=""
     Password=""
+    CompanyDomain=""

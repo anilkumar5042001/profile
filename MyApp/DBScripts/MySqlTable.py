@@ -46,6 +46,7 @@ class MySqlTable:
             Country VARCHAR(250) NULL,
             AboutMe NVARCHAR(500) NULL,
             Password NVARCHAR(250) NULL,
+            CompanyDomain NVARCHAR(250) NULL,
             PRIMARY KEY ( ProfileId )
             );"""
             cursor.execute(query)
@@ -106,6 +107,7 @@ class MySqlTable:
             EndMonth INT,
             EndYear INT,
             CurrentlyWorking BOOLEAN,
+            CompanyEmailId NVARCHAR(250),
             PRIMARY KEY (WorkHistoryId)
             );"""
             cursor.execute(query)

@@ -103,7 +103,7 @@ def ExecuteDBScripts(json_data):
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
         
-#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Hyderabad","Country":"India","AboutMe":"I am mad","Password":"Test123"}
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Hyderabad","Country":"India","AboutMe":"I am mad","Password":"Test123","CompanyDomain":"SharePoint"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileInsert(json_data):
@@ -119,8 +119,9 @@ def UserProfileInsert(json_data):
         strCountry=loaded_json["Country"]
         strAboutMe=loaded_json["AboutMe"]
         strPassword=loaded_json["Password"]
+        strCompanyDomain=loaded_json["CompanyDomain"]
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strPassword)
+        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strPassword,strCompanyDomain)
         return JsonResponse("1",safe=False)
 
 @csrf_exempt
@@ -129,7 +130,7 @@ def UploadFile(binaryData):
         print(binaryData)
         return JsonResponse("1",safe=False)
 
-#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India"}
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India","CompanyDomain":".Net"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileUpdate(json_data):
@@ -144,9 +145,10 @@ def UserProfileUpdate(json_data):
         strDesignation=loaded_json["Designation"]
         strCity=loaded_json["City"]
         strCountry=loaded_json["Country"]
-        strAboutMe=loaded_json["AboutMe"]      
+        strAboutMe=loaded_json["AboutMe"]  
+        strCompanyDomain=loaded_json["CompanyDomain"]    
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strCompanyDomain)
         return JsonResponse("1",safe=False)
 
 #{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}
