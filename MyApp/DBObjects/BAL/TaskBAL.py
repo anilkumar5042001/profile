@@ -9,6 +9,10 @@ class TaskBAL:
         objTaskDAL=TaskDAL()
         return objTaskDAL.GetTaskByTaskId(TaskId)
 
+    def GetTaskByProfileId(self,ProfileId):
+        objTaskDAL=TaskDAL()
+        return objTaskDAL.GetTaskByProfileId(ProfileId)
+
     def GetTaskByAssignTo(self,AssignTo):
         objTaskDAL=TaskDAL()
         return objTaskDAL.GetTaskByAssignTo(AssignTo)

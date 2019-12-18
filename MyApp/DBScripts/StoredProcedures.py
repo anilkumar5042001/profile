@@ -1131,6 +1131,27 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetTaskByTaskId executed')
 
+    def GetTaskByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetTask_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetTask_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT TaskId,
+        ProfileId,
+        TaskTitle,
+        Description,
+        DueDate,
+        AssignTo,
+        CreatedBy,
+        TaskStatus
+        FROM Task 
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetTaskByProfileId executed')
+    
+
     def GetTaskByAssignTo(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS GetTask_ByAssignTo"""

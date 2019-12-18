@@ -76,6 +76,7 @@ class ExecOrder:
         objStoredProcedures.CheckLoginCredentials('self')
         objStoredProcedures.TaskInsert('self')
         objStoredProcedures.GetTaskByTaskId('self')
+        objStoredProcedures.GetTaskByProfileId('self')
         objStoredProcedures.GetTaskByAssignTo('self')
         objStoredProcedures.TaskUpdate('self')
         objStoredProcedures.GetUsers('self')

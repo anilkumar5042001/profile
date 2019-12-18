@@ -90,6 +90,7 @@ urlpatterns = [
     url(r'^InterestDelete/', InterestView.InterestDelete),
     url(r'^TaskInsert/', TaskView.TaskInsert),
     url(r'^GetTaskByTaskId/', TaskView.GetTaskByTaskId),
+    url(r'^GetTaskByProfileId/', TaskView.GetTaskByProfileId),
     url(r'^GetTaskByAssignTo/', TaskView.GetTaskByAssignTo),
     url(r'^TaskUpdate/', TaskView.TaskUpdate),
     url(r'^GetUserNameForAssignTo/', TaskView.GetUserNameForAssignTo),

@@ -47,6 +47,20 @@ def GetTaskByTaskId(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"ProfileId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetTaskByProfileId(json_data):
+        loaded_json = json.loads(json_data.body)
+        objTaskBAL=TaskBAL.TaskBAL()    
+        strProfileId=loaded_json["ProfileId"]    
+        objTaskEntity=objTaskBAL.GetTaskByProfileId(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objTaskEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 #{"AssignTo": "1"}
 @csrf_exempt
 @api_view(["POST"])

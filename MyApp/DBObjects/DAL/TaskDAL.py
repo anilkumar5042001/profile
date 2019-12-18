@@ -30,6 +30,25 @@ class TaskDAL:
             objTaskEntity.TaskStatus=TaskItem[7]
             arrayItems.append(objTaskEntity)
         return arrayItems 
+    
+    def GetTaskByProfileId(self,ProfileId):
+        cursor=connection.cursor()
+        args=[ProfileId]
+        cursor.callproc('GetTask_ByProfileId',args)
+        res=cursor.fetchall()
+        arrayItems=[]
+        for TaskItem in res:
+            objTaskEntity=TaskEntity()
+            objTaskEntity.TaskId=TaskItem[0]
+            objTaskEntity.ProfileId=TaskItem[1]
+            objTaskEntity.TaskTitle=TaskItem[2]
+            objTaskEntity.Description=TaskItem[3]
+            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y")
+            objTaskEntity.AssignTo=TaskItem[5]
+            objTaskEntity.CreatedBy=TaskItem[6]
+            objTaskEntity.TaskStatus=TaskItem[7]
+            arrayItems.append(objTaskEntity)
+        return arrayItems
 
     def GetTaskByAssignTo(self,AssignTo):
         cursor=connection.cursor()
