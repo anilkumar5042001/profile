@@ -94,6 +94,17 @@ def GetUserProfileById(json_data):
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False) 
 
+#{"CompanyDomain": "core.co.uk"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileGetByCompanyDomain(json_data):
+        loaded_json = json.loads(json_data.body)
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        companyDomain=loaded_json["CompanyDomain"]
+        objUserProfileEntity=objUserProfileBAL.UserProfileGetByCompanyDomain(companyDomain)
+        result = json.dumps([ob.__dict__ for ob in objUserProfileEntity])
+        return JsonResponse(result,safe=False) 
+
 #{"ProfileId": 1}
 @csrf_exempt
 @api_view(["POST"])
@@ -130,7 +141,7 @@ def UploadFile(binaryData):
         print(binaryData)
         return JsonResponse("1",safe=False)
 
-#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India","CompanyDomain":".Net"}
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileUpdate(json_data):
@@ -146,9 +157,19 @@ def UserProfileUpdate(json_data):
         strCity=loaded_json["City"]
         strCountry=loaded_json["Country"]
         strAboutMe=loaded_json["AboutMe"]  
-        strCompanyDomain=loaded_json["CompanyDomain"]    
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strCompanyDomain)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe)
+        return JsonResponse("1",safe=False)
+
+#{"ProfileId":"1","CompanyDomain":"Core@co.uk"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileUpdateDomainName(json_data):
+        loaded_json = json.loads(json_data.body)
+        strProfileId=loaded_json["ProfileId"]
+        strCompanyDomain=loaded_json["CompanyDomain"]
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        result=objUserProfileBAL.UserProfileUpdateDomainName(strProfileId,strCompanyDomain)
         return JsonResponse("1",safe=False)
 
 #{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0"}

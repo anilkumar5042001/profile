@@ -1213,6 +1213,48 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP GetUsers')
 
+    def UserProfileGetByCompanyDomain(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_GetByCompanyDomain"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_GetByCompanyDomain
+        (
+        IN p_CompanyDomain VARCHAR(250)
+        )
+        BEGIN
+        SELECT ProfileId,FirstName,LastName,EmailId,
+        PhoneNumber,
+        Education,
+        Designation,
+        City,
+        Country,
+        AboutMe,
+        CompanyDomain
+        FROM UserProfile 
+        WHERE CompanyDomain=p_CompanyDomain;
+        END """
+        cursor.execute(query)
+        print('Exec SP UserProfileGetByCompanyDomain')
+
+    def UserProfileUpdateDomainName(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_UpdateDomainName"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_UpdateDomainName
+        (
+        IN p_ProfileId INT,
+        IN p_CompanyDomain VARCHAR(250)
+        )
+        BEGIN
+        Update UserProfile 
+        SET 
+        CompanyDomain=p_CompanyDomain
+        WHERE ProfileId=p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP UserProfile_UpdateDomainName')
+
+
     def SkillsCategoryInsert(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS SkillsCategory_Insert"""

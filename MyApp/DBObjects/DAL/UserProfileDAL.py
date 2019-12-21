@@ -41,10 +41,39 @@ class UserProfileDAL:
         objUserProfileEntity.CompanyDomain=res[0][10]
         return objUserProfileEntity  
 
+    def UserProfileGetByCompanyDomain(self,companyDomain):
+        db_name = connection.settings_dict['NAME']
+        cursor = connection.cursor()
+        args = [companyDomain]
+        cursor.callproc('UserProfile_GetByCompanyDomain',args)
+        results =  cursor.fetchall()
+        arrayItems=[]
+        for res in results:
+            objUserProfileEntity=UserProfileEntity()
+            objUserProfileEntity.ProfileId=res[0]
+            objUserProfileEntity.FirstName=res[1]
+            objUserProfileEntity.LastName=res[2]
+            objUserProfileEntity.EmailId=res[3]
+            objUserProfileEntity.PhoneNumber=res[4]
+            objUserProfileEntity.Education=res[5]
+            objUserProfileEntity.Designation=res[6]
+            objUserProfileEntity.City=res[7]
+            objUserProfileEntity.Country=res[8]
+            objUserProfileEntity.AboutMe=res[9]
+            objUserProfileEntity.CompanyDomain=res[10]
+            arrayItems.append(objUserProfileEntity)
+        return arrayItems  
+
     def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain):
         cursor = connection.cursor()
         args = [firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain]
         cursor.callproc('UserProfile_Insert',args)
+        return 1
+
+    def UserProfileUpdateDomainName(self,profileId,companyDomain):
+        cursor = connection.cursor()
+        args = [profileId,companyDomain]
+        cursor.callproc('UserProfile_UpdateDomainName',args)
         return 1
 
     def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,CompanyDomain):

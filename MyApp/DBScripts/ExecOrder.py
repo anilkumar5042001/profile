@@ -28,6 +28,8 @@ class ExecOrder:
         objStoredProcedures.UserProfileGetById('self')
         objStoredProcedures.UserProfileInsert('self') 
         objStoredProcedures.UserProfileUpdate('self')    
+        objStoredProcedures.UserProfileUpdateDomainName('self') 
+        objStoredProcedures.UserProfileGetByCompanyDomain('self')
         objStoredProcedures.UserProfileUpdateAboutMe('self')
         objStoredProcedures.CertificationInsert('self')
         objStoredProcedures.CertificationUpdate('self')

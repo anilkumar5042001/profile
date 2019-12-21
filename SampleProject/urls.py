@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^ExecuteDBScripts/', views.ExecuteDBScripts),
     url(r'^UserProfileInsert/', views.UserProfileInsert),
     url(r'^UserProfileUpdate/', views.UserProfileUpdate),
+    url(r'^UserProfileUpdateDomainName/', views.UserProfileUpdateDomainName),
+    url(r'^UserProfileGetByCompanyDomain/', views.UserProfileGetByCompanyDomain),
     url(r'^UserLoginCheckCredentials/', views.UserLoginCheckCredentials),
     url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
     url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),
