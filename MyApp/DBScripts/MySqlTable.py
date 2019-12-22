@@ -204,6 +204,7 @@ class MySqlTable:
             ProfileId INT NOT NULL,
             AwardTitle NVARCHAR(250) NULL,
             AwardDescription NVARCHAR(500) NULL,
+            AssignTo INT NULL,
             PRIMARY KEY (AwardId)
             );"""
             cursor.execute(query)

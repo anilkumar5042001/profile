@@ -2,9 +2,9 @@ from ..Entity.AwardsEntity import *
 from django.db import connection
 
 class AwardsDAL:
-    def AwardsInsert(self,ProfileId,AwardTitle,AwardDescription):
+    def AwardsInsert(self,ProfileId,AwardTitle,AwardDescription,AssignTo):
         cursor=connection.cursor()
-        args=[ProfileId,AwardTitle,AwardDescription]
+        args=[ProfileId,AwardTitle,AwardDescription,AssignTo]
         cursor.callproc('Awards_Insert',args)
         return 1
 

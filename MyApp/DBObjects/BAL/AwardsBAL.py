@@ -1,9 +1,9 @@
 from ..DAL.AwardsDAL import AwardsDAL
 
 class AwardsBAL:
-    def AwardsInsert(self,ProfileId,AwardTitle,AwardDescription):
+    def AwardsInsert(self,ProfileId,AwardTitle,AwardDescription,AssignTo):
         objAwardsDAL=AwardsDAL()
-        return objAwardsDAL.AwardsInsert(ProfileId,AwardTitle,AwardDescription)
+        return objAwardsDAL.AwardsInsert(ProfileId,AwardTitle,AwardDescription,AssignTo)
 
     def GetAwardsByProfileId(self,ProfileId):
         objAwardsDAL=AwardsDAL()

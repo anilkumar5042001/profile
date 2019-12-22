@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from ..DBObjects.BAL import AwardsBAL
 from ..DBObjects.Entity import AwardsEntity
 
-#{"ProfileId": "1","AwardTitle":"Best Developer","AwardDescription":"worked as a member"}
+#{"ProfileId": "1","AwardTitle":"Best Developer","AwardDescription":"worked as a member","AssignTo":"2"}
 @csrf_exempt
 @api_view(["POST"])
 def AwardsInsert(json_data):
@@ -21,8 +21,9 @@ def AwardsInsert(json_data):
         strProfileId=loaded_json["ProfileId"]
         strAwardTitle=loaded_json["AwardTitle"]
         strAwardDescription=loaded_json["AwardDescription"]
+        strAssignTo=loaded_json["AssignTo"]
         objAwardsBAL=AwardsBAL.AwardsBAL()
-        result=objAwardsBAL.AwardsInsert(strProfileId,strAwardTitle,strAwardDescription)
+        result=objAwardsBAL.AwardsInsert(strProfileId,strAwardTitle,strAwardDescription,strAssignTo)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId": "1"}
@@ -53,7 +54,7 @@ def GetAwardsById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"AwardId":"2","ProfileId": "1","AwardTitle":"Gujarathi","AwardDescription":"Low"}
+#{"AwardId":"2","ProfileId": "1","AwardTitle":"Gujarathi","AwardDescription":"Low","AssignTo":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def AwardsUpdate(json_data):

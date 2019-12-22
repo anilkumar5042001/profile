@@ -883,18 +883,21 @@ class StoredProcedures:
         (
         IN p_ProfileId INT,
         IN p_AwardTitle NVARCHAR(250),
-        IN p_AwardDescription NVARCHAR(500)
+        IN p_AwardDescription NVARCHAR(500),
+        IN p_AssignTo INT
         )
         BEGIN
         INSERT INTO Awards (
         ProfileId,
         AwardTitle,
-        AwardDescription
+        AwardDescription,
+        AssignTo
         ) 
         VALUES (
         p_ProfileId,
         p_AwardTitle,
-        p_AwardDescription
+        p_AwardDescription,
+        p_AssignTo
         );
         END"""
         cursor.execute(query)
