@@ -274,9 +274,24 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('method executed')
+
+    def CreateFavourite(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Favourite")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Favourite
+            (
+            FavouriteId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            FavouriteCategoryId INT NOT NULL,
+            FavouriteName NVARCHAR(250) NULL,
+            FavouriteLink NVARCHAR(250) NULL,           
+            PRIMARY KEY (FavouriteId)
+            );"""
+            cursor.execute(query)
+            print('Favourite table created')
     
-
-
     def CheckTableExists(self,tableName):
         db_name = connection.settings_dict['NAME']
         cursor = connection.cursor()

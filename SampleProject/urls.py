@@ -29,6 +29,7 @@ from MyApp.AllViews import InterestView
 from MyApp.AllViews import TaskView
 from MyApp.AllViews import SkillsCategoryView
 from MyApp.AllViews import SkillsView
+from MyApp.AllViews import FavouriteView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -106,6 +107,12 @@ urlpatterns = [
     url(r'^GetSkillsById/', SkillsView.GetSkillsById),
     url(r'^SkillsUpdate/', SkillsView.SkillsUpdate),
     url(r'^SkillsDelete/', SkillsView.SkillsDelete),
+    url(r'^FavouriteInsert/', FavouriteView.FavouriteInsert),
+    url(r'^GetFavouriteById/', FavouriteView.GetFavouriteById),
+    url(r'^GetFavouriteByProfileId/', FavouriteView.GetFavouriteByProfileId),
+    url(r'^FavouriteUpdate/', FavouriteView.FavouriteUpdate),
+    url(r'^FavouriteDelete/', FavouriteView.FavouriteDelete),
+
     
     
 
