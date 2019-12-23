@@ -3,3 +3,5 @@ class AwardsEntity(object):
     ProfileId=""
     AwardTitle=""
     AwardDescription=""
+    FirstName=""
+    LastName=""

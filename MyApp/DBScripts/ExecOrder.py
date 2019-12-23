@@ -69,6 +69,7 @@ class ExecOrder:
         objStoredProcedures.AwardsInsert('self')
         objStoredProcedures.GetAwardsById('self')
         objStoredProcedures.GetAwardsByProfileId('self')
+        objStoredProcedures.GetAwardsByAssignTo('self')
         objStoredProcedures.AwardsUpdate('self')
         objStoredProcedures.AwardsDelete('self')
         objStoredProcedures.InterestInsert('self')

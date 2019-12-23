@@ -8,6 +8,10 @@ class AwardsBAL:
     def GetAwardsByProfileId(self,ProfileId):
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.GetAwardsByProfileId(ProfileId)
+
+    def GetAwardsByAssignTo(self,assignTo):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.GetAwardsByAssignTo(assignTo)
     
     def GetAwardsById(self,AwardId):
         objAwardsDAL=AwardsDAL()

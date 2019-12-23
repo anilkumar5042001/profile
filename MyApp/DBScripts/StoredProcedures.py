@@ -919,6 +919,27 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetAwardsByProfileId executed')
 
+    def GetAwardsByAssignTo(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_GetByAssignTo"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_GetByAssignTo(IN p_AssignTo INT)
+        BEGIN
+        SELECT 
+        a.AwardId,
+        u.ProfileId,
+        a.AwardTitle,
+        a.AwardDescription,
+        u.FirstName,
+        u.LastName
+        FROM Awards a
+        INNER JOIN UserProfile u ON
+        a.AssignTo=u.ProfileId
+        WHERE a.AssignTo = p_AssignTo;
+        END"""
+        cursor.execute(query)
+        print('SP GetAwardsByAssignTo executed')
+
     def GetAwardsById(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Awards_GetById"""

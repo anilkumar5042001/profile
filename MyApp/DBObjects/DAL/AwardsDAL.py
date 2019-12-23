@@ -23,6 +23,23 @@ class AwardsDAL:
             arrayItems.append(objAwardEntity)
         return arrayItems
 
+    def GetAwardsByAssignTo(self,assignTo):
+        cursor = connection.cursor()
+        args = [assignTo]
+        cursor.callproc('Awards_GetByAssignTo',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for AwardItem in res:
+            objAwardEntity=AwardsEntity()
+            objAwardEntity.AwardId=AwardItem[0]
+            objAwardEntity.ProfileId=AwardItem[1]
+            objAwardEntity.AwardTitle=AwardItem[2]
+            objAwardEntity.AwardDescription=AwardItem[3]
+            objAwardEntity.FirstName=AwardItem[4]
+            objAwardEntity.LastName=AwardItem[5]
+            arrayItems.append(objAwardEntity)
+        return arrayItems
+
     def GetAwardsById(self,AwardId):
         cursor = connection.cursor()
         args = [AwardId]
