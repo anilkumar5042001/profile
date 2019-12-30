@@ -211,8 +211,7 @@ class StoredProcedures:
         IN p_Designation NVARCHAR(250),
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
-        IN p_AboutMe NVARCHAR(500),
-        IN p_CompanyDomain NVARCHAR(250)
+        IN p_AboutMe NVARCHAR(500)
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -224,8 +223,7 @@ class StoredProcedures:
         Designation=p_Designation,
         City=p_City,
         Country=p_Country,
-        AboutMe = p_AboutMe,
-        CompanyDomain=p_CompanyDomain
+        AboutMe = p_AboutMe
         WHERE ProfileId=p_ProfileId;
         END"""
         cursor.execute(query)
@@ -940,8 +938,8 @@ class StoredProcedures:
         u.ProfileId,
         a.AwardTitle,
         a.AwardDescription,
-        u.FirstName,
-        u.LastName
+        (select FirstName from UserProfile where ProfileId=a.ProfileId) as FirstName,
+        (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName
         FROM Awards a
         INNER JOIN UserProfile u ON
         a.AssignTo=u.ProfileId
