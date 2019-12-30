@@ -30,6 +30,7 @@ from MyApp.AllViews import TaskView
 from MyApp.AllViews import SkillsCategoryView
 from MyApp.AllViews import SkillsView
 from MyApp.AllViews import FavouriteView
+from MyApp.AllViews import EventsView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -113,6 +114,11 @@ urlpatterns = [
     url(r'^GetFavouriteByProfileId/', FavouriteView.GetFavouriteByProfileId),
     url(r'^FavouriteUpdate/', FavouriteView.FavouriteUpdate),
     url(r'^FavouriteDelete/', FavouriteView.FavouriteDelete),
+    # url(r'^EventInsert/',EventsView.EventInsert),
+    # url(r'^GetEventByProfileId/', EventsView.GetEventByProfileId),
+    # url(r'^GetEventById/', EventsView.GetEventById),
+    # url(r'^EventUpdate/', EventsView.EventUpdate),
+    # url(r'^EventDelete/', EventsView.EventDelete),
 
     
     

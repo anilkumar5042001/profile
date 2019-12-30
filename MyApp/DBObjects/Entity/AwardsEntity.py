@@ -5,3 +5,5 @@ class AwardsEntity(object):
     AwardDescription=""
     FirstName=""
     LastName=""
+    CompanyDomain=""
+    CompanyName=""

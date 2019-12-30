@@ -887,17 +887,27 @@ class StoredProcedures:
         IN p_AssignTo INT
         )
         BEGIN
+        declare vCompanyDomain NVARCHAR(250);
+        declare vCompanyName NVARCHAR(250);
+        SET vCompanyDomain=(select CompanyDomain FROM UserProfile where ProfileId=p_ProfileId);
+        select CompanyName into vCompanyName FROM WorkHistory where CompanyEmailId like CONCAT('%', vCompanyDomain, '%') LIMIT 1;
         INSERT INTO Awards (
         ProfileId,
         AwardTitle,
         AwardDescription,
-        AssignTo
+        AssignTo,
+        CompanyDomain,
+        CompanyName,
+        CreatedOn
         ) 
         VALUES (
         p_ProfileId,
         p_AwardTitle,
         p_AwardDescription,
-        p_AssignTo
+        p_AssignTo,
+        vCompanyDomain,
+        vCompanyName,
+        CURDATE()
         );
         END"""
         cursor.execute(query)
@@ -1560,6 +1570,106 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP FavouriteDelete executed')
+
+    # def EventInsert(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS Event_Insert"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE Event_Insert
+    #     (
+    #     IN p_ProfileId INT,
+    #     IN p_EventCategoryId INT,
+    #     IN p_EventName NVARCHAR(250),
+    #     IN p_Description NVARCHAR(500)
+    #     )
+    #     BEGIN
+    #     INSERT INTO  Event(
+    #     ProfileId,
+    #     EventCategoryId,
+    #     EventName,
+    #     Description
+    #     ) 
+    #     VALUES (
+    #     p_ProfileId,
+    #     P_EventCategoryId,
+    #     p_EventName,
+    #     p_Description
+    #     );
+    #     END"""
+    #     cursor.execute(query)
+    #     print('Exec SP EventInsert')
+
+    # def GetEventByProfileId(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS GetEvent_ByProfileId"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE GetEvent_ByProfileId(IN p_ProfileId INT)
+    #     BEGIN
+    #     SELECT EventId,EventCategoryId,EventName,Description,
+    #     ProfileId,
+    #     EventCategoryId,
+    #     EventName,
+    #     Description,        
+    #     FROM Event
+    #     WHERE ProfileId = p_ProfileId;
+    #     END"""
+    #     cursor.execute(query)
+    #     print('SP GetEventByProfileId executed')
+
+    # def GetEventById(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS Event_GetById"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE Event_GetById(IN p_EventId INT)
+    #     BEGIN
+    #     SELECT EventId,
+    #     ProfileId,
+    #     EventCategoryId,
+    #     EventName,
+    #     Description,
+    #     FROM Event
+    #     WHERE EventId = p_EventId;
+    #     END"""
+    #     cursor.execute(query)
+    #     print('SP GetEventById executed')
+
+    # def EventUpdate(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS Event_Update"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE Event_Update
+    #     (
+    #     IN p_EvntId INT,
+    #     IN p_ProfileId INT,
+    #     IN p_EventCategoryId INT,
+    #     IN p_EventName NVARCHAR(250),
+    #     IN p_Description NVARCHAR(500),
+    #     )
+    #     BEGIN
+    #     Update Event 
+    #     SET ProfileId=p_ProfileId,
+    #     EventCategoryId=p_EventCategoryId,
+    #     EventName=p_EventName,
+    #     Description=p_Description,
+    #     WHERE EventId=p_EventId;
+    #     END"""
+    #     cursor.execute(query)
+    #     print('Exec SP EventUpdate')
+
+    # def EventDelete(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS Event_Delete"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE Event_Delete(IN p_EventId INT)
+    #     BEGIN
+    #     Delete
+    #     FROM Event
+    #     WHERE EventId = p_EventId;
+    #     END"""
+    #     cursor.execute(query)
+    #     print('SP EventDelete executed')
+
+
 
 
 

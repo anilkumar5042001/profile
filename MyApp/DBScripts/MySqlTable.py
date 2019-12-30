@@ -205,6 +205,9 @@ class MySqlTable:
             AwardTitle NVARCHAR(250) NULL,
             AwardDescription NVARCHAR(500) NULL,
             AssignTo INT NULL,
+            CreatedOn DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+            CompanyDomain NVARCHAR(250) NULL,
+            CompanyName NVARCHAR(250) NULL,
             PRIMARY KEY (AwardId)
             );"""
             cursor.execute(query)
@@ -292,6 +295,22 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('Favourite table created')
+
+    def CreateEvent(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Event")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Event(
+            EventId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            EventCategoryId INT NOT NULL,
+            EventName NVARCHAR(250) NULL,
+            Description NVARCHAR(500) NULL,
+            PRIMARY KEY (EventId)
+            );"""
+            cursor.execute(query)
+            print('Event table created')
     
     def CheckTableExists(self,tableName):
         db_name = connection.settings_dict['NAME']
