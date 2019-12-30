@@ -100,11 +100,11 @@ class ExecOrder:
         objStoredProcedures.GetFavouriteByProfileId('self')
         objStoredProcedures.FavouriteUpdate('self')
         objStoredProcedures.FavouriteDelete('self')
-        # objStoredProcedures.EventInsert('self')
-        # objStoredProcedures.GetEventById('self')
-        # objStoredProcedures.GetEventByProfileId('self')
-        # objStoredProcedures.EventUpdate('self')
-        # objStoredProcedures.EventDelete('self')
+        objStoredProcedures.EventInsert('self')
+        objStoredProcedures.GetEventById('self')
+        objStoredProcedures.GetEventByProfileId('self')
+        objStoredProcedures.EventUpdate('self')
+        objStoredProcedures.EventDelete('self')
         
 
 

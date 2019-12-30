@@ -1569,103 +1569,104 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP FavouriteDelete executed')
 
-    # def EventInsert(self):
-    #     cursor = connection.cursor()
-    #     query = """DROP PROCEDURE IF EXISTS Event_Insert"""
-    #     cursor.execute(query)
-    #     query = """CREATE PROCEDURE Event_Insert
-    #     (
-    #     IN p_ProfileId INT,
-    #     IN p_EventCategoryId INT,
-    #     IN p_EventName NVARCHAR(250),
-    #     IN p_Description NVARCHAR(500)
-    #     )
-    #     BEGIN
-    #     INSERT INTO  Event(
-    #     ProfileId,
-    #     EventCategoryId,
-    #     EventName,
-    #     Description
-    #     ) 
-    #     VALUES (
-    #     p_ProfileId,
-    #     P_EventCategoryId,
-    #     p_EventName,
-    #     p_Description
-    #     );
-    #     END"""
-    #     cursor.execute(query)
-    #     print('Exec SP EventInsert')
+    def EventInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Event_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Event_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_EventCategoryId INT,
+        IN p_EventName NVARCHAR(250),
+        IN p_Description NVARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO  Event(
+        ProfileId,
+        EventCategoryId,
+        EventName,
+        Description
+        ) 
+        VALUES (
+        p_ProfileId,
+        P_EventCategoryId,
+        p_EventName,
+        p_Description
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP EventInsert')
 
-    # def GetEventByProfileId(self):
-    #     cursor = connection.cursor()
-    #     query = """DROP PROCEDURE IF EXISTS GetEvent_ByProfileId"""
-    #     cursor.execute(query)
-    #     query = """CREATE PROCEDURE GetEvent_ByProfileId(IN p_ProfileId INT)
-    #     BEGIN
-    #     SELECT EventId,EventCategoryId,EventName,Description,
-    #     ProfileId,
-    #     EventCategoryId,
-    #     EventName,
-    #     Description,        
-    #     FROM Event
-    #     WHERE ProfileId = p_ProfileId;
-    #     END"""
-    #     cursor.execute(query)
-    #     print('SP GetEventByProfileId executed')
+    def GetEventByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEvent_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEvent_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT EventId,
+        ProfileId,
+        EventCategoryId,
+        EventName,
+        Description       
+        FROM Event
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEventByProfileId executed')
 
-    # def GetEventById(self):
-    #     cursor = connection.cursor()
-    #     query = """DROP PROCEDURE IF EXISTS Event_GetById"""
-    #     cursor.execute(query)
-    #     query = """CREATE PROCEDURE Event_GetById(IN p_EventId INT)
-    #     BEGIN
-    #     SELECT EventId,
-    #     ProfileId,
-    #     EventCategoryId,
-    #     EventName,
-    #     Description,
-    #     FROM Event
-    #     WHERE EventId = p_EventId;
-    #     END"""
-    #     cursor.execute(query)
-    #     print('SP GetEventById executed')
+    def GetEventById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEvent_ById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEvent_ById(IN p_EventId INT)
+        BEGIN
+        SELECT EventId,
+        ProfileId,
+        EventCategoryId,
+        EventName,
+        Description
+        FROM Event
+        WHERE EventId = p_EventId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEventById executed')
 
-    # def EventUpdate(self):
-    #     cursor = connection.cursor()
-    #     query = """DROP PROCEDURE IF EXISTS Event_Update"""
-    #     cursor.execute(query)
-    #     query = """CREATE PROCEDURE Event_Update
-    #     (
-    #     IN p_EvntId INT,
-    #     IN p_ProfileId INT,
-    #     IN p_EventCategoryId INT,
-    #     IN p_EventName NVARCHAR(250),
-    #     IN p_Description NVARCHAR(500),
-    #     )
-    #     BEGIN
-    #     Update Event 
-    #     SET ProfileId=p_ProfileId,
-    #     EventCategoryId=p_EventCategoryId,
-    #     EventName=p_EventName,
-    #     Description=p_Description,
-    #     WHERE EventId=p_EventId;
-    #     END"""
-    #     cursor.execute(query)
-    #     print('Exec SP EventUpdate')
+    def EventUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Event_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Event_Update
+        (
+        IN p_EventId INT,
+        IN p_ProfileId INT,
+        IN p_EventCategoryId INT,
+        IN p_EventName NVARCHAR(250),
+        IN p_Description NVARCHAR(500)
+        )
+        BEGIN
+        Update Event 
+        SET ProfileId=p_ProfileId,
+        EventCategoryId=p_EventCategoryId,
+        EventName=p_EventName,
+        Description=p_Description
+        WHERE EventId=p_EventId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP EventUpdate')
 
-    # def EventDelete(self):
-    #     cursor = connection.cursor()
-    #     query = """DROP PROCEDURE IF EXISTS Event_Delete"""
-    #     cursor.execute(query)
-    #     query = """CREATE PROCEDURE Event_Delete(IN p_EventId INT)
-    #     BEGIN
-    #     Delete
-    #     FROM Event
-    #     WHERE EventId = p_EventId;
-    #     END"""
-    #     cursor.execute(query)
-    #     print('SP EventDelete executed')
+    def EventDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Event_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Event_Delete(IN p_EventId INT)
+        BEGIN
+        Delete
+        FROM Event
+        WHERE EventId = p_EventId;
+        END"""
+        cursor.execute(query)
+        print('SP EventDelete executed')
 
 
 

@@ -1,24 +1,25 @@
-# from ..DAL.EventDAL import EventDAL
 
-# class EventBAL:
-#     def EventInsert(self,ProfileId,EventCategoryId,EventName,Description):
-#         objEventDAL=EventDAL()
-#         return objEventDAL.EventInsert(ProfileId,EventCategoryId,EventName,Description)
+from ..DAL.EventsDAL import EventDAL
 
-#     def GetEventByProfileId(self,ProfileId):
-#         objEventDAL=EventDAL()
-#         return objEventDAL.GetEventByProfileId(ProfileId)
+class EventBAL:
+    def EventInsert(self,ProfileId,EventCategoryId,EventName,Description):
+        objEventDAL=EventDAL()
+        return objEventDAL.EventInsert(ProfileId,EventCategoryId,EventName,Description)
 
-#     def GetEventById(self,EventId):
-#         objEventDAL=EventDAL()
-#         return objEventDAL.GetEventById(EventId)
+    def GetEventByProfileId(self,ProfileId):
+        objEventDAL=EventDAL()
+        return objEventDAL.GetEventByProfileId(ProfileId)
 
-#     def EventUpdate(self,EventId,EventCategoryId,ProfileId,EventName,Description):
-#         objEventDAL=EventDAL()
-#         return objEventDAL.EventUpdate(EventId,EventCategoryId,ProfileId,EventName,Description)
+    def GetEventById(self,EventId):
+        objEventDAL=EventDAL()
+        return objEventDAL.GetEventById(EventId)
 
-#     def EventDelete(self,EventId):
-#         objEventDAL=EventDAL()
-#         return objEventDAL.EventDelete(EventId)
+    def EventUpdate(self,EventId,EventCategoryId,ProfileId,EventName,Description):
+        objEventDAL=EventDAL()
+        return objEventDAL.EventUpdate(EventId,EventCategoryId,ProfileId,EventName,Description)
+
+    def EventDelete(self,EventId):
+        objEventDAL=EventDAL()
+        return objEventDAL.EventDelete(EventId)
 
         

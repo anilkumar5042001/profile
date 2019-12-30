@@ -20,9 +20,10 @@ class FavouriteDAL:
             objFavouriteEntity=FavouriteEntity()
             objFavouriteEntity.FavouriteId=FavouriteItem[0]
             objFavouriteEntity.ProfileId=FavouriteItem[1]
-            objFavouriteEntity.FavouriteName=FavouriteItem[2]
-            objFavouriteEntity.FavouriteLink=FavouriteItem[3]
-            objFavouriteEntity.FavouriteCategoryId=FavouriteItem[4]
+            objFavouriteEntity.FavouriteCategoryId=FavouriteItem[2]
+            objFavouriteEntity.FavouriteName=FavouriteItem[3]
+            objFavouriteEntity.FavouriteLink=FavouriteItem[4]
+            
             arrayItems.append(objFavouriteEntity)
         return arrayItems
 

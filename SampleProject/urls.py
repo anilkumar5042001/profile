@@ -114,11 +114,11 @@ urlpatterns = [
     url(r'^GetFavouriteByProfileId/', FavouriteView.GetFavouriteByProfileId),
     url(r'^FavouriteUpdate/', FavouriteView.FavouriteUpdate),
     url(r'^FavouriteDelete/', FavouriteView.FavouriteDelete),
-    # url(r'^EventInsert/',EventsView.EventInsert),
-    # url(r'^GetEventByProfileId/', EventsView.GetEventByProfileId),
-    # url(r'^GetEventById/', EventsView.GetEventById),
-    # url(r'^EventUpdate/', EventsView.EventUpdate),
-    # url(r'^EventDelete/', EventsView.EventDelete),
+    url(r'^EventInsert/',EventsView.EventInsert),
+    url(r'^GetEventByProfileId/', EventsView.GetEventByProfileId),
+    url(r'^GetEventById/', EventsView.GetEventById),
+    url(r'^EventUpdate/', EventsView.EventUpdate),
+    url(r'^EventDelete/', EventsView.EventDelete),
 
     
     
