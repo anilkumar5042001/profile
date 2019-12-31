@@ -1,7 +1,5 @@
 from ..Entity.EventsEntity import *
 from django.db import connection
-from datetime import datetime
-from ..Entity.UserProfileEntity import *
 
 class EventDAL:
     def EventInsert(self,ProfileId,EventCategoryId,EventName,Description):
@@ -19,7 +17,7 @@ class EventDAL:
         res=cursor.fetchall()
         arrayItems=[]
         for EventItem in res:
-            objEventEntity=EventEntity()
+            objEventEntity=EventsEntity()
             objEventEntity.EventId=EventItem[0]
             objEventEntity.ProfileId=EventItem[1]
             objEventEntity.EventCategoryId=EventItem[2]
@@ -35,7 +33,7 @@ class EventDAL:
         res =  cursor.fetchall()
         arrayItems=[]
         for EventItem in res:
-            objEventEntity=EventEntity()
+            objEventEntity=EventsEntity()
             objEventEntity.EventId=EventItem[0]
             objEventEntity.ProfileId=EventItem[1]
             objEventEntity.EventCategoryId=EventItem[2]

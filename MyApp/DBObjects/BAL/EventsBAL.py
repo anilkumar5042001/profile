@@ -14,9 +14,9 @@ class EventBAL:
         objEventDAL=EventDAL()
         return objEventDAL.GetEventById(EventId)
 
-    def EventUpdate(self,EventId,EventCategoryId,ProfileId,EventName,Description):
+    def EventUpdate(self,EventId,ProfileId,EventCategoryId,EventName,Description):
         objEventDAL=EventDAL()
-        return objEventDAL.EventUpdate(EventId,EventCategoryId,ProfileId,EventName,Description)
+        return objEventDAL.EventUpdate(EventId,ProfileId,EventCategoryId,EventName,Description)
 
     def EventDelete(self,EventId):
         objEventDAL=EventDAL()

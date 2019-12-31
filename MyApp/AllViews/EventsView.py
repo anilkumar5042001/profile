@@ -68,7 +68,7 @@ def EventUpdate(json_data):
         strEventName=loaded_json["EventName"]
         strDescription=loaded_json["Description"]        
         objEventBAL=EventsBAL.EventBAL()
-        result=objEventBAL.EventInsert(strEventId,strProfileId,EventCategoryId,strEventName,strDescription)
+        result=objEventBAL.EventUpdate(strEventId,strProfileId,strEventCategoryId,strEventName,strDescription)
         return JsonResponse("1",safe=False)
 
 #{"EventId": "1"}
@@ -77,7 +77,7 @@ def EventUpdate(json_data):
 def EventDelete(json_data):
         loaded_json = json.loads(json_data.body)
         objEventBAL=EventsBAL.EventBAL()
-        strStoryId=loaded_json["EventId"]
+        strEventId=loaded_json["EventId"]
         objEventEntity=objEventBAL.EventDelete(strEventId)
         return JsonResponse("1",safe=False)
 
