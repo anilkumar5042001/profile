@@ -920,7 +920,8 @@ class StoredProcedures:
         SELECT AwardId,
         ProfileId,
         AwardTitle,
-        AwardDescription
+        AwardDescription,
+        ShowInProfile
         FROM Awards
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -939,7 +940,8 @@ class StoredProcedures:
         a.AwardTitle,
         a.AwardDescription,
         (select FirstName from UserProfile where ProfileId=a.ProfileId) as FirstName,
-        (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName
+        (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName,
+        a.ShowInProfile
         FROM Awards a
         INNER JOIN UserProfile u ON
         a.AssignTo=u.ProfileId
@@ -984,6 +986,23 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP AwardsUpdate')
+
+    def AwardsUpdateShowInProfile(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_UpdateShowInProfile"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_UpdateShowInProfile
+        (
+        IN p_AwardId INT,
+        IN p_ShowInProfile Boolean
+        )
+        BEGIN
+        Update Awards 
+        SET ShowInProfile=p_ShowInProfile
+        WHERE AwardId=p_AwardId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP Awards_UpdateShowInProfile')
 
     def AwardsDelete(self):
         cursor = connection.cursor()

@@ -20,6 +20,7 @@ class AwardsDAL:
             objAwardEntity.ProfileId=AwardItem[1]
             objAwardEntity.AwardTitle=AwardItem[2]
             objAwardEntity.AwardDescription=AwardItem[3]
+            objAwardEntity.ShowInProfile=AwardItem[4]
             arrayItems.append(objAwardEntity)
         return arrayItems
 
@@ -37,6 +38,7 @@ class AwardsDAL:
             objAwardEntity.AwardDescription=AwardItem[3]
             objAwardEntity.FirstName=AwardItem[4]
             objAwardEntity.LastName=AwardItem[5]
+            objAwardEntity.ShowInProfile=AwardItem[6]
             arrayItems.append(objAwardEntity)
         return arrayItems
 
@@ -59,6 +61,12 @@ class AwardsDAL:
         cursor = connection.cursor()
         args = [AwardId,ProfileId,AwardTitle,AwardDescription]
         cursor.callproc('Awards_Update',args)
+        return 1
+
+    def AwardsUpdateShowInProfile(self,AwardId,ShowInProfile):
+        cursor = connection.cursor()
+        args = [AwardId,ShowInProfile]
+        cursor.callproc('Awards_UpdateShowInProfile',args)
         return 1
 
     def AwardsDelete(self,AwardId):

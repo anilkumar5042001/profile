@@ -82,6 +82,18 @@ def AwardsUpdate(json_data):
         result=objAwardsBAL.AwardsUpdate(strAwardId,strProfileId,strAwardTitle,strAwardDescription)
         return JsonResponse("1",safe=False)
 
+#{"AwardId":"1","ShowInProfile": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def AwardsUpdateShowInProfile(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strAwardId=loaded_json["AwardId"]
+        strShowInProfile=loaded_json["ShowInProfile"]
+        objAwardsBAL=AwardsBAL.AwardsBAL()
+        result=objAwardsBAL.AwardsUpdateShowInProfile(strAwardId,strShowInProfile)
+        return JsonResponse("1",safe=False)
+
 #{"AwardId": "1"}
 @csrf_exempt
 @api_view(["POST"])

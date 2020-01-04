@@ -20,6 +20,10 @@ class AwardsBAL:
     def AwardsUpdate(self,AwardId,ProfileId,AwardTitle,AwardDescription):
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.AwardsUpdate(AwardId,ProfileId,AwardTitle,AwardDescription)
+    
+    def AwardsUpdateShowInProfile(self,AwardId,ShowInProfile):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.AwardsUpdateShowInProfile(AwardId,ShowInProfile)
 
     def AwardsDelete(self,AwardId):
         objAwardsDAL=AwardsDAL()

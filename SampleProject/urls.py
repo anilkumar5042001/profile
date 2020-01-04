@@ -87,6 +87,7 @@ urlpatterns = [
     url(r'^GetAwardsByAssignTo/', AwardsView.GetAwardsByAssignTo),
     url(r'^GetAwardsById/', AwardsView.GetAwardsById),
     url(r'^AwardsUpdate/', AwardsView.AwardsUpdate),
+    url(r'^AwardsUpdateShowInProfile/', AwardsView.AwardsUpdateShowInProfile),
     url(r'^AwardsDelete/', AwardsView.AwardsDelete),
     url(r'^InterestInsert/', InterestView.InterestInsert),
     url(r'^GetInterestById/', InterestView.GetInterestById),

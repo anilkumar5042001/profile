@@ -208,6 +208,7 @@ class MySqlTable:
             CreatedOn DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP,
             CompanyDomain NVARCHAR(250) NULL,
             CompanyName NVARCHAR(250) NULL,
+            ShowInProfile BOOLEAN,
             PRIMARY KEY (AwardId)
             );"""
             cursor.execute(query)

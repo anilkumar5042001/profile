@@ -7,3 +7,4 @@ class AwardsEntity(object):
     LastName=""
     CompanyDomain=""
     CompanyName=""
+    ShowInProfile=""
