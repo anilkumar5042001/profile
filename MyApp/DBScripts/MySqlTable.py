@@ -178,6 +178,8 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+            
+
     def CreateRegistration(self):
         objMySqlTable=MySqlTable
         tblExists=objMySqlTable.CheckTableExists(self,"Registration")

@@ -20,6 +20,24 @@ from .DBObjects.BAL import WorkHistoryBAL
 from .DBObjects.Entity import WorkHistoryEntity
 
 
+from rest_framework.parsers import MultiPartParser
+
+
+
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+
+
+
+from .serializers import FileSerializer
+
+
 #from snippets.models import Snippet
 #from snippets.serializers import SnippetSerializer
 
@@ -32,6 +50,60 @@ from .DBObjects.Entity import WorkHistoryEntity
 
 # Create your views here.
 #@api_view(["POST"])
+
+#@api_view(["POST"])
+
+class FileView(APIView):
+
+  parser_classes = (MultiPartParser, FormParser)
+
+  def post(self, request, *args, **kwargs):
+
+    file_serializer = FileSerializer(data=request.data)
+    if file_serializer.is_valid():
+      file_serializer.save()
+      return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+    else:
+      return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
+class FileUploadView(APIView):
+    parser_class = (FileUploadParser)
+
+    def post(self, request, *args, **kwargs):
+
+      file_serializer = FileSerializer(data=request.data)
+
+      if file_serializer.is_valid():
+          file_serializer.save()
+          return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+      else:
+          return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
+def FileUploadViewHell(heightdata):
+        #return JsonResponse(GetCountry(),safe=False)
+        #return JsonResponse(GetCountry(),safe=False)
+        objCountryBAL=CountryBAL.CountryBAL()
+        objCountryEntity=objCountryBAL.GetCountryById("1")
+        objCountries=objCountryBAL.GetCountries()
+
+        # return JsonResponse(objCountryEntity[1].CountryName,safe=False)
+        # return JsonResponse(json.dumps(objCountryEntity),safe=False)
+        
+        
+        #return JsonResponse(data,safe=False)
+        #return HttpResponse(data, content_type="application/json")
+       # strAbc= json.dumps(objCountryEntity.__dict__)
+
+        strAbc = json.dumps([ob.__dict__ for ob in objCountries])
+        #strAbc  = json.dumps(objCountryEntity)
+ 
+        # A python list as a JSON string
+        print('hello'+strAbc)
+        
+        return JsonResponse(strAbc,safe=False)        
+
 @csrf_exempt
 def IdealWeight(heightdata):
         #return JsonResponse(GetCountry(),safe=False)

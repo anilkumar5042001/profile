@@ -32,8 +32,15 @@ from MyApp.AllViews import SkillsView
 from MyApp.AllViews import FavouriteView
 from MyApp.AllViews import EventsView
 
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^file/', include('MyApp.urls')),
+    #path(r'^upload/', include('MyApp.urls')),
     url(r'^IdealWeight/', views.IdealWeight),
     url(r'^GetCountryById/', views.GetCountryById),
     url(r'^GetCountries/', views.GetCountries),
@@ -130,3 +137,5 @@ urlpatterns = [
     
     
 ]
+if settings.DEBUG:
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
