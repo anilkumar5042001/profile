@@ -426,6 +426,14 @@ class StoredProcedures:
         IN p_CompanyEmailId NVARCHAR(250)
         )
         BEGIN
+
+        IF(p_CurrentlyWorking="1")
+        THEN
+        Update WorkHistory 
+        SET CurrentlyWorking=false
+        WHERE ProfileId=p_ProfileId;
+        END IF;
+        
         Update WorkHistory 
         SET ProfileId=p_ProfileId,
         CompanyName=p_CompanyName,
@@ -951,7 +959,9 @@ class StoredProcedures:
         a.AwardDescription,
         (select FirstName from UserProfile where ProfileId=a.ProfileId) as FirstName,
         (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName,
-        a.ShowInProfile
+        a.ShowInProfile,
+        (select ProfileImageName from UserProfile where ProfileId=a.ProfileId) as ProfileImageName,
+        a.CompanyName
         FROM Awards a
         INNER JOIN UserProfile u ON
         a.AssignTo=u.ProfileId

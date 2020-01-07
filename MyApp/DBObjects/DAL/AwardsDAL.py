@@ -39,6 +39,8 @@ class AwardsDAL:
             objAwardEntity.FirstName=AwardItem[4]
             objAwardEntity.LastName=AwardItem[5]
             objAwardEntity.ShowInProfile=AwardItem[6]
+            objAwardEntity.ProfileImageName=AwardItem[7]
+            objAwardEntity.CompanyName=AwardItem[8]
             arrayItems.append(objAwardEntity)
         return arrayItems
 
