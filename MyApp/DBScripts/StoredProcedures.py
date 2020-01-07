@@ -50,7 +50,8 @@ class StoredProcedures:
         City,
         Country,
         AboutMe,
-        CompanyDomain
+        CompanyDomain,
+        ProfileImageName
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -211,7 +212,8 @@ class StoredProcedures:
         IN p_Designation NVARCHAR(250),
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
-        IN p_AboutMe NVARCHAR(500)
+        IN p_AboutMe NVARCHAR(500),
+        IN p_ProfileImageName NVARCHAR(300)
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -225,6 +227,14 @@ class StoredProcedures:
         Country=p_Country,
         AboutMe = p_AboutMe
         WHERE ProfileId=p_ProfileId;
+
+      	IF(p_ProfileImageName<>'NA')
+        THEN
+        UPDATE UserProfile SET 
+        ProfileImageName=p_ProfileImageName
+        WHERE ProfileId=p_ProfileId;
+        END IF;
+
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileUpdate')

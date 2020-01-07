@@ -11,3 +11,4 @@ class UserProfileEntity(object):
     AboutMe=""
     Password=""
     CompanyDomain=""
+    ProfileImageName=""

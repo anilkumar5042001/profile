@@ -47,6 +47,7 @@ class MySqlTable:
             AboutMe NVARCHAR(500) NULL,
             Password NVARCHAR(250) NULL,
             CompanyDomain NVARCHAR(250) NULL,
+            ProfileImageName NVARCHAR(300) NULL,
             PRIMARY KEY ( ProfileId )
             );"""
             cursor.execute(query)
@@ -178,7 +179,7 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
-            
+
 
     def CreateRegistration(self):
         objMySqlTable=MySqlTable

@@ -39,6 +39,7 @@ class UserProfileDAL:
         objUserProfileEntity.Country=res[0][8]
         objUserProfileEntity.AboutMe=res[0][9]
         objUserProfileEntity.CompanyDomain=res[0][10]
+        objUserProfileEntity.ProfileImageName=res[0][11]
         return objUserProfileEntity  
 
     def UserProfileGetByCompanyDomain(self,companyDomain):
@@ -76,9 +77,9 @@ class UserProfileDAL:
         cursor.callproc('UserProfile_UpdateDomainName',args)
         return 1
 
-    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe):
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName):
         cursor = connection.cursor()
-        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe]
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName]
         cursor.callproc('UserProfile_Update',args)
         return 1
     def UserProfileUpdateAboutMe(self,ProfileId,aboutMe):

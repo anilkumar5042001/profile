@@ -229,8 +229,10 @@ def UserProfileUpdate(json_data):
         strCity=loaded_json["City"]
         strCountry=loaded_json["Country"]
         strAboutMe=loaded_json["AboutMe"]  
+        strProfileImageName=loaded_json["ProfileImageName"]  
+        
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strProfileImageName)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId":"1","CompanyDomain":"Core@co.uk"}
