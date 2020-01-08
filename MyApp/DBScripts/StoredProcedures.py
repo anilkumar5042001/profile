@@ -1500,7 +1500,7 @@ class StoredProcedures:
         BEGIN
         Delete
         FROM Skills 
-        WHERE SkillsId = p_SkillsId;
+        WHERE SkillId = p_SkillId;
         END"""
         cursor.execute(query)
         print('SP SkillsDelete executed')

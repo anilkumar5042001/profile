@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from ..DBObjects.BAL import SkillsBAL
 from ..DBObjects.Entity import SkillsEntity
 
-#{"ProfileId": "1",SkillCategoryId":"1"SkillName":".Net"}
+#{"ProfileId": "1","SkillCategoryId":"1","SkillName":".Net"}
 @csrf_exempt
 @api_view(["POST"])
 def SkillsInsert(json_data):
