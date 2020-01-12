@@ -1707,6 +1707,100 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP EventDelete executed')
 
+    def PassionInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Passion_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Passion_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_PassionName NVARCHAR(250),
+        IN p_Description NVARCHAR(500)
+        )
+        BEGIN
+        INSERT INTO Passion (
+        ProfileId,
+        PassionName,
+        Description
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_PassionName,
+        p_Description
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP PassionInsert')
+
+    def GetPassionByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetPassion_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetPassion_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT PassionId,
+        ProfileId,
+        PassionName,
+        Description
+        FROM Passion
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetPassionsByProfileId executed')
+
+    def GetPassionById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Passion_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetPassion_ById(IN p_PassionId INT)
+        BEGIN
+        SELECT PassionId,
+        ProfileId,
+        PassionName,
+        Description
+        FROM Passion
+        WHERE PassionId = p_PassionId;
+        END"""
+        cursor.execute(query)
+        print('SP GetPassionById executed')
+
+    def PassionUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Passion_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Passion_Update
+        (
+        IN p_PassionId INT,
+        IN p_ProfileId INT,
+        IN p_PassionName NVARCHAR(250),
+        IN p_Description NVARCHAR(500)
+        )
+        BEGIN
+        Update Passion 
+        SET ProfileId=p_ProfileId,
+        PassionName=p_PassionName,
+        Description=p_Description
+        WHERE PassionId=p_PassionId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP PassionUpdate')
+
+    def PassionDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Passion_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Passion_Delete(IN p_PassionId INT)
+        BEGIN
+        Delete
+        FROM Passion 
+        WHERE PassionId = p_PassionId;
+        END"""
+        cursor.execute(query)
+        print('SP PassionDelete executed')
+
+
+
 
 
 

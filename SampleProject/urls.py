@@ -31,6 +31,7 @@ from MyApp.AllViews import SkillsCategoryView
 from MyApp.AllViews import SkillsView
 from MyApp.AllViews import FavouriteView
 from MyApp.AllViews import EventsView
+from MyApp.AllViews import PassionView
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -127,7 +128,11 @@ urlpatterns = [
     url(r'^GetEventById/', EventsView.GetEventById),
     url(r'^EventUpdate/', EventsView.EventUpdate),
     url(r'^EventDelete/', EventsView.EventDelete),
-
+    url(r'^PassionInsert/', PassionView.PassionInsert),
+    url(r'^GetPassionByProfileId/', PassionView.GetPassionByProfileId),
+    url(r'^GetPassionById/', PassionView.GetPassionById),
+    url(r'^PassionUpdate/', PassionView.PassionUpdate),
+    url(r'^PassionDelete/', PassionView.PassionDelete),
     
     
 

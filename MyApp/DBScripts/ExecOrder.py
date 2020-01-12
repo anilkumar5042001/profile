@@ -21,6 +21,7 @@ class ExecOrder:
         objMySqlTable.CreateSkills('self')
         objMySqlTable.CreateFavourite('self')
         objMySqlTable.CreateEvent('self')
+        objMySqlTable.CreatePassion('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -106,7 +107,11 @@ class ExecOrder:
         objStoredProcedures.GetEventByProfileId('self')
         objStoredProcedures.EventUpdate('self')
         objStoredProcedures.EventDelete('self')
-        
+        objStoredProcedures.PassionInsert('self')
+        objStoredProcedures.GetPassionById('self')
+        objStoredProcedures.GetPassionByProfileId('self')
+        objStoredProcedures.PassionUpdate('self')
+        objStoredProcedures.PassionDelete('self')
 
 
 

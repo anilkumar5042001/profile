@@ -315,6 +315,22 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('Event table created')
+
+    def CreatePassion(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Passion")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Passion(
+            PassionId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            PassionName NVARCHAR(250) NULL,
+            Description NVARCHAR(500) NULL,
+            PRIMARY KEY (PassionId)
+            );"""
+            cursor.execute(query)
+            print('Passion table created')
+            
     
     def CheckTableExists(self,tableName):
         db_name = connection.settings_dict['NAME']
