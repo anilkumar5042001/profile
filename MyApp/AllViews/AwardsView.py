@@ -68,6 +68,18 @@ def GetAwardsById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"AssignTo": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetAwardsNew(json_data):
+        loaded_json = json.loads(json_data.body)
+        objAwardsBAL=AwardsBAL.AwardsBAL()
+        strAssignTo=loaded_json["AssignTo"]
+        objAwardsEntity=objAwardsBAL.GetAwardsNew(strAssignTo)
+        result = json.dumps([ob.__dict__ for ob in objAwardsEntity])
+        return JsonResponse(result,safe=False)
+
+
 #{"AwardId":"2","ProfileId": "1","AwardTitle":"Gujarathi","AwardDescription":"Low","AssignTo":"1"}
 @csrf_exempt
 @api_view(["POST"])
@@ -92,6 +104,17 @@ def AwardsUpdateShowInProfile(json_data):
         strShowInProfile=loaded_json["ShowInProfile"]
         objAwardsBAL=AwardsBAL.AwardsBAL()
         result=objAwardsBAL.AwardsUpdateShowInProfile(strAwardId,strShowInProfile)
+        return JsonResponse("1",safe=False)
+
+
+#{"ProfileId":"1"}
+@csrf_exempt
+@api_view(["POST"])
+def AwardsUpdateIsNew(json_data):
+        loaded_json = json.loads(json_data.body)
+        strProfileId=loaded_json["ProfileId"]
+        objAwardsBAL=AwardsBAL.AwardsBAL()
+        result=objAwardsBAL.AwardsUpdateIsNew(strProfileId)
         return JsonResponse("1",safe=False)
 
 #{"AwardId": "1"}

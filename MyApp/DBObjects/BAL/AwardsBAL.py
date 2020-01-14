@@ -17,6 +17,10 @@ class AwardsBAL:
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.GetAwardsById(AwardId)
 
+    def GetAwardsNew(self,AssignTo):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.GetAwardsNew(AssignTo)
+
     def AwardsUpdate(self,AwardId,ProfileId,AwardTitle,AwardDescription):
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.AwardsUpdate(AwardId,ProfileId,AwardTitle,AwardDescription)
@@ -24,6 +28,10 @@ class AwardsBAL:
     def AwardsUpdateShowInProfile(self,AwardId,ShowInProfile):
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.AwardsUpdateShowInProfile(AwardId,ShowInProfile)
+
+    def AwardsUpdateIsNew(self,ProfileId):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.AwardsUpdateIsNew(ProfileId)
 
     def AwardsDelete(self,AwardId):
         objAwardsDAL=AwardsDAL()

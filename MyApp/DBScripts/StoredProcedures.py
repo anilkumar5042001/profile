@@ -914,7 +914,8 @@ class StoredProcedures:
         AssignTo,
         CompanyDomain,
         CompanyName,
-        CreatedOn
+        CreatedOn,
+        IsNew
         ) 
         VALUES (
         p_ProfileId,
@@ -923,7 +924,8 @@ class StoredProcedures:
         p_AssignTo,
         vCompanyDomain,
         vCompanyName,
-        CURDATE()
+        CURDATE(),
+        1
         );
         END"""
         cursor.execute(query)
@@ -986,6 +988,23 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetAwardsById executed')
 
+    def GetAwardsNew(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_GetNew"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_GetNew(IN p_AssignTo INT)
+        BEGIN
+        SELECT AwardId,
+        ProfileId,
+        AwardTitle,
+        AwardDescription
+        FROM Awards
+        WHERE AssignTo = p_AssignTo
+        AND IsNew=1;
+        END"""
+        cursor.execute(query)
+        print('SP GetAwardsNew executed')
+
     def AwardsUpdate(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Awards_Update"""
@@ -1023,6 +1042,22 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP Awards_UpdateShowInProfile')
+
+    def AwardsUpdateIsNew(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_UpdateIsNew"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_UpdateIsNew
+        (
+        IN p_ProfileId INT
+        )
+        BEGIN
+        Update Awards 
+        SET IsNew=0
+        WHERE ProfileId=p_ProfileId AND IsNew=1;
+        END"""
+        cursor.execute(query)
+        print('Exec SP Awards_UpdateIsNew')
 
     def AwardsDelete(self):
         cursor = connection.cursor()

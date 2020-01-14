@@ -212,6 +212,7 @@ class MySqlTable:
             CompanyDomain NVARCHAR(250) NULL,
             CompanyName NVARCHAR(250) NULL,
             ShowInProfile BOOLEAN,
+            IsNew BOOLEAN,
             PRIMARY KEY (AwardId)
             );"""
             cursor.execute(query)
