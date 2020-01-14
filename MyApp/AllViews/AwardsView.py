@@ -107,14 +107,14 @@ def AwardsUpdateShowInProfile(json_data):
         return JsonResponse("1",safe=False)
 
 
-#{"ProfileId":"1"}
+#{"AssignTo":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def AwardsUpdateIsNew(json_data):
         loaded_json = json.loads(json_data.body)
-        strProfileId=loaded_json["ProfileId"]
+        strAssignTo=loaded_json["AssignTo"]
         objAwardsBAL=AwardsBAL.AwardsBAL()
-        result=objAwardsBAL.AwardsUpdateIsNew(strProfileId)
+        result=objAwardsBAL.AwardsUpdateIsNew(strAssignTo)
         return JsonResponse("1",safe=False)
 
 #{"AwardId": "1"}

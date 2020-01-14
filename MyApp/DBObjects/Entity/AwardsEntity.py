@@ -9,3 +9,4 @@ class AwardsEntity(object):
     CompanyName=""
     ShowInProfile=""
     ProfileImageName=""
+    IsNew=""

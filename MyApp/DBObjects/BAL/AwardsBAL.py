@@ -29,9 +29,9 @@ class AwardsBAL:
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.AwardsUpdateShowInProfile(AwardId,ShowInProfile)
 
-    def AwardsUpdateIsNew(self,ProfileId):
+    def AwardsUpdateIsNew(self,AssignTo):
         objAwardsDAL=AwardsDAL()
-        return objAwardsDAL.AwardsUpdateIsNew(ProfileId)
+        return objAwardsDAL.AwardsUpdateIsNew(AssignTo)
 
     def AwardsDelete(self,AwardId):
         objAwardsDAL=AwardsDAL()

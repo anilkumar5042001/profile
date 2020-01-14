@@ -963,7 +963,8 @@ class StoredProcedures:
         (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName,
         a.ShowInProfile,
         (select ProfileImageName from UserProfile where ProfileId=a.ProfileId) as ProfileImageName,
-        a.CompanyName
+        a.CompanyName,
+        a.IsNew
         FROM Awards a
         INNER JOIN UserProfile u ON
         a.AssignTo=u.ProfileId
@@ -1049,12 +1050,12 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Awards_UpdateIsNew
         (
-        IN p_ProfileId INT
+        IN p_AssignTo INT
         )
         BEGIN
         Update Awards 
         SET IsNew=0
-        WHERE ProfileId=p_ProfileId AND IsNew=1;
+        WHERE AssignTo=p_AssignTo AND IsNew=1;
         END"""
         cursor.execute(query)
         print('Exec SP Awards_UpdateIsNew')
@@ -1788,7 +1789,7 @@ class StoredProcedures:
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Passion_GetById"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE GetPassion_ById(IN p_PassionId INT)
+        query = """CREATE PROCEDURE Passion_GetById(IN p_PassionId INT)
         BEGIN
         SELECT PassionId,
         ProfileId,

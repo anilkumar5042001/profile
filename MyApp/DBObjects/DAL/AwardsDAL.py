@@ -43,6 +43,7 @@ class AwardsDAL:
             objAwardEntity.ShowInProfile=AwardItem[6]
             objAwardEntity.ProfileImageName=AwardItem[7]
             objAwardEntity.CompanyName=AwardItem[8]
+            objAwardEntity.IsNew=AwardItem[9]
             arrayItems.append(objAwardEntity)
         return arrayItems
 
@@ -88,9 +89,9 @@ class AwardsDAL:
         cursor.callproc('Awards_UpdateShowInProfile',args)
         return 1
 
-    def AwardsUpdateIsNew(self,ProfileId):
+    def AwardsUpdateIsNew(self,AssignTo):
         cursor = connection.cursor()
-        args = [ProfileId]
+        args = [AssignTo]
         cursor.callproc('Awards_UpdateIsNew',args)
         return 1
 
