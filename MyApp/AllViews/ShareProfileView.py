@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from ..DBObjects.BAL import ShareProfileBAL
 from ..DBObjects.Entity import ShareProfileEntity
+import smtplib
 
 #{"ProfileId": "1","EmailId":"Best Developer@gmail","ExpiryDate":"2019-11-12","ProfileLink":"wwww.Nagukandivalas/htt.com","SharedWith":"Addars","Message":"callme"}
 @csrf_exempt
@@ -27,3 +28,4 @@ def ShareProfileInsert(json_data):
         objShareProfileBAL=ShareProfileBAL.ShareProfileBAL()
         result=objShareProfileBAL.ShareProfileInsert(strProfileId,strEmailId,strProfileLink,strExpiryDate,strSharedWith,strMessage) 
         return JsonResponse("1",safe=False)
+
