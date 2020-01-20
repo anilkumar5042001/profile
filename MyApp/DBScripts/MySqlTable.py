@@ -15,6 +15,24 @@ class MySqlTable:
             cursor.execute(query)
             print('method executed')
 
+    def CreateShareProfile(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"ShareProfile")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table ShareProfile(
+            ShareProfileId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            EmailId  NVARCHAR(250) NULL,
+            ProfileLink NVARCHAR(1000) NULL,
+            ExpiryDate DATETIME NULL,
+            SharedWith NVARCHAR(250) NULL,
+            Message NVARCHAR(1000) NULL,
+            PRIMARY KEY (ShareProfileId)
+            );"""
+            cursor.execute(query)
+            print('ShareProfile table created')
+
     def CreateCountry(self):
         objMySqlTable=MySqlTable
         tblExists=objMySqlTable.CheckTableExists(self,"country")

@@ -1,6 +1,41 @@
 from django.db import connection
 
 class StoredProcedures:
+
+    def ShareProfileInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ShareProfile_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ShareProfile_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_EmailId VARCHAR(250),
+        IN p_ProfileLink VARCHAR(1000),
+        IN p_ExpiryDate DATETIME,
+        IN p_SharedWith VARCHAR(250),
+        IN p_Message VARCHAR(1000)
+        )
+        BEGIN
+        INSERT INTO ShareProfile(
+        ProfileId,
+        EmailId,
+        ProfileLink,
+        ExpiryDate,
+        SharedWith,
+        Message
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_EmailId,
+        p_ProfileLink,
+        p_ExpiryDate,
+        p_SharedWith,
+        p_Message
+        );
+        END"""
+        cursor.execute(query)
+        print('Exec SP ShareProfileInsert')
+
     def CountryGetAll(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Country_GetAll"""

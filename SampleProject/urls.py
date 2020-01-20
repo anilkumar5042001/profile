@@ -32,6 +32,7 @@ from MyApp.AllViews import SkillsView
 from MyApp.AllViews import FavouriteView
 from MyApp.AllViews import EventsView
 from MyApp.AllViews import PassionView
+from MyApp.AllViews import ShareProfileView
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -87,6 +88,7 @@ urlpatterns = [
     url(r'^GetLanguageByProfileId/', LanguageView.GetLanguageByProfileId),
     url(r'^LanguageUpdate/', LanguageView.LanguageUpdate),
     url(r'^LanguageDelete/', LanguageView.LanguageDelete),
+    url(r'^ShareProfileInsert/', ShareProfileView.ShareProfileInsert),
     url(r'^RegistrationInsert/', RegistrationView.RegistrationInsert),
     url(r'^GetRegistrationById/', RegistrationView.GetRegistrationById),
     url(r'^RegistrationUpdate/', RegistrationView.RegistrationUpdate),
