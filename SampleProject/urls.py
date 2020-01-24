@@ -89,6 +89,7 @@ urlpatterns = [
     url(r'^LanguageUpdate/', LanguageView.LanguageUpdate),
     url(r'^LanguageDelete/', LanguageView.LanguageDelete),
     url(r'^ShareProfileInsert/', ShareProfileView.ShareProfileInsert),
+    url(r'^ShareProfileGetProfileIdByProfileLink/', ShareProfileView.ShareProfileGetProfileIdByProfileLink),
     url(r'^RegistrationInsert/', RegistrationView.RegistrationInsert),
     url(r'^GetRegistrationById/', RegistrationView.GetRegistrationById),
     url(r'^RegistrationUpdate/', RegistrationView.RegistrationUpdate),

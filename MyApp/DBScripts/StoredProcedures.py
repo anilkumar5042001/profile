@@ -36,6 +36,27 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP ShareProfileInsert')
 
+    def ShareProfileGetProfileIdByProfileLink(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS ShareProfile_GetProfileIdByProfileLink"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE ShareProfile_GetProfileIdByProfileLink
+        (
+        IN p_ProfileLink VARCHAR(1000)
+        )
+        BEGIN
+        SELECT 
+        ProfileId,
+        EmailId,
+        ProfileLink,
+        SharedWith,
+        Message
+        FROM ShareProfile WHERE 
+        ProfileLink=p_ProfileLink;
+        END"""
+        cursor.execute(query)
+        print('Exec SP ShareProfileGetProfileIdByProfileLink')
+
     def CountryGetAll(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Country_GetAll"""

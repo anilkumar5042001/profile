@@ -117,6 +117,7 @@ class ExecOrder:
         objStoredProcedures.PassionUpdate('self')
         objStoredProcedures.PassionDelete('self')
         objStoredProcedures.ShareProfileInsert('self')
+        objStoredProcedures.ShareProfileGetProfileIdByProfileLink('self')
 
 
 

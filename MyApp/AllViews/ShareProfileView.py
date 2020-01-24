@@ -29,3 +29,14 @@ def ShareProfileInsert(json_data):
         result=objShareProfileBAL.ShareProfileInsert(strProfileId,strEmailId,strProfileLink,strExpiryDate,strSharedWith,strMessage) 
         return JsonResponse("1",safe=False)
 
+#{"ProfileLink": "24012020052208800285"}
+@csrf_exempt
+@api_view(["POST"])
+def ShareProfileGetProfileIdByProfileLink(json_data):
+        loaded_json = json.loads(json_data.body)
+        strProfileLink=loaded_json["ProfileLink"]
+        objShareProfileBAL=ShareProfileBAL.ShareProfileBAL()
+        objShareProfile=objShareProfileBAL.ShareProfileGetProfileIdByProfileLink(strProfileLink)
+        result = json.dumps([ob.__dict__ for ob in objShareProfile])
+        return JsonResponse(result,safe=False)    
+

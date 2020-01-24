@@ -1,4 +1,4 @@
-class ShareProfile (object):
+class ShareProfileEntity (object):
     ShareProfileId=0
     ProfileId=""
     EmailId=""
