@@ -23,6 +23,7 @@ class ExecOrder:
         objMySqlTable.CreateEvent('self')
         objMySqlTable.CreatePassion('self')
         objMySqlTable.CreateShareProfile('self')
+        objMySqlTable.CreateFavouriteCategory('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -118,6 +119,11 @@ class ExecOrder:
         objStoredProcedures.PassionDelete('self')
         objStoredProcedures.ShareProfileInsert('self')
         objStoredProcedures.ShareProfileGetProfileIdByProfileLink('self')
+        objStoredProcedures.FavouriteCategoryInsert('self')
+        objStoredProcedures.GetFavouriteCategoryById('self')
+        objStoredProcedures.GetFavouriteCategoryByProfileId('self')
+        objStoredProcedures.FavouriteCategoryUpdate('self')
+        objStoredProcedures.FavouriteCategoryDelete('self')
 
 
 

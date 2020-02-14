@@ -33,6 +33,7 @@ from MyApp.AllViews import FavouriteView
 from MyApp.AllViews import EventsView
 from MyApp.AllViews import PassionView
 from MyApp.AllViews import ShareProfileView
+from MyApp.AllViews import FavouriteCategoryView
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -138,7 +139,11 @@ urlpatterns = [
     url(r'^GetPassionById/', PassionView.GetPassionById),
     url(r'^PassionUpdate/', PassionView.PassionUpdate),
     url(r'^PassionDelete/', PassionView.PassionDelete),
-    
+    url(r'^FavouriteCategoryInsert/', FavouriteCategoryView.FavouriteCategoryInsert),
+    url(r'^GetFavouriteCategoryByProfileId/', FavouriteCategoryView.GetFavouriteCategoryByProfileId),
+    url(r'^GetFavouriteCategoryById/', FavouriteCategoryView.GetFavouriteCategoryById),
+    url(r'^FavouriteCategoryUpdate/', FavouriteCategoryView.FavouriteCategoryUpdate),
+    url(r'^FavouriteCategoryDelete/', FavouriteCategoryView.FavouriteCategoryDelete),
     
 
 

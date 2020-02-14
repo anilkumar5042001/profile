@@ -1891,6 +1891,93 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP PassionDelete executed')
 
+    def FavouriteCategoryInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS FavouriteCategory_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE FavouriteCategory_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_FavouriteCategoryName NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO FavouriteCategory (
+        ProfileId,
+        FavouriteCategoryName
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_FavouriteCategoryName   
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP FavouriteCategoryInsert')
+
+    def GetFavouriteCategoryByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetFavouriteCategory_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetFavouriteCategory_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT FavouriteCategoryId,
+        ProfileId,
+        FavouriteCategoryName  
+        FROM FavouriteCategory
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetFavouriteCategoryByProfileId executed')
+
+    def GetFavouriteCategoryById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetFavouriteCategory_ById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetFavouriteCategory_ById(IN p_FavouriteCategoryId INT)
+        BEGIN
+        SELECT FavouriteCategoryId,
+        ProfileId,
+        FavouriteCategoryName
+        FROM FavouriteCategory
+        WHERE FavouriteCategoryId = p_FavouriteCategoryId;
+        END"""
+        cursor.execute(query)
+        print('SP GetFavouriteCategoryById executed')
+
+    def FavouriteCategoryUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS FavouriteCategory_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE FavouriteCategory_Update
+        (
+        IN p_FavouriteCategoryId INT,
+        IN p_ProfileId INT,
+        IN p_FavouriteCategoryName NVARCHAR(250)
+        )
+        BEGIN
+        Update FavouriteCategory 
+        SET ProfileId=p_ProfileId,
+        FavouriteCategoryName=p_FavouriteCategoryName
+        WHERE FavouriteCategoryId=p_FavouriteCategoryId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP FavouriteCategoryUpdate')
+
+    def FavouriteCategoryDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS FavouriteCategory_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE FavouriteCategory_Delete(IN p_FavouriteCategoryId INT)
+        BEGIN
+        Delete
+        FROM FavouriteCategory 
+        WHERE FavouriteCategoryId = p_FavouriteCategoryId;
+        END"""
+        cursor.execute(query)
+        print('SP FavouriteCategoryDelete executed')
+
+
+
 
 
 

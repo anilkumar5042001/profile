@@ -349,6 +349,20 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('Passion table created')
+
+    def CreateFavouriteCategory(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"FavouriteCategory")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table FavouriteCategory(
+            FavouriteCategoryId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            FavouriteCategoryName VARCHAR(250) NULL,
+            PRIMARY KEY (FavouriteCategoryId)
+            );"""
+            cursor.execute(query)
+            print('FavouriteCategory table created')
             
     
     def CheckTableExists(self,tableName):
