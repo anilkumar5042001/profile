@@ -2,9 +2,9 @@
 from ..DAL.EventsDAL import EventDAL
 
 class EventBAL:
-    def EventInsert(self,ProfileId,EventCategoryId,EventName,Description):
+    def EventInsert(self,ProfileId,EventCategoryId,EventName,Description,StartDate,EndDate):
         objEventDAL=EventDAL()
-        return objEventDAL.EventInsert(ProfileId,EventCategoryId,EventName,Description)
+        return objEventDAL.EventInsert(ProfileId,EventCategoryId,EventName,Description,StartDate,EndDate)
 
     def GetEventByProfileId(self,ProfileId):
         objEventDAL=EventDAL()
@@ -14,9 +14,9 @@ class EventBAL:
         objEventDAL=EventDAL()
         return objEventDAL.GetEventById(EventId)
 
-    def EventUpdate(self,EventId,ProfileId,EventCategoryId,EventName,Description):
+    def EventUpdate(self,EventId,ProfileId,EventCategoryId,EventName,Description,StartDate,EndDate):
         objEventDAL=EventDAL()
-        return objEventDAL.EventUpdate(EventId,ProfileId,EventCategoryId,EventName,Description)
+        return objEventDAL.EventUpdate(EventId,ProfileId,EventCategoryId,EventName,Description,StartDate,EndDate)
 
     def EventDelete(self,EventId):
         objEventDAL=EventDAL()

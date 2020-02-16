@@ -1709,20 +1709,26 @@ class StoredProcedures:
         IN p_ProfileId INT,
         IN p_EventCategoryId INT,
         IN p_EventName NVARCHAR(250),
-        IN p_Description NVARCHAR(500)
+        IN p_Description NVARCHAR(500),
+        IN p_StartDate DATETIME,
+        IN p_EndDate DATETIME
         )
         BEGIN
         INSERT INTO  Event(
         ProfileId,
         EventCategoryId,
         EventName,
-        Description
+        Description,
+        StartDate,
+        EndDate
         ) 
         VALUES (
         p_ProfileId,
         P_EventCategoryId,
         p_EventName,
-        p_Description
+        p_Description,
+        p_StartDate,
+        p_EndDate
         );
         select LAST_INSERT_ID();
         END"""
@@ -1739,7 +1745,9 @@ class StoredProcedures:
         ProfileId,
         EventCategoryId,
         EventName,
-        Description       
+        Description,
+        StartDate,
+        EndDate      
         FROM Event
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -1756,7 +1764,9 @@ class StoredProcedures:
         ProfileId,
         EventCategoryId,
         EventName,
-        Description
+        Description,
+        StartDate,
+        EndDate
         FROM Event
         WHERE EventId = p_EventId;
         END"""
@@ -1773,14 +1783,18 @@ class StoredProcedures:
         IN p_ProfileId INT,
         IN p_EventCategoryId INT,
         IN p_EventName NVARCHAR(250),
-        IN p_Description NVARCHAR(500)
+        IN p_Description NVARCHAR(500),
+        IN p_StartDate DATETIME,
+        IN p_EndDate DATETIME
         )
         BEGIN
         Update Event 
         SET ProfileId=p_ProfileId,
         EventCategoryId=p_EventCategoryId,
         EventName=p_EventName,
-        Description=p_Description
+        Description=p_Description,
+        StartDate=p_StartDate,
+        EndDate=p_EndDate
         WHERE EventId=p_EventId;
         END"""
         cursor.execute(query)

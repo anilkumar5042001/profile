@@ -330,6 +330,8 @@ class MySqlTable:
             EventCategoryId INT NOT NULL,
             EventName NVARCHAR(250) NULL,
             Description NVARCHAR(500) NULL,
+            StartDate DATETIME  NULL,
+            EndDate DATETIME NULL,
             PRIMARY KEY (EventId)
             );"""
             cursor.execute(query)

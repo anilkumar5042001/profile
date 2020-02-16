@@ -4,3 +4,5 @@ class EventsEntity(object):
     EventCategoryId=""
     EventName=""
     Description=""
+    StartDate=""
+    EndDate=""

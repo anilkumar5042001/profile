@@ -16,7 +16,7 @@ from ..DBObjects.Entity import EventsEntity
 from ..CommonMethods import CommonMethods
 
 
-#{"ProfileId": "1","EventCategoryId":"1","EventName": "Sankranthi","Description": "Farmers festival"}
+#{"ProfileId": "1","EventCategoryId":"1","EventName": "Sankranthi","Description": "Farmers festival","StartDate":"2020-02-16","EndDate":"2020-02-17"}
 @csrf_exempt
 @api_view(["POST"])
 def EventInsert(json_data):
@@ -24,9 +24,11 @@ def EventInsert(json_data):
         strProfileId=loaded_json["ProfileId"]
         strEventCategoryId=loaded_json["EventCategoryId"]
         strEventName=loaded_json["EventName"]
-        strDescription=loaded_json["Description"]    
+        strDescription=loaded_json["Description"]
+        strStartDate=loaded_json["StartDate"]
+        strEndDate=loaded_json["EndDate"]   
         objEventBAL=EventsBAL.EventBAL()
-        result=objEventBAL.EventInsert(strProfileId,strEventCategoryId,strEventName,strDescription)
+        result=objEventBAL.EventInsert(strProfileId,strEventCategoryId,strEventName,strDescription,strStartDate,strEndDate)
         return JsonResponse(result,safe=False)
 
 #{"ProfileId": "1"}
@@ -57,7 +59,7 @@ def GetEventById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"EventId":"1","ProfileId": "1","EventCategoryId":"1","EventName": "Ugadhi","Description": "Telugu New Year"}
+#{"EventId":"1","ProfileId": "1","EventCategoryId":"1","EventName": "Ugadhi","Description": "Telugu New Year","StartDate":"2020-02-15","EndDate":"2020-02-18"}
 @csrf_exempt
 @api_view(["POST"])
 def EventUpdate(json_data):
@@ -66,9 +68,11 @@ def EventUpdate(json_data):
         strProfileId=loaded_json["ProfileId"]
         strEventCategoryId=loaded_json["EventCategoryId"]
         strEventName=loaded_json["EventName"]
-        strDescription=loaded_json["Description"]        
+        strDescription=loaded_json["Description"]
+        strStartDate=loaded_json["StartDate"]      
+        strEndDate=loaded_json["EndDate"]
         objEventBAL=EventsBAL.EventBAL()
-        result=objEventBAL.EventUpdate(strEventId,strProfileId,strEventCategoryId,strEventName,strDescription)
+        result=objEventBAL.EventUpdate(strEventId,strProfileId,strEventCategoryId,strEventName,strDescription,strStartDate,strEndDate)
         return JsonResponse("1",safe=False)
 
 #{"EventId": "1"}
