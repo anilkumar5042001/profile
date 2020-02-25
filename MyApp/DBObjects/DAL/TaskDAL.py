@@ -24,7 +24,8 @@ class TaskDAL:
             objTaskEntity.ProfileId=TaskItem[1]
             objTaskEntity.TaskTitle=TaskItem[2]
             objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y")
+            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y %H:%M:%S")
+            # objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y")
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
@@ -43,7 +44,7 @@ class TaskDAL:
             objTaskEntity.ProfileId=TaskItem[1]
             objTaskEntity.TaskTitle=TaskItem[2]
             objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y")
+            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y %H:%M:%S")
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]

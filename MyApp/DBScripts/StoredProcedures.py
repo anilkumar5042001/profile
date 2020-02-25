@@ -1789,7 +1789,9 @@ class StoredProcedures:
         )
         BEGIN
         Update Event 
-        SET ProfileId=p_ProfileId,
+        SET 
+        EventId=p_EventId,
+        ProfileId=p_ProfileId,
         EventCategoryId=p_EventCategoryId,
         EventName=p_EventName,
         Description=p_Description,
