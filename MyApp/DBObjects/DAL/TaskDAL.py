@@ -45,8 +45,8 @@ class TaskDAL:
             objTaskEntity.TaskTitle=TaskItem[2]
             objTaskEntity.Description=TaskItem[3]
             objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")
-            strSplitDate=objTaskEntity.DueDate.split("/")
-            print("Jan") if strSplitDate[1]=="01" else print("Feb")
+            strSplitDate=objTaskEntity.DueDate.split("")
+            print("Feb") if strSplitDate[1]=='02' else print("Mar")
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
