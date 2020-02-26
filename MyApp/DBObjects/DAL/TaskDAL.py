@@ -45,31 +45,11 @@ class TaskDAL:
             objTaskEntity.TaskTitle=TaskItem[2]
             objTaskEntity.Description=TaskItem[3]
             objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")
-            strSplitDate=objTaskEntity.DueDate.split("")
-            print("Feb") if strSplitDate[1]=='02' else print("Mar")
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
             arrayItems.append(objTaskEntity)
         return arrayItems
-
-    # def Switch(m):
-    #     let strSplitDate=""
-    #     switcher = {
-    #     1: "January",
-    #     2: "February",
-    #     3: "March",
-    #     4: "April",
-    #     5: "May",
-    #     6: "June",
-    #     7: "July",
-    #     8: "August",
-    #     9: "September",
-    #     10: "October",
-    #     11: "November",
-    #     12: "December"
-    # }
-    #     return strSplitDate
 
     def GetTaskByAssignTo(self,AssignTo):
         cursor=connection.cursor()
