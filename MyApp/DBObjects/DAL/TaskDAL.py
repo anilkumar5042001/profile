@@ -44,13 +44,13 @@ class TaskDAL:
             objTaskEntity.ProfileId=TaskItem[1]
             objTaskEntity.TaskTitle=TaskItem[2]
             objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")
+            objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")           
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
             arrayItems.append(objTaskEntity)
         return arrayItems
-
+        
     def GetTaskByAssignTo(self,AssignTo):
         cursor=connection.cursor()
         args=[AssignTo]
