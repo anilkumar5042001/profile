@@ -4,9 +4,9 @@ from datetime import datetime
 from ..Entity.UserProfileEntity import *
 
 class TaskDAL:
-    def TaskInsert(self,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus):
+    def TaskInsert(self,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
         cursor=connection.cursor()
-        args=[ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus]
+        args=[ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
         cursor.callproc('Task_Insert',args)
         TaskItem=cursor.fetchall()
         objTaskId=TaskItem[0][0]
@@ -29,6 +29,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
+            objTaskEntity.TaskDuration=TaskItem[8]
             arrayItems.append(objTaskEntity)
         return arrayItems 
     
@@ -48,6 +49,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
+            objTaskEntity.TaskDuration=TaskItem[8]
             arrayItems.append(objTaskEntity)
         return arrayItems
         
@@ -67,12 +69,13 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
+            objTaskEntity.TaskDuration=TaskItem[8]
             arrayItems.append(objTaskEntity)
         return arrayItems 
 
-    def TaskUpdate(self,TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus):
+    def TaskUpdate(self,TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
         cursor=connection.cursor()
-        args=[TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus]
+        args=[TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
         cursor.callproc('Task_Update',args)
         return 1
     

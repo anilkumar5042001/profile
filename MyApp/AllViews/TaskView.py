@@ -16,7 +16,7 @@ from ..DBObjects.Entity import TaskEntity
 from ..CommonMethods import CommonMethods
 
 
-#{"ProfileId":"1","TaskTitle":"Test123","Description":"TestDescription","DueDate":"2019-11-12","AssignTo":"2","CreatedBy":"1","TaskStatus":"Open"}
+#{"ProfileId":"1","TaskTitle":"Test123","Description":"TestDescription","DueDate":"2019-11-12","AssignTo":"2","CreatedBy":"1","TaskStatus":"Open","TaskDuration":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def TaskInsert(json_data):
@@ -29,8 +29,9 @@ def TaskInsert(json_data):
         strAssignTo=loaded_json["AssignTo"]
         strCreatedBy=loaded_json["CreatedBy"]
         strTaskStatus=loaded_json["TaskStatus"]
+        strTaskDuration=loaded_json["TaskDuration"]
         objTaskBAL=TaskBAL.TaskBAL()
-        result=objTaskBAL.TaskInsert(strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus)
+        result=objTaskBAL.TaskInsert(strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
         return JsonResponse(result,safe=False)
 
 #{"TaskId": "1"}
@@ -76,7 +77,7 @@ def GetTaskByAssignTo(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"TaskId":"1","ProfileId":"2","TaskTitle":"Test1234","Description":"TestDescriptionOne","DueDate":"2019-11-16","AssignTo":"1","CreatedBy":"2","TaskStatus":"Close"}
+#{"TaskId":"1","ProfileId":"2","TaskTitle":"Test1234","Description":"TestDescriptionOne","DueDate":"2019-11-16","AssignTo":"1","CreatedBy":"2","TaskStatus":"Close","TaskDuration":"2"}
 @csrf_exempt
 @api_view(["POST"])
 def TaskUpdate(json_data):
@@ -90,8 +91,9 @@ def TaskUpdate(json_data):
         strAssignTo=loaded_json["AssignTo"]
         strCreatedBy=loaded_json["CreatedBy"]
         strTaskStatus=loaded_json["TaskStatus"]
+        strTaskDuration=loaded_json["TaskDuration"]
         objTaskBAL=TaskBAL.TaskBAL()
-        result=objTaskBAL.TaskUpdate(strTaskId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus)
+        result=objTaskBAL.TaskUpdate(strTaskId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
         return JsonResponse("1",safe=False)
 
 #{"TaskId": "1"}

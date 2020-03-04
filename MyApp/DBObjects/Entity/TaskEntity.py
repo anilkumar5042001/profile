@@ -7,3 +7,4 @@ class TaskEntity(object):
     AssignTo=""
     CreatedBy=""
     TaskStatus=""
+    TaskDuration=""

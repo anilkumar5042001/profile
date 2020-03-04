@@ -1248,7 +1248,8 @@ class StoredProcedures:
         IN p_DueDate DATETIME,
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
-        IN p_TaskStatus VARCHAR(250)
+        IN p_TaskStatus VARCHAR(250),
+        IN p_TaskDuration INT
         )
         BEGIN
         INSERT INTO Task (
@@ -1258,7 +1259,8 @@ class StoredProcedures:
         DueDate,
         AssignTo,
         CreatedBy,
-        TaskStatus
+        TaskStatus,
+        TaskDuration
         ) 
         VALUES (
         p_ProfileId,
@@ -1267,7 +1269,8 @@ class StoredProcedures:
         p_DueDate,
         p_AssignTo,
         p_CreatedBy,
-        p_TaskStatus
+        p_TaskStatus,
+        p_TaskDuration
         );
         select LAST_INSERT_ID();
         END"""
@@ -1287,7 +1290,8 @@ class StoredProcedures:
         DueDate,
         AssignTo,
         CreatedBy,
-        TaskStatus
+        TaskStatus,
+        TaskDuration
         FROM Task 
         WHERE TaskId = p_TaskId;
         END"""
@@ -1307,7 +1311,8 @@ class StoredProcedures:
         DueDate,
         AssignTo,
         CreatedBy,
-        TaskStatus
+        TaskStatus,
+        TaskDuration
         FROM Task 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -1328,7 +1333,8 @@ class StoredProcedures:
         DueDate,
         AssignTo,
         CreatedBy,
-        TaskStatus
+        TaskStatus,
+        TaskDuration
         FROM Task 
         WHERE AssignTo = p_AssignTo AND TaskStatus='Open' Order BY DueDate ASC;
         END"""
@@ -1348,7 +1354,8 @@ class StoredProcedures:
         IN p_DueDate DATETIME,
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
-        IN p_TaskStatus VARCHAR(250)
+        IN p_TaskStatus VARCHAR(250),
+        IN p_TaskDuration INT
         )
         BEGIN
         Update Task 
@@ -1359,7 +1366,8 @@ class StoredProcedures:
         DueDate=p_DueDate,
         AssignTo=p_AssignTo,
         CreatedBy=p_CreatedBy,
-        TaskStatus=p_TaskStatus
+        TaskStatus=p_TaskStatus,
+        TaskDuration=p_TaskDuration
         WHERE TaskId=p_TaskId;
         END"""
         cursor.execute(query)
