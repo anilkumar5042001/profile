@@ -1,5 +1,5 @@
 class SkillsEntity:
-    SkillId="0"
+    SkillId=0
     ProfileId=""
     SkillCategoryId=""
     SkillName=""

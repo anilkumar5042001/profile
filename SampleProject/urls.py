@@ -34,6 +34,7 @@ from MyApp.AllViews import EventsView
 from MyApp.AllViews import PassionView
 from MyApp.AllViews import ShareProfileView
 from MyApp.AllViews import FavouriteCategoryView
+from MyApp.AllViews import TaskCommentView
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -144,6 +145,9 @@ urlpatterns = [
     url(r'^GetFavouriteCategoryById/', FavouriteCategoryView.GetFavouriteCategoryById),
     url(r'^FavouriteCategoryUpdate/', FavouriteCategoryView.FavouriteCategoryUpdate),
     url(r'^FavouriteCategoryDelete/', FavouriteCategoryView.FavouriteCategoryDelete),
+    url(r'^TaskCommentInsert/',TaskCommentView.TaskCommentInsert),
+    url(r'^GetTaskCommentByProfileId/',TaskCommentView.GetTaskCommentByProfileId),
+    url(r'^TaskCommentDelete/',TaskCommentView.TaskCommentDelete),
     
 
 

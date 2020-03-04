@@ -365,6 +365,23 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('FavouriteCategory table created')
+
+    def CreateTaskComment(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"TaskComment")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table TaskComment(
+            TaskCommentId INT NOT NULL AUTO_INCREMENT,
+            TaskId INT NOT NULL,
+            ProfileId INT NOT NULL,
+            Comment VARCHAR(500)  NULL,
+            CommentedBy INT  NULL,
+            CommentedOn DATETIME  NULL,
+            PRIMARY KEY (TaskCommentId)
+            );"""
+            cursor.execute(query)
+            print('TaskComment table created')
             
     
     def CheckTableExists(self,tableName):

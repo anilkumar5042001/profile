@@ -1330,7 +1330,7 @@ class StoredProcedures:
         CreatedBy,
         TaskStatus
         FROM Task 
-        WHERE AssignTo = p_AssignTo;
+        WHERE AssignTo = p_AssignTo AND TaskStatus='Open' Order BY DueDate ASC;
         END"""
         cursor.execute(query)
         print('SP GetTaskByAssignTo executed')
@@ -1371,7 +1371,7 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Get_Users()
         BEGIN
-        SELECT ProfileId,FirstName,LastName  FROM UserProfile;
+        SELECT ProfileId,FirstName,LastName,ProfileImageName,EmailId,Designation  FROM UserProfile;
         END """
         cursor.execute(query)
         print('Exec SP GetUsers')
@@ -1991,6 +1991,71 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP FavouriteCategoryDelete executed')
+    
+    def TaskCommentInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS TaskComment_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE TaskComment_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_TaskId INT,
+        IN p_Comment VARCHAR(500),
+        IN p_CommentedBy INT,
+        IN p_CommentedOn DATETIME      
+        )
+        BEGIN
+        INSERT INTO  TaskComment(
+        ProfileId,
+        TaskId,
+        Comment,
+        CommentedBy,
+        CommentedOn        
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_TaskId,
+        p_Comment,
+        p_CommentedBy,
+        p_CommentedOn             
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP TaskCommentInsert')
+
+    def GetTaskCommentByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetTaskComment_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetTaskComment_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT 
+        TaskCommentId,
+        ProfileId,
+        TaskId,
+        Comment,
+        CommentedBy,
+        CommentedOn       
+        FROM TaskComment
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetTaskCommentByProfileId executed')
+
+    def TaskCommentDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS TaskComment_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE TaskComment_Delete(IN p_TaskCommentId INT)
+        BEGIN
+        Delete
+        FROM TaskComment
+        WHERE TaskCommentId = p_TaskCommentId;
+        END"""
+        cursor.execute(query)
+        print('SP TaskCommentDelete executed')
+
 
 
 

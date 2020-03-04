@@ -86,5 +86,8 @@ class TaskDAL:
             objUserProfileEntity.ProfileId=UserItem[0]
             objUserProfileEntity.FirstName=UserItem[1]
             objUserProfileEntity.LastName=UserItem[2]
+            objUserProfileEntity.ProfileImageName=UserItem[3]
+            objUserProfileEntity.EmailId=UserItem[4]
+            objUserProfileEntity.Designation=UserItem[5]
             arrayItems.append(objUserProfileEntity)
         return arrayItems 

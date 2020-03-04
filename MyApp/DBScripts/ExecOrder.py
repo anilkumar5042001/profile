@@ -24,6 +24,7 @@ class ExecOrder:
         objMySqlTable.CreatePassion('self')
         objMySqlTable.CreateShareProfile('self')
         objMySqlTable.CreateFavouriteCategory('self')
+        objMySqlTable.CreateTaskComment('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -124,6 +125,9 @@ class ExecOrder:
         objStoredProcedures.GetFavouriteCategoryByProfileId('self')
         objStoredProcedures.FavouriteCategoryUpdate('self')
         objStoredProcedures.FavouriteCategoryDelete('self')
+        objStoredProcedures.TaskCommentInsert('self')
+        objStoredProcedures.GetTaskCommentByProfileId('self')
+        objStoredProcedures.TaskCommentDelete('self')
 
 
 
