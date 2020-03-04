@@ -41,6 +41,19 @@ def GetTaskCommentByProfileId(json_data):
         #result= json.dumps(objAmountDetailsEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"TaskId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def GetTaskCommentByTaskId(json_data):
+        loaded_json = json.loads(json_data.body)
+        objTaskCommentBAL=TaskCommentBAL.TaskCommentBAL()
+        strTaskId=loaded_json["TaskId"]
+        objTaskCommentEntity=objTaskCommentBAL.GetTaskCommentByTaskId(strTaskId)
+        result = json.dumps([ob.__dict__ for ob in objTaskCommentEntity])
+        #result = json.dumps([ob.__dict__ for ob in objAmountDetailsEntity]) this is basically convert in to Json format
+        #result= json.dumps(objAmountDetailsEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 #{"TaskCommentId": "1"}
 @csrf_exempt
 @api_view(["POST"])

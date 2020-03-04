@@ -147,6 +147,7 @@ urlpatterns = [
     url(r'^FavouriteCategoryDelete/', FavouriteCategoryView.FavouriteCategoryDelete),
     url(r'^TaskCommentInsert/',TaskCommentView.TaskCommentInsert),
     url(r'^GetTaskCommentByProfileId/',TaskCommentView.GetTaskCommentByProfileId),
+    url(r'^GetTaskCommentByTaskId/',TaskCommentView.GetTaskCommentByTaskId),
     url(r'^TaskCommentDelete/',TaskCommentView.TaskCommentDelete),
     
 

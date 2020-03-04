@@ -2051,6 +2051,25 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetTaskCommentByProfileId executed')
 
+    def GetTaskCommentByTaskId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetTaskComment_ByTaskId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetTaskComment_ByTaskId(IN p_TaskId INT)
+        BEGIN
+        SELECT 
+        TaskCommentId,
+        ProfileId,
+        TaskId,
+        Comment,
+        CommentedBy,
+        CommentedOn       
+        FROM TaskComment
+        WHERE TaskId = p_TaskId;
+        END"""
+        cursor.execute(query)
+        print('SP GetTaskCommentByTaskId executed')
+
     def TaskCommentDelete(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS TaskComment_Delete"""

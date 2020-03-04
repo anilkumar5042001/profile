@@ -9,6 +9,10 @@ class TaskCommentBAL:
         objTaskCommentDAL=TaskCommentDAL()
         return objTaskCommentDAL.GetTaskCommentByProfileId(ProfileId)
 
+    def GetTaskCommentByTaskId(self,TaskId):
+        objTaskCommentDAL=TaskCommentDAL()
+        return objTaskCommentDAL.GetTaskCommentByTaskId(TaskId)
+
     def TaskCommentDelete(self,TaskCommentId):
         objTaskCommentDAL=TaskCommentDAL()
         return objTaskCommentDAL.TaskCommentDelete(TaskCommentId)

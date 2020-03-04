@@ -128,6 +128,7 @@ class ExecOrder:
         objStoredProcedures.TaskCommentInsert('self')
         objStoredProcedures.GetTaskCommentByProfileId('self')
         objStoredProcedures.TaskCommentDelete('self')
+        objStoredProcedures.GetTaskCommentByTaskId('self')
 
 
 
