@@ -10,6 +10,13 @@ class TaskCommentDAL:
         objTaskCommentId=TaskCommentItem[0][0]
         return objTaskCommentId
 
+    def TaskCommentUpdateIsNew(self,TaskId):
+        cursor = connection.cursor()
+        args = [TaskId]
+        cursor.callproc('TaskComment_UpdateIsNew',args)
+        TaskCommentItem=cursor.fetchall()
+        return 1
+
     def GetTaskCommentByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
@@ -42,6 +49,7 @@ class TaskCommentDAL:
             objTaskCommentEntity.CommentedBy=TaskCommentItem[4]
             objTaskCommentEntity.CommentedOn=TaskCommentItem[5].strftime("%d/%m/%Y %H:%M:%S")
             objTaskCommentEntity.FullName=TaskCommentItem[6]
+            objTaskCommentEntity.IsNew=TaskCommentItem[7]
             arrayItems.append(objTaskCommentEntity)
         return arrayItems
 

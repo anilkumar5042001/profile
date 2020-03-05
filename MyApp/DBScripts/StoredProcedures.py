@@ -1326,17 +1326,18 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE GetTask_ByAssignTo(IN p_AssignTo INT)
         BEGIN
-        SELECT TaskId,
-        ProfileId,
-        TaskTitle,
-        Description,
-        DueDate,
-        AssignTo,
-        CreatedBy,
-        TaskStatus,
-        TaskDuration
-        FROM Task 
-        WHERE AssignTo = p_AssignTo AND TaskStatus='Open' Order BY DueDate ASC;
+        SELECT t.TaskId,
+        t.ProfileId,
+        t.TaskTitle,
+        t.Description,
+        t.DueDate,
+        t.AssignTo,
+        t.CreatedBy,
+        t.TaskStatus,
+        t.TaskDuration,
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1) as NewCommentCount
+        FROM Task t
+        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open' Order BY t.DueDate ASC;
         END"""
         cursor.execute(query)
         print('SP GetTaskByAssignTo executed')
@@ -1372,6 +1373,23 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP TaskUpdate')
+
+    def TaskCommentUpdateIsNew(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS TaskComment_UpdateIsNew"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE TaskComment_UpdateIsNew
+        (
+        IN p_TaskId INT
+        )
+        BEGIN
+        Update TaskComment
+        SET 
+        IsNew=0
+        WHERE TaskId=p_TaskId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP TaskCommentUpdateIsNew')
 
     def GetUsers(self):
         cursor = connection.cursor()
@@ -2018,14 +2036,16 @@ class StoredProcedures:
         TaskId,
         Comment,
         CommentedBy,
-        CommentedOn        
+        CommentedOn,
+        IsNew     
         ) 
         VALUES (
         p_ProfileId,
         p_TaskId,
         p_Comment,
         p_CommentedBy,
-        p_CommentedOn             
+        p_CommentedOn,
+        1           
         );
         select LAST_INSERT_ID();
         END"""
@@ -2044,7 +2064,8 @@ class StoredProcedures:
         TaskId,
         Comment,
         CommentedBy,
-        CommentedOn       
+        CommentedOn,
+        IsNew      
         FROM TaskComment
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -2064,7 +2085,8 @@ class StoredProcedures:
         tc.Comment,
         tc.CommentedBy,
         tc.CommentedOn,
-        CONCAT(up.FirstName," ",up.LastName) as FullName
+        CONCAT(up.FirstName," ",up.LastName) as FullName,
+        tc.IsNew
         FROM TaskComment tc
         INNER JOIN UserProfile up
         ON tc.ProfileId=up.ProfileId

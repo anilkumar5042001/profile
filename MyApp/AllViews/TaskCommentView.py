@@ -28,6 +28,16 @@ def TaskCommentInsert(json_data):
         result=objTaskCommentBAL.TaskCommentInsert(strProfileId,strTaskId,strComment,strCommentedBy,strCommentedOn)
         return JsonResponse(result,safe=False)
 
+#{"TaskId":"1"}
+@csrf_exempt
+@api_view(["POST"])
+def TaskCommentUpdateIsNew(json_data):
+        loaded_json = json.loads(json_data.body)
+        strTaskId=loaded_json["TaskId"]
+        objTaskCommentBAL=TaskCommentBAL.TaskCommentBAL()
+        result=objTaskCommentBAL.TaskCommentUpdateIsNew(strTaskId)
+        return JsonResponse(result,safe=False)
+
 #{"ProfileId": "1"}
 @csrf_exempt
 @api_view(["POST"])

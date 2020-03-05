@@ -12,6 +12,7 @@ class TaskDAL:
         objTaskId=TaskItem[0][0]
         return objTaskId
 
+    
     def GetTaskByTaskId(self,TaskId):
         cursor=connection.cursor()
         args=[TaskId]
@@ -70,6 +71,7 @@ class TaskDAL:
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
             objTaskEntity.TaskDuration=TaskItem[8]
+            objTaskEntity.NewCommentCount=TaskItem[9]
             arrayItems.append(objTaskEntity)
         return arrayItems 
 

@@ -6,3 +6,4 @@ class TaskCommentEntity(object):
     CommentedBy=""
     CommentOn=""
     FullName=""
+    IsNew="0"

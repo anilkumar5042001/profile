@@ -379,6 +379,7 @@ class MySqlTable:
             Comment VARCHAR(500)  NULL,
             CommentedBy INT  NULL,
             CommentedOn DATETIME  NULL,
+            IsNew BOOLEAN,
             PRIMARY KEY (TaskCommentId)
             );"""
             cursor.execute(query)

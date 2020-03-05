@@ -8,3 +8,4 @@ class TaskEntity(object):
     CreatedBy=""
     TaskStatus=""
     TaskDuration=""
+    NewCommentCount=0
