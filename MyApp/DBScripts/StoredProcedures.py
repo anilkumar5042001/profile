@@ -2058,14 +2058,17 @@ class StoredProcedures:
         query = """CREATE PROCEDURE GetTaskComment_ByTaskId(IN p_TaskId INT)
         BEGIN
         SELECT 
-        TaskCommentId,
-        ProfileId,
-        TaskId,
-        Comment,
-        CommentedBy,
-        CommentedOn       
-        FROM TaskComment
-        WHERE TaskId = p_TaskId;
+        tc.TaskCommentId,
+        tc.ProfileId,
+        tc.TaskId,
+        tc.Comment,
+        tc.CommentedBy,
+        tc.CommentedOn,
+        CONCAT(up.FirstName," ",up.LastName) as FullName
+        FROM TaskComment tc
+        INNER JOIN UserProfile up
+        ON tc.ProfileId=up.ProfileId
+        WHERE TaskId = p_TaskId ORDER By tc.CommentedOn DESC;
         END"""
         cursor.execute(query)
         print('SP GetTaskCommentByTaskId executed')

@@ -5,3 +5,4 @@ class TaskCommentEntity(object):
     Comment=""
     CommentedBy=""
     CommentOn=""
+    FullName=""
