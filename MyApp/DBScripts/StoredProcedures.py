@@ -1325,16 +1325,18 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Get_AllTasks()
         BEGIN
-        SELECT TaskId,
-        ProfileId,
-        TaskTitle,
-        Description,
-        DueDate,
-        AssignTo,
-        CreatedBy,
-        TaskStatus,
-        TaskDuration
-        FROM Task;
+        SELECT t.TaskId,
+        t.ProfileId,
+        t.TaskTitle,
+        t.Description,
+        t.DueDate,
+        t.AssignTo,
+        t.CreatedBy,
+        t.TaskStatus,
+        t.TaskDuration,
+        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.AssignTo) as AssignToFullName,
+        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName            
+        FROM Task t;  
         END"""
         cursor.execute(query)
         print('SP GetAllTasks executed')

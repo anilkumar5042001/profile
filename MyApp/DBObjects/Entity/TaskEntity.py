@@ -8,4 +8,6 @@ class TaskEntity(object):
     CreatedBy=""
     TaskStatus=""
     TaskDuration=""
+    AssignToFullName=""
+    CreatedByFullName=""
     NewCommentCount=0

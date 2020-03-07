@@ -119,5 +119,8 @@ class TaskDAL:
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
             objTaskEntity.TaskDuration=TaskItem[8]
+            objTaskEntity.AssignToFullName=TaskItem[9]
+            objTaskEntity.CreatedByFullName=TaskItem[10]
             arrayItems.append(objTaskEntity)
+            
         return arrayItems
