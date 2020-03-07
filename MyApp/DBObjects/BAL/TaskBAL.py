@@ -24,3 +24,11 @@ class TaskBAL:
     def GetUserNameForAssignTo(self):
         objTaskDAL=TaskDAL()
         return objTaskDAL.GetUserNameForAssignTo()
+    
+    def TaskDelete(self,TaskId):
+        objTaskDAL=TaskDAL()
+        return objTaskDAL.TaskDelete(TaskId)
+
+    def GetAllTasks(self):
+        objTaskDAL=TaskDAL()
+        return objTaskDAL.GetAllTasks()

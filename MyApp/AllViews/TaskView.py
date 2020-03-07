@@ -108,5 +108,28 @@ def GetUserNameForAssignTo(id):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"TaskId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def TaskDelete(json_data):
+        loaded_json = json.loads(json_data.body)
+        objTaskBAL=TaskBAL.TaskBAL()  
+        strTaskId=loaded_json["TaskId"]
+        objTaskEntity=objTaskBAL.TaskDelete(strTaskId)
+        return JsonResponse("1",safe=False)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def GetAllTasks(id):
+        # loaded_json = json.loads(json_data.body)
+        objTaskBAL=TaskBAL.TaskBAL()     
+        objTaskEntity=objTaskBAL.GetAllTasks()
+        result = json.dumps([ob.__dict__ for ob in objTaskEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 
       

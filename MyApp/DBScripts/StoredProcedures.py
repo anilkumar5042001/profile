@@ -1318,6 +1318,26 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP GetTaskByProfileId executed')
+
+    def GetAllTasks(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Get_AllTasks"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Get_AllTasks()
+        BEGIN
+        SELECT TaskId,
+        ProfileId,
+        TaskTitle,
+        Description,
+        DueDate,
+        AssignTo,
+        CreatedBy,
+        TaskStatus,
+        TaskDuration
+        FROM Task;
+        END"""
+        cursor.execute(query)
+        print('SP GetAllTasks executed')
     
 
     def GetTaskByAssignTo(self):
@@ -1337,7 +1357,22 @@ class StoredProcedures:
         t.TaskDuration,
         (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1) as NewCommentCount
         FROM Task t
-        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open' Order BY t.DueDate ASC;
+	    INNER JOIN TaskComment tc
+	    on t.TaskId=tc.TaskId
+        WHERE tc.ProfileId =p_AssignTo AND tc.IsNew=1
+        UNION
+        SELECT t.TaskId,
+        t.ProfileId,
+        t.TaskTitle,
+        t.Description,
+        t.DueDate,
+        t.AssignTo,
+        t.CreatedBy,
+        t.TaskStatus,
+        t.TaskDuration,
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1) as NewCommentCount
+        FROM Task t
+        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open';
         END"""
         cursor.execute(query)
         print('SP GetTaskByAssignTo executed')
@@ -1373,6 +1408,19 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP TaskUpdate')
+
+    def TaskDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Task_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Task_Delete(IN p_TaskId INT)
+        BEGIN
+        Delete
+        FROM Task 
+        WHERE TaskId = p_TaskId;
+        END"""
+        cursor.execute(query)
+        print('SP TaskDelete executed')
 
     def TaskCommentUpdateIsNew(self):
         cursor = connection.cursor()
@@ -2085,11 +2133,10 @@ class StoredProcedures:
         tc.Comment,
         tc.CommentedBy,
         tc.CommentedOn,
-        CONCAT(up.FirstName," ",up.LastName) as FullName,
+        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=tc.ProfileId) as CommentedToFullName,
+        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=tc.CommentedBy) as CommentedByFullName,
         tc.IsNew
         FROM TaskComment tc
-        INNER JOIN UserProfile up
-        ON tc.ProfileId=up.ProfileId
         WHERE TaskId = p_TaskId ORDER By tc.CommentedOn DESC;
         END"""
         cursor.execute(query)

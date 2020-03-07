@@ -114,6 +114,8 @@ urlpatterns = [
     url(r'^GetTaskByProfileId/', TaskView.GetTaskByProfileId),
     url(r'^GetTaskByAssignTo/', TaskView.GetTaskByAssignTo),
     url(r'^TaskUpdate/', TaskView.TaskUpdate),
+    url(r'^TaskDelete/',TaskView.TaskDelete),
+    url(r'^GetAllTasks/',TaskView.GetAllTasks),
     url(r'^GetUserNameForAssignTo/', TaskView.GetUserNameForAssignTo),
     url(r'^SkillsCategoryInsert/', SkillsCategoryView.SkillsCategoryInsert),
     url(r'^GetSkillCategoryNameByProfileId/', SkillsCategoryView.GetSkillCategoryNameByProfileId),

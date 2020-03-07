@@ -92,6 +92,8 @@ class ExecOrder:
         objStoredProcedures.GetTaskByProfileId('self')
         objStoredProcedures.GetTaskByAssignTo('self')
         objStoredProcedures.TaskUpdate('self')
+        objStoredProcedures.TaskDelete('self')
+        objStoredProcedures.GetAllTasks('self')
         objStoredProcedures.GetUsers('self')
         objStoredProcedures.SkillsCategoryInsert('self')
         objStoredProcedures.GetSkillCategoryById('self')

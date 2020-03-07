@@ -48,8 +48,9 @@ class TaskCommentDAL:
             objTaskCommentEntity.Comment=TaskCommentItem[3]
             objTaskCommentEntity.CommentedBy=TaskCommentItem[4]
             objTaskCommentEntity.CommentedOn=TaskCommentItem[5].strftime("%d/%m/%Y %H:%M:%S")
-            objTaskCommentEntity.FullName=TaskCommentItem[6]
-            objTaskCommentEntity.IsNew=TaskCommentItem[7]
+            objTaskCommentEntity.CommentedToFullName=TaskCommentItem[6]
+            objTaskCommentEntity.CommentedByFullName=TaskCommentItem[7]
+            objTaskCommentEntity.IsNew=TaskCommentItem[8]
             arrayItems.append(objTaskCommentEntity)
         return arrayItems
 
