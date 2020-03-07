@@ -121,7 +121,7 @@ def TaskDelete(json_data):
 
 @csrf_exempt
 @api_view(["POST"])
-def GetAllTasks(id):
+def GetAllTasks(json_data):
         # loaded_json = json.loads(json_data.body)
         objTaskBAL=TaskBAL.TaskBAL()     
         objTaskEntity=objTaskBAL.GetAllTasks()
