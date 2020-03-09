@@ -1346,8 +1346,12 @@ class StoredProcedures:
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS GetTask_ByAssignTo"""
         cursor.execute(query)
+        # First query brings only results for those users who got comments but the task is not assigned.
+        # Second query brings tasks assigned to them.
         query = """CREATE PROCEDURE GetTask_ByAssignTo(IN p_AssignTo INT)
         BEGIN
+        SELECT *
+        FROM (
         SELECT t.TaskId,
         t.ProfileId,
         t.TaskTitle,
@@ -1357,12 +1361,12 @@ class StoredProcedures:
         t.CreatedBy,
         t.TaskStatus,
         t.TaskDuration,
-        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1) as NewCommentCount
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount
         FROM Task t
 	    INNER JOIN TaskComment tc
 	    on t.TaskId=tc.TaskId
-        WHERE tc.ProfileId =p_AssignTo AND tc.IsNew=1
-        UNION
+        WHERE tc.ProfileId =p_AssignTo AND tc.IsNew=1 AND t.AssignTo<>p_AssignTo
+        UNION ALL
         SELECT t.TaskId,
         t.ProfileId,
         t.TaskTitle,
@@ -1372,9 +1376,10 @@ class StoredProcedures:
         t.CreatedBy,
         t.TaskStatus,
         t.TaskDuration,
-        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1) as NewCommentCount
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount
         FROM Task t
-        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open';
+        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open') a
+        ORDER BY NewCommentCount DESC,DueDate ASC;
         END"""
         cursor.execute(query)
         print('SP GetTaskByAssignTo executed')
@@ -1430,13 +1435,14 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE TaskComment_UpdateIsNew
         (
-        IN p_TaskId INT
+        IN p_TaskId INT,
+        IN p_ProfileId INT
         )
         BEGIN
         Update TaskComment
         SET 
         IsNew=0
-        WHERE TaskId=p_TaskId;
+        WHERE TaskId=p_TaskId and ProfileId=p_ProfileId;
         END"""
         cursor.execute(query)
         print('Exec SP TaskCommentUpdateIsNew')

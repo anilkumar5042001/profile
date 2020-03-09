@@ -34,8 +34,9 @@ def TaskCommentInsert(json_data):
 def TaskCommentUpdateIsNew(json_data):
         loaded_json = json.loads(json_data.body)
         strTaskId=loaded_json["TaskId"]
+        strProfileId=loaded_json["ProfileId"]
         objTaskCommentBAL=TaskCommentBAL.TaskCommentBAL()
-        result=objTaskCommentBAL.TaskCommentUpdateIsNew(strTaskId)
+        result=objTaskCommentBAL.TaskCommentUpdateIsNew(strTaskId,strProfileId)
         return JsonResponse(result,safe=False)
 
 #{"ProfileId": "1"}

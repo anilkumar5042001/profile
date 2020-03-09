@@ -10,9 +10,9 @@ class TaskCommentDAL:
         objTaskCommentId=TaskCommentItem[0][0]
         return objTaskCommentId
 
-    def TaskCommentUpdateIsNew(self,TaskId):
+    def TaskCommentUpdateIsNew(self,TaskId,ProfileId):
         cursor = connection.cursor()
-        args = [TaskId]
+        args = [TaskId,ProfileId]
         cursor.callproc('TaskComment_UpdateIsNew',args)
         TaskCommentItem=cursor.fetchall()
         return 1

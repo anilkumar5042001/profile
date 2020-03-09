@@ -5,9 +5,9 @@ class TaskCommentBAL:
         objTaskCommentDAL=TaskCommentDAL()
         return objTaskCommentDAL.TaskCommentInsert(ProfileId,TaskId,Comment,CommentedBy,CommentedOn)
 
-    def TaskCommentUpdateIsNew(self,TaskId):
+    def TaskCommentUpdateIsNew(self,TaskId,ProfileId):
         objTaskCommentDAL=TaskCommentDAL()
-        return objTaskCommentDAL.TaskCommentUpdateIsNew(TaskId)
+        return objTaskCommentDAL.TaskCommentUpdateIsNew(TaskId,ProfileId)
 
     def GetTaskCommentByProfileId(self,ProfileId):
         objTaskCommentDAL=TaskCommentDAL()
