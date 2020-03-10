@@ -1242,6 +1242,7 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Task_Insert
         (
+        IN p_TaskCategoryId INT,
         IN p_ProfileId INT,
         IN p_TaskTitle NVARCHAR(250),
         IN p_Description NVARCHAR(500),
@@ -1253,6 +1254,7 @@ class StoredProcedures:
         )
         BEGIN
         INSERT INTO Task (
+        TaskCategoryId,
         ProfileId,
         TaskTitle,
         Description,
@@ -1263,6 +1265,7 @@ class StoredProcedures:
         TaskDuration
         ) 
         VALUES (
+        p_TaskCategoryId,
         p_ProfileId,
         p_TaskTitle,
         p_Description,
@@ -1284,6 +1287,7 @@ class StoredProcedures:
         query = """CREATE PROCEDURE GetTask_ByTaskId(IN p_TaskId INT)
         BEGIN
         SELECT TaskId,
+        TaskCategoryId,
         ProfileId,
         TaskTitle,
         Description,
@@ -1305,6 +1309,7 @@ class StoredProcedures:
         query = """CREATE PROCEDURE GetTask_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT TaskId,
+        TaskCategoryId,
         ProfileId,
         TaskTitle,
         Description,
@@ -1325,7 +1330,9 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Get_AllTasks()
         BEGIN
+        SET @vQuery='
         SELECT t.TaskId,
+        t.TaskCategoryId,
         t.ProfileId,
         t.TaskTitle,
         t.Description,
@@ -1336,8 +1343,11 @@ class StoredProcedures:
         t.TaskDuration,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.AssignTo) as AssignToFullName,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName            
-        FROM Task t;  
-        END"""
+        FROM Task t';
+        PREPARE stmt FROM @vQuery;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt; 
+        END;"""
         cursor.execute(query)
         print('SP GetAllTasks executed')
     
@@ -1391,6 +1401,7 @@ class StoredProcedures:
         query = """CREATE PROCEDURE Task_Update
         (
         IN p_TaskId INT,
+        IN p_TaskCategoryId INT,
         IN p_ProfileId INT,
         IN p_TaskTitle NVARCHAR(250),
         IN p_Description NVARCHAR(500),
@@ -1403,6 +1414,7 @@ class StoredProcedures:
         BEGIN
         Update Task 
         SET 
+        TaskCategoryId=p_TaskCategoryId,
         ProfileId=p_ProfileId,
         TaskTitle=p_TaskTitle,
         Description=p_Description,

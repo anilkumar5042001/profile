@@ -4,9 +4,9 @@ from datetime import datetime
 from ..Entity.UserProfileEntity import *
 
 class TaskDAL:
-    def TaskInsert(self,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
         cursor=connection.cursor()
-        args=[ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
+        args=[TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
         cursor.callproc('Task_Insert',args)
         TaskItem=cursor.fetchall()
         objTaskId=TaskItem[0][0]
@@ -22,15 +22,16 @@ class TaskDAL:
         for TaskItem in res:
             objTaskEntity=TaskEntity()
             objTaskEntity.TaskId=TaskItem[0]
-            objTaskEntity.ProfileId=TaskItem[1]
-            objTaskEntity.TaskTitle=TaskItem[2]
-            objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y %H:%M:%S")
+            objTaskEntity.TaskCategoryId=TaskItem[1]
+            objTaskEntity.ProfileId=TaskItem[2]
+            objTaskEntity.TaskTitle=TaskItem[3]
+            objTaskEntity.Description=TaskItem[4]
+            objTaskEntity.DueDate=TaskItem[5].strftime("%m/%d/%Y %H:%M:%S")
             # objTaskEntity.DueDate=TaskItem[4].strftime("%m/%d/%Y")
-            objTaskEntity.AssignTo=TaskItem[5]
-            objTaskEntity.CreatedBy=TaskItem[6]
-            objTaskEntity.TaskStatus=TaskItem[7]
-            objTaskEntity.TaskDuration=TaskItem[8]
+            objTaskEntity.AssignTo=TaskItem[6]
+            objTaskEntity.CreatedBy=TaskItem[7]
+            objTaskEntity.TaskStatus=TaskItem[8]
+            objTaskEntity.TaskDuration=TaskItem[9]
             arrayItems.append(objTaskEntity)
         return arrayItems 
     
@@ -43,14 +44,15 @@ class TaskDAL:
         for TaskItem in res:
             objTaskEntity=TaskEntity()
             objTaskEntity.TaskId=TaskItem[0]
-            objTaskEntity.ProfileId=TaskItem[1]
-            objTaskEntity.TaskTitle=TaskItem[2]
-            objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")           
-            objTaskEntity.AssignTo=TaskItem[5]
-            objTaskEntity.CreatedBy=TaskItem[6]
-            objTaskEntity.TaskStatus=TaskItem[7]
-            objTaskEntity.TaskDuration=TaskItem[8]
+            objTaskEntity.TaskCategoryId=TaskItem[1]
+            objTaskEntity.ProfileId=TaskItem[2]
+            objTaskEntity.TaskTitle=TaskItem[3]
+            objTaskEntity.Description=TaskItem[4]
+            objTaskEntity.DueDate=TaskItem[5].strftime("%d/%m/%Y %H:%M:%S")           
+            objTaskEntity.AssignTo=TaskItem[6]
+            objTaskEntity.CreatedBy=TaskItem[7]
+            objTaskEntity.TaskStatus=TaskItem[8]
+            objTaskEntity.TaskDuration=TaskItem[9]
             arrayItems.append(objTaskEntity)
         return arrayItems
         
@@ -75,9 +77,9 @@ class TaskDAL:
             arrayItems.append(objTaskEntity)
         return arrayItems 
 
-    def TaskUpdate(self,TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskUpdate(self,TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
         cursor=connection.cursor()
-        args=[TaskId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
+        args=[TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
         cursor.callproc('Task_Update',args)
         return 1
     
@@ -111,16 +113,17 @@ class TaskDAL:
         for TaskItem in res:
             objTaskEntity=TaskEntity()
             objTaskEntity.TaskId=TaskItem[0]
-            objTaskEntity.ProfileId=TaskItem[1]
-            objTaskEntity.TaskTitle=TaskItem[2]
-            objTaskEntity.Description=TaskItem[3]
-            objTaskEntity.DueDate=TaskItem[4].strftime("%d/%m/%Y %H:%M:%S")           
-            objTaskEntity.AssignTo=TaskItem[5]
-            objTaskEntity.CreatedBy=TaskItem[6]
-            objTaskEntity.TaskStatus=TaskItem[7]
-            objTaskEntity.TaskDuration=TaskItem[8]
-            objTaskEntity.AssignToFullName=TaskItem[9]
-            objTaskEntity.CreatedByFullName=TaskItem[10]
+            objTaskEntity.TaskCategoryId=TaskItem[1]
+            objTaskEntity.ProfileId=TaskItem[2]
+            objTaskEntity.TaskTitle=TaskItem[3]
+            objTaskEntity.Description=TaskItem[4]
+            objTaskEntity.DueDate=TaskItem[5].strftime("%d/%m/%Y %H:%M:%S")           
+            objTaskEntity.AssignTo=TaskItem[6]
+            objTaskEntity.CreatedBy=TaskItem[7]
+            objTaskEntity.TaskStatus=TaskItem[8]
+            objTaskEntity.TaskDuration=TaskItem[9]
+            objTaskEntity.AssignToFullName=TaskItem[10]
+            objTaskEntity.CreatedByFullName=TaskItem[11]
             arrayItems.append(objTaskEntity)
             
         return arrayItems

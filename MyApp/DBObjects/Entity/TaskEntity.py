@@ -1,5 +1,6 @@
 class TaskEntity(object):
     TaskId=0
+    TaskCategoryId=""
     ProfileId=""
     TaskTitle=""
     Description=""

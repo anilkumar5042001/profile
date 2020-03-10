@@ -259,6 +259,7 @@ class MySqlTable:
             query = """create table Task
             (
             TaskId INT NOT NULL AUTO_INCREMENT,
+            TaskCategoryId INT NOT NULL,
             ProfileId INT NOT NULL,
             TaskTitle NVARCHAR(250) NULL,
             Description NVARCHAR(500) NULL,
@@ -268,6 +269,21 @@ class MySqlTable:
             TaskStatus VARCHAR(250) NULL,
             TaskDuration INT,
             PRIMARY KEY (TaskId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+    
+    def CreateTaskCategory(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"TaskCategory")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table TaskCategory
+            (
+            TaskCategoryId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            TaskCategoryName NVARCHAR(250) NULL,
+            PRIMARY KEY (TaskCategoryId)
             );"""
             cursor.execute(query)
             print('method executed')

@@ -16,12 +16,13 @@ from ..DBObjects.Entity import TaskEntity
 from ..CommonMethods import CommonMethods
 
 
-#{"ProfileId":"1","TaskTitle":"Test123","Description":"TestDescription","DueDate":"2019-11-12","AssignTo":"2","CreatedBy":"1","TaskStatus":"Open","TaskDuration":"1"}
+#{"TaskCategoryId":"1","ProfileId":"1","TaskTitle":"Test123","Description":"TestDescription","DueDate":"2019-11-12","AssignTo":"2","CreatedBy":"1","TaskStatus":"Open","TaskDuration":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def TaskInsert(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
+        strTaskCategoryId=loaded_json["TaskCategoryId"]
         strProfileId=loaded_json["ProfileId"]
         strTaskTitle=loaded_json["TaskTitle"]
         strDescription=loaded_json["Description"]
@@ -31,7 +32,7 @@ def TaskInsert(json_data):
         strTaskStatus=loaded_json["TaskStatus"]
         strTaskDuration=loaded_json["TaskDuration"]
         objTaskBAL=TaskBAL.TaskBAL()
-        result=objTaskBAL.TaskInsert(strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
+        result=objTaskBAL.TaskInsert(strTaskCategoryId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
         return JsonResponse(result,safe=False)
 
 #{"TaskId": "1"}
@@ -77,13 +78,14 @@ def GetTaskByAssignTo(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-#{"TaskId":"1","ProfileId":"2","TaskTitle":"Test1234","Description":"TestDescriptionOne","DueDate":"2019-11-16","AssignTo":"1","CreatedBy":"2","TaskStatus":"Close","TaskDuration":"2"}
+#{"TaskId":"1","TaskCategoryId":"1","ProfileId":"2","TaskTitle":"Test1234","Description":"TestDescriptionOne","DueDate":"2019-11-16","AssignTo":"1","CreatedBy":"2","TaskStatus":"Close","TaskDuration":"2"}
 @csrf_exempt
 @api_view(["POST"])
 def TaskUpdate(json_data):
         loaded_json = json.loads(json_data.body)
         print(loaded_json)
         strTaskId=loaded_json["TaskId"]
+        strTaskCategoryId=loaded_json["TaskCategoryId"]
         strProfileId=loaded_json["ProfileId"]
         strTaskTitle=loaded_json["TaskTitle"]
         strDescription=loaded_json["Description"]
@@ -93,7 +95,7 @@ def TaskUpdate(json_data):
         strTaskStatus=loaded_json["TaskStatus"]
         strTaskDuration=loaded_json["TaskDuration"]
         objTaskBAL=TaskBAL.TaskBAL()
-        result=objTaskBAL.TaskUpdate(strTaskId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
+        result=objTaskBAL.TaskUpdate(strTaskId,strTaskCategoryId,strProfileId,strTaskTitle,strDescription,strDueDate,strAssignTo,strCreatedBy,strTaskStatus,strTaskDuration)
         return JsonResponse("1",safe=False)
 
 #{"TaskId": "1"}
