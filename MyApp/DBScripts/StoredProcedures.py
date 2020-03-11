@@ -1328,7 +1328,12 @@ class StoredProcedures:
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Get_AllTasks"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Get_AllTasks()
+        query = """CREATE PROCEDURE Get_AllTasks
+        (
+        IN p_FromDueDate DATETIME,
+        IN p_ToDueDate DATETIME,
+        IN p_AssignTo INT
+        )
         BEGIN
         SET @vQuery='
         SELECT t.TaskId,
@@ -1343,7 +1348,16 @@ class StoredProcedures:
         t.TaskDuration,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.AssignTo) as AssignToFullName,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName            
-        FROM Task t';
+        FROM Task t WHERE 1=1';
+        IF(p_AssignTo>0)
+        THEN
+        SET @vQuery = CONCAT(@vQuery,'  AND AssignTo=',p_AssignTo);
+        END IF;
+        IF(p_FromDueDate>DATE_FORMAT('1900-01-01','%y-%m-%d'))
+        THEN
+        SET @vQuery = CONCAT(@vQuery,'  AND Date(DueDate)<',DATE_FORMAT(p_FromDueDate,'%y-%m-%d'));
+        END IF;
+        SET @vQuery = CONCAT(@vQuery, ';');
         PREPARE stmt FROM @vQuery;
         EXECUTE stmt;
         DEALLOCATE PREPARE stmt; 

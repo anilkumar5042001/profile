@@ -5,6 +5,8 @@ class TaskEntity(object):
     TaskTitle=""
     Description=""
     DueDate=""
+    FromDueDate=""
+    ToDueDate=""
     AssignTo=""
     CreatedBy=""
     TaskStatus=""
