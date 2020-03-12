@@ -25,6 +25,7 @@ class ExecOrder:
         objMySqlTable.CreateShareProfile('self')
         objMySqlTable.CreateFavouriteCategory('self')
         objMySqlTable.CreateTaskComment('self')
+        objMySqlTable.CreateTaskCategory('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
