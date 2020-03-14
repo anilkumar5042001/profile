@@ -125,6 +125,7 @@ class TaskDAL:
             objTaskEntity.TaskDuration=TaskItem[9]
             objTaskEntity.AssignToFullName=TaskItem[10]
             objTaskEntity.CreatedByFullName=TaskItem[11]
+            objTaskEntity.AssignToProfileImageName=TaskItem[12]
+            objTaskEntity.CreatedByProfileImageName=TaskItem[13]
             arrayItems.append(objTaskEntity)
-            
         return arrayItems

@@ -14,3 +14,5 @@ class TaskEntity(object):
     AssignToFullName=""
     CreatedByFullName=""
     NewCommentCount=0
+    AssignToProfileImageName=""
+    CreatedByProfileImageName=""

@@ -1347,7 +1347,9 @@ class StoredProcedures:
         t.TaskStatus,
         t.TaskDuration,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.AssignTo) as AssignToFullName,
-        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName            
+        (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName,
+        (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.AssignTo) as AssignToProfileImageName,            
+        (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName
         FROM Task t WHERE 1=1';
         IF(p_AssignTo>0)
         THEN
