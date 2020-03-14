@@ -1353,17 +1353,20 @@ class StoredProcedures:
         THEN
         SET @vQuery = CONCAT(@vQuery,'  AND AssignTo=',p_AssignTo);
         END IF;
-        # IF(DATE_FORMAT(p_FromDueDate,'%y-%m-%d')>DATE_FORMAT('2000-1-1','%y-%m-%d'))
-        # THEN
-        # SET @vQuery = CONCAT(@vQuery,'  AND DueDate>',DATE_FORMAT(p_FromDueDate,'%y-%m-%d'));
-        SET @vQuery = CONCAT(@vQuery,'  AND t.DueDate >','2020-11-17');
-        # END IF;
+        IF(p_FromDueDate>'1800-01-01')
+        THEN
+        SET @vQuery=concat(@vQuery,' AND DueDate>=',''+p_FromDueDate+'');
+        END IF;
+        IF(p_ToDueDate>'1800-01-01')
+        THEN
+        SET @vQuery=concat(@vQuery,' AND DueDate<=',''+p_ToDueDate+'');
+        END IF;
         SET @vQuery = CONCAT(@vQuery, ';');
         PREPARE stmt FROM @vQuery;
         EXECUTE stmt;
         DEALLOCATE PREPARE stmt; 
         END;"""
-        print (query)
+        
         cursor.execute(query)
         print('SP GetAllTasks executed')
     
