@@ -267,7 +267,7 @@ class MySqlTable:
             AssignTo INT,
             CreatedBy INT,
             TaskStatus VARCHAR(250) NULL,
-            TaskDuration INT,
+            TaskDuration DECIMAL(6,2),
             PRIMARY KEY (TaskId)
             );"""
             cursor.execute(query)

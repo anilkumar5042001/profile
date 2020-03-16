@@ -1250,7 +1250,7 @@ class StoredProcedures:
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
         IN p_TaskStatus VARCHAR(250),
-        IN p_TaskDuration INT
+        IN p_TaskDuration decimal(3,2)
         )
         BEGIN
         INSERT INTO Task (
@@ -1430,7 +1430,7 @@ class StoredProcedures:
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
         IN p_TaskStatus VARCHAR(250),
-        IN p_TaskDuration INT
+        IN p_TaskDuration decimal(3,2)
         )
         BEGIN
         Update Task 

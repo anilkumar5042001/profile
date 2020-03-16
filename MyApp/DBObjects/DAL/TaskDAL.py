@@ -2,6 +2,7 @@ from ..Entity.TaskEntity import *
 from django.db import connection
 from datetime import datetime
 from ..Entity.UserProfileEntity import *
+import decimal
 
 class TaskDAL:
     def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
@@ -31,7 +32,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[6]
             objTaskEntity.CreatedBy=TaskItem[7]
             objTaskEntity.TaskStatus=TaskItem[8]
-            objTaskEntity.TaskDuration=TaskItem[9]
+            objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[9]))
             arrayItems.append(objTaskEntity)
         return arrayItems 
     
@@ -52,7 +53,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[6]
             objTaskEntity.CreatedBy=TaskItem[7]
             objTaskEntity.TaskStatus=TaskItem[8]
-            objTaskEntity.TaskDuration=TaskItem[9]
+            objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[9]))
             arrayItems.append(objTaskEntity)
         return arrayItems
         
@@ -72,7 +73,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[5]
             objTaskEntity.CreatedBy=TaskItem[6]
             objTaskEntity.TaskStatus=TaskItem[7]
-            objTaskEntity.TaskDuration=TaskItem[8]
+            objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[8]))
             objTaskEntity.NewCommentCount=TaskItem[9]
             arrayItems.append(objTaskEntity)
         return arrayItems 
@@ -122,7 +123,7 @@ class TaskDAL:
             objTaskEntity.AssignTo=TaskItem[6]
             objTaskEntity.CreatedBy=TaskItem[7]
             objTaskEntity.TaskStatus=TaskItem[8]
-            objTaskEntity.TaskDuration=TaskItem[9]
+            objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[9]))
             objTaskEntity.AssignToFullName=TaskItem[10]
             objTaskEntity.CreatedByFullName=TaskItem[11]
             objTaskEntity.AssignToProfileImageName=TaskItem[12]
