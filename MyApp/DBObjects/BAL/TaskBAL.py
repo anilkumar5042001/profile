@@ -29,6 +29,6 @@ class TaskBAL:
         objTaskDAL=TaskDAL()
         return objTaskDAL.TaskDelete(TaskId)
 
-    def GetAllTasks(self,FromDueDate,ToDueDate,AssignTo):
+    def GetAllTasks(self,FromDueDate,ToDueDate,AssignTo,TaskStatus):
         objTaskDAL=TaskDAL()
-        return objTaskDAL.GetAllTasks(FromDueDate,ToDueDate,AssignTo)
+        return objTaskDAL.GetAllTasks(FromDueDate,ToDueDate,AssignTo,TaskStatus)

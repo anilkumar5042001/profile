@@ -106,9 +106,9 @@ class TaskDAL:
         cursor.callproc('Task_Delete',args)
         return 1
 
-    def GetAllTasks(self,FromDueDate,ToDueDate,AssignTo):
+    def GetAllTasks(self,FromDueDate,ToDueDate,AssignTo,TaskStatus):
         cursor=connection.cursor()
-        args = [FromDueDate,ToDueDate,AssignTo]
+        args = [FromDueDate,ToDueDate,AssignTo,TaskStatus]
         cursor.callproc('Get_AllTasks',args)
         res=cursor.fetchall()
         arrayItems=[]

@@ -121,7 +121,7 @@ def TaskDelete(json_data):
         return JsonResponse("1",safe=False)
 
 
-#{"FromDueDate":"2019-11-16","ToDueDate":"2019-11-16","AssignTo":"1"}
+#{"FromDueDate":"2019-11-16","ToDueDate":"2019-11-16","AssignTo":"1","TaskStatus":"Open"}
 @csrf_exempt
 @api_view(["POST"])
 def GetAllTasks(json_data):
@@ -130,9 +130,10 @@ def GetAllTasks(json_data):
         strFromDueDate=loaded_json["FromDueDate"]
         strToDueDate=loaded_json["ToDueDate"]
         strAssignTo=loaded_json["AssignTo"]
+        strTaskStatus=loaded_json["TaskStatus"]
 
         objTaskBAL=TaskBAL.TaskBAL()     
-        objTaskEntity=objTaskBAL.GetAllTasks(strFromDueDate,strToDueDate,strAssignTo)
+        objTaskEntity=objTaskBAL.GetAllTasks(strFromDueDate,strToDueDate,strAssignTo,strTaskStatus)
         result = json.dumps([ob.__dict__ for ob in objTaskEntity])
         # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 

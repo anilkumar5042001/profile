@@ -1332,7 +1332,8 @@ class StoredProcedures:
         (
         IN p_FromDueDate DATETIME,
         IN p_ToDueDate DATETIME,
-        IN p_AssignTo INT
+        IN p_AssignTo INT,
+        IN p_TaskStatus VARCHAR(250)
         )
         BEGIN
         SET @vQuery='
@@ -1362,6 +1363,10 @@ class StoredProcedures:
         IF(p_ToDueDate>'1800-01-01')
         THEN
         SET @vQuery=concat(@vQuery,' AND DueDate<=',''+p_ToDueDate+'');
+        END IF;
+        IF(p_TaskStatus<>'All')
+        THEN
+        SET @vQuery=concat(@vQuery," AND TaskStatus='",p_TaskStatus,"'");
         END IF;
         SET @vQuery = CONCAT(@vQuery, ';');
         PREPARE stmt FROM @vQuery;
