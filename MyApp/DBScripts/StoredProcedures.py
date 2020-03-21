@@ -1333,7 +1333,8 @@ class StoredProcedures:
         IN p_FromDueDate DATETIME,
         IN p_ToDueDate DATETIME,
         IN p_AssignTo INT,
-        IN p_TaskStatus VARCHAR(250)
+        IN p_TaskStatus VARCHAR(250),
+        IN p_LoggedInUserId INT
         )
         BEGIN
         SET @vQuery='
@@ -1368,7 +1369,7 @@ class StoredProcedures:
         THEN
         SET @vQuery=concat(@vQuery," AND TaskStatus='",p_TaskStatus,"'");
         END IF;
-        SET @vQuery = CONCAT(@vQuery, ';');
+        SET @vQuery = CONCAT(@vQuery, ' order by t.DueDate asc;');
         PREPARE stmt FROM @vQuery;
         EXECUTE stmt;
         DEALLOCATE PREPARE stmt; 
