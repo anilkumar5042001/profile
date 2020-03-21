@@ -1,5 +1,6 @@
 
 from ..DAL.UserProfileDAL import UserProfileDAL
+from ..BAL.CommonMethodsBAL import CommonMethodsBAL
 
 class UserProfileBAL:
     def GetUserProfileById(self,profileId):
@@ -12,6 +13,8 @@ class UserProfileBAL:
 
     
     def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain):
+        objCommonMethodsBAL=CommonMethodsBAL()
+        objCommonMethodsBAL.SendMail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/","Please click link")
         objUserProfileDAL=UserProfileDAL()
         return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain)  
 
