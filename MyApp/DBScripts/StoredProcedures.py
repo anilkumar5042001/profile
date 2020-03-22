@@ -107,7 +107,10 @@ class StoredProcedures:
         Country,
         AboutMe,
         CompanyDomain,
-        ProfileImageName
+        ProfileImageName,
+        RegGuid,
+        ActivationCode,
+        IsActivated
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -164,7 +167,10 @@ class StoredProcedures:
         IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
         IN p_Password NVARCHAR(250),
-        IN p_CompanyDomain NVARCHAR(250)
+        IN p_CompanyDomain NVARCHAR(250),
+        IN p_RegGuid NVARCHAR(250),
+        IN p_ActivationCode NVARCHAR(10),
+        IN p_IsActivated BOOLEAN
         )
         BEGIN
         INSERT INTO UserProfile (
@@ -178,7 +184,11 @@ class StoredProcedures:
         Country,
         AboutMe,
         Password,
-        CompanyDomain) 
+        CompanyDomain,
+        RegGuid,
+        ActivationCode,
+        IsActivated
+        ) 
         VALUES (
         p_FirstName,
         p_LastName,
@@ -190,7 +200,12 @@ class StoredProcedures:
         p_Country,
         p_AboutMe,
         p_Password,
-        p_CompanyDomain);
+        p_CompanyDomain,
+        p_RegGuid,
+        p_ActivationCode,
+        p_IsActivated
+        );
+        select LAST_INSERT_ID();
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')
@@ -269,7 +284,10 @@ class StoredProcedures:
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
-        IN p_ProfileImageName NVARCHAR(300)
+        IN p_ProfileImageName NVARCHAR(300),
+        IN p_RegGuid NVARCHAR(250),
+        IN p_ActivationCode NVARCHAR(10),
+        IN p_IsActivated BOOLEAN
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -281,7 +299,10 @@ class StoredProcedures:
         Designation=p_Designation,
         City=p_City,
         Country=p_Country,
-        AboutMe = p_AboutMe
+        AboutMe = p_AboutMe,
+        RegGuid=p_RegGuid,
+        ActivationCode=p_ActivationCode,
+        IsActivated=p_IsActivated
         WHERE ProfileId=p_ProfileId;
 
       	IF(p_ProfileImageName<>'NA')
@@ -1513,7 +1534,10 @@ class StoredProcedures:
         City,
         Country,
         AboutMe,
-        CompanyDomain
+        CompanyDomain,
+        RegGuid,
+        ActivationCode,
+        IsActivated
         FROM UserProfile 
         WHERE CompanyDomain=p_CompanyDomain;
         END """

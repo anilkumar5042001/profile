@@ -66,6 +66,9 @@ class MySqlTable:
             Password NVARCHAR(250) NULL,
             CompanyDomain NVARCHAR(250) NULL,
             ProfileImageName NVARCHAR(300) NULL,
+            RegGuid NVARCHAR(250) NULL,
+            ActivationCode NVARCHAR(10) NULL,
+            IsActivated BOOLEAN,
             PRIMARY KEY ( ProfileId )
             );"""
             cursor.execute(query)

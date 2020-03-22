@@ -12,3 +12,6 @@ class UserProfileEntity(object):
     Password=""
     CompanyDomain=""
     ProfileImageName=""
+    RegGuid=""
+    ActivationCode=""
+    IsActivated=""

@@ -40,6 +40,9 @@ class UserProfileDAL:
         objUserProfileEntity.AboutMe=res[0][9]
         objUserProfileEntity.CompanyDomain=res[0][10]
         objUserProfileEntity.ProfileImageName=res[0][11]
+        objUserProfileEntity.RegGuid=res[0][12]
+        objUserProfileEntity.ActivationCode=res[0][13]
+        objUserProfileEntity.IsActivated=res[0][14]
         return objUserProfileEntity  
 
     def UserProfileGetByCompanyDomain(self,companyDomain):
@@ -62,14 +65,19 @@ class UserProfileDAL:
             objUserProfileEntity.Country=res[8]
             objUserProfileEntity.AboutMe=res[9]
             objUserProfileEntity.CompanyDomain=res[10]
+            objUserProfileEntity.RegGuid=res[11]
+            objUserProfileEntity.ActivationCode=res[12]
+            objUserProfileEntity.IsActivated=res[13]
             arrayItems.append(objUserProfileEntity)
         return arrayItems  
 
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated):
         cursor = connection.cursor()
-        args = [firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain]
+        args = [firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated]
         cursor.callproc('UserProfile_Insert',args)
-        return 1
+        UserProfileItem=cursor.fetchall()
+        objUserProfileId=UserProfileItem[0][0]
+        return objUserProfileId
 
     def UserProfileUpdateDomainName(self,profileId,companyDomain):
         cursor = connection.cursor()
@@ -77,9 +85,9 @@ class UserProfileDAL:
         cursor.callproc('UserProfile_UpdateDomainName',args)
         return 1
 
-    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName):
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated):
         cursor = connection.cursor()
-        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName]
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated]
         cursor.callproc('UserProfile_Update',args)
         return 1
     def UserProfileUpdateAboutMe(self,ProfileId,aboutMe):
