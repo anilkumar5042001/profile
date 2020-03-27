@@ -233,11 +233,8 @@ def UserProfileUpdate(json_data):
         strCountry=loaded_json["Country"]
         strAboutMe=loaded_json["AboutMe"]  
         strProfileImageName=loaded_json["ProfileImageName"]  
-        strRegGuid=loaded_json["RegGuid"]
-        strActivationCode=loaded_json["ActivationCode"]
-        strIsActivated=loaded_json["IsActivated"]
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strProfileImageName,strRegGuid,strActivationCode,strIsActivated)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strProfileImageName)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId":"1","CompanyDomain":"Core@co.uk"}
@@ -275,6 +272,19 @@ def UserLoginCheckCredentials(json_data):
         strPassword=loaded_json["Password"]      
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
         objUserProfileEntity=objUserProfileBAL.UserLoginCheckCredentials(strEmailId,strPassword)
+        result= json.dumps(objUserProfileEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
+#{"RegGuid":"ABC1234","ActivationCode":"1234"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileUpdateRegCode(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strRegGuid=loaded_json["RegGuid"]
+        strActivationCode=loaded_json["ActivationCode"]      
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        objUserProfileEntity=objUserProfileBAL.UserProfileUpdateRegCode(strRegGuid,strActivationCode)
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False)
 

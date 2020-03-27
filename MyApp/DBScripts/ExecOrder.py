@@ -133,6 +133,7 @@ class ExecOrder:
         objStoredProcedures.TaskCommentDelete('self')
         objStoredProcedures.GetTaskCommentByTaskId('self')
         objStoredProcedures.TaskCommentUpdateIsNew('self')
+        objStoredProcedures.UserProfileUpdateRegCode('self')
 
 
 

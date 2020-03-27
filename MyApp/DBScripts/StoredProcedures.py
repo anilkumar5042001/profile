@@ -284,10 +284,7 @@ class StoredProcedures:
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
-        IN p_ProfileImageName NVARCHAR(300),
-        IN p_RegGuid NVARCHAR(250),
-        IN p_ActivationCode NVARCHAR(10),
-        IN p_IsActivated BOOLEAN
+        IN p_ProfileImageName NVARCHAR(300)
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -299,10 +296,7 @@ class StoredProcedures:
         Designation=p_Designation,
         City=p_City,
         Country=p_Country,
-        AboutMe = p_AboutMe,
-        RegGuid=p_RegGuid,
-        ActivationCode=p_ActivationCode,
-        IsActivated=p_IsActivated
+        AboutMe = p_AboutMe
         WHERE ProfileId=p_ProfileId;
 
       	IF(p_ProfileImageName<>'NA')
@@ -2225,7 +2219,29 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP TaskCommentDelete executed')
-
+    
+    def UserProfileUpdateRegCode(self):
+        cursor=connection.cursor()
+        query="""DROP PROCEDURE IF EXISTS UserProfile_UpdateRegCode"""
+        cursor.execute(query)
+        query="""CREATE PROCEDURE UserProfile_UpdateRegCode
+        (
+        IN p_RegGuid NVARCHAR(250),
+        IN p_ActivationCode NVARCHAR(10)
+        )
+        BEGIN
+        Declare varProfileId INT;
+        SET varProfileId=(SELECT ProfileId from UserProfile WHERE RegGuid=p_RegGuid AND ActivationCode=p_ActivationCode);
+        If (varProfileId>0)
+        THEN
+        UPDATE UserProfile Set IsActivated =1 WHERE ProfileId=varProfileId;   
+        ELSE
+        SET varProfileId=0;
+        END IF;
+        SELECT varProfileId as OUTPUT;
+        END"""
+        cursor.execute(query)
+        print('SP UserProfileUpdateRegCode executed')
 
 
 

@@ -1,5 +1,6 @@
 import smtplib 
 import random
+import email.message
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import datetime
@@ -32,6 +33,36 @@ class CommonMethodsBAL:
         s.sendmail("anil.spnet@gmail.com", toEmail, mailMessage) 
     
         # terminating the session
+        s.quit()
+
+    def SendHTMLMail(self,toEmail,profileLink,userMessage):
+        
+        msg = email.message.Message()
+        msg['Subject'] = 'foo'
+        msg['From'] = 'anil.spnet@gmail.com'
+        msg['To'] = toEmail
+        msg.add_header('Content-Type','text/html')
+        msg.set_payload('Body of <p><b>message</b></p><p>Please click</p>')
+
+        # Send the message via local SMTP server.
+        #s = smtplib.SMTP('localhost')
+        s = smtplib.SMTP('smtp.gmail.com', 587) 
+        # msg = MIMEMultipart('alternative')
+            
+        #     # start TLS for security 
+        # s.starttls() 
+            
+        # Authentication 
+       
+        # sendmail function takes 3 arguments: sender's address, recipient's address
+        # and message to send - here it is sent as one string.
+        # s.sendmail("anil.spnet@gmail.com", toEmail, msg.as_string())
+        # s.quit()
+
+        # Send the message via local SMTP server.
+        s.starttls()
+        s.login("anil.spnet@gmail.com", "sumalatha") 
+        s.sendmail(msg['From'], toEmail, msg.as_string())
         s.quit()
 
     def SendMailWithSubject(self,toEmail,profileLink,userMessage):

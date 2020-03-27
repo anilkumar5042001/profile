@@ -1,6 +1,7 @@
 
 from ..DAL.UserProfileDAL import UserProfileDAL
 from ..BAL.CommonMethodsBAL import CommonMethodsBAL
+import uuid
 
 class UserProfileBAL:
     def GetUserProfileById(self,profileId):
@@ -14,13 +15,16 @@ class UserProfileBAL:
     
     def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated):
         objCommonMethodsBAL=CommonMethodsBAL()
-        objCommonMethodsBAL.SendMail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/","Please click link")
+        uid = uuid.uuid4()
+        strRegGuid=uid.hex
+        actCode=strRegGuid[0:4]
+        objCommonMethodsBAL.SendHTMLMail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/Activation/"+strRegGuid,"Please enter activation code: "+actCode)
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated)
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,strRegGuid,actCode,IsActivated)
 
-    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated):
+    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated) 
+        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName) 
 
     def UserProfileUpdateDomainName(self,profileId,companyDomain):
         objUserProfileDAL=UserProfileDAL()
@@ -38,3 +42,7 @@ class UserProfileBAL:
         objUserProfileDAL=UserProfileDAL()
         res = objUserProfileDAL.UserLoginCheckCredentials(EmailId,Password)
         return res
+    
+    def UserProfileUpdateRegCode(self,RegGuid,ActivationCode):
+        objUserProfileDAL=UserProfileDAL()
+        return objUserProfileDAL.UserProfileUpdateRegCode(RegGuid,ActivationCode)

@@ -152,7 +152,7 @@ urlpatterns = [
     url(r'^GetTaskCommentByTaskId/',TaskCommentView.GetTaskCommentByTaskId),
     url(r'^TaskCommentDelete/',TaskCommentView.TaskCommentDelete),
     url(r'^TaskCommentUpdateIsNew/',TaskCommentView.TaskCommentUpdateIsNew),
-    
+    url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode)
     
 
 

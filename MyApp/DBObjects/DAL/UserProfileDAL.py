@@ -85,9 +85,9 @@ class UserProfileDAL:
         cursor.callproc('UserProfile_UpdateDomainName',args)
         return 1
 
-    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated):
+    def UserProfileUpdate(self,ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName):
         cursor = connection.cursor()
-        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,RegGuid,ActivationCode,IsActivated]
+        args = [ProfileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName]
         cursor.callproc('UserProfile_Update',args)
         return 1
     def UserProfileUpdateAboutMe(self,ProfileId,aboutMe):
@@ -100,6 +100,15 @@ class UserProfileDAL:
         cursor = connection.cursor()
         args = [EmailId,Password]
         cursor.callproc('CheckLoginCredentials',args)
+        res=cursor.fetchall()
+        objUserProfileEntity=UserProfileEntity()        
+        objUserProfileEntity.ProfileId=res[0][0]
+        return objUserProfileEntity
+    
+    def UserProfileUpdateRegCode(self,RegGuid,ActivationCode):
+        cursor = connection.cursor()
+        args = [RegGuid,ActivationCode]
+        cursor.callproc('UserProfile_UpdateRegCode',args)
         res=cursor.fetchall()
         objUserProfileEntity=UserProfileEntity()        
         objUserProfileEntity.ProfileId=res[0][0]
