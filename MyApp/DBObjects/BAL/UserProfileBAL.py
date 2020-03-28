@@ -18,7 +18,7 @@ class UserProfileBAL:
         uid = uuid.uuid4()
         strRegGuid=uid.hex
         actCode=strRegGuid[0:4]
-        objCommonMethodsBAL.SendHTMLMail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/Activation/"+strRegGuid,"Please enter activation code: "+actCode)
+        objCommonMethodsBAL.SendActivationEmail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/Activation/"+strRegGuid,actCode)
         objUserProfileDAL=UserProfileDAL()
         return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,strRegGuid,actCode,IsActivated)
 
