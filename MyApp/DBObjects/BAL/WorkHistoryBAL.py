@@ -5,17 +5,20 @@ import uuid
 
 class WorkHistoryBAL:
     def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
-        uid = uuid.uuid4()
-        WHGuid=uid.hex
-        VerificationCode=WHGuid[0:4]
+        VerificationCode=""
+        WHGuid=""
         IsVerified=0
         
         if CurrentlyWorking=="1":
+            uid = uuid.uuid4()
+            WHGuid=uid.hex
+            VerificationCode=WHGuid[0:4]
             objCommonMethodsBAL=CommonMethodsBAL()
             objEmailTemplate=EmailTemplate()
+            strLink="https://boring-rosalind-5ae0ce.netlify.com/whverification/"+WHGuid
             verificationEmailTemplate=objEmailTemplate.GetWorkHistoryVerificationEmail(WHGuid,VerificationCode)
             objCommonMethodsBAL.SendMail(CompanyEmailId,"Company Verification Email",verificationEmailTemplate)
-            
+
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified)
     
