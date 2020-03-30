@@ -367,7 +367,10 @@ class StoredProcedures:
         IN p_EndMonth INT,
         IN p_EndYear INT,
         IN p_CurrentlyWorking BOOLEAN,
-        IN p_CompanyEmailId NVARCHAR(250)
+        IN p_CompanyEmailId NVARCHAR(250),
+        IN p_WHGuid NVARCHAR(250),
+        IN p_VerificationCode NVARCHAR(10),
+        IN p_IsVerified BOOLEAN
         )
         BEGIN
         INSERT INTO WorkHistory (
@@ -383,7 +386,11 @@ class StoredProcedures:
         EndMonth,
         EndYear,
         CurrentlyWorking,
-        CompanyEmailId) 
+        CompanyEmailId,
+        WHGuid,
+        VerificationCode,
+        IsVerified
+        ) 
         VALUES (
         p_ProfileId,
         p_CompanyName,
@@ -397,7 +404,11 @@ class StoredProcedures:
         p_EndMonth,
         p_EndYear,
         p_CurrentlyWorking,
-        p_CompanyEmailId);
+        p_CompanyEmailId,
+        p_WHGuid,
+        p_VerificationCode,
+        p_IsVerified
+        );
         select LAST_INSERT_ID();
         END"""
         cursor.execute(query)

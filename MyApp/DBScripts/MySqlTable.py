@@ -128,8 +128,11 @@ class MySqlTable:
             StartYear INT,
             EndMonth INT,
             EndYear INT,
-            CurrentlyWorking BOOLEAN,
+            CurrentlyWorking BOOLEAN ,
             CompanyEmailId NVARCHAR(250),
+            WHGuid NVARCHAR(250) NULL,
+            VerificationCode NVARCHAR(10) NULL,
+            IsVerified BOOLEAN,
             PRIMARY KEY (WorkHistoryId)
             );"""
             cursor.execute(query)

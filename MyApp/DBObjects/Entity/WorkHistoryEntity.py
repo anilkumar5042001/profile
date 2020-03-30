@@ -13,6 +13,9 @@ class WorkHistoryEntity(object):
     EndYear=""
     CurrentlyWorking=""
     CompanyEmailId=""
+    WHGuid=""
+    VerificationCode=""
+    IsVerified=""
 
 class ProjectHighlightsEntity(object): 
     HighlightId=0

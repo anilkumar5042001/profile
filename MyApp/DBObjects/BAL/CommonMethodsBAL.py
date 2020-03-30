@@ -8,33 +8,7 @@ import string
 from ..Helper.EmailTemplate import *
 
 class CommonMethodsBAL:
-    def SendMail(self,toEmail,profileLink,userMessage):
-        
-        s = smtplib.SMTP('smtp.gmail.com', 587) 
-        msg = MIMEMultipart('alternative')
-        
-        # start TLS for security 
-        s.starttls() 
-        
-        # Authentication 
-        s.login("anil.spnet@gmail.com", "sumalatha") 
-        
-        # message to be sent 
-        message = "<html><body>"
-        message+="Please click on the below link to access link"
-        message+="<a href='"+profileLink+"'>Click here</a></br>"
-        message+="<p>"+userMessage+"</p>"
-        message+="</body></html>"
-        
-        part2 = MIMEText(message, 'html')
-        SUBJECT="Work Profile"
-        mailMessage = 'Subject: {}\n\n{}'.format(SUBJECT, message)
-        
-        # sending the mail 
-        s.sendmail("anil.spnet@gmail.com", toEmail, mailMessage) 
-    
-        # terminating the session
-        s.quit()
+  
 
     def SendActivationEmail(self,toEmail,profileLink,activationCode):
         objEmailTemplate=EmailTemplate()
@@ -55,14 +29,13 @@ class CommonMethodsBAL:
         s.sendmail(msg['From'], toEmail, msg.as_string())
         s.quit()
 
-    def SendHTMLMailBkp(self,toEmail,profileLink,userMessage):
-        
+    def SendMail(self,toEmail,subject,htmlBody):
         msg = email.message.Message()
-        msg['Subject'] = 'foo'
+        msg['Subject'] = subject
         msg['From'] = 'anil.spnet@gmail.com'
         msg['To'] = toEmail
         msg.add_header('Content-Type','text/html')
-        msg.set_payload('Body of <p>Dear User,</p><p>Please click</p>')
+        msg.set_payload(htmlBody)
 
         s = smtplib.SMTP('smtp.gmail.com', 587) 
         s.starttls()
@@ -70,28 +43,5 @@ class CommonMethodsBAL:
         s.sendmail(msg['From'], toEmail, msg.as_string())
         s.quit()
 
-    def SendMailWithSubject(self,toEmail,profileLink,userMessage):
-        
-        s = smtplib.SMTP('smtp.gmail.com', 587) 
-        msg = MIMEMultipart('alternative')
-        
-        # start TLS for security 
-        s.starttls() 
-        
-        # Authentication 
-        s.login("anil.spnet@gmail.com", "sumalatha") 
-        
-        # message to be sent 
-        message = "<html><body>"
-        message+="Please click on the below link to access link"
-        message+="<a href='"+profileLink+"'>Click here</a></br>"
-        message+="<p>"+userMessage+"</p>"
-        message+="</body></html>"
-        
-        part2 = MIMEText(message, 'html')
-        
-        # sending the mail 
-        s.sendmail("anilkumar5042001@gmail.com", toEmail, message) 
-    
-        # terminating the session
-        s.quit()
+
+   
