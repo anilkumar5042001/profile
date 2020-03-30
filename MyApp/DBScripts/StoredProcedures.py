@@ -173,6 +173,13 @@ class StoredProcedures:
         IN p_IsActivated BOOLEAN
         )
         BEGIN
+        DECLARE varProfileId INT;
+		SET varProfileId = (select ProfileId from UserProfile where EmailId=p_EmailId);
+		IF (varProfileId>0)
+		THEN
+		SET varProfileId=0;
+        SELECT varProfileId as OUTPUT;
+		else
         INSERT INTO UserProfile (
         FirstName,
         LastName,
@@ -206,6 +213,7 @@ class StoredProcedures:
         p_IsActivated
         );
         select LAST_INSERT_ID();
+        END IF;
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileInsert')
