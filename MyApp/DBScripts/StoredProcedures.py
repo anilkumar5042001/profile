@@ -433,7 +433,10 @@ class StoredProcedures:
         EndMonth,
         EndYear,
         CurrentlyWorking,
-        CompanyEmailId
+        CompanyEmailId,
+        WHGuid,
+        VerificationCode,
+        IsVerified
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId;
         END"""
