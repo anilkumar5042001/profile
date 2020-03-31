@@ -406,6 +406,22 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('TaskComment table created')
+
+    def CreateCompany(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Company")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Company
+            (
+            CompanyId INT NOT NULL AUTO_INCREMENT,
+            CompanyName NVARCHAR(250) NULL,
+            DomainName NVARCHAR(250) NULL,
+            Logo NVARCHAR(250) NULL,
+            PRIMARY KEY (CompanyId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
             
     
     def CheckTableExists(self,tableName):

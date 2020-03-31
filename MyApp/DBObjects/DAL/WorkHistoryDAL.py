@@ -75,6 +75,9 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
             objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
             objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
+            objWorkHistoryEntity.WSGuid=WorkHistoryItem[14]
+            objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
+            objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems
 

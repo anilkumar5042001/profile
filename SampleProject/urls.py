@@ -35,6 +35,7 @@ from MyApp.AllViews import PassionView
 from MyApp.AllViews import ShareProfileView
 from MyApp.AllViews import FavouriteCategoryView
 from MyApp.AllViews import TaskCommentView
+from MyApp.AllViews import CompanyView
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -152,7 +153,8 @@ urlpatterns = [
     url(r'^GetTaskCommentByTaskId/',TaskCommentView.GetTaskCommentByTaskId),
     url(r'^TaskCommentDelete/',TaskCommentView.TaskCommentDelete),
     url(r'^TaskCommentUpdateIsNew/',TaskCommentView.TaskCommentUpdateIsNew),
-    url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode)
+    url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode),
+    url(r'^CompanyGetAll',CompanyView.CompanyGetAll),
     
 
 

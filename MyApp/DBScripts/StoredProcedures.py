@@ -490,7 +490,10 @@ class StoredProcedures:
         EndMonth,
         EndYear,
         CurrentlyWorking,
-        CompanyEmailId
+        CompanyEmailId,
+        WHGuid,
+        VerificationCode,
+        IsVerified
         FROM WorkHistory 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -2207,6 +2210,22 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetTaskCommentByProfileId executed')
 
+    def CompanyGetAll(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Company_GetAll"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Company_GetAll()
+        BEGIN
+        SELECT 
+        CompanyId,
+        CompanyName,
+        DomainName,
+        Logo  
+        FROM Company;
+        END """
+        cursor.execute(query)
+        print('SP CompanyGetAll executed')
+
     def GetTaskCommentByTaskId(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS GetTaskComment_ByTaskId"""
@@ -2264,6 +2283,7 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP UserProfileUpdateRegCode executed')
+    
 
 
 

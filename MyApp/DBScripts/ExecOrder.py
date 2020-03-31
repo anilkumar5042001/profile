@@ -26,6 +26,7 @@ class ExecOrder:
         objMySqlTable.CreateFavouriteCategory('self')
         objMySqlTable.CreateTaskComment('self')
         objMySqlTable.CreateTaskCategory('self')
+        objMySqlTable.CreateCompany('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -134,6 +135,7 @@ class ExecOrder:
         objStoredProcedures.GetTaskCommentByTaskId('self')
         objStoredProcedures.TaskCommentUpdateIsNew('self')
         objStoredProcedures.UserProfileUpdateRegCode('self')
+        objStoredProcedures.CompanyGetAll('self')
 
 
 
