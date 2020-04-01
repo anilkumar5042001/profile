@@ -370,7 +370,8 @@ class StoredProcedures:
         IN p_CompanyEmailId NVARCHAR(250),
         IN p_WHGuid NVARCHAR(250),
         IN p_VerificationCode NVARCHAR(10),
-        IN p_IsVerified BOOLEAN
+        IN p_IsVerified BOOLEAN,
+        IN p_CompanyId INT
         )
         BEGIN
         INSERT INTO WorkHistory (
@@ -389,7 +390,8 @@ class StoredProcedures:
         CompanyEmailId,
         WHGuid,
         VerificationCode,
-        IsVerified
+        IsVerified,
+        CompanyId
         ) 
         VALUES (
         p_ProfileId,
@@ -407,7 +409,8 @@ class StoredProcedures:
         p_CompanyEmailId,
         p_WHGuid,
         p_VerificationCode,
-        p_IsVerified
+        p_IsVerified,
+        p_CompanyId
         );
         select LAST_INSERT_ID();
         END"""
@@ -436,7 +439,8 @@ class StoredProcedures:
         CompanyEmailId,
         WHGuid,
         VerificationCode,
-        IsVerified
+        IsVerified,
+        CompanyId
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -462,7 +466,8 @@ class StoredProcedures:
         EndMonth,
         EndYear,
         CurrentlyWorking,
-        CompanyEmailId
+        CompanyEmailId,
+        CompanyId
         FROM WorkHistory 
         WHERE ProfileId = p_ProfileId
         AND
@@ -493,7 +498,8 @@ class StoredProcedures:
         CompanyEmailId,
         WHGuid,
         VerificationCode,
-        IsVerified
+        IsVerified,
+        CompanyId
         FROM WorkHistory 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -519,7 +525,8 @@ class StoredProcedures:
         IN p_EndMonth INT,
         IN p_EndYear INT,
         IN p_CurrentlyWorking BOOLEAN,
-        IN p_CompanyEmailId NVARCHAR(250)
+        IN p_CompanyEmailId NVARCHAR(250),
+        IN p_CompanyId INT
         )
         BEGIN
 
@@ -543,7 +550,8 @@ class StoredProcedures:
         EndMonth=p_EndMonth,
         EndYear=p_EndYear,
         CurrentlyWorking=p_CurrentlyWorking,
-        CompanyEmailId=p_CompanyEmailId
+        CompanyEmailId=p_CompanyEmailId,
+        CompanyId=p_CompanyId
         WHERE WorkHistoryId=p_WorkHistoryId;
         END"""
         cursor.execute(query)
@@ -2283,6 +2291,30 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP UserProfileUpdateRegCode executed')
+
+    def WorkHistoryUpdateVerificationCode(self):
+        cursor=connection.cursor()
+        query="""DROP PROCEDURE IF EXISTS WorkHistory_UpdateVerificationCode"""
+        cursor.execute(query)
+        query="""CREATE PROCEDURE WorkHistory_UpdateVerificationCode
+        (
+        IN p_WHGuid NVARCHAR(250),
+        IN p_VerificationCode NVARCHAR(10)
+        )
+        BEGIN
+        Declare varWorkHistoryId INT;
+        SET SQL_SAFE_UPDATES = 0;
+        SET varWorkHistoryId=(SELECT ProfileId from WorkHistory WHERE WHGuid=p_WHGuid AND VerificationCode=p_VerificationCode);
+        If (varWorkHistoryId>0)
+        THEN
+        UPDATE WorkHistory Set IsVerified =1 WHERE WorkHistoryId=varWorkHistoryId;   
+        ELSE
+        SET varWorkHistoryId=0;
+        END IF;
+        SELECT varWorkHistoryId as OUTPUT;
+        END"""
+        cursor.execute(query)
+        print('SP WorkHistoryUpdateVerificationCode executed')
     
 
 

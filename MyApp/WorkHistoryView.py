@@ -17,7 +17,7 @@ from .DBObjects.Entity import UserProfileEntity
 from .DBObjects.BAL import WorkHistoryBAL
 from .DBObjects.Entity import WorkHistoryEntity
 
-#{"ProfileId": "1","CompanyName":"WebSynergies","ProjectName":"FujiFilm","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0","CompanyEmailId":"test@gmail.com"}
+#{"ProfileId": "1","CompanyName":"WebSynergies","ProjectName":"FujiFilm","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0","CompanyEmailId":"test@gmail.com","CompanyId":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryInsert(json_data):
@@ -36,8 +36,9 @@ def WorkHistoryInsert(json_data):
         strEndYear=loaded_json["EndYear"]
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         strCompanyEmailId=loaded_json["CompanyEmailId"]
+        strCompanyId=loaded_json["CompanyId"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.WorkHistoryInsert(strProfileId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking,strCompanyEmailId)
+        result=objWorkHistoryBAL.WorkHistoryInsert(strProfileId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking,strCompanyEmailId,strCompanyId)
         return JsonResponse(result,safe=False)
 
 #{"WorkHistoryId": "1"}
@@ -84,7 +85,7 @@ def GetWorkHistoryByProfileIdAndCompanyName(json_data):
         return JsonResponse(result,safe=False)
 
 
-#{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys","ProjectName":"RSM","Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1","CompanyEmailId":"test123@google.com"}
+#{"ProfileId":"1","WorkHistoryId": "1","CompanyName": "Infosys","ProjectName":"RSM","Role": "SAP", "Description":"Changed my technology","City":"Banglore","Country":"India","StartMonth":"12","StartYear": "2015","EndMonth": "11","EndYear": "2018","CurrentlyWorking": "1","CompanyEmailId":"test123@google.com","CompanyId":"2"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryUpdate(json_data):
@@ -104,8 +105,9 @@ def WorkHistoryUpdate(json_data):
         strEndYear=loaded_json["EndYear"]
         strCurrentlyWorking=loaded_json["CurrentlyWorking"]
         strCompanyEmailId=loaded_json["CompanyEmailId"]
+        strCompanyId=loaded_json["CompanyId"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
-        result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking,strCompanyEmailId)
+        result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strCompanyName,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking,strCompanyEmailId,strCompanyId)
         return JsonResponse("1",safe=False)
 
 #{"WorkHistoryId": "1"}
@@ -117,6 +119,19 @@ def WorkHistoryDelete(json_data):
         strWorkHistoryId=loaded_json["WorkHistoryId"]
         objWorkHistoryEntity=objWorkHistoryBAL.WorkHistoryDelete(strWorkHistoryId)
         return JsonResponse("1",safe=False)
+
+#{"WHGuid":"ABC1234","VerificationCode":"1234"}
+@csrf_exempt
+@api_view(["POST"])
+def WorkHistoryUpdateVerificationCode(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strWHGuid=loaded_json["WHGuid"]
+        strVerificationCode=loaded_json["VerificationCode"]      
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        objWorkHistoryEntity=objWorkHistoryBAL.WorkHistoryUpdateVerificationCode(strWHGuid,strVerificationCode)
+        result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
 
 #{"WorkHistoryId":"1","Description":"Worked hard in deadline"}
 @csrf_exempt

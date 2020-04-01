@@ -136,6 +136,7 @@ class ExecOrder:
         objStoredProcedures.TaskCommentUpdateIsNew('self')
         objStoredProcedures.UserProfileUpdateRegCode('self')
         objStoredProcedures.CompanyGetAll('self')
+        objStoredProcedures.WorkHistoryUpdateVerificationCode('self')
 
 
 

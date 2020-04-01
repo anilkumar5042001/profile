@@ -4,7 +4,7 @@ from .CommonMethodsBAL import *
 import uuid
 
 class WorkHistoryBAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
+    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
         VerificationCode=""
         WHGuid=""
         IsVerified=0
@@ -20,7 +20,7 @@ class WorkHistoryBAL:
             objCommonMethodsBAL.SendMail(CompanyEmailId,"Company Verification Email",verificationEmailTemplate)
 
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified)
+        return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId)
     
     def WorkHistoryGetById(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()
@@ -34,13 +34,17 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyName(ProfileId,CompanyName)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId)
+        return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId)
 
     def WorkHistoryDelete(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.WorkHistoryDelete(WorkHistoryId)
+
+    def WorkHistoryUpdateVerificationCode(self,WHGuid,VerificationCode):
+        objWorkHistoryDAL=WorkHistoryDAL()
+        return objWorkHistoryDAL.WorkHistoryUpdateVerificationCode(WHGuid,VerificationCode)
 
     def ProjectHighlightsInsert(self,WorkHistoryId,Description):
         objWorkHistoryDAL=WorkHistoryDAL()

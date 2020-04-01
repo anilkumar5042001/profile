@@ -116,7 +116,7 @@ class MySqlTable:
             cursor = connection.cursor()
             query = """create table WorkHistory
             (
-            WorkHistoryId INT NOT NULL AUTO_INCREMENT,
+            WorkHistoryId INT NOT NULL AUTO_INCREMENT,           
             ProfileId INT NOT NULL,
             CompanyName NVARCHAR(250) NULL,
             ProjectName NVARCHAR(250) NULL,
@@ -133,6 +133,7 @@ class MySqlTable:
             WHGuid NVARCHAR(250) NULL,
             VerificationCode NVARCHAR(10) NULL,
             IsVerified BOOLEAN,
+            CompanyId INT NOT NULL,
             PRIMARY KEY (WorkHistoryId)
             );"""
             cursor.execute(query)

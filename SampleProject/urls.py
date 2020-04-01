@@ -66,6 +66,7 @@ urlpatterns = [
     url(r'^GetWorkHistoryByProfileIdAndCompanyName/', WorkHistoryView.GetWorkHistoryByProfileIdAndCompanyName),
     url(r'^WorkHistoryUpdate/', WorkHistoryView.WorkHistoryUpdate),
     url(r'^WorkHistoryDelete/', WorkHistoryView.WorkHistoryDelete),
+    url(r'^WorkHistoryUpdateVerificationCode/', WorkHistoryView.WorkHistoryUpdateVerificationCode),
     url(r'^CertificationInsert/', CertificationView.CertificationInsert),
     url(r'^CertificationUpdate/', CertificationView.CertificationUpdate),
     url(r'^CertificationDelete/', CertificationView.CertificationDelete),
@@ -155,6 +156,7 @@ urlpatterns = [
     url(r'^TaskCommentUpdateIsNew/',TaskCommentView.TaskCommentUpdateIsNew),
     url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode),
     url(r'^CompanyGetAll',CompanyView.CompanyGetAll),
+    
     
 
 

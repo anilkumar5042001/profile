@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class WorkHistoryDAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified):
+    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId):
         cursor = connection.cursor()
-        args = [ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified]
+        args = [ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId]
         cursor.callproc('WorkHistory_Insert',args)
         workHistoryItem =  cursor.fetchall()
         workHistoryId=workHistoryItem[0][0]
@@ -18,9 +18,9 @@ class WorkHistoryDAL:
         args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
         cursor = connection.cursor()
-        args = [ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId]
+        args = [ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId]
         cursor.callproc('WorkHistory_Update',args)
         return 1
         
@@ -50,6 +50,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.WHGuid=WorkHistoryItem[14]
             objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
             objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
+            objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
@@ -78,6 +79,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.WSGuid=WorkHistoryItem[14]
             objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
             objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
+            objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems
 
@@ -103,6 +105,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[11]
             objWorkHistoryEntity.ProjectName=WorkHistoryItem[12]
             objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
+            objWorkHistoryEntity.CompanyId=WorkHistoryItem[14]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems  
 
@@ -111,6 +114,15 @@ class WorkHistoryDAL:
         args = [WorkHistoryId]
         cursor.callproc('WorkHistory_Delete',args)
         return 1
+
+    def WorkHistoryUpdateVerificationCode(self,WHGuid,VerificationCode):
+        cursor = connection.cursor()
+        args = [WHGuid,VerificationCode]
+        cursor.callproc('WorkHistory_UpdateVerificationCode',args)
+        res=cursor.fetchall()
+        objWorkHistoryEntity=WorkHistoryEntity()        
+        objWorkHistoryEntity.ProfileId=res[0][0]
+        return objWorkHistoryEntity
 
     def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         cursor = connection.cursor()
