@@ -2319,6 +2319,35 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP WorkHistoryUpdateVerificationCode executed')
     
+    def CompanyInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Company_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Company_Insert
+        (
+        IN p_CompanyName NVARCHAR(250),
+        IN p_DomainName NVARCHAR(250),
+        IN p_Logo NVARCHAR(250)   
+        )
+        BEGIN
+        INSERT INTO  Company(
+        CompanyName,
+        DomainName,
+        Logo  
+        ) 
+        VALUES (
+        p_CompanyName,
+        p_DomainName,
+        p_Logo    
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP CompanyInsert')
+    
+    
+
+    
 
 
 

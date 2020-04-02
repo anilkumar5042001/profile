@@ -25,6 +25,18 @@ def CompanyGetAll(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"CompanyName": "google","DomainName":"google.com","Logo": "google.jpg"}
+@csrf_exempt
+@api_view(["POST"])
+def CompanyInsert(json_data):
+        loaded_json = json.loads(json_data.body)
+        strCompanyName=loaded_json["CompanyName"]
+        strDomainName=loaded_json["DomainName"]
+        strLogo=loaded_json["Logo"]   
+        objCompanyBAL=CompanyBAL.CompanyBAL()
+        result=objCompanyBAL.CompanyInsert(strCompanyName,strDomainName,strLogo)
+        return JsonResponse(result,safe=False)
+
 
 
 

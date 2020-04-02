@@ -156,6 +156,7 @@ urlpatterns = [
     url(r'^TaskCommentUpdateIsNew/',TaskCommentView.TaskCommentUpdateIsNew),
     url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode),
     url(r'^CompanyGetAll',CompanyView.CompanyGetAll),
+    url(r'^CompanyInsert',CompanyView.CompanyInsert),
     
     
 
