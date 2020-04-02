@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class WorkHistoryDAL:
-    def WorkHistoryInsert(self,ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId):
+    def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId):
         cursor = connection.cursor()
-        args = [ProfileId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId]
+        args = [ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId]
         cursor.callproc('WorkHistory_Insert',args)
         workHistoryItem =  cursor.fetchall()
         workHistoryId=workHistoryItem[0][0]
@@ -18,9 +18,9 @@ class WorkHistoryDAL:
         args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
         cursor = connection.cursor()
-        args = [ProfileId,WorkHistoryId,CompanyName,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId]
+        args = [ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId]
         cursor.callproc('WorkHistory_Update',args)
         return 1
         

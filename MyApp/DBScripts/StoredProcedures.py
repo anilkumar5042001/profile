@@ -356,7 +356,6 @@ class StoredProcedures:
         query = """CREATE PROCEDURE WorkHistory_Insert
         (
         IN p_ProfileId INT,
-        IN p_CompanyName NVARCHAR(250),
         IN p_ProjectName NVARCHAR(250),
         IN p_Role NVARCHAR(250),
         IN p_Description NVARCHAR(500),
@@ -376,7 +375,6 @@ class StoredProcedures:
         BEGIN
         INSERT INTO WorkHistory (
         ProfileId,
-        CompanyName,
         ProjectName,
         Role,
         Description,
@@ -395,7 +393,6 @@ class StoredProcedures:
         ) 
         VALUES (
         p_ProfileId,
-        p_CompanyName,
         p_ProjectName,
         p_Role,
         p_Description,
@@ -425,7 +422,7 @@ class StoredProcedures:
         BEGIN
         SELECT ProfileId,
         WorkHistoryId,
-        w.CompanyName,
+        c.CompanyName,
         ProjectName,
         Role,
         Description,
@@ -517,7 +514,6 @@ class StoredProcedures:
         (
         IN p_ProfileId INT,
         IN p_WorkHistoryId INT,
-        IN p_CompanyName NVARCHAR(250),
         IN p_ProjectName NVARCHAR(250),
         IN p_Role NVARCHAR(250),
         IN p_Description NVARCHAR(500),
@@ -542,7 +538,6 @@ class StoredProcedures:
         
         Update WorkHistory 
         SET ProfileId=p_ProfileId,
-        CompanyName=p_CompanyName,
         ProjectName=p_ProjectName,
         Role=p_Role,
         Description=p_Description,
