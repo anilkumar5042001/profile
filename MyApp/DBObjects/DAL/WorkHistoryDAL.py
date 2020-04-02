@@ -28,7 +28,7 @@ class WorkHistoryDAL:
     def GetWorkHistoryByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
-        cursor.callproc('GetWorkHistory_ByProfileId',args)
+        cursor.callproc('WorkHistory_GetByProfileId',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for WorkHistoryItem in res:
@@ -51,6 +51,8 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
             objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
+            objWorkHistoryEntity.Logo=WorkHistoryItem[18]
+            objWorkHistoryEntity.DomainName=WorkHistoryItem[19]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
@@ -86,7 +88,7 @@ class WorkHistoryDAL:
     def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
         cursor = connection.cursor()
         args = [ProfileId,CompanyName]
-        cursor.callproc('GetWorkHistory_ByProfileIdAndCompanyName',args)
+        cursor.callproc('WorkHistory_ByProfileIdAndCompanyName',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for WorkHistoryItem in res:

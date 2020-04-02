@@ -419,13 +419,13 @@ class StoredProcedures:
 
     def GetWorkHistoryByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS GetWorkHistory_ByProfileId"""
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_GetByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE GetWorkHistory_ByProfileId(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE WorkHistory_GetByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT ProfileId,
         WorkHistoryId,
-        CompanyName,
+        w.CompanyName,
         ProjectName,
         Role,
         Description,
@@ -440,8 +440,11 @@ class StoredProcedures:
         WHGuid,
         VerificationCode,
         IsVerified,
-        CompanyId
-        FROM WorkHistory 
+        w.CompanyId,
+        c.Logo,
+        c.DomainName
+        FROM WorkHistory w 
+        inner join Company c on w.CompanyId=c.CompanyId
         WHERE ProfileId = p_ProfileId;
         END"""
         cursor.execute(query)
@@ -449,9 +452,9 @@ class StoredProcedures:
     
     def GetWorkHistoryByProfileIdAndCompanyName(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS GetWorkHistory_ByProfileIdAndCompanyName"""
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_ByProfileIdAndCompanyName"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE GetWorkHistory_ByProfileIdAndCompanyName(IN p_ProfileId INT,IN p_CompanyName VARCHAR(250))
+        query = """CREATE PROCEDURE WorkHistory_ByProfileIdAndCompanyName(IN p_ProfileId INT,IN p_CompanyName VARCHAR(250))
         BEGIN
         SELECT ProfileId,
         WorkHistoryId,
@@ -1273,11 +1276,16 @@ class StoredProcedures:
         BEGIN
         Declare p_ProfileIdValue INT;
         Declare p_Result INT;
-        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId and Password=p_Password);
+        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId and Password=p_Password and IsActivated=1);
         IF p_ProfileIdValue>0 THEN
         set  p_Result=p_ProfileIdValue;
         else
+        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId and Password=p_Password);
+        IF p_ProfileIdValue>0 THEN
+		set  p_Result=-1;
+		else
         set p_Result=0;
+        END IF;
         END IF;
         select p_Result as output;
         END"""

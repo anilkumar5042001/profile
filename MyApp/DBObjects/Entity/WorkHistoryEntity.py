@@ -17,6 +17,8 @@ class WorkHistoryEntity(object):
     VerificationCode=""
     IsVerified=""
     CompanyId=""
+    Logo=""
+    DomainName=""
 
 class ProjectHighlightsEntity(object): 
     HighlightId=0
