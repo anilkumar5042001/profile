@@ -463,7 +463,7 @@ class StoredProcedures:
         c.DomainName
         FROM WorkHistory w 
         inner join Company c on w.CompanyId=c.CompanyId
-        WHERE ProfileId = p_ProfileId;
+        WHERE ProfileId = p_ProfileId ORDER BY StartYear DESC,StartMonth DESC;
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileId executed')
@@ -2328,7 +2328,7 @@ class StoredProcedures:
         BEGIN
         Declare varWorkHistoryId INT;
         SET SQL_SAFE_UPDATES = 0;
-        SET varWorkHistoryId=(SELECT ProfileId from WorkHistory WHERE WHGuid=p_WHGuid AND VerificationCode=p_VerificationCode);
+        SET varWorkHistoryId=(SELECT WorkHistoryId from WorkHistory WHERE WHGuid=p_WHGuid AND VerificationCode=p_VerificationCode);
         If (varWorkHistoryId>0)
         THEN
         UPDATE WorkHistory Set IsVerified =1 WHERE WorkHistoryId=varWorkHistoryId;   
