@@ -137,6 +137,7 @@ class ExecOrder:
         objStoredProcedures.UserProfileUpdateRegCode('self')
         objStoredProcedures.CompanyGetAll('self')
         objStoredProcedures.WorkHistoryUpdateVerificationCode('self')
+        objStoredProcedures.WorkHistoryUpdateVerificationCodeById('self')
         objStoredProcedures.CompanyInsert('self')
 
 

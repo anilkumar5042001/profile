@@ -83,6 +83,8 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
             arrayItems.append(objWorkHistoryEntity)
+
+        cursor.close() 
         return arrayItems
 
     def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
@@ -125,6 +127,12 @@ class WorkHistoryDAL:
         objWorkHistoryEntity=WorkHistoryEntity()        
         objWorkHistoryEntity.ProfileId=res[0][0]
         return objWorkHistoryEntity
+
+    def WorkHistoryUpdateVerificationCodeById(self,WorkHistoryId,WHGuid,VerificationCode,IsVerified):
+        cursor = connection.cursor()
+        args = [WorkHistoryId,WHGuid,VerificationCode,IsVerified]
+        cursor.callproc('WorkHistory_UpdateVerificationCodeById',args)
+        return 1
 
     def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         cursor = connection.cursor()

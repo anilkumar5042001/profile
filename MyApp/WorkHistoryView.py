@@ -17,7 +17,7 @@ from .DBObjects.Entity import UserProfileEntity
 from .DBObjects.BAL import WorkHistoryBAL
 from .DBObjects.Entity import WorkHistoryEntity
 
-#{"ProfileId": "1","ProjectName":"FujiFilm","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0","CompanyEmailId":"test@gmail.com","CompanyId":"1"}
+#{"ProfileId": "1","ProjectName":"FujiFilm","Role":"Testing","Description":"I worked as a Test Engineer","City":"Hyd","Country":"India","StartMonth":"1","StartYear":"2016","EndMonth":"6","EndYear":"2019","CurrentlyWorking":"0","CompanyEmailId":"anilkumar5042001@gmail.com","CompanyId":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def WorkHistoryInsert(json_data):
@@ -106,7 +106,7 @@ def WorkHistoryUpdate(json_data):
         strCompanyId=loaded_json["CompanyId"]
         objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
         result=objWorkHistoryBAL.WorkHistoryUpdate(strProfileId,strWorkHistoryId,strProjectName,strRole,strDescription,strCity,strCountry,strStartMonth,strStartYear,strEndMonth,strEndYear,strCurrentlyWorking,strCompanyEmailId,strCompanyId)
-        return JsonResponse("1",safe=False)
+        return JsonResponse(result,safe=False)
 
 #{"WorkHistoryId": "1"}
 @csrf_exempt

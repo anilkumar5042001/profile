@@ -2,25 +2,38 @@ from ..DAL.WorkHistoryDAL import WorkHistoryDAL
 from ..Helper.EmailTemplate import *
 from .CommonMethodsBAL import *
 import uuid
+from ...GlobalConstants import *
 
 class WorkHistoryBAL:
     def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
+        workHistoryId=0
+        IsVerified=0
         VerificationCode=""
         WHGuid=""
-        IsVerified=0
-        
+
         if CurrentlyWorking=="1":
             uid = uuid.uuid4()
             WHGuid=uid.hex
             VerificationCode=WHGuid[0:4]
-            objCommonMethodsBAL=CommonMethodsBAL()
-            objEmailTemplate=EmailTemplate()
-            strLink="https://boring-rosalind-5ae0ce.netlify.com/whverification/"+WHGuid
-            verificationEmailTemplate=objEmailTemplate.GetWorkHistoryVerificationEmail(WHGuid,VerificationCode)
-            objCommonMethodsBAL.SendMail(CompanyEmailId,"Company Verification Email",verificationEmailTemplate)
 
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryInsert(ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId)
+        workHistoryId=objWorkHistoryDAL.WorkHistoryInsert(ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId)
+        if workHistoryId>0:
+            if CurrentlyWorking=="1":
+                objWorkHistoryBAL=WorkHistoryBAL()
+                objWorkHistoryBAL.SendVerificationEmail(ProjectName,WHGuid,VerificationCode,CompanyEmailId)
+
+        return workHistoryId
+
+    def SendVerificationEmail(self,projectName,WHGuid,VerificationCode,CompanyEmailId):
+        
+        objCommonMethodsBAL=CommonMethodsBAL()
+        objEmailTemplate=EmailTemplate()
+        objGlobalConstants=GlobalConstants()
+        strLink=objGlobalConstants.SiteUrl+"/"+objGlobalConstants.WHVerificationUrl+"/"+ WHGuid
+        verificationEmailTemplate=objEmailTemplate.GetWorkHistoryVerificationEmail(strLink,VerificationCode)
+        subject="Company Verification Email for project: "+projectName
+        objCommonMethodsBAL.SendMail(CompanyEmailId,subject,verificationEmailTemplate)
     
     def WorkHistoryGetById(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()
@@ -35,9 +48,37 @@ class WorkHistoryBAL:
         return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyName(ProfileId,CompanyName)
 
     def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
-        objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId)
+        sucess=0
+        isEmailIdChanged=False
+        objWorkHistoryBAL=WorkHistoryBAL()
+        if CurrentlyWorking=="1":
+            objWorkHistoryItem=objWorkHistoryBAL.WorkHistoryGetById(WorkHistoryId)
+            existingCompanyEmailId=objWorkHistoryItem[0].CompanyEmailId
+            if existingCompanyEmailId!=CompanyEmailId:
+                isEmailIdChanged=True
 
+        objWorkHistoryDAL=WorkHistoryDAL()
+        sucess=objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId)
+
+        if isEmailIdChanged==True:
+            sucess=objWorkHistoryBAL.UpdateVerificationAndSendEmal(ProjectName,WorkHistoryId,CompanyEmailId)
+        return sucess
+
+    def UpdateVerificationAndSendEmal(self,ProjectName,WorkHistoryId,CompanyEmailId):
+        VerificationCode=""
+        WHGuid=""
+        uid = uuid.uuid4()
+        WHGuid=uid.hex
+        VerificationCode=WHGuid[0:4]
+        objWorkHistoryDAL=WorkHistoryDAL()
+        success=objWorkHistoryDAL.WorkHistoryUpdateVerificationCodeById(WorkHistoryId,WHGuid,VerificationCode,"0")
+        
+        objWorkHistoryBAL=WorkHistoryBAL()
+        objWorkHistoryBAL.SendVerificationEmail(ProjectName,WHGuid,VerificationCode,CompanyEmailId)
+        success="2"
+
+        return success
+        
     def WorkHistoryDelete(self,WorkHistoryId):
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.WorkHistoryDelete(WorkHistoryId)

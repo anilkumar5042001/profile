@@ -414,6 +414,27 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP WorkHistoryInsert')
 
+    def WorkHistoryUpdateVerificationCodeById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_UpdateVerificationCodeById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_UpdateVerificationCodeById
+        (
+        IN p_WorkHistoryId INT,
+        IN p_WHGuid NVARCHAR(250),
+        IN p_VerificationCode NVARCHAR(10),
+        IN p_IsVerified BOOLEAN
+        )
+        BEGIN
+        Update WorkHistory SET
+        WHGuid=p_WHGuid,
+        VerificationCode=p_VerificationCode,
+        IsVerified=p_IsVerified
+        WHERE WorkHistoryId=p_WorkHistoryId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP WorkHistory_UpdateVerificationCodeById')
+
     def GetWorkHistoryByProfileId(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS WorkHistory_GetByProfileId"""
