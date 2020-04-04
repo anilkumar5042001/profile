@@ -275,6 +275,7 @@ class MySqlTable:
             CreatedBy INT,
             TaskStatus VARCHAR(250) NULL,
             TaskDuration DECIMAL(6,2),
+            TaskOrder INT NOT NULL,
             PRIMARY KEY (TaskId)
             );"""
             cursor.execute(query)
