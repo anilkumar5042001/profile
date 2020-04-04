@@ -2378,6 +2378,122 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP CompanyInsert')
+
+    def StoryInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Story_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Story_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_StoryCategoryId INT,
+        IN p_StoryTitle NVARCHAR(250),        
+        IN p_Description LONGTEXT,
+        IN p_Thumbnail NVARCHAR(250),
+        IN p_IsPublished BOOLEAN
+        )
+        BEGIN
+        INSERT INTO Story (
+        ProfileId,
+        StoryCategoryId,
+        StoryTitle,
+        Description,
+        Thumbnail,
+        IsPublished
+        ) 
+        VALUES (
+        p_ProfileId,
+        P_StoryCategoryId,
+        p_StoryTitle,
+        p_Description,
+        p_Thumbnail,
+        p_IsPublished
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP StoryInsert')
+
+    def GetStoryByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetStory_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetStory_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT 
+        StoryId,
+        ProfileId,
+        StoryCategoryId,
+        StoryTitle,
+        Description,
+        Thumbnail,
+        IsPublished
+        FROM Story
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetStoryByProfileId executed')
+    
+    def StoryUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Story_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Story_Update
+        (
+        IN p_StoryId INT,
+        IN p_ProfileId INT,
+        IN p_StoryCategoryId INT,
+        IN p_StoryTitle NVARCHAR(250),
+        IN p_Description LONGTEXT,
+        IN p_Thumbnail NVARCHAR(250),
+        IN p_IsPublished BOOLEAN
+        )
+        BEGIN
+        Update Story 
+        SET ProfileId=p_ProfileId,
+        StoryCategoryId=p_StoryCategoryId,
+        StoryTitle=p_StoryTitle,
+        Description=p_Description,
+        Thumbnail=p_Thumbnail,
+        IsPublished=P_IsPublished
+        WHERE StoryId=p_StoryId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP StoryUpdate')
+
+    def GetStoryById(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Story_GetById"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Story_GetById(IN p_StoryId INT)
+        BEGIN
+        SELECT StoryId,
+        ProfileId,
+        StoryCategoryId,
+        StoryTitle,
+        Description,
+        Thumbnail,
+        IsPublished
+        FROM Story
+        WHERE StoryId = p_StoryId;
+        END"""
+        cursor.execute(query)
+        print('SP GetStoryById executed')
+
+    def StoryDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Story_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Story_Delete(IN p_StoryId INT)
+        BEGIN
+        Delete
+        FROM Story 
+        WHERE StoryId = p_StoryId;
+        END"""
+        cursor.execute(query)
+        print('SP StoryDelete executed')
+
+
     
     
 

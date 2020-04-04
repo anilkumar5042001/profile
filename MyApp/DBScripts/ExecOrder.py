@@ -27,6 +27,7 @@ class ExecOrder:
         objMySqlTable.CreateTaskComment('self')
         objMySqlTable.CreateTaskCategory('self')
         objMySqlTable.CreateCompany('self')
+        objMySqlTable.CreateStory('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -139,6 +140,11 @@ class ExecOrder:
         objStoredProcedures.WorkHistoryUpdateVerificationCode('self')
         objStoredProcedures.WorkHistoryUpdateVerificationCodeById('self')
         objStoredProcedures.CompanyInsert('self')
+        objStoredProcedures.StoryInsert('self')
+        objStoredProcedures.GetStoryById('self')
+        objStoredProcedures.GetStoryByProfileId('self')
+        objStoredProcedures.StoryUpdate('self')
+        objStoredProcedures.StoryDelete('self')
 
 
 

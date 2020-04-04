@@ -344,6 +344,24 @@ class MySqlTable:
             cursor.execute(query)
             print('Favourite table created')
 
+    def CreateStory(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Story")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Story(
+            StoryId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            StoryCategoryId INT NOT NULL,
+            StoryTitle NVARCHAR(250) NOT NULL,
+            Description LONGTEXT NOT NULL,
+            Thumbnail NVARCHAR(250) NOT NULL,
+            IsPublished Boolean NOT NULL,
+            PRIMARY KEY (StoryId)
+            );"""
+            cursor.execute(query)
+            print('Story table created')
+
     def CreateEvent(self):
         objMySqlTable=MySqlTable
         tblExists=objMySqlTable.CheckTableExists(self,"Event")

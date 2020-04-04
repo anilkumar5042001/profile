@@ -36,6 +36,8 @@ from MyApp.AllViews import ShareProfileView
 from MyApp.AllViews import FavouriteCategoryView
 from MyApp.AllViews import TaskCommentView
 from MyApp.AllViews import CompanyView
+from MyApp.AllViews import StoryView
+
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -157,7 +159,11 @@ urlpatterns = [
     url(r'^UserProfileUpdateRegCode/',views.UserProfileUpdateRegCode),
     url(r'^CompanyGetAll',CompanyView.CompanyGetAll),
     url(r'^CompanyInsert',CompanyView.CompanyInsert),
-    
+    url(r'^StoryInsert',StoryView.StoryInsert),
+    url(r'^GetStoryById',StoryView.GetStoryById),
+    url(r'^GetStoryByProfileId',StoryView.GetStoryByProfileId),
+    url(r'^StoryUpdate',StoryView.StoryUpdate),
+    url(r'^StoryDelete',StoryView.StoryDelete),
     
 
 

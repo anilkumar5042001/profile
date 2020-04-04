@@ -5,6 +5,8 @@ class SkillsBAL:
         objSkillsDAL=SkillsDAL()
         return objSkillsDAL.SkillsInsert(ProfileId,SkillCategoryId,SkillName)
 
+    
+
     def GetSkillsByProfileId(self,ProfileId):
         objSkillsDAL=SkillsDAL()
         return objSkillsDAL.GetSkillsByProfileId(ProfileId)
