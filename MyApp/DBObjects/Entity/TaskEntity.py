@@ -16,3 +16,4 @@ class TaskEntity(object):
     NewCommentCount=0
     AssignToProfileImageName=""
     CreatedByProfileImageName=""
+    TaskOrder=""

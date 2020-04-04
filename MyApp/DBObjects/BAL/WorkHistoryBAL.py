@@ -43,9 +43,9 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileId(ProfileId)
 
-    def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
+    def GetWorkHistoryByProfileIdAndCompanyId(self,ProfileId,CompanyId):
         objWorkHistoryDAL=WorkHistoryDAL()
-        return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyName(ProfileId,CompanyName)
+        return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyId(ProfileId,CompanyId)
 
     def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
         sucess=0
@@ -72,7 +72,7 @@ class WorkHistoryBAL:
         VerificationCode=WHGuid[0:4]
         objWorkHistoryDAL=WorkHistoryDAL()
         success=objWorkHistoryDAL.WorkHistoryUpdateVerificationCodeById(WorkHistoryId,WHGuid,VerificationCode,"0")
-        
+
         objWorkHistoryBAL=WorkHistoryBAL()
         objWorkHistoryBAL.SendVerificationEmail(ProjectName,WHGuid,VerificationCode,CompanyEmailId)
         success="2"

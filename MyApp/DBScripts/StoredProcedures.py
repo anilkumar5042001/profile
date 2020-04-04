@@ -468,31 +468,34 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileId executed')
     
-    def GetWorkHistoryByProfileIdAndCompanyName(self):
+    
+
+    def GetWorkHistoryByProfileIdAndCompanyId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS WorkHistory_ByProfileIdAndCompanyName"""
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_ByProfileIdAndCompanyId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE WorkHistory_ByProfileIdAndCompanyName(IN p_ProfileId INT,IN p_CompanyName VARCHAR(250))
+        query = """CREATE PROCEDURE WorkHistory_ByProfileIdAndCompanyId(IN p_ProfileId INT,IN p_CompanyId INT)
         BEGIN
-        SELECT ProfileId,
-        WorkHistoryId,
-        CompanyName,
-        ProjectName,
-        Role,
-        Description,
-        City,
-        Country,
-        StartMonth,
-        StartYear,
-        EndMonth,
-        EndYear,
-        CurrentlyWorking,
-        CompanyEmailId,
-        CompanyId
-        FROM WorkHistory 
-        WHERE ProfileId = p_ProfileId
+        SELECT w.ProfileId,
+        w.WorkHistoryId,
+        c.CompanyName,
+        w.ProjectName,
+        w.Role,
+        w.Description,
+        w.City,
+        w.Country,
+        w.StartMonth,
+        w.StartYear,
+        w.EndMonth,
+        w.EndYear,
+        w.CurrentlyWorking,
+        w.CompanyEmailId,
+        w.CompanyId
+        FROM WorkHistory w
+        inner join Company c on w.CompanyId=c.CompanyId
+        WHERE w.ProfileId = p_ProfileId
         AND
-        CompanyName=p_CompanyName;
+        w.CompanyId=p_CompanyId;
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileIdAndCompanyName executed')
@@ -1322,7 +1325,8 @@ class StoredProcedures:
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
         IN p_TaskStatus VARCHAR(250),
-        IN p_TaskDuration decimal(3,2)
+        IN p_TaskDuration decimal(3,2),
+        IN p_TaskOrder INT
         )
         BEGIN
         INSERT INTO Task (
@@ -1334,7 +1338,8 @@ class StoredProcedures:
         AssignTo,
         CreatedBy,
         TaskStatus,
-        TaskDuration
+        TaskDuration,
+        TaskOrder
         ) 
         VALUES (
         p_TaskCategoryId,
@@ -1345,7 +1350,8 @@ class StoredProcedures:
         p_AssignTo,
         p_CreatedBy,
         p_TaskStatus,
-        p_TaskDuration
+        p_TaskDuration,
+        p_TaskOrder
         );
         select LAST_INSERT_ID();
         END"""
@@ -1367,7 +1373,8 @@ class StoredProcedures:
         AssignTo,
         CreatedBy,
         TaskStatus,
-        TaskDuration
+        TaskDuration,
+        TaskOrder
         FROM Task 
         WHERE TaskId = p_TaskId;
         END"""
@@ -1389,7 +1396,8 @@ class StoredProcedures:
         AssignTo,
         CreatedBy,
         TaskStatus,
-        TaskDuration
+        TaskDuration,
+        TaskOrder
         FROM Task 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -1423,7 +1431,8 @@ class StoredProcedures:
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.AssignTo) as AssignToFullName,
         (SELECT CONCAT(up.FirstName," ",up.LastName)  FROM UserProfile up WHERE ProfileId=t.CreatedBy) as CreatedByFullName,
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.AssignTo) as AssignToProfileImageName,            
-        (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName
+        (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName,
+        t.TaskOrder
         FROM Task t WHERE 1=1';
         IF(p_AssignTo>0)
         THEN
@@ -1470,7 +1479,8 @@ class StoredProcedures:
         t.CreatedBy,
         t.TaskStatus,
         t.TaskDuration,
-        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount,
+        t.TaskOrder
         FROM Task t
 	    INNER JOIN TaskComment tc
 	    on t.TaskId=tc.TaskId
@@ -1484,8 +1494,9 @@ class StoredProcedures:
         t.AssignTo,
         t.CreatedBy,
         t.TaskStatus,
-        t.TaskDuration,
-        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount
+        t.TaskDuration, 
+        (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount,
+        t.TaskOrder
         FROM Task t
         WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open') a
         ORDER BY NewCommentCount DESC,DueDate ASC;
@@ -1508,7 +1519,8 @@ class StoredProcedures:
         IN p_AssignTo INT,
         IN p_CreatedBy INT,
         IN p_TaskStatus VARCHAR(250),
-        IN p_TaskDuration decimal(3,2)
+        IN p_TaskDuration decimal(3,2),
+        IN p_TaskOrder INT
         )
         BEGIN
         Update Task 
@@ -1521,7 +1533,8 @@ class StoredProcedures:
         AssignTo=p_AssignTo,
         CreatedBy=p_CreatedBy,
         TaskStatus=p_TaskStatus,
-        TaskDuration=p_TaskDuration
+        TaskDuration=p_TaskDuration,
+        TaskOrder=p_TaskOrder
         WHERE TaskId=p_TaskId;
         END"""
         cursor.execute(query)

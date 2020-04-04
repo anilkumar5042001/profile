@@ -5,9 +5,9 @@ from ..Entity.UserProfileEntity import *
 import decimal
 
 class TaskDAL:
-    def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder):
         cursor=connection.cursor()
-        args=[TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
+        args=[TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder]
         cursor.callproc('Task_Insert',args)
         TaskItem=cursor.fetchall()
         objTaskId=TaskItem[0][0]
@@ -33,6 +33,7 @@ class TaskDAL:
             objTaskEntity.CreatedBy=TaskItem[7]
             objTaskEntity.TaskStatus=TaskItem[8]
             objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[9]))
+            objTaskEntity.TaskOrder=TaskItem[10]
             arrayItems.append(objTaskEntity)
         return arrayItems 
     
@@ -54,6 +55,7 @@ class TaskDAL:
             objTaskEntity.CreatedBy=TaskItem[7]
             objTaskEntity.TaskStatus=TaskItem[8]
             objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[9]))
+            objTaskEntity.TaskOrder=TaskItem[10]
             arrayItems.append(objTaskEntity)
         return arrayItems
         
@@ -75,12 +77,13 @@ class TaskDAL:
             objTaskEntity.TaskStatus=TaskItem[7]
             objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[8]))
             objTaskEntity.NewCommentCount=TaskItem[9]
+            objTaskEntity.TaskOrder=TaskItem[10]
             arrayItems.append(objTaskEntity)
         return arrayItems 
 
-    def TaskUpdate(self,TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskUpdate(self,TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder):
         cursor=connection.cursor()
-        args=[TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration]
+        args=[TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder]
         cursor.callproc('Task_Update',args)
         return 1
     
@@ -128,5 +131,6 @@ class TaskDAL:
             objTaskEntity.CreatedByFullName=TaskItem[11]
             objTaskEntity.AssignToProfileImageName=TaskItem[12]
             objTaskEntity.CreatedByProfileImageName=TaskItem[13]
+            objTaskEntity.TaskOrder=TaskItem[14]
             arrayItems.append(objTaskEntity)
         return arrayItems

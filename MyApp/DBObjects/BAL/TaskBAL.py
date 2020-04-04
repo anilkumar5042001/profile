@@ -1,9 +1,9 @@
 from ..DAL.TaskDAL import TaskDAL
 
 class TaskBAL:
-    def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder):
         objTaskDAL=TaskDAL()
-        return objTaskDAL.TaskInsert(TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration)
+        return objTaskDAL.TaskInsert(TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder)
 
     def GetTaskByTaskId(self,TaskId):
         objTaskDAL=TaskDAL()
@@ -17,9 +17,9 @@ class TaskBAL:
         objTaskDAL=TaskDAL()
         return objTaskDAL.GetTaskByAssignTo(AssignTo)
 
-    def TaskUpdate(self,TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration):
+    def TaskUpdate(self,TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder):
         objTaskDAL=TaskDAL()
-        return objTaskDAL.TaskUpdate(TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration)
+        return objTaskDAL.TaskUpdate(TaskId,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder)
     
     def GetUserNameForAssignTo(self):
         objTaskDAL=TaskDAL()

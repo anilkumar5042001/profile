@@ -87,10 +87,10 @@ class WorkHistoryDAL:
         cursor.close() 
         return arrayItems
 
-    def GetWorkHistoryByProfileIdAndCompanyName(self,ProfileId,CompanyName):
+    def GetWorkHistoryByProfileIdAndCompanyId(self,ProfileId,CompanyId):
         cursor = connection.cursor()
-        args = [ProfileId,CompanyName]
-        cursor.callproc('WorkHistory_ByProfileIdAndCompanyName',args)
+        args = [ProfileId,CompanyId]
+        cursor.callproc('WorkHistory_ByProfileIdAndCompanyId',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for WorkHistoryItem in res:
