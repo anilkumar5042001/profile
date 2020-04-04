@@ -134,10 +134,9 @@ def GetAllTasks(json_data):
         strAssignTo=loaded_json["AssignTo"]
         strTaskStatus=loaded_json["TaskStatus"]
         strProfileId=loaded_json["ProfileId"]
-        strTaskOrder=loaded_json["TaskOrder"]
-
+        
         objTaskBAL=TaskBAL.TaskBAL()     
-        objTaskEntity=objTaskBAL.GetAllTasks(strFromDueDate,strToDueDate,strAssignTo,strTaskStatus,strProfileId,strTaskOrder)
+        objTaskEntity=objTaskBAL.GetAllTasks(strFromDueDate,strToDueDate,strAssignTo,strTaskStatus,strProfileId)
         result = json.dumps([ob.__dict__ for ob in objTaskEntity])
         # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
 
