@@ -47,6 +47,27 @@ class AwardsDAL:
             arrayItems.append(objAwardEntity)
         return arrayItems
 
+    def GetAwardsByAssignToAndCompanyDomain(self,assignTo,companyDomain):
+        cursor = connection.cursor()
+        args = [assignTo,companyDomain]
+        cursor.callproc('Awards_GetByAssignToAndDomainName',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for AwardItem in res:
+            objAwardEntity=AwardsEntity()
+            objAwardEntity.AwardId=AwardItem[0]
+            objAwardEntity.ProfileId=AwardItem[1]
+            objAwardEntity.AwardTitle=AwardItem[2]
+            objAwardEntity.AwardDescription=AwardItem[3]
+            objAwardEntity.FirstName=AwardItem[4]
+            objAwardEntity.LastName=AwardItem[5]
+            objAwardEntity.ShowInProfile=AwardItem[6]
+            objAwardEntity.ProfileImageName=AwardItem[7]
+            objAwardEntity.CompanyName=AwardItem[8]
+            objAwardEntity.IsNew=AwardItem[9]
+            arrayItems.append(objAwardEntity)
+        return arrayItems
+
     def GetAwardsById(self,AwardId):
         cursor = connection.cursor()
         args = [AwardId]

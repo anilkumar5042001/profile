@@ -102,6 +102,7 @@ urlpatterns = [
     url(r'^AwardsInsert/',AwardsView.AwardsInsert),
     url(r'^GetAwardsByProfileId/', AwardsView.GetAwardsByProfileId),
     url(r'^GetAwardsByAssignTo/', AwardsView.GetAwardsByAssignTo),
+    url(r'^GetAwardsByAssignToAndCompanyDomain/', AwardsView.GetAwardsByAssignToAndCompanyDomain),
     url(r'^GetAwardsById/', AwardsView.GetAwardsById),
     url(r'^AwardsUpdate/', AwardsView.AwardsUpdate),
     url(r'^AwardsUpdateShowInProfile/', AwardsView.AwardsUpdateShowInProfile),

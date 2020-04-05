@@ -12,6 +12,10 @@ class AwardsBAL:
     def GetAwardsByAssignTo(self,assignTo):
         objAwardsDAL=AwardsDAL()
         return objAwardsDAL.GetAwardsByAssignTo(assignTo)
+
+    def GetAwardsByAssignToAndCompanyDomain(self,assignTo,companyDomain):
+        objAwardsDAL=AwardsDAL()
+        return objAwardsDAL.GetAwardsByAssignToAndCompanyDomain(assignTo,companyDomain)
     
     def GetAwardsById(self,AwardId):
         objAwardsDAL=AwardsDAL()

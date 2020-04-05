@@ -1098,6 +1098,31 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP GetAwardsByAssignTo executed')
 
+    def GetAwardsByAssignToAndDomainName(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Awards_GetByAssignToAndDomainName"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Awards_GetByAssignToAndDomainName(IN p_AssignTo INT,IN p_CompanyDomain varchar(250))
+        BEGIN
+        SELECT 
+        a.AwardId,
+        u.ProfileId,
+        a.AwardTitle,
+        a.AwardDescription,
+        (select FirstName from UserProfile where ProfileId=a.ProfileId) as FirstName,
+        (select LastName from UserProfile where ProfileId=a.ProfileId) as LastName,
+        a.ShowInProfile,
+        (select ProfileImageName from UserProfile where ProfileId=a.ProfileId) as ProfileImageName,
+        a.CompanyName,
+        a.IsNew
+        FROM Awards a
+        INNER JOIN UserProfile u ON
+        a.AssignTo=u.ProfileId
+        WHERE a.AssignTo = p_AssignTo AND a.CompanyDomain=p_CompanyDomain;
+        END"""
+        cursor.execute(query)
+        print('SP GetAwardsByAssignToAndDomainName executed')
+
     def GetAwardsById(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Awards_GetById"""

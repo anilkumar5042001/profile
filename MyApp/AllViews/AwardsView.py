@@ -54,6 +54,21 @@ def GetAwardsByAssignTo(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"AssignTo": "1","CompanyDomain":"gmail.com"}
+@csrf_exempt
+@api_view(["POST"])
+def GetAwardsByAssignToAndCompanyDomain(json_data):
+        loaded_json = json.loads(json_data.body)
+        objAwardsBAL=AwardsBAL.AwardsBAL()
+        strAssignTo=loaded_json["AssignTo"]
+        strCompanyDomain=loaded_json["CompanyDomain"]
+        objAwardsEntity=objAwardsBAL.GetAwardsByAssignToAndCompanyDomain(strAssignTo,strCompanyDomain)
+        result = json.dumps([ob.__dict__ for ob in objAwardsEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 #{"AwardId": "1"}
 @csrf_exempt
 @api_view(["POST"])
