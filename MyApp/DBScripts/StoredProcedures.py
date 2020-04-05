@@ -467,8 +467,6 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileId executed')
-    
-    
 
     def GetWorkHistoryByProfileIdAndCompanyId(self):
         cursor = connection.cursor()
@@ -479,7 +477,6 @@ class StoredProcedures:
         SELECT w.ProfileId,
         w.WorkHistoryId,
         c.CompanyName,
-        w.ProjectName,
         w.Role,
         w.Description,
         w.City,
@@ -489,8 +486,10 @@ class StoredProcedures:
         w.EndMonth,
         w.EndYear,
         w.CurrentlyWorking,
+        w.ProjectName,
         w.CompanyEmailId,
-        w.CompanyId
+        w.CompanyId,
+        c.Logo
         FROM WorkHistory w
         inner join Company c on w.CompanyId=c.CompanyId
         WHERE w.ProfileId = p_ProfileId
@@ -1499,7 +1498,7 @@ class StoredProcedures:
         t.TaskOrder
         FROM Task t
         WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open') a
-        ORDER BY NewCommentCount DESC,DueDate ASC;
+        ORDER BY NewCommentCount DESC,DueDate ASC,TaskOrder ASC;
         END"""
         cursor.execute(query)
         print('SP GetTaskByAssignTo executed')

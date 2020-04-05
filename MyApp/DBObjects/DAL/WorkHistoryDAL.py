@@ -110,6 +110,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.ProjectName=WorkHistoryItem[12]
             objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[14]
+            objWorkHistoryEntity.Logo=WorkHistoryItem[15]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems  
 
