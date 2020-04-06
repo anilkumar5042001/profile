@@ -22,3 +22,16 @@ class EmailTemplate:
         message+="Worked.com team"
         message +="</p>"
         return message
+
+    def GetShareProfileEmail(self,profileLink,msg,userFullName):
+        message = "<p>Dear User,</p>"
+        message +="<p>"
+        message+="Please <a href='"+profileLink+"'>Click here</a> to access profile link of "+userFullName+".<br/>"
+        message +="</p>"
+        if msg!="":
+            message+="<p>Message : <b>"+msg+"</b></p>"
+        message +="<p>"
+        message+="Regards,<br/>"
+        message+=userFullName
+        message +="</p>"
+        return message

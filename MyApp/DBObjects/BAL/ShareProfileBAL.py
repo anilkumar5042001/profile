@@ -5,22 +5,37 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import datetime
 import string
+from ..Helper.EmailTemplate import *
+from .CommonMethodsBAL import *
+from ...GlobalConstants import *
+from .UserProfileBAL import *
 
 class ShareProfileBAL:
     def ShareProfileInsert(self,ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message):
         # strEmailIds='anilkumar5042001@gmail.com;riav4562001@gmail.com'
         splitEmailIds= EmailId.split(";")
         lensplitEmailIds=len(EmailId.split(';'))
+        objUserProfileBAL=UserProfileBAL()
+        objUserEntity=objUserProfileBAL.GetUserProfileById(profileId)
+        userFullName=objUserEntity.FirstName+" "+objUserEntity.LastName
 
         for x in range(0,lensplitEmailIds):
             email=splitEmailIds[x]
             randomNum = datetime.datetime.now().strftime("%d%m%Y%H%M%S%f")
             profileLink=ProfileLink+"/"+randomNum
             objShareProfileBAL=ShareProfileBAL()
-            objShareProfileBAL.SendMail(email,profileLink,Message)
+            objShareProfileBAL.SendShareProfileEmail(email,profileLink,userFullName,Message)
             objShareProfileDAL=ShareProfileDAL()
             objShareProfileDAL.ShareProfileInsert(ProfileId,email,randomNum,ExpiryDate,SharedWith,Message)
         return "1"
+
+    def SendShareProfileEmail(self,emailId,profileLink,userFullName,msg):
+        objCommonMethodsBAL=CommonMethodsBAL()
+        objEmailTemplate=EmailTemplate()
+        objGlobalConstants=GlobalConstants()
+        shareProfileEmailTemplate=objEmailTemplate.GetShareProfileEmail(profileLink,msg,userFullName)
+        subject="Profile link: "+userFullName
+        objCommonMethodsBAL.SendMail(emailId,subject,shareProfileEmailTemplate)
 
     def ShareProfileGetProfileIdByProfileLink(self,profileLink):
         objShareProfileDAL=ShareProfileDAL()
