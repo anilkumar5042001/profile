@@ -23,10 +23,11 @@ class EmailTemplate:
         message +="</p>"
         return message
 
-    def GetShareProfileEmail(self,profileLink,msg,userFullName):
+    def GetShareProfileEmail(self,profileLink,msg,userFullName,expiryDate):
         message = "<p>Dear User,</p>"
         message +="<p>"
         message+="Please <a href='"+profileLink+"'>Click here</a> to access profile link of "+userFullName+".<br/>"
+        message+="Access to this link will be expired on "+expiryDate+".<br/>"
         message +="</p>"
         if msg!="":
             message+="<p>Message : <b>"+msg+"</b></p>"

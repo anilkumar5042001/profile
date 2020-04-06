@@ -16,7 +16,7 @@ class ShareProfileBAL:
         splitEmailIds= EmailId.split(";")
         lensplitEmailIds=len(EmailId.split(';'))
         objUserProfileBAL=UserProfileBAL()
-        objUserEntity=objUserProfileBAL.GetUserProfileById(profileId)
+        objUserEntity=objUserProfileBAL.GetUserProfileById(ProfileId)
         userFullName=objUserEntity.FirstName+" "+objUserEntity.LastName
 
         for x in range(0,lensplitEmailIds):
@@ -24,16 +24,16 @@ class ShareProfileBAL:
             randomNum = datetime.datetime.now().strftime("%d%m%Y%H%M%S%f")
             profileLink=ProfileLink+"/"+randomNum
             objShareProfileBAL=ShareProfileBAL()
-            objShareProfileBAL.SendShareProfileEmail(email,profileLink,userFullName,Message)
+            objShareProfileBAL.SendShareProfileEmail(email,profileLink,userFullName,Message,ExpiryDate)
             objShareProfileDAL=ShareProfileDAL()
             objShareProfileDAL.ShareProfileInsert(ProfileId,email,randomNum,ExpiryDate,SharedWith,Message)
         return "1"
 
-    def SendShareProfileEmail(self,emailId,profileLink,userFullName,msg):
+    def SendShareProfileEmail(self,emailId,profileLink,userFullName,msg,ExpiryDate):
         objCommonMethodsBAL=CommonMethodsBAL()
         objEmailTemplate=EmailTemplate()
         objGlobalConstants=GlobalConstants()
-        shareProfileEmailTemplate=objEmailTemplate.GetShareProfileEmail(profileLink,msg,userFullName)
+        shareProfileEmailTemplate=objEmailTemplate.GetShareProfileEmail(profileLink,msg,userFullName,ExpiryDate)
         subject="Profile link: "+userFullName
         objCommonMethodsBAL.SendMail(emailId,subject,shareProfileEmailTemplate)
 

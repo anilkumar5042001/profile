@@ -22,7 +22,6 @@ class UserProfileDAL:
 
     def GetUserProfileById(self,profileId):
         db_name = connection.settings_dict['NAME']
-        print(db_name)
         cursor = connection.cursor()
         args = [profileId]
         cursor.callproc('UserProfile_GetById',args)
@@ -43,6 +42,8 @@ class UserProfileDAL:
         objUserProfileEntity.RegGuid=res[0][12]
         objUserProfileEntity.ActivationCode=res[0][13]
         objUserProfileEntity.IsActivated=res[0][14]
+
+        cursor.close() 
         return objUserProfileEntity  
 
     def UserProfileGetByCompanyDomain(self,companyDomain):
