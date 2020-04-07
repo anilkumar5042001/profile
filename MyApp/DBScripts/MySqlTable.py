@@ -33,19 +33,20 @@ class MySqlTable:
             cursor.execute(query)
             print('ShareProfile table created')
 
-    def CreateCountry(self):
+    def CreateCountryMaster(self):
         objMySqlTable=MySqlTable
-        tblExists=objMySqlTable.CheckTableExists(self,"country")
+        tblExists=objMySqlTable.CheckTableExists(self,"CountryMaster")
         if tblExists==False:
             cursor = connection.cursor()
-            query = """create table country(
-            country_id INT NOT NULL AUTO_INCREMENT,
-            country_code VARCHAR(100) NOT NULL,
-            country_name VARCHAR(100) NOT NULL,
-            PRIMARY KEY (country_id)
+            query = """create table CountryMaster(
+            CountryId INT NOT NULL,
+            CountryCode VARCHAR(100) NULL,
+            CountryName VARCHAR(100) NULL,
+            Flag varchar(100) NULL,
+            PRIMARY KEY (CountryId)
             );"""
             cursor.execute(query)
-            print('method executed table CreateCountry')
+            print('method executed table CreateCountryMaster')
 
     def CreateUserProfile(self):
         objMySqlTable=MySqlTable

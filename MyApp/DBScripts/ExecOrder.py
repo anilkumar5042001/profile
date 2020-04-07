@@ -1,12 +1,13 @@
 from .MySqlTable import MySqlTable
 from .StoredProcedures import StoredProcedures
+from .MasterTableData import MasterTableData
 class ExecOrder:
     def scriptsOrder(self):
         #Tables
         objMySqlTable=MySqlTable
         objMySqlTable.CreateTest('self')
         objMySqlTable.CreateUserProfile('self')
-        objMySqlTable.CreateCountry('self')
+        objMySqlTable.CreateCountryMaster('self')
         objMySqlTable.CreateCertificationTable('self')
         objMySqlTable.CreateWorkHistory('self')
         objMySqlTable.CreateProjectHighlights('self')
@@ -146,7 +147,9 @@ class ExecOrder:
         objStoredProcedures.GetStoryByProfileId('self')
         objStoredProcedures.StoryUpdate('self')
         objStoredProcedures.StoryDelete('self')
-
+        #Master Table Dta
+        objMasterTableData=MasterTableData
+        objMasterTableData.CountryMasterData('self')
 
 
 
