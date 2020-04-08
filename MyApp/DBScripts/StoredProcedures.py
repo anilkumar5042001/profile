@@ -46,15 +46,24 @@ class StoredProcedures:
         IN p_ProfileLink VARCHAR(1000)
         )
         BEGIN
-        SELECT 
-        ProfileId,
-        EmailId,
-        ProfileLink,
-        SharedWith,
-        Message
-        FROM ShareProfile WHERE 
-        ProfileLink=p_ProfileLink;
-        END"""
+		Declare p_ProfileIdValue INT;
+        Declare p_Result INT;
+        SET p_Result=0;#Not a valid link
+        set p_ProfileIdValue = (SELECT ProfileId from ShareProfile where ProfileLink=p_ProfileLink);
+        IF p_ProfileIdValue>0 THEN
+        SET p_Result=p_ProfileIdValue;
+		END IF;
+        
+        IF p_Result>0
+        THEN
+			set p_ProfileIdValue = (SELECT ProfileId from ShareProfile where ProfileLink=p_ProfileLink and ExpiryDate>CURDATE());
+            IF p_ProfileIdValue is null
+            THEN
+				SET p_Result=-1;#Link expired
+			END IF;
+		END IF;
+       select p_Result as output;
+	    END"""
         cursor.execute(query)
         print('Exec SP ShareProfileGetProfileIdByProfileLink')
 
