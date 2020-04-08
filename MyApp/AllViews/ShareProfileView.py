@@ -37,6 +37,9 @@ def ShareProfileGetProfileIdByProfileLink(json_data):
         strProfileLink=loaded_json["ProfileLink"]
         objShareProfileBAL=ShareProfileBAL.ShareProfileBAL()
         objShareProfile=objShareProfileBAL.ShareProfileGetProfileIdByProfileLink(strProfileLink)
-        result = json.dumps([ob.__dict__ for ob in objShareProfile])
-        return JsonResponse(result,safe=False)    
+        result= json.dumps(objShareProfile.__dict__)
+        return JsonResponse(result,safe=False)
+
+        # result = json.dumps([ob.__dict__ for ob in objShareProfile])
+        # return JsonResponse(result,safe=False)    
 

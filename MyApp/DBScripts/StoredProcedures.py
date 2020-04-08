@@ -62,7 +62,7 @@ class StoredProcedures:
 				SET p_Result=-1;#Link expired
 			END IF;
 		END IF;
-       select p_Result as output;
+       select p_Result as ProfileId;
 	    END"""
         cursor.execute(query)
         print('Exec SP ShareProfileGetProfileIdByProfileLink')

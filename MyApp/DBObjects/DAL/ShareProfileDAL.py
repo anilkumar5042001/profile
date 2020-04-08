@@ -14,15 +14,9 @@ class ShareProfileDAL:
         cursor = connection.cursor()
         args = [profileLink]
         cursor.callproc('ShareProfile_GetProfileIdByProfileLink',args)
-        res =  cursor.fetchall()
-        arrayItems=[]
-        for certItem in res:
-            objShareProfileEntity=ShareProfileEntity()
-            objShareProfileEntity.ProfileId=certItem[0]
-            objShareProfileEntity.EmailId=certItem[1]
-            objShareProfileEntity.ProfileLink=certItem[2]
-            objShareProfileEntity.SharedWith=certItem[3]
-            objShareProfileEntity.Message=certItem[4]
-            arrayItems.append(objShareProfileEntity)
-        return arrayItems  
+        res=cursor.fetchall()
+        objShareProfileEntity=ShareProfileEntity()        
+        objShareProfileEntity.ProfileId=res[0][0]
+        return objShareProfileEntity
+
 
