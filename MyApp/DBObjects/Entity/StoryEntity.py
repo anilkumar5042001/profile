@@ -6,3 +6,4 @@ class StoryEntity(object):
     Description=""
     Thumbnail=""
     IsPublished=""
+    StoryDate=""

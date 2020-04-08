@@ -2415,7 +2415,8 @@ class StoredProcedures:
         IN p_StoryTitle NVARCHAR(250),        
         IN p_Description LONGTEXT,
         IN p_Thumbnail NVARCHAR(250),
-        IN p_IsPublished BOOLEAN
+        IN p_IsPublished BOOLEAN,
+        IN p_StoryDate DateTime
         )
         BEGIN
         INSERT INTO Story (
@@ -2424,7 +2425,8 @@ class StoredProcedures:
         StoryTitle,
         Description,
         Thumbnail,
-        IsPublished
+        IsPublished,
+        StoryDate
         ) 
         VALUES (
         p_ProfileId,
@@ -2432,7 +2434,8 @@ class StoredProcedures:
         p_StoryTitle,
         p_Description,
         p_Thumbnail,
-        p_IsPublished
+        p_IsPublished,
+        p_StoryDate
         );
         select LAST_INSERT_ID();
         END"""
@@ -2452,7 +2455,8 @@ class StoredProcedures:
         StoryTitle,
         Description,
         Thumbnail,
-        IsPublished
+        IsPublished,
+        StoryDate
         FROM Story
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -2471,7 +2475,8 @@ class StoredProcedures:
         IN p_StoryTitle NVARCHAR(250),
         IN p_Description LONGTEXT,
         IN p_Thumbnail NVARCHAR(250),
-        IN p_IsPublished BOOLEAN
+        IN p_IsPublished BOOLEAN,
+        IN p_StoryDate DATETIME
         )
         BEGIN
         Update Story 
@@ -2480,7 +2485,8 @@ class StoredProcedures:
         StoryTitle=p_StoryTitle,
         Description=p_Description,
         Thumbnail=p_Thumbnail,
-        IsPublished=P_IsPublished
+        IsPublished=P_IsPublished,
+        StoryDate=p_StoryDate
         WHERE StoryId=p_StoryId;
         END"""
         cursor.execute(query)
@@ -2498,7 +2504,8 @@ class StoredProcedures:
         StoryTitle,
         Description,
         Thumbnail,
-        IsPublished
+        IsPublished,
+        StoryDate
         FROM Story
         WHERE StoryId = p_StoryId;
         END"""

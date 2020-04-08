@@ -4,9 +4,9 @@ from datetime import datetime
 
 
 class StoryDAL:
-    def StoryInsert(self,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished):
+    def StoryInsert(self,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished,StoryDate):
         cursor=connection.cursor()
-        args=[ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished]
+        args=[ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished,StoryDate]
         cursor.callproc('Story_Insert',args)
         StoryItem=cursor.fetchall()
         objStoryId=StoryItem[0][0]
@@ -33,6 +33,8 @@ class StoryDAL:
             objStoryEntity.Description=StoryItem[4]
             objStoryEntity.Thumbnail=StoryItem[5]
             objStoryEntity.IsPublished=StoryItem[6]
+            # objStoryEntity.StoryDate=StoryItem[7]
+            objStoryEntity.StoryDate=StoryItem[7].strftime("%m/%d/%Y %H:%M:%S")
             arrayItems.append(objStoryEntity)
         return arrayItems 
 
@@ -50,13 +52,15 @@ class StoryDAL:
             objStoryEntity.StoryTitle=StoryItem[3]
             objStoryEntity.Description=StoryItem[4]
             objStoryEntity.Thumbnail=StoryItem[5]
-            objStoryEntity.IsPublished=StoryItem[6]            
+            objStoryEntity.IsPublished=StoryItem[6]
+            # objStoryEntity.StoryDate=StoryItem[7]
+            objStoryEntity.StoryDate=StoryItem[7].strftime("%m/%d/%Y %H:%M:%S")            
             arrayItems.append(objStoryEntity)
         return arrayItems 
 
-    def StoryUpdate(self,StoryId,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished):
+    def StoryUpdate(self,StoryId,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished,StoryDate):
         cursor=connection.cursor()
-        args=[StoryId,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished]
+        args=[StoryId,ProfileId,StoryCategoryId,StoryTitle,Description,Thumbnail,IsPublished,StoryDate]
         cursor.callproc('Story_Update',args)
         return 1
     

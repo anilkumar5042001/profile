@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from ..DBObjects.BAL import StoryBAL
 from ..DBObjects.Entity import StoryEntity
 
-#{"ProfileId": "1","StoryCategoryId":"1","StoryTitle": "Test","Description": "VenkyMama","Thumbnail":"testOne.jpg","IsPublished":"0"}
+#{"ProfileId": "1","StoryCategoryId":"1","StoryTitle": "Test","Description": "VenkyMama","Thumbnail":"testOne.jpg","IsPublished":"0","StoryDate":"2020-04-08"}
 @csrf_exempt
 @api_view(["POST"])
 def StoryInsert(json_data):
@@ -23,9 +23,10 @@ def StoryInsert(json_data):
         strStoryCategoryId=loaded_json["StoryCategoryId"]
         strDescription=loaded_json["Description"]
         strThumbnail=loaded_json["Thumbnail"]
-        strIsPublished=loaded_json["IsPublished"]       
+        strIsPublished=loaded_json["IsPublished"]
+        strStoryDate=loaded_json["StoryDate"]      
         objStoryBAL=StoryBAL.StoryBAL()
-        result=objStoryBAL.StoryInsert(strProfileId,strStoryCategoryId,strStoryTitle,strDescription,strThumbnail,strIsPublished)
+        result=objStoryBAL.StoryInsert(strProfileId,strStoryCategoryId,strStoryTitle,strDescription,strThumbnail,strIsPublished,strStoryDate)
         return JsonResponse(result,safe=False)
 
 #{"ProfileId": "1"}
@@ -56,7 +57,7 @@ def GetStoryById(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
-# {"ProfileId": "1","StoryCategoryId":"2","StoryTitle": "TestStoryTitle","Description": "TestStoryDescription","Thumbnail":"testTwo.jpg","IsPublished":"1"}
+# {"ProfileId": "1","StoryCategoryId":"2","StoryTitle": "TestStoryTitle","Description": "TestStoryDescription","Thumbnail":"testTwo.jpg","IsPublished":"1","StoryDate":"2020-04-10"}
 @csrf_exempt
 @api_view(["POST"])
 def StoryUpdate(json_data):
@@ -68,9 +69,10 @@ def StoryUpdate(json_data):
         strStoryTitle=loaded_json["StoryTitle"]       
         strDescription=loaded_json["Description"]
         strThumbnail=loaded_json["Thumbnail"]
-        strIsPublished=loaded_json["IsPublished"]        
+        strIsPublished=loaded_json["IsPublished"] 
+        strStoryDate=loaded_json["StoryDate"]       
         objStoryBAL=StoryBAL.StoryBAL()
-        result=objStoryBAL.StoryUpdate(strStoryId,strProfileId,strStoryCategoryId,strStoryTitle,strDescription,strThumbnail,strIsPublished)
+        result=objStoryBAL.StoryUpdate(strStoryId,strProfileId,strStoryCategoryId,strStoryTitle,strDescription,strThumbnail,strIsPublished,strStoryDate)
         return JsonResponse("1",safe=False)
 
 #{"StoryId": "1"}
