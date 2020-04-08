@@ -137,11 +137,17 @@ def GetCountryById(id):
         return JsonResponse(result,safe=False)        
 
 @csrf_exempt
-def GetCountries(id):
+@api_view(["POST"])
+def CountryGetAll(json_data):
+        # loaded_json = json.loads(json_data.body)
         objCountryBAL=CountryBAL.CountryBAL()
-        objCountries=objCountryBAL.GetCountries()
-        result = json.dumps([ob.__dict__ for ob in objCountries])
-        return JsonResponse(result,safe=False)        
+        objCountryEntity=objCountryBAL.CountryGetAll()
+        result = json.dumps([ob.__dict__ for ob in objCountryEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 
 #{"CountryCode": "uk", "ContryName": "unitr"}
 @csrf_exempt

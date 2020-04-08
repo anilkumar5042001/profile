@@ -358,6 +358,7 @@ class MySqlTable:
             Description LONGTEXT NOT NULL,
             Thumbnail NVARCHAR(250) NOT NULL,
             IsPublished Boolean NOT NULL,
+            StoryDate DATETIME NOT NULL,
             PRIMARY KEY (StoryId)
             );"""
             cursor.execute(query)

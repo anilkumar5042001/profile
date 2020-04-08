@@ -1,4 +1,6 @@
 class CountryEntity(object):
-    CountryName=""
-    Countrycode=""
     CountryId=0
+    Countrycode=""
+    CountryName=""
+    Flag=""
+    

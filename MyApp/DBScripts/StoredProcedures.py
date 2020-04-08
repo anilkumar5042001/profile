@@ -36,6 +36,7 @@ class StoredProcedures:
         cursor.execute(query)
         print('Exec SP ShareProfileInsert')
 
+    
     def ShareProfileGetProfileIdByProfileLink(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS ShareProfile_GetProfileIdByProfileLink"""
@@ -63,10 +64,10 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE Country_GetAll()
         BEGIN
-        SELECT country_id,country_name,country_code  FROM country;
+        SELECT CountryId,CountryCode,CountryName,Flag FROM CountryMaster;
         END """
         cursor.execute(query)
-        print('method executed')
+        print('SP CountryGetAll executed')
 
 
     def CountryGetById(self):
@@ -1457,7 +1458,7 @@ class StoredProcedures:
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.AssignTo) as AssignToProfileImageName,            
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName,
         t.TaskOrder
-        FROM Task t WHERE 1=1';
+        FROM Task t WHERE 1=1 and TaskCategoryId<>1';
         IF(p_AssignTo>0)
         THEN
         SET @vQuery = CONCAT(@vQuery,'  AND AssignTo=',p_AssignTo);

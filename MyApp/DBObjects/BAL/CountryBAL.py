@@ -13,4 +13,8 @@ class CountryBAL:
         objCountryDAL=CountryDAL()
         return objCountryDAL.InsertCountry(countryCode,countryName) 
     
+    def CountryGetAll(self):
+        objCountryDAL=CountryDAL()
+        return objCountryDAL.GetAllCountries()
+    
     
