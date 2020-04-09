@@ -33,7 +33,9 @@ class ShareProfileBAL:
         objCommonMethodsBAL=CommonMethodsBAL()
         objEmailTemplate=EmailTemplate()
         objGlobalConstants=GlobalConstants()
-        shareProfileEmailTemplate=objEmailTemplate.GetShareProfileEmail(profileLink,msg,userFullName,ExpiryDate)
+        strExpiryDate = ExpiryDate.split('-')
+        strFormattedDate =strExpiryDate[2]+"-"+strExpiryDate[1]+"-"+strExpiryDate[0]
+        shareProfileEmailTemplate=objEmailTemplate.GetShareProfileEmail(profileLink,msg,userFullName,strFormattedDate)
         subject="Profile link: "+userFullName
         objCommonMethodsBAL.SendMail(emailId,subject,shareProfileEmailTemplate)
 
