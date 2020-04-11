@@ -15,3 +15,4 @@ class UserProfileEntity(object):
     RegGuid=""
     ActivationCode=""
     IsActivated=""
+    CountryId=""

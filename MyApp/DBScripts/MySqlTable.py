@@ -70,6 +70,7 @@ class MySqlTable:
             RegGuid NVARCHAR(250) NULL,
             ActivationCode NVARCHAR(10) NULL,
             IsActivated BOOLEAN,
+            CountryId INT NULL,
             PRIMARY KEY ( ProfileId )
             );"""
             cursor.execute(query)

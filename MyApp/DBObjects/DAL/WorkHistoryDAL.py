@@ -60,6 +60,8 @@ class WorkHistoryDAL:
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
+   
+
     def WorkHistoryGetById(self,WorkHistoryId):
         cursor = connection.cursor()
         args = [WorkHistoryId]

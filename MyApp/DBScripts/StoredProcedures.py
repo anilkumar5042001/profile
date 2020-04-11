@@ -120,7 +120,8 @@ class StoredProcedures:
         ProfileImageName,
         RegGuid,
         ActivationCode,
-        IsActivated
+        IsActivated,
+        CountryId
         FROM UserProfile 
         WHERE ProfileId = p_ProfileId;
         END"""
@@ -180,7 +181,8 @@ class StoredProcedures:
         IN p_CompanyDomain NVARCHAR(250),
         IN p_RegGuid NVARCHAR(250),
         IN p_ActivationCode NVARCHAR(10),
-        IN p_IsActivated BOOLEAN
+        IN p_IsActivated BOOLEAN,
+        IN p_CountryId INT
         )
         BEGIN
         DECLARE varProfileId INT;
@@ -204,7 +206,8 @@ class StoredProcedures:
         CompanyDomain,
         RegGuid,
         ActivationCode,
-        IsActivated
+        IsActivated,
+        CountryId
         ) 
         VALUES (
         p_FirstName,
@@ -220,7 +223,8 @@ class StoredProcedures:
         p_CompanyDomain,
         p_RegGuid,
         p_ActivationCode,
-        p_IsActivated
+        p_IsActivated,
+        p_CountryId
         );
         select LAST_INSERT_ID();
         END IF;
@@ -302,7 +306,8 @@ class StoredProcedures:
         IN p_City VARCHAR(250),
         IN p_Country VARCHAR(250),
         IN p_AboutMe NVARCHAR(500),
-        IN p_ProfileImageName NVARCHAR(300)
+        IN p_ProfileImageName NVARCHAR(300),
+        IN p_CountryId INT
         )
         BEGIN
         UPDATE UserProfile SET 
@@ -314,7 +319,8 @@ class StoredProcedures:
         Designation=p_Designation,
         City=p_City,
         Country=p_Country,
-        AboutMe = p_AboutMe
+        AboutMe = p_AboutMe,
+        CountryId=p_CountryId
         WHERE ProfileId=p_ProfileId;
 
       	IF(p_ProfileImageName<>'NA')
@@ -485,6 +491,44 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryByProfileId executed')
+
+    def WorkHistoryGetCurrentlyWorkingItem(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS WorkHistory_GetCurrentlyWorkingItem"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE WorkHistory_GetCurrentlyWorkingItem(IN p_ProfileId INT)
+        BEGIN
+        SELECT ProfileId,
+        WorkHistoryId,
+        c.CompanyName,
+        ProjectName,
+        Role,
+        Description,
+        City,
+        Country,
+        StartMonth,
+        StartYear,
+        EndMonth,
+        EndYear,
+        CurrentlyWorking,
+        CompanyEmailId,
+        WHGuid,
+        VerificationCode,
+        IsVerified,
+        w.CompanyId,
+        c.Logo,
+        c.DomainName,
+        w.CountryId,
+        cm.CountryCode,
+        cm.CountryName,
+        cm.Flag
+        FROM WorkHistory w 
+        inner join Company c on w.CompanyId=c.CompanyId
+        inner join CountryMaster cm on w.CountryId=cm.CountryId
+        WHERE ProfileId = p_ProfileId ORDER BY StartYear DESC,StartMonth DESC;
+        END"""
+        cursor.execute(query)
+        print('SP GetWorkHistoryCurrentlyWorkingByProfileId executed')
 
     def GetWorkHistoryByProfileIdAndCompanyId(self):
         cursor = connection.cursor()
@@ -1550,7 +1594,7 @@ class StoredProcedures:
         t.TaskOrder,
         t.TaskCategoryId
         FROM Task t
-        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus<>'Close') a
+        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus<>'Close' AND t.TaskStatus<>'On hold') a
         ORDER BY NewCommentCount DESC,DueDate ASC,TaskOrder ASC;
         END"""
         cursor.execute(query)
@@ -1653,7 +1697,8 @@ class StoredProcedures:
         CompanyDomain,
         RegGuid,
         ActivationCode,
-        IsActivated
+        IsActivated,
+        CountryId
         FROM UserProfile 
         WHERE CompanyDomain=p_CompanyDomain;
         END """

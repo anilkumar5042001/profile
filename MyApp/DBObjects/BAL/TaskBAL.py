@@ -1,5 +1,6 @@
 from ..DAL.TaskDAL import TaskDAL
 
+
 class TaskBAL:
     def TaskInsert(self,TaskCategoryId,ProfileId,TaskTitle,Description,DueDate,AssignTo,CreatedBy,TaskStatus,TaskDuration,TaskOrder):
         objTaskDAL=TaskDAL()

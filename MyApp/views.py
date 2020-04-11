@@ -192,7 +192,7 @@ def ExecuteDBScripts(json_data):
         objExecOrder.scriptsOrder('self')
         return JsonResponse("success",safe=False) 
         
-#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Hyderabad","Country":"India","AboutMe":"I am mad","Password":"Test123","CompanyDomain":"SharePoint","RegGuid":"ABC1234","ActivationCode":"2345678","IsActivated":"1"}
+#{"FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Hyderabad","Country":"India","AboutMe":"I am mad","Password":"Test123","CompanyDomain":"SharePoint","RegGuid":"ABC1234","ActivationCode":"2345678","IsActivated":"1","CountryId":"1"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileInsert(json_data):
@@ -212,8 +212,9 @@ def UserProfileInsert(json_data):
         strRegGuid=loaded_json["RegGuid"]
         strActivationCode=loaded_json["ActivationCode"]
         strIsActivated=loaded_json["IsActivated"]
+        strCountryId=loaded_json["CountryId"]
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strPassword,strCompanyDomain,strRegGuid,strActivationCode,strIsActivated)
+        result=objUserProfileBAL.UserProfileInsert(strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strPassword,strCompanyDomain,strRegGuid,strActivationCode,strIsActivated,strCountryId)
         return JsonResponse(result,safe=False)
 
 @csrf_exempt
@@ -222,7 +223,7 @@ def UploadFile(binaryData):
         print(binaryData)
         return JsonResponse("1",safe=False)
 
-#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India","RegGuid":"FGH34567","ActivationCode":"8765432","IsActivated":"0"}
+#{"ProfileId":"1","FirstName": "Test", "LastName": "Three", "EmailId":"testthree@gmail.com","AboutMe":"test","PhoneNumber":"0","Education":"JNTU","Designation":"Software Engg","City":"Banglore","Country":"India","RegGuid":"FGH34567","ActivationCode":"8765432","IsActivated":"0","CountryId":"2"}
 @csrf_exempt
 @api_view(["POST"])
 def UserProfileUpdate(json_data):
@@ -238,9 +239,10 @@ def UserProfileUpdate(json_data):
         strCity=loaded_json["City"]
         strCountry=loaded_json["Country"]
         strAboutMe=loaded_json["AboutMe"]  
-        strProfileImageName=loaded_json["ProfileImageName"]  
+        strProfileImageName=loaded_json["ProfileImageName"] 
+        strCountryId=loaded_json["CountryId"] 
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
-        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strProfileImageName)
+        result=objUserProfileBAL.UserProfileUpdate(strProfileId,strFirstName,strLastName,strEmailId,strPhoneNumber,strEducation,strDesignation,strCity,strCountry,strAboutMe,strProfileImageName,strCountryId)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId":"1","CompanyDomain":"Core@co.uk"}

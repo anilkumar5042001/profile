@@ -13,18 +13,18 @@ class UserProfileBAL:
         return objUserProfileDAL.GetUserProfile()
 
     
-    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated):
+    def UserProfileInsert(self,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,RegGuid,ActivationCode,IsActivated,CountryId):
         objCommonMethodsBAL=CommonMethodsBAL()
         uid = uuid.uuid4()
         strRegGuid=uid.hex
         actCode=strRegGuid[0:4]
         objCommonMethodsBAL.SendActivationEmail(emailId,"https://boring-rosalind-5ae0ce.netlify.com/Activation/"+strRegGuid,actCode)
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,strRegGuid,actCode,IsActivated)
+        return objUserProfileDAL.UserProfileInsert(firstName,lastName,emailId,phoneNumber,education,designation,City,Country,aboutMe,Password,CompanyDomain,strRegGuid,actCode,IsActivated,CountryId)
 
-    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName):
+    def UserProfileUpdate(self,profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,CountryId):
         objUserProfileDAL=UserProfileDAL()
-        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName) 
+        return objUserProfileDAL.UserProfileUpdate(profileId,firstName,lastName,emailId,phoneNumber,education,designation,City,Country,AboutMe,profileImageName,CountryId) 
 
     def UserProfileUpdateDomainName(self,profileId,companyDomain):
         objUserProfileDAL=UserProfileDAL()
