@@ -380,7 +380,8 @@ class StoredProcedures:
         IN p_WHGuid NVARCHAR(250),
         IN p_VerificationCode NVARCHAR(10),
         IN p_IsVerified BOOLEAN,
-        IN p_CompanyId INT
+        IN p_CompanyId INT,
+        IN p_CountryId INT
         )
         BEGIN
         INSERT INTO WorkHistory (
@@ -399,7 +400,8 @@ class StoredProcedures:
         WHGuid,
         VerificationCode,
         IsVerified,
-        CompanyId
+        CompanyId,
+        CountryId
         ) 
         VALUES (
         p_ProfileId,
@@ -417,7 +419,8 @@ class StoredProcedures:
         p_WHGuid,
         p_VerificationCode,
         p_IsVerified,
-        p_CompanyId
+        p_CompanyId,
+        p_CountryId
         );
         select LAST_INSERT_ID();
         END"""
@@ -470,9 +473,14 @@ class StoredProcedures:
         IsVerified,
         w.CompanyId,
         c.Logo,
-        c.DomainName
+        c.DomainName,
+        w.CountryId,
+        cm.CountryCode,
+        cm.CountryName,
+        cm.Flag
         FROM WorkHistory w 
         inner join Company c on w.CompanyId=c.CompanyId
+        inner join CountryMaster cm on w.CountryId=cm.CountryId
         WHERE ProfileId = p_ProfileId ORDER BY StartYear DESC,StartMonth DESC;
         END"""
         cursor.execute(query)
@@ -499,9 +507,14 @@ class StoredProcedures:
         w.ProjectName,
         w.CompanyEmailId,
         w.CompanyId,
-        c.Logo
+        c.Logo,
+        w.CountryId,
+        cm.CountryCode,
+        cm.CountryName,
+        cm.Flag
         FROM WorkHistory w
         inner join Company c on w.CompanyId=c.CompanyId
+        inner join CountryMaster cm on w.CountryId=cm.CountryId
         WHERE w.ProfileId = p_ProfileId
         AND
         w.CompanyId=p_CompanyId;
@@ -532,7 +545,8 @@ class StoredProcedures:
         WHGuid,
         VerificationCode,
         IsVerified,
-        CompanyId
+        CompanyId,
+        CountryId
         FROM WorkHistory 
         WHERE WorkHistoryId = p_WorkHistoryId;
         END"""
@@ -558,7 +572,8 @@ class StoredProcedures:
         IN p_EndYear INT,
         IN p_CurrentlyWorking BOOLEAN,
         IN p_CompanyEmailId NVARCHAR(250),
-        IN p_CompanyId INT
+        IN p_CompanyId INT,
+        IN p_CountryId INT
         )
         BEGIN
 
@@ -582,7 +597,8 @@ class StoredProcedures:
         EndYear=p_EndYear,
         CurrentlyWorking=p_CurrentlyWorking,
         CompanyEmailId=p_CompanyEmailId,
-        CompanyId=p_CompanyId
+        CompanyId=p_CompanyId,
+        COuntryId=p_CountryId
         WHERE WorkHistoryId=p_WorkHistoryId;
         END"""
         cursor.execute(query)
@@ -1514,7 +1530,8 @@ class StoredProcedures:
         t.TaskStatus,
         t.TaskDuration,
         (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount,
-        t.TaskOrder
+        t.TaskOrder,
+        t.TaskCategoryId
         FROM Task t
 	    INNER JOIN TaskComment tc
 	    on t.TaskId=tc.TaskId
@@ -1530,9 +1547,10 @@ class StoredProcedures:
         t.TaskStatus,
         t.TaskDuration, 
         (SELECT COUNT(*) FROM TaskComment WHERE TaskId=t.TaskId AND IsNew=1 AND ProfileId=p_AssignTo) as NewCommentCount,
-        t.TaskOrder
+        t.TaskOrder,
+        t.TaskCategoryId
         FROM Task t
-        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus='Open') a
+        WHERE t.AssignTo = p_AssignTo AND t.TaskStatus<>'Close') a
         ORDER BY NewCommentCount DESC,DueDate ASC,TaskOrder ASC;
         END"""
         cursor.execute(query)

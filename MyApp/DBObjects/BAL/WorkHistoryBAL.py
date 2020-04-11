@@ -5,7 +5,7 @@ import uuid
 from ...GlobalConstants import *
 
 class WorkHistoryBAL:
-    def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
+    def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId,CountryId):
         workHistoryId=0
         IsVerified=0
         VerificationCode=""
@@ -17,7 +17,7 @@ class WorkHistoryBAL:
             VerificationCode=WHGuid[0:4]
 
         objWorkHistoryDAL=WorkHistoryDAL()
-        workHistoryId=objWorkHistoryDAL.WorkHistoryInsert(ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId)
+        workHistoryId=objWorkHistoryDAL.WorkHistoryInsert(ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId,CountryId)
         if workHistoryId>0:
             if CurrentlyWorking=="1":
                 objWorkHistoryBAL=WorkHistoryBAL()
@@ -47,7 +47,7 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyId(ProfileId,CompanyId)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId,CountryId):
         sucess=0
         isEmailIdChanged=False
         objWorkHistoryBAL=WorkHistoryBAL()
@@ -58,7 +58,7 @@ class WorkHistoryBAL:
                 isEmailIdChanged=True
 
         objWorkHistoryDAL=WorkHistoryDAL()
-        sucess=objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId)
+        sucess=objWorkHistoryDAL.WorkHistoryUpdate(ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId,CountryId)
 
         if isEmailIdChanged==True:
             sucess=objWorkHistoryBAL.UpdateVerificationAndSendEmal(ProjectName,WorkHistoryId,CompanyEmailId)

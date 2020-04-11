@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class WorkHistoryDAL:
-    def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId):
+    def WorkHistoryInsert(self,ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId,CountryId):
         cursor = connection.cursor()
-        args = [ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId]
+        args = [ProfileId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,WHGuid,VerificationCode,IsVerified,CompanyId,CountryId]
         cursor.callproc('WorkHistory_Insert',args)
         workHistoryItem =  cursor.fetchall()
         workHistoryId=workHistoryItem[0][0]
@@ -18,9 +18,9 @@ class WorkHistoryDAL:
         args = [profileId]
         cursor.callproc('Certification_GetByProfileId',args)
 
-    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId):
+    def WorkHistoryUpdate(self,ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId,CountryId):
         cursor = connection.cursor()
-        args = [ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId]
+        args = [ProfileId,WorkHistoryId,ProjectName,Role,Description,City,Country,StartMonth,StartYear,EndMonth,EndYear,CurrentlyWorking,CompanyEmailId,CompanyId,CountryId]
         cursor.callproc('WorkHistory_Update',args)
         return 1
         
@@ -53,6 +53,10 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
             objWorkHistoryEntity.Logo=WorkHistoryItem[18]
             objWorkHistoryEntity.DomainName=WorkHistoryItem[19]
+            objWorkHistoryEntity.CountryId=WorkHistoryItem[20]
+            objWorkHistoryEntity.CountryCode=WorkHistoryItem[21]
+            objWorkHistoryEntity.CountryName=WorkHistoryItem[22]
+            objWorkHistoryEntity.Flag=WorkHistoryItem[23]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems 
 
@@ -82,6 +86,7 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
             objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
+            objWorkHistoryEntity.CountryId=WorkHistoryItem[18]
             arrayItems.append(objWorkHistoryEntity)
 
         cursor.close() 
@@ -111,6 +116,10 @@ class WorkHistoryDAL:
             objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
             objWorkHistoryEntity.CompanyId=WorkHistoryItem[14]
             objWorkHistoryEntity.Logo=WorkHistoryItem[15]
+            objWorkHistoryEntity.CountryId=WorkHistoryItem[16]
+            objWorkHistoryEntity.CountryCode=WorkHistoryItem[17]
+            objWorkHistoryEntity.CountryName=WorkHistoryItem[18]
+            objWorkHistoryEntity.Flag=WorkHistoryItem[19]
             arrayItems.append(objWorkHistoryEntity)
         return arrayItems  
 

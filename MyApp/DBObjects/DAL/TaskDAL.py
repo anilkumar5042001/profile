@@ -78,6 +78,7 @@ class TaskDAL:
             objTaskEntity.TaskDuration=str(decimal.Decimal(TaskItem[8]))
             objTaskEntity.NewCommentCount=TaskItem[9]
             objTaskEntity.TaskOrder=TaskItem[10]
+            objTaskEntity.TaskCategoryId=TaskItem[11]
             arrayItems.append(objTaskEntity)
         return arrayItems 
 

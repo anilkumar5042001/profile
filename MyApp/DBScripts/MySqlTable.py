@@ -135,6 +135,7 @@ class MySqlTable:
             VerificationCode NVARCHAR(10) NULL,
             IsVerified BOOLEAN,
             CompanyId INT NOT NULL,
+            CountryId INT NOT NULL,
             PRIMARY KEY (WorkHistoryId)
             );"""
             cursor.execute(query)

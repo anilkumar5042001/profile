@@ -19,6 +19,7 @@ class WorkHistoryEntity(object):
     CompanyId=""
     Logo=""
     DomainName=""
+    CountryId=""
 
 class ProjectHighlightsEntity(object): 
     HighlightId=0
