@@ -861,9 +861,9 @@ class StoredProcedures:
 
     def GetEducationByProfileId(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS GetEducation_ByProfileId"""
+        query = """DROP PROCEDURE IF EXISTS Education_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE GetEducation_ByProfileId(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE Education_ByProfileId(IN p_ProfileId INT)
         BEGIN
         SELECT EducationId,
         ProfileId,
@@ -873,7 +873,7 @@ class StoredProcedures:
         EndYear,
         EducationDescription
         FROM Education 
-        WHERE ProfileId = p_ProfileId;
+        WHERE ProfileId = p_ProfileId ORDER BY StartYear Desc;
         END"""
         cursor.execute(query)
         print('SP GetEducationByProfileId executed')
@@ -1500,9 +1500,9 @@ class StoredProcedures:
 
     def GetAllTasks(self):
         cursor = connection.cursor()
-        query = """DROP PROCEDURE IF EXISTS Get_AllTasks"""
+        query = """DROP PROCEDURE IF EXISTS Task_All"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE Get_AllTasks
+        query = """CREATE PROCEDURE Task_All
         (
         IN p_FromDueDate DATETIME,
         IN p_ToDueDate DATETIME,
@@ -1527,7 +1527,7 @@ class StoredProcedures:
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.AssignTo) as AssignToProfileImageName,            
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName,
         t.TaskOrder
-        FROM Task t WHERE 1=1 and TaskCategoryId<>1';
+        FROM Task t WHERE 1=1';
         IF(p_AssignTo>0)
         THEN
         SET @vQuery = CONCAT(@vQuery,'  AND AssignTo=',p_AssignTo);
@@ -1551,7 +1551,7 @@ class StoredProcedures:
         END;"""
         
         cursor.execute(query)
-        print('SP GetAllTasks executed')
+        print('SP Task_All executed')
     
 
     def GetTaskByAssignTo(self):

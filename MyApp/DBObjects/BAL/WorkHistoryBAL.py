@@ -43,6 +43,10 @@ class WorkHistoryBAL:
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileId(ProfileId)
 
+    def WorkHistoryGetCurrentlyWorkingItem(self,ProfileId):
+        objWorkHistoryDAL=WorkHistoryDAL()
+        return objWorkHistoryDAL.WorkHistoryGetCurrentlyWorkingItem(ProfileId)
+
     def GetWorkHistoryByProfileIdAndCompanyId(self,ProfileId,CompanyId):
         objWorkHistoryDAL=WorkHistoryDAL()
         return objWorkHistoryDAL.GetWorkHistoryByProfileIdAndCompanyId(ProfileId,CompanyId)

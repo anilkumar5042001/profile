@@ -29,7 +29,7 @@ class EducationDAL:
     def GetEducationByProfileId(self,ProfileId):
         cursor = connection.cursor()
         args = [ProfileId]
-        cursor.callproc('GetEducation_ByProfileId',args)
+        cursor.callproc('Education_ByProfileId',args)
         res =  cursor.fetchall()
         arrayItems=[]
         for EducationItem in res:

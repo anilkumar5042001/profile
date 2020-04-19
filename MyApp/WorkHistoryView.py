@@ -69,6 +69,22 @@ def GetWorkHistoryByProfileId(json_data):
         #result= json.dumps(objWorkHistoryEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+
+
+#{"ProfileId": "1"}
+@csrf_exempt
+@api_view(["POST"])
+def WorkHistoryGetCurrentlyWorkingItem(json_data):
+        loaded_json = json.loads(json_data.body)
+        objWorkHistoryBAL=WorkHistoryBAL.WorkHistoryBAL()
+        strProfileId=loaded_json["ProfileId"]
+        objWorkHistoryEntity=objWorkHistoryBAL.WorkHistoryGetCurrentlyWorkingItem(strProfileId)
+        result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 #{"ProfileId": "1","CompanyId":"1"}
 @csrf_exempt
 @api_view(["POST"])

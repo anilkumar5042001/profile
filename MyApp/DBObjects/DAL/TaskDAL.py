@@ -113,7 +113,7 @@ class TaskDAL:
     def GetAllTasks(self,FromDueDate,ToDueDate,AssignTo,TaskStatus,ProfileId):
         cursor=connection.cursor()
         args = [FromDueDate,ToDueDate,AssignTo,TaskStatus,ProfileId]
-        cursor.callproc('Get_AllTasks',args)
+        cursor.callproc('Task_All',args)
         res=cursor.fetchall()
         arrayItems=[]
         for TaskItem in res:

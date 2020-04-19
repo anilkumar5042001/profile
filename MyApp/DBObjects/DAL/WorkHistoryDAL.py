@@ -146,6 +146,41 @@ class WorkHistoryDAL:
         cursor.callproc('WorkHistory_UpdateVerificationCodeById',args)
         return 1
 
+    def WorkHistoryGetCurrentlyWorkingItem(self,ProfileId):
+        cursor = connection.cursor()
+        args = [ProfileId]
+        cursor.callproc('WorkHistory_GetCurrentlyWorkingItem',args)
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for WorkHistoryItem in res:
+            objWorkHistoryEntity=WorkHistoryEntity()
+            objWorkHistoryEntity.ProfileId=WorkHistoryItem[0]
+            objWorkHistoryEntity.WorkHistoryId=WorkHistoryItem[1]
+            objWorkHistoryEntity.CompanyName=WorkHistoryItem[2]
+            objWorkHistoryEntity.ProjectName=WorkHistoryItem[3]
+            objWorkHistoryEntity.Role=WorkHistoryItem[4]
+            objWorkHistoryEntity.Description=WorkHistoryItem[5]
+            objWorkHistoryEntity.City=WorkHistoryItem[6]
+            objWorkHistoryEntity.Country=WorkHistoryItem[7]
+            objWorkHistoryEntity.StartMonth=WorkHistoryItem[8]
+            objWorkHistoryEntity.StartYear=WorkHistoryItem[9]
+            objWorkHistoryEntity.EndMonth=WorkHistoryItem[10]
+            objWorkHistoryEntity.EndYear=WorkHistoryItem[11]            
+            objWorkHistoryEntity.CurrentlyWorking=WorkHistoryItem[12]
+            objWorkHistoryEntity.CompanyEmailId=WorkHistoryItem[13]
+            objWorkHistoryEntity.WHGuid=WorkHistoryItem[14]
+            objWorkHistoryEntity.VerificationCode=WorkHistoryItem[15]
+            objWorkHistoryEntity.IsVerified=WorkHistoryItem[16]
+            objWorkHistoryEntity.CompanyId=WorkHistoryItem[17]
+            objWorkHistoryEntity.Logo=WorkHistoryItem[18]
+            objWorkHistoryEntity.DomainName=WorkHistoryItem[19]
+            objWorkHistoryEntity.CountryId=WorkHistoryItem[20]
+            objWorkHistoryEntity.CountryCode=WorkHistoryItem[21]
+            objWorkHistoryEntity.CountryName=WorkHistoryItem[22]
+            objWorkHistoryEntity.Flag=WorkHistoryItem[23]
+            arrayItems.append(objWorkHistoryEntity)
+        return arrayItems 
+
     def ProjectHighlightsInsert(self,WorkHistoryId,ProjectHighlightsDescription):
         cursor = connection.cursor()
         args = [WorkHistoryId,ProjectHighlightsDescription]
