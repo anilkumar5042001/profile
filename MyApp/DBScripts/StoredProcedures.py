@@ -498,6 +498,9 @@ class StoredProcedures:
         cursor.execute(query)
         query = """CREATE PROCEDURE WorkHistory_GetCurrentlyWorkingItem(IN p_ProfileId INT)
         BEGIN
+
+        DECLARE vWorkHistoryId INT;
+        SET vWorkHistoryId=(select WorkHistoryId from WorkHistory where ProfileId=p_ProfileId AND CurrentlyWorking=1 limit 1);
         SELECT ProfileId,
         WorkHistoryId,
         c.CompanyName,
@@ -525,7 +528,7 @@ class StoredProcedures:
         FROM WorkHistory w 
         inner join Company c on w.CompanyId=c.CompanyId
         inner join CountryMaster cm on w.CountryId=cm.CountryId
-        WHERE ProfileId = p_ProfileId ORDER BY StartYear DESC,StartMonth DESC;
+        WHERE w.WorkHistoryId = vWorkHistoryId ORDER BY StartYear DESC,StartMonth DESC;
         END"""
         cursor.execute(query)
         print('SP GetWorkHistoryCurrentlyWorkingByProfileId executed')
