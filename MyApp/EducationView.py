@@ -16,7 +16,7 @@ from .DBObjects.BAL import EducationBAL
 from .DBObjects.Entity import EducationEntity
 
 
-#{"ProfileId": "1","NameOfInstitution":"St.Xaviers High School","Degree":"10th Standard","StartYear":"1995","EndYear":"1996","EducationDescription":"I Passed my first entrance"}
+#{"ProfileId": "1","NameOfInstitution":"St.Xaviers High School","Degree":"10th Standard","StartYear":"1995","EndYear":"1996","EducationDescription":"I Passed my first entrance","CountryId":"2","City":"Chennai"}
 @csrf_exempt
 @api_view(["POST"])
 def EducationInsert(json_data):
@@ -29,8 +29,10 @@ def EducationInsert(json_data):
         strStartYear=loaded_json["StartYear"]
         strEndYear=loaded_json["EndYear"]
         strEducationDescription=loaded_json["EducationDescription"]
+        strCountryId=loaded_json["CountryId"]
+        strCity=loaded_json["City"]
         objEducationBAL=EducationBAL.EducationBAL()
-        result=objEducationBAL.EducationInsert(strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription)
+        result=objEducationBAL.EducationInsert(strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription,strCountryId,strCity)
         return JsonResponse("1",safe=False)
 
 #{"ProfileId": "1"}
@@ -74,8 +76,10 @@ def EducationUpdate(json_data):
         strStartYear=loaded_json["StartYear"]
         strEndYear=loaded_json["EndYear"]
         strEducationDescription=loaded_json["EducationDescription"]
+        strCountryId=loaded_json["CountryId"]
+        strCity=loaded_json["City"]
         objEducationBAL=EducationBAL.EducationBAL()
-        result=objEducationBAL.EducationUpdate(strEducationId,strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription)
+        result=objEducationBAL.EducationUpdate(strEducationId,strProfileId,strNameOfInstitution,strDegree,strStartYear,strEndYear,strEducationDescription,strCountryId,strCity)
         return JsonResponse("1",safe=False)
 
 #{"EducationId": "1"}

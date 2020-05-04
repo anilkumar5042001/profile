@@ -70,6 +70,7 @@ class UserProfileDAL:
             objUserProfileEntity.ActivationCode=res[12]
             objUserProfileEntity.IsActivated=res[13]
             objUserProfileEntity.CountryId=res[14]
+            objUserProfileEntity.ProfileImageName=res[15]
             arrayItems.append(objUserProfileEntity)
         return arrayItems  
 

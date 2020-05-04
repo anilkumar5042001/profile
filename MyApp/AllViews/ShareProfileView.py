@@ -14,7 +14,7 @@ from ..DBObjects.BAL import ShareProfileBAL
 from ..DBObjects.Entity import ShareProfileEntity
 import smtplib
 
-#{"ProfileId": "1","EmailId":"anilkumar5042001@gmail.com","ExpiryDate":"2019-11-12","ProfileLink":"https://boring-rosalind-5ae0ce.netlify.com/login","SharedWith":"Addars","Message":"callme"}
+#{"ProfileId": "1","EmailId":"anilkumar5042001@gmail.com","ExpiryDate":"2019-11-12","ProfileLink":"https://boring-rosalind-5ae0ce.netlify.com/login","SharedWith":"Addars","Message":"callme","ShareType":"Link"}
 @csrf_exempt
 @api_view(["POST"])
 def ShareProfileInsert(json_data):
@@ -25,9 +25,10 @@ def ShareProfileInsert(json_data):
         strProfileLink=loaded_json["ProfileLink"]
         strMessage=loaded_json["Message"]
         strExpiryDate=loaded_json["ExpiryDate"]
+        strShareType=loaded_json["ShareType"]
         objShareProfileBAL=ShareProfileBAL.ShareProfileBAL()
-        result=objShareProfileBAL.ShareProfileInsert(strProfileId,strEmailId,strProfileLink,strExpiryDate,strSharedWith,strMessage) 
-        return JsonResponse("1",safe=False)
+        result=objShareProfileBAL.ShareProfileInsert(strProfileId,strEmailId,strProfileLink,strExpiryDate,strSharedWith,strMessage,strShareType) 
+        return JsonResponse(result,safe=False)
 
 #{"ProfileLink": "24012020052208800285"}
 @csrf_exempt

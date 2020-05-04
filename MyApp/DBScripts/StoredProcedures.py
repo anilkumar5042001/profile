@@ -13,7 +13,8 @@ class StoredProcedures:
         IN p_ProfileLink VARCHAR(1000),
         IN p_ExpiryDate DATETIME,
         IN p_SharedWith VARCHAR(250),
-        IN p_Message VARCHAR(1000)
+        IN p_Message VARCHAR(1000),
+        IN p_ShareType VARCHAR(50)
         )
         BEGIN
         INSERT INTO ShareProfile(
@@ -22,7 +23,8 @@ class StoredProcedures:
         ProfileLink,
         ExpiryDate,
         SharedWith,
-        Message
+        Message,
+        ShareType
         ) 
         VALUES (
         p_ProfileId,
@@ -30,7 +32,8 @@ class StoredProcedures:
         p_ProfileLink,
         p_ExpiryDate,
         p_SharedWith,
-        p_Message
+        p_Message,
+        p_ShareType
         );
         END"""
         cursor.execute(query)
@@ -349,6 +352,29 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('Exec SP UserProfileUpdateAboutMe')
+
+    # def UserProfileGetItemByEmailId(self):
+    #     cursor = connection.cursor()
+    #     query = """DROP PROCEDURE IF EXISTS UserProfile_GetItemByEmailId"""
+    #     cursor.execute(query)
+    #     query = """CREATE PROCEDURE UserProfile_GetItemByEmailId(IN p_EmailId NVARCHAR(500))
+    #     BEGIN
+    #     SELECT TaskId,
+    #     TaskCategoryId,
+    #     ProfileId,
+    #     TaskTitle,
+    #     Description,
+    #     DueDate,
+    #     AssignTo,
+    #     CreatedBy,
+    #     TaskStatus,
+    #     TaskDuration,
+    #     TaskOrder
+    #     FROM Task 
+    #     WHERE ProfileId = p_ProfileId;
+    #     END"""
+    #     cursor.execute(query)
+    #     print('SP GetTaskByProfileId executed')
     
     def ProjectInsert(self):
         cursor = connection.cursor()
@@ -839,7 +865,9 @@ class StoredProcedures:
         IN p_Degree NVARCHAR(250),
         IN p_StartYear INT,
         IN p_EndYear INT,
-        IN p_EducationDescription NVARCHAR(500)
+        IN p_EducationDescription NVARCHAR(500),
+        IN p_CountryId INT,
+        IN p_City NVARCHAR(250)
         )
         BEGIN
         INSERT INTO Education (
@@ -848,7 +876,9 @@ class StoredProcedures:
         Degree,
         StartYear,
         EndYear,
-        EducationDescription
+        EducationDescription,
+        CountryId,
+        City
         ) 
         VALUES (
         p_ProfileId,
@@ -856,7 +886,9 @@ class StoredProcedures:
         p_Degree,
         p_StartYear,
         p_EndYear,
-        p_EducationDescription
+        p_EducationDescription,
+        p_CountryId,
+        p_City
         );
         END"""
         cursor.execute(query)
@@ -874,9 +906,12 @@ class StoredProcedures:
         Degree,
         StartYear,
         EndYear,
-        EducationDescription
-        FROM Education 
-        WHERE ProfileId = p_ProfileId ORDER BY StartYear Desc;
+        EducationDescription,
+        cm.CountryId,
+        City
+        FROM Education e
+        inner join CountryMaster cm on e.CountryId=cm.CountryId
+        where e.ProfileId = p_ProfileId ORDER BY e.StartYear Desc;
         END"""
         cursor.execute(query)
         print('SP GetEducationByProfileId executed')
@@ -893,8 +928,11 @@ class StoredProcedures:
         Degree,
         StartYear,
         EndYear,
-        EducationDescription
-        FROM Education 
+        EducationDescription,
+        CountryId,
+        City
+        FROM Education  e
+        inner join CountryMaster cm on e.CountryId=cm.CountryId
         WHERE EducationId = p_EducationId;
         END"""
         cursor.execute(query)
@@ -912,7 +950,9 @@ class StoredProcedures:
         IN p_Degree NVARCHAR(250),
         IN p_StartYear INT,
         IN p_EndYear INT,
-        IN p_EducationDescription NVARCHAR(500)
+        IN p_EducationDescription NVARCHAR(500),
+        IN p_CountryId INT,
+        IN p_City NVARCHAR(250)
         )
         BEGIN
         Update Education 
@@ -921,7 +961,9 @@ class StoredProcedures:
         Degree=p_Degree,
         StartYear=p_StartYear,
         EndYear=p_EndYear,
-        EducationDescription=p_EducationDescription
+        EducationDescription=p_EducationDescription,
+        CountryId=p_CountryId,
+        City=p_City
         WHERE EducationId=p_EducationId;
         END"""
         cursor.execute(query)
@@ -1701,7 +1743,8 @@ class StoredProcedures:
         RegGuid,
         ActivationCode,
         IsActivated,
-        CountryId
+        CountryId,
+        ProfileImageName
         FROM UserProfile 
         WHERE CompanyDomain=p_CompanyDomain;
         END """

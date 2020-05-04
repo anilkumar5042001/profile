@@ -6,3 +6,5 @@ class EducationEntity(object):
     StartYear=""
     EndYear=""
     EducationDescription=""
+    City=""
+    CountryId=""

@@ -27,6 +27,7 @@ class MySqlTable:
             ProfileLink NVARCHAR(1000) NULL,
             ExpiryDate DATETIME NULL,
             SharedWith NVARCHAR(250) NULL,
+            ShareType VARCHAR(50) NULL,
             Message NVARCHAR(1000) NULL,
             PRIMARY KEY (ShareProfileId)
             );"""
@@ -47,6 +48,21 @@ class MySqlTable:
             );"""
             cursor.execute(query)
             print('method executed table CreateCountryMaster')
+
+    def CreateAwardLogoMaster(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"AwardLogoMaster")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table AwardLogoMaster(
+            AwardLogoId INT NOT NULL,
+            AwardLogoTitle VARCHAR(100) NULL,
+            LogoPath VARCHAR(100) NULL,
+            PRIMARY KEY (AwardLogoId)
+            );"""
+            cursor.execute(query)
+            print('method executed table CreateCountryMaster')
+
 
     def CreateUserProfile(self):
         objMySqlTable=MySqlTable
@@ -186,6 +202,8 @@ class MySqlTable:
             StartYear Int,
             EndYear Int,
             EducationDescription NVARCHAR(500) NULL,
+            CountryId Int,
+            City NVARCHAR(250) NULL,
             PRIMARY KEY (EducationId)
             );"""
             cursor.execute(query)

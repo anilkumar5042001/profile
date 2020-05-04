@@ -2,9 +2,9 @@ from ..Entity.EducationEntity import *
 from django.db import connection
 
 class EducationDAL:
-    def EducationInsert(self,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription):
+    def EducationInsert(self,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City):
         cursor = connection.cursor()
-        args = [ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription]
+        args = [ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City]
         cursor.callproc('Education_Insert',args)
         return 1
 
@@ -23,6 +23,8 @@ class EducationDAL:
             objEducationEntity.StartYear=EducationItem[4]
             objEducationEntity.EndYear=EducationItem[5]
             objEducationEntity.EducationDescription=EducationItem[6]
+            objEducationEntity.CountryId=EducationItem[7]
+            objEducationEntity.City=EducationItem[8]
             arrayItems.append(objEducationEntity)
         return arrayItems
 
@@ -41,12 +43,14 @@ class EducationDAL:
             objEducationEntity.StartYear=EducationItem[4]
             objEducationEntity.EndYear=EducationItem[5]
             objEducationEntity.EducationDescription=EducationItem[6]
+            objEducationEntity.CountryId=EducationItem[7]
+            objEducationEntity.City=EducationItem[8]
             arrayItems.append(objEducationEntity)
         return arrayItems 
 
-    def EducationUpdate(self,EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription):
+    def EducationUpdate(self,EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City):
         cursor = connection.cursor()
-        args = [EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription]
+        args = [EducationId,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City]
         cursor.callproc('Education_Update',args)
         return 1
 

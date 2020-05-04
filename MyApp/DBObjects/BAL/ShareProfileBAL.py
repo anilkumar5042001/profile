@@ -11,23 +11,30 @@ from ...GlobalConstants import *
 from .UserProfileBAL import *
 
 class ShareProfileBAL:
-    def ShareProfileInsert(self,ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message):
+    def ShareProfileInsert(self,ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message,ShareType):
         # strEmailIds='anilkumar5042001@gmail.com;riav4562001@gmail.com'
-        splitEmailIds= EmailId.split(";")
-        lensplitEmailIds=len(EmailId.split(';'))
-        objUserProfileBAL=UserProfileBAL()
-        objUserEntity=objUserProfileBAL.GetUserProfileById(ProfileId)
-        userFullName=objUserEntity.FirstName+" "+objUserEntity.LastName
+        randomNum="1"
+        if(ShareType=="Email"):
+            splitEmailIds= EmailId.split(";")
+            lensplitEmailIds=len(EmailId.split(';'))
+            objUserProfileBAL=UserProfileBAL()
+            objUserEntity=objUserProfileBAL.GetUserProfileById(ProfileId)
+            userFullName=objUserEntity.FirstName+" "+objUserEntity.LastName
 
-        for x in range(0,lensplitEmailIds):
-            email=splitEmailIds[x]
+            for x in range(0,lensplitEmailIds):
+                email=splitEmailIds[x]
+                randomNum = datetime.datetime.now().strftime("%d%m%Y%H%M%S%f")
+                profileLink=ProfileLink+"/"+randomNum
+                objShareProfileBAL=ShareProfileBAL()
+                objShareProfileBAL.SendShareProfileEmail(email,profileLink,userFullName,Message,ExpiryDate)
+                objShareProfileDAL=ShareProfileDAL()
+                objShareProfileDAL.ShareProfileInsert(ProfileId,email,randomNum,ExpiryDate,SharedWith,Message,ShareType)
+        elif (ShareType=="Link"):
             randomNum = datetime.datetime.now().strftime("%d%m%Y%H%M%S%f")
-            profileLink=ProfileLink+"/"+randomNum
-            objShareProfileBAL=ShareProfileBAL()
-            objShareProfileBAL.SendShareProfileEmail(email,profileLink,userFullName,Message,ExpiryDate)
             objShareProfileDAL=ShareProfileDAL()
-            objShareProfileDAL.ShareProfileInsert(ProfileId,email,randomNum,ExpiryDate,SharedWith,Message)
-        return "1"
+            objShareProfileDAL.ShareProfileInsert(ProfileId,EmailId,randomNum,ExpiryDate,SharedWith,Message,ShareType)
+            
+        return randomNum
 
     def SendShareProfileEmail(self,emailId,profileLink,userFullName,msg,ExpiryDate):
         objCommonMethodsBAL=CommonMethodsBAL()

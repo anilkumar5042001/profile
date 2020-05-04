@@ -6,3 +6,4 @@ class ShareProfileEntity (object):
     ExpiryDate=""
     SharedWith=""
     Message=""
+    ShareType=""

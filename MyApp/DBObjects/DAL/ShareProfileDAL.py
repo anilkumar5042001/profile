@@ -3,9 +3,9 @@ from django.db import connection
 
 
 class ShareProfileDAL:
-    def ShareProfileInsert(self,ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message):
+    def ShareProfileInsert(self,ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message,ShareType):
         cursor = connection.cursor()
-        args = [ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message]
+        args = [ProfileId,EmailId,ProfileLink,ExpiryDate,SharedWith,Message,ShareType]
         cursor.callproc('ShareProfile_Insert',args)
         return 1
 
