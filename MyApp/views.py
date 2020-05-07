@@ -283,6 +283,18 @@ def UserLoginCheckCredentials(json_data):
         result= json.dumps(objUserProfileEntity.__dict__)
         return JsonResponse(result,safe=False)
 
+#{"EmailId":"testthree@gmail.com"}
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileGetProfileIdByEmailId(json_data):
+        loaded_json = json.loads(json_data.body)
+        print(loaded_json)
+        strEmailId=loaded_json["EmailId"]
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        objUserProfileEntity=objUserProfileBAL.UserProfileGetProfileIdByEmailId(strEmailId)
+        result= json.dumps(objUserProfileEntity.__dict__)
+        return JsonResponse(result,safe=False)
+
 #{"RegGuid":"ABC1234","ActivationCode":"1234"}
 @csrf_exempt
 @api_view(["POST"])

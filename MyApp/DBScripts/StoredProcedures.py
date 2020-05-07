@@ -1450,6 +1450,33 @@ class StoredProcedures:
         cursor.execute(query)
         print('SP CheckLoginCredentials executed')
 
+    def UserProfileGetProfileIdByEmailId(self): 
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_GetProfileIdByEmailId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_GetProfileIdByEmailId
+        (
+        IN p_EmailId NVARCHAR(500)
+        )
+        BEGIN
+        Declare p_ProfileIdValue INT;
+        Declare p_Result INT;
+        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId AND IsActivated=1);
+        IF p_ProfileIdValue>0 THEN
+        set  p_Result=p_ProfileIdValue;
+        else
+        set p_ProfileIdValue = (SELECT ProfileId from UserProfile where EmailId=p_EmailId);
+        IF p_ProfileIdValue>0 THEN
+		set  p_Result=-1;
+		else
+        set p_Result=0;
+        END IF;
+        END IF;
+        select p_Result as output;
+        END"""
+        cursor.execute(query)
+        print('SP UserProfileGetProfileIdByEmailId executed')
+
     def TaskInsert(self):
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS Task_Insert"""

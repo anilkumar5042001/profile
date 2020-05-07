@@ -107,6 +107,15 @@ class UserProfileDAL:
         objUserProfileEntity=UserProfileEntity()        
         objUserProfileEntity.ProfileId=res[0][0]
         return objUserProfileEntity
+
+    def UserProfileGetProfileIdByEmailId(self,EmailId):
+        cursor = connection.cursor()
+        args = [EmailId]
+        cursor.callproc('UserProfile_GetProfileIdByEmailId',args)
+        res=cursor.fetchall()
+        objUserProfileEntity=UserProfileEntity()        
+        objUserProfileEntity.ProfileId=res[0][0]
+        return objUserProfileEntity
     
     def UserProfileUpdateRegCode(self,RegGuid,ActivationCode):
         cursor = connection.cursor()

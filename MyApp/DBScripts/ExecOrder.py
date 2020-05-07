@@ -36,6 +36,7 @@ class ExecOrder:
         objStoredProcedures.CountryGetById('self')        
         objStoredProcedures.CountryInsert('self')  
         objStoredProcedures.UserProfileGetById('self')
+        objStoredProcedures.UserProfileGetProfileIdByEmailId('self')
         objStoredProcedures.UserProfileInsert('self') 
         objStoredProcedures.UserProfileUpdate('self')    
         objStoredProcedures.UserProfileUpdateDomainName('self') 

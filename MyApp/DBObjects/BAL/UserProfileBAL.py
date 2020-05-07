@@ -42,6 +42,11 @@ class UserProfileBAL:
         objUserProfileDAL=UserProfileDAL()
         res = objUserProfileDAL.UserLoginCheckCredentials(EmailId,Password)
         return res
+
+    def UserProfileGetProfileIdByEmailId(self,EmailId):
+        objUserProfileDAL=UserProfileDAL()
+        res = objUserProfileDAL.UserProfileGetProfileIdByEmailId(EmailId)
+        return res
     
     def UserProfileUpdateRegCode(self,RegGuid,ActivationCode):
         objUserProfileDAL=UserProfileDAL()

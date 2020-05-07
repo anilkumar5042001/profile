@@ -60,6 +60,7 @@ urlpatterns = [
     url(r'^UserProfileUpdateDomainName/', views.UserProfileUpdateDomainName),
     url(r'^UserProfileGetByCompanyDomain/', views.UserProfileGetByCompanyDomain),
     url(r'^UserLoginCheckCredentials/', views.UserLoginCheckCredentials),
+    url(r'^UserProfileGetProfileIdByEmailId/', views.UserProfileGetProfileIdByEmailId),
     url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
     url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),
     url(r'^UploadFile/', views.UploadFile),
