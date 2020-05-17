@@ -44,7 +44,8 @@ class EducationDAL:
             objEducationEntity.EndYear=EducationItem[5]
             objEducationEntity.EducationDescription=EducationItem[6]
             objEducationEntity.CountryId=EducationItem[7]
-            objEducationEntity.City=EducationItem[8]
+            objEducationEntity.CountryName=EducationItem[8]
+            objEducationEntity.City=EducationItem[9]
             arrayItems.append(objEducationEntity)
         return arrayItems 
 

@@ -8,3 +8,4 @@ class EducationEntity(object):
     EducationDescription=""
     City=""
     CountryId=""
+    CountryName=""
