@@ -929,7 +929,7 @@ class StoredProcedures:
         StartYear,
         EndYear,
         EducationDescription,
-        CountryId,
+        cm.CountryId,
         City
         FROM Education  e
         inner join CountryMaster cm on e.CountryId=cm.CountryId

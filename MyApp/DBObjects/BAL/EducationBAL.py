@@ -3,7 +3,7 @@ from ..DAL.EducationDAL import EducationDAL
 class EducationBAL:
     def EducationInsert(self,ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City):
         objEducationDAL=EducationDAL()
-        return objEducationDAL.EducationInsert(ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription)
+        return objEducationDAL.EducationInsert(ProfileId,NameOfInstitution,Degree,StartYear,EndYear,EducationDescription,CountryId,City)
 
     def GetEducationByProfileId(self,ProfileId):
         objEducationDAL=EducationDAL()
