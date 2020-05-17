@@ -908,6 +908,7 @@ class StoredProcedures:
         EndYear,
         EducationDescription,
         cm.CountryId,
+        cm.CountryName,
         City
         FROM Education e
         inner join CountryMaster cm on e.CountryId=cm.CountryId
