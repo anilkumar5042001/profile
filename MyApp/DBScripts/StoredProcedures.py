@@ -1600,7 +1600,7 @@ class StoredProcedures:
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.AssignTo) as AssignToProfileImageName,            
         (SELECT ProfileImageName FROM UserProfile up WHERE up.ProfileId=t.CreatedBy) as CreatedByProfileImageName,
         t.TaskOrder
-        FROM Task t WHERE 1=1';
+        FROM Task t WHERE t.TaskCategoryId<>4';
         IF(p_AssignTo>0)
         THEN
         SET @vQuery = CONCAT(@vQuery,'  AND AssignTo=',p_AssignTo);
@@ -2410,7 +2410,7 @@ class StoredProcedures:
         cursor = connection.cursor()
         query = """DROP PROCEDURE IF EXISTS GetTaskComment_ByProfileId"""
         cursor.execute(query)
-        query = """CREATE PROCEDURE GetTaskComment_ByProfileId(IN p_ProfileId INT)
+        query = """CREATE PROCEDURE GetTaskComment_ByProfileId(IN p_ProfileId INT,IN p_Comment VARCHAR(500))
         BEGIN
         SELECT 
         TaskCommentId,
@@ -2421,10 +2421,13 @@ class StoredProcedures:
         CommentedOn,
         IsNew      
         FROM TaskComment
-        WHERE ProfileId = p_ProfileId;
+        WHERE ProfileId = p_ProfileId 
+        and Comment like CONCAT('%',p_Comment,'%');
         END"""
         cursor.execute(query)
         print('SP GetTaskCommentByProfileId executed')
+
+    
 
     def CompanyGetAll(self):
         cursor = connection.cursor()
@@ -2436,7 +2439,9 @@ class StoredProcedures:
         CompanyId,
         CompanyName,
         DomainName,
-        Logo  
+        Logo,
+        EmailId,
+        Password
         FROM Company;
         END """
         cursor.execute(query)
@@ -2532,18 +2537,24 @@ class StoredProcedures:
         (
         IN p_CompanyName NVARCHAR(250),
         IN p_DomainName NVARCHAR(250),
-        IN p_Logo NVARCHAR(250)   
+        IN p_Logo NVARCHAR(250),
+        IN p_EmailId NVARCHAR(500),
+        IN p_Password NVARCHAR(100)
         )
         BEGIN
         INSERT INTO  Company(
         CompanyName,
         DomainName,
-        Logo  
+        Logo,
+        EmailId,
+        Password
         ) 
         VALUES (
         p_CompanyName,
         p_DomainName,
-        p_Logo    
+        p_Logo,
+        p_EmailId,
+        p_Password   
         );
         select LAST_INSERT_ID();
         END"""
@@ -2670,6 +2681,304 @@ class StoredProcedures:
         END"""
         cursor.execute(query)
         print('SP StoryDelete executed')
+
+    def RoleInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Role_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Role_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_RoleName NVARCHAR(100)
+        )
+        BEGIN
+        INSERT INTO Role (
+        ProfileId,
+        RoleName
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_RoleName
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP RoleInsert')
+
+    def GetRoleByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetRole_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetRole_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT 
+        RoleId,
+        ProfileId,
+        RoleName
+        FROM Role
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetRoleByProfileId executed')
+
+    def GetRoleByRoleId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetRole_ByRoleId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetRole_ByRoleId(IN p_RoleId INT)
+        BEGIN
+        SELECT 
+        RoleId,
+        ProfileId,
+        RoleName
+        FROM Role
+        WHERE RoleId = p_RoleId;
+        END"""
+        cursor.execute(query)
+        print('SP GetRoleByRoleId executed')
+
+    def RoleUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Role_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Role_Update
+        (
+        IN p_RoleId INT,
+        IN p_ProfileId INT,
+        IN p_RoleName NVARCHAR(100)
+        )
+        BEGIN
+        Update Role 
+        SET
+        ProfileId=p_ProfileId,
+        RoleName=p_RoleName
+        WHERE RoleId=p_RoleId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP RoleUpdate')
+
+    def RoleDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Role_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Role_Delete(IN p_RoleId INT)
+        BEGIN
+        Delete
+        FROM Role 
+        WHERE RoleId = p_RoleId;
+        END"""
+        cursor.execute(query)
+        print('SP RoleDelete executed')
+
+    def UserProfileGetAll(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS UserProfile_GetAll"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE UserProfile_GetAll()
+        BEGIN
+        SELECT 
+        ProfileId,
+        FirstName,
+        LastName,
+        EmailId,
+        PhoneNumber,
+        Education,
+        Designation,
+        City,
+        Country,
+        AboutMe,
+        Password,
+        CompanyDomain,
+        ProfileImageName       
+        FROM UserProfile;
+        END """
+        cursor.execute(query)
+        print('SP UserProfileGetAll executed')
+
+    def EmployeeInsert(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Employee_Insert"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Employee_Insert
+        (
+        IN p_ProfileId INT,
+        IN p_ManagerId INT,
+        IN p_RoleId INT,
+        IN p_HrId INT,
+        IN p_EUID NVARCHAR(250)
+        )
+        BEGIN
+        INSERT INTO Employee (
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        ) 
+        VALUES (
+        p_ProfileId,
+        p_ManagerId,
+        p_RoleId,
+        p_HrId,
+        p_EUID
+        );
+        select LAST_INSERT_ID();
+        END"""
+        cursor.execute(query)
+        print('Exec SP EmployeeInsert')
+
+    def GetEmployeeByProfileId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEmployee_ByProfileId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEmployee_ByProfileId(IN p_ProfileId INT)
+        BEGIN
+        SELECT 
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee
+        WHERE ProfileId = p_ProfileId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEmployeeByProfileId executed')
+    
+    def EmployeeUpdate(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Employee_Update"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Employee_Update
+        (
+        IN p_EmployeeId INT,
+        IN p_ProfileId INT,
+        IN p_ManagerId INT,
+        IN p_RoleId INT,
+        IN p_HrId INT,
+        IN p_EUID NVARCHAR(250)
+        )
+        BEGIN
+        Update Employee 
+        SET ProfileId=p_ProfileId,
+        ManagerId=p_ManagerId,
+        RoleId=p_RoleId,
+        HrId=p_HrId,
+        EUID=p_EUID
+        WHERE EmployeeId=p_EmployeeId;
+        END"""
+        cursor.execute(query)
+        print('Exec SP EmployeeUpdate')
+
+    def GetEmployeeByEmployeeId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEmployee_ByEmployeeId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEmployee_ByEmployeeId(IN p_EmployeeId INT)
+        BEGIN
+        SELECT
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee
+        WHERE EmployeeId = p_EmployeeId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEmployeeByEmployeeId executed')
+
+    def GetEmployeeByManagerId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEmployee_ByManagerId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEmployee_ByManagerId(IN p_ManagerId INT)
+        BEGIN
+        SELECT
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee
+        WHERE ManagerId = p_ManagerId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEmployeeByManagerId executed')
+
+    def GetEmployeeByRoleId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEmployee_ByRoleId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEmployee_ByRoleId(IN p_RoleId INT)
+        BEGIN
+        SELECT
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee
+        WHERE RoleId = p_RoleId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEmployeeByRoleId executed')
+
+    def GetEmployeeByHrId(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS GetEmployee_ByHrId"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE GetEmployee_ByHrId(IN p_HrId INT)
+        BEGIN
+        SELECT
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee
+        WHERE HrId = p_HrId;
+        END"""
+        cursor.execute(query)
+        print('SP GetEmployeeByHrId executed')
+        
+
+    def EmployeeDelete(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Employee_Delete"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Employee_Delete(IN p_EmployeeId INT)
+        BEGIN
+        Delete
+        FROM Employee 
+        WHERE EmployeeId = p_EmployeeId;
+        END"""
+        cursor.execute(query)
+        print('SP EmployeeDelete executed')
+    
+    def EmployeeGetAll(self):
+        cursor = connection.cursor()
+        query = """DROP PROCEDURE IF EXISTS Employee_GetAll"""
+        cursor.execute(query)
+        query = """CREATE PROCEDURE Employee_GetAll()
+        BEGIN
+        SELECT 
+        EmployeeId,
+        ProfileId,
+        ManagerId,
+        RoleId,
+        HrId,
+        EUID
+        FROM Employee;
+        END """
+        cursor.execute(query)
+        print('SP EmployeeGetAll executed')
+
 
 
     

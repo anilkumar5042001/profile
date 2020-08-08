@@ -125,4 +125,27 @@ class UserProfileDAL:
         objUserProfileEntity=UserProfileEntity()        
         objUserProfileEntity.ProfileId=res[0][0]
         return objUserProfileEntity
+    
+    def UserProfileGetAll(self):
+        cursor = connection.cursor()
+        cursor.callproc('UserProfile_GetAll')
+        res =  cursor.fetchall()
+        arrayItems=[]
+        for UserProfileItem in res:
+            objUserProfileEntity=UserProfileEntity()
+            objUserProfileEntity.ProfileId=UserProfileItem[0]
+            objUserProfileEntity.FirstName=UserProfileItem[1]
+            objUserProfileEntity.LastName=UserProfileItem[2]
+            objUserProfileEntity.EmailId=UserProfileItem[3]  
+            objUserProfileEntity.PhoneNumber=UserProfileItem[4]         
+            objUserProfileEntity.Education=UserProfileItem[5]
+            objUserProfileEntity.Designation=UserProfileItem[6]
+            objUserProfileEntity.City=UserProfileItem[7]
+            objUserProfileEntity.Country=UserProfileItem[8]
+            objUserProfileEntity.AboutMe=UserProfileItem[9]
+            objUserProfileEntity.Password=UserProfileItem[10]
+            objUserProfileEntity.CompanyDomain=UserProfileItem[11]
+            objUserProfileEntity.ProfileImageName=UserProfileItem[12]            
+            arrayItems.append(objUserProfileEntity)
+        return arrayItems
         

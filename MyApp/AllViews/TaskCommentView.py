@@ -39,14 +39,15 @@ def TaskCommentUpdateIsNew(json_data):
         result=objTaskCommentBAL.TaskCommentUpdateIsNew(strTaskId,strProfileId)
         return JsonResponse(result,safe=False)
 
-#{"ProfileId": "1"}
+#{"ProfileId": "1","Comment":"%exercise%"}
 @csrf_exempt
 @api_view(["POST"])
 def GetTaskCommentByProfileId(json_data):
         loaded_json = json.loads(json_data.body)
         objTaskCommentBAL=TaskCommentBAL.TaskCommentBAL()
         strProfileId=loaded_json["ProfileId"]
-        objTaskCommentEntity=objTaskCommentBAL.GetTaskCommentByProfileId(strProfileId)
+        strComment=loaded_json["Comment"]
+        objTaskCommentEntity=objTaskCommentBAL.GetTaskCommentByProfileId(strProfileId,strComment)
         result = json.dumps([ob.__dict__ for ob in objTaskCommentEntity])
         #result = json.dumps([ob.__dict__ for ob in objAmountDetailsEntity]) this is basically convert in to Json format
         #result= json.dumps(objAmountDetailsEntity.__dict__)

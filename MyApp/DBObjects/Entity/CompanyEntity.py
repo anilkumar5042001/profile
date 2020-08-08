@@ -3,3 +3,5 @@ class CompanyEntity(object):
     CompanyName=""
     DomainName=""
     Logo=""
+    EmailId=""
+    Password=""

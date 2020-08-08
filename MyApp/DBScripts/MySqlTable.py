@@ -460,7 +460,57 @@ class MySqlTable:
             CompanyName NVARCHAR(250) NULL,
             DomainName NVARCHAR(250) NULL,
             Logo NVARCHAR(250) NULL,
+            EmailId NVARCHAR(500) NULL,
+            Password NVARCHAR(100) NULL,
             PRIMARY KEY (CompanyId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+
+    def CreateRole(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Role")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Role
+            (
+            RoleId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            RoleName NVARCHAR(100) NULL,
+            PRIMARY KEY (RoleId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+    
+    def CreateRole(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Role")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Role
+            (
+            RoleId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            RoleName NVARCHAR(100) NULL,
+            PRIMARY KEY (RoleId)
+            );"""
+            cursor.execute(query)
+            print('method executed')
+    
+    def CreateEmployee(self):
+        objMySqlTable=MySqlTable
+        tblExists=objMySqlTable.CheckTableExists(self,"Employee")
+        if tblExists==False:
+            cursor = connection.cursor()
+            query = """create table Employee
+            (
+            EmployeeId INT NOT NULL AUTO_INCREMENT,
+            ProfileId INT NOT NULL,
+            ManagerId INT NOT NULL,
+            RoleId INT NOT NULL,
+            HrId INT NOT NULL,
+            EUID NVARCHAR(250) NULL,
+            PRIMARY KEY (EmployeeId)
             );"""
             cursor.execute(query)
             print('method executed')

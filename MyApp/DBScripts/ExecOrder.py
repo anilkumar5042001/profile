@@ -29,6 +29,8 @@ class ExecOrder:
         objMySqlTable.CreateTaskCategory('self')
         objMySqlTable.CreateCompany('self')
         objMySqlTable.CreateStory('self')
+        objMySqlTable.CreateRole('self')
+        objMySqlTable.CreateEmployee('self')
 
         #Stored Procedures
         objStoredProcedures=StoredProcedures
@@ -41,6 +43,7 @@ class ExecOrder:
         objStoredProcedures.UserProfileUpdate('self')    
         objStoredProcedures.UserProfileUpdateDomainName('self') 
         objStoredProcedures.UserProfileGetByCompanyDomain('self')
+        objStoredProcedures.UserProfileGetAll('self')
         objStoredProcedures.UserProfileUpdateAboutMe('self')
         objStoredProcedures.CertificationInsert('self')
         objStoredProcedures.CertificationUpdate('self')
@@ -149,6 +152,22 @@ class ExecOrder:
         objStoredProcedures.StoryUpdate('self')
         objStoredProcedures.StoryDelete('self')
         objStoredProcedures.WorkHistoryGetCurrentlyWorkingItem('self')
+        objStoredProcedures.RoleInsert('self')
+        objStoredProcedures.GetRoleByProfileId('self')
+        objStoredProcedures.GetRoleByRoleId('self')
+        objStoredProcedures.RoleUpdate('self')
+        objStoredProcedures.RoleDelete('self')
+        objStoredProcedures.EmployeeInsert('self')
+        objStoredProcedures.GetEmployeeByProfileId('self')
+        objStoredProcedures.GetEmployeeByEmployeeId('self')
+        objStoredProcedures.GetEmployeeByManagerId('self')
+        objStoredProcedures.GetEmployeeByRoleId('self')
+        objStoredProcedures.GetEmployeeByHrId('self')
+        objStoredProcedures.EmployeeGetAll('self')
+        objStoredProcedures.EmployeeUpdate('self')
+        objStoredProcedures.EmployeeDelete('self')
+        
+        
         #Master Table Dta
         objMasterTableData=MasterTableData
         objMasterTableData.CountryMasterData('self')

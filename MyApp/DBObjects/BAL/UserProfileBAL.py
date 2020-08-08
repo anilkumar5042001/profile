@@ -51,3 +51,7 @@ class UserProfileBAL:
     def UserProfileUpdateRegCode(self,RegGuid,ActivationCode):
         objUserProfileDAL=UserProfileDAL()
         return objUserProfileDAL.UserProfileUpdateRegCode(RegGuid,ActivationCode)
+    
+    def UserProfileGetAll(self):
+        objUserProfileDAL=UserProfileDAL()
+        return objUserProfileDAL.UserProfileGetAll()

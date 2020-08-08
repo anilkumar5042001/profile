@@ -26,6 +26,7 @@ from MyApp import LanguageView
 from MyApp.AllViews import RegistrationView
 from MyApp.AllViews import AwardsView
 from MyApp.AllViews import InterestView
+from MyApp.AllViews import EmployeeView
 from MyApp.AllViews import TaskView
 from MyApp.AllViews import SkillsCategoryView
 from MyApp.AllViews import SkillsView
@@ -37,6 +38,7 @@ from MyApp.AllViews import FavouriteCategoryView
 from MyApp.AllViews import TaskCommentView
 from MyApp.AllViews import CompanyView
 from MyApp.AllViews import StoryView
+from MyApp.AllViews import RoleView
 
 
 from django.conf.urls import url, include
@@ -62,7 +64,8 @@ urlpatterns = [
     url(r'^UserLoginCheckCredentials/', views.UserLoginCheckCredentials),
     url(r'^UserProfileGetProfileIdByEmailId/', views.UserProfileGetProfileIdByEmailId),
     url(r'^GetUserProfileAboutMeById/', userProfileView.GetUserProfileAboutMeById),
-    url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),
+    url(r'^UserProfileUpdateAboutMe/', userProfileView.UserProfileUpdateAboutMe),   
+    url(r'^UserProfileGetAll/', userProfileView.UserProfileGetAll),
     url(r'^UploadFile/', views.UploadFile),
     url(r'^WorkHistoryInsert/', WorkHistoryView.WorkHistoryInsert),
     url(r'^WorkHistoryGetById/', WorkHistoryView.GetWorkHistoryById),
@@ -168,6 +171,23 @@ urlpatterns = [
     url(r'^GetStoryByProfileId',StoryView.GetStoryByProfileId),
     url(r'^StoryUpdate',StoryView.StoryUpdate),
     url(r'^StoryDelete',StoryView.StoryDelete),
+    url(r'^RoleInsert',RoleView.RoleInsert),
+    url(r'^GetRoleByProfileId',RoleView.GetRoleByProfileId),
+    url(r'^GetRoleByRoleId',RoleView.GetRoleByRoleId),
+    url(r'^RoleUpdate',RoleView.RoleUpdate),
+    url(r'^RoleDelete',RoleView.RoleDelete),
+    # url(r'^EmployeeInsert',EmployeeView.EmployeeInsert),
+    url(r'^EmployeeInsert',EmployeeView.EmployeeInsert),
+    url(r'^GetEmployeeByProfileId',EmployeeView.GetEmployeeByProfileId),
+    url(r'^GetEmployeeByEmployeeId',EmployeeView.GetEmployeeByEmployeeId),
+    url(r'^GetEmployeeByManagerId',EmployeeView.GetEmployeeByManagerId),
+    url(r'^GetEmployeeByRoleId',EmployeeView.GetEmployeeByRoleId),
+    url(r'^GetEmployeeByHrId',EmployeeView.GetEmployeeByHrId),
+    url(r'^EmployeeGetAll',EmployeeView.EmployeeGetAll),
+    url(r'^EmployeeUpdate',EmployeeView.EmployeeUpdate),
+    url(r'^EmployeeDelete',EmployeeView.EmployeeDelete),
+    
+    
     
 
 

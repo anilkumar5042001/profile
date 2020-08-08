@@ -38,3 +38,15 @@ def UserProfileUpdateAboutMe(json_data):
         objUserProfileBAL=UserProfileBAL.UserProfileBAL()
         result=objUserProfileBAL.UserProfileUpdateAboutMe(strProfileId,strAboutMe)
         return JsonResponse("1",safe=False)
+
+@csrf_exempt
+@api_view(["POST"])
+def UserProfileGetAll(json_data):
+        # loaded_json = json.loads(json_data.body)
+        objUserProfileBAL=UserProfileBAL.UserProfileBAL()
+        objUserProfileEntity=objUserProfileBAL.UserProfileGetAll()
+        result = json.dumps([ob.__dict__ for ob in objUserProfileEntity])
+        # result = json.dumps([ob.__dict__ for ob in objWorkHistoryEntity]) this is basically convert in to Json format
+
+        #result= json.dumps(objWorkHistoryEntity.__dict__)
+        return JsonResponse(result,safe=False)

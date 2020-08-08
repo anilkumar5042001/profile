@@ -12,13 +12,15 @@ class CompanyDAL:
             objCompanyEntity.CompanyId=CompanyItem[0]
             objCompanyEntity.CompanyName=CompanyItem[1]
             objCompanyEntity.DomainName=CompanyItem[2]
-            objCompanyEntity.Logo=CompanyItem[3]           
+            objCompanyEntity.Logo=CompanyItem[3]  
+            objCompanyEntity.EmailId=CompanyItem[4]         
+            objCompanyEntity.Password=CompanyItem[5]
             arrayItems.append(objCompanyEntity)
         return arrayItems
     
-    def CompanyInsert(self,CompanyName,DomainName,Logo):
+    def CompanyInsert(self,CompanyName,DomainName,Logo,EmailId,Password):
         cursor=connection.cursor()
-        args=[CompanyName,DomainName,Logo]
+        args=[CompanyName,DomainName,Logo,EmailId,Password]
         cursor.callproc('Company_Insert',args)
         EventItem=cursor.fetchall()
         objEventId=EventItem[0][0]

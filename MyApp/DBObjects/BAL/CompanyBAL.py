@@ -5,6 +5,6 @@ class CompanyBAL:
         objCompanyDAL=CompanyDAL()
         return objCompanyDAL.CompanyGetAll()
     
-    def CompanyInsert(self,CompanyName,DomainName,Logo):
+    def CompanyInsert(self,CompanyName,DomainName,Logo,EmailId,Password):
         objCompanyDAL=CompanyDAL()
-        return objCompanyDAL.CompanyInsert(CompanyName,DomainName,Logo)
+        return objCompanyDAL.CompanyInsert(CompanyName,DomainName,Logo,EmailId,Password)

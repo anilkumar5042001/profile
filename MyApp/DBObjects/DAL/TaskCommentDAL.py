@@ -17,9 +17,9 @@ class TaskCommentDAL:
         TaskCommentItem=cursor.fetchall()
         return 1
 
-    def GetTaskCommentByProfileId(self,ProfileId):
+    def GetTaskCommentByProfileId(self,ProfileId,Comment):
         cursor = connection.cursor()
-        args = [ProfileId]
+        args = [ProfileId,Comment]
         cursor.callproc('GetTaskComment_ByProfileId',args)
         res =  cursor.fetchall()
         arrayItems=[]
